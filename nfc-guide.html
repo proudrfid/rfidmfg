@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NFC Cards, Tags &amp; Labels: A Practical Guide | RFID MFG</title>
+<meta name="description" content="A practical NFC guide: how NFC works, NTAG chips, cards vs tags vs labels, encoding, and real applications from marketing to authentication." />
+<link rel="canonical" href="https://www.rfidmfg.com/nfc-guide.html" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="theme-color" content="#0a1b34" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="RFID MFG" />
+<meta property="og:title" content="NFC Cards, Tags &amp; Labels: A Practical Guide | RFID MFG" />
+<meta property="og:description" content="A practical NFC guide: how NFC works, NTAG chips, cards vs tags vs labels, encoding, and real applications from marketing to authentication." />
+<meta property="og:url" content="https://www.rfidmfg.com/nfc-guide.html" />
+<meta property="og:image" content="https://www.rfidmfg.com/og-image.jpg" />
+<meta property="article:modified_time" content="2026-06-15" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"NFC cards, tags & labels: a practical guide","description":"A practical NFC guide: how NFC works, NTAG chips, cards vs tags vs labels, encoding, and real applications from marketing to authentication.","image":"https://www.rfidmfg.com/og-image.jpg","datePublished":"2026-06-15","dateModified":"2026-06-15","author":{"@type":"Organization","name":"RFID MFG","url":"https://www.rfidmfg.com/about.html"},"publisher":{"@type":"Organization","name":"RFID MFG","logo":{"@type":"ImageObject","url":"https://www.rfidmfg.com/icon-512.png"}},"mainEntityOfPage":"https://www.rfidmfg.com/nfc-guide.html"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.rfidmfg.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://www.rfidmfg.com/guides.html"},{"@type":"ListItem","position":3,"name":"NFC Guide","item":"https://www.rfidmfg.com/nfc-guide.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do NFC tags need an app?","acceptedAnswer":{"@type":"Answer","text":"No. NTAG tags store an NDEF record (e.g. a URL), so a tap opens it directly in the phone’s browser without any app."}},{"@type":"Question","name":"Can NFC be used for anti-counterfeiting?","acceptedAnswer":{"@type":"Answer","text":"Yes. A locked, unique NFC chip plus tamper-evident material lets customers verify authenticity with a tap and makes cloning impractical."}},{"@type":"Question","name":"Which NFC chip should I choose?","acceptedAnswer":{"@type":"Answer","text":"NTAG213 for short URLs, NTAG215 for vCards/richer data, NTAG216 for the most memory. We can advise based on your content."}}]}
+</script>
+<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin-700-normal.woff2" crossorigin /><link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin-400-normal.woff2" crossorigin />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+<link rel="stylesheet" href="styles.css" />
+<!-- Google Analytics 4 — replace G-XXXXXXXXXX with your Measurement ID, then remove this comment wrapper to activate
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+-->
+</head>
+<body>
+<div class="topbar"><div class="container topbar__inner"><span class="topbar__item">Established 1996 · Shenzhen, China</span><div class="topbar__contact"><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8675523765843">+86 755 2376 5843</a></div></div></div>
+<header class="header" id="header"><div class="container header__inner"><a href="index.html" class="brand" aria-label="RFID MFG home"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="products.html">Products</a>
+      <a href="guides.html">Guides</a>
+      <a href="cases.html">Cases</a>
+      <a href="sustainability.html">Sustainability</a>
+      <a href="news.html">News</a>
+      <a href="contact.html">Contact</a>
+    </nav><a href="contact.html" class="btn btn--primary header__cta">Get a Quote</a><button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div></header>
+<main>
+<section class="page-hero">
+  <div class="page-hero__bg" aria-hidden="true"></div>
+  <div class="container page-hero__inner" style="padding:54px 24px 48px">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span><a href="guides.html">Guides</a><span>/</span>NFC Guide</nav>
+    <h1 style="max-width:20em;margin-left:auto;margin-right:auto">NFC cards, tags &amp; labels: a practical guide</h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container article">
+    <div class="article-body">
+      <p style="font-size:13px;color:var(--muted,#6b7a90);margin:0 0 18px">By RFID MFG Editorial Team · Updated June 15, 2026</p>
+      <div class="lead-line" style="border-left:4px solid var(--brand,#0aa2e8);background:#f4f8fc;padding:14px 18px;border-radius:8px;margin-bottom:22px"><strong>In short:</strong> NFC is short-range 13.56 MHz technology built into every modern phone. A tap can open a link, verify a product or share data — no app needed — which makes NFC ideal for marketing, authentication and access.</div>
+      <h2>How NFC works</h2>
+      <p>NFC (Near Field Communication) is a subset of HF RFID standardised for two-way phone interaction at a few centimetres. The phone powers the passive NFC tag and reads its stored data (NDEF), typically a URL or contact — opening it directly in the browser with no app or pairing.</p>
+      <h2>NTAG chips</h2>
+      <p>Most NFC products use NTAG213/215/216, differing mainly in memory (144–888 bytes). NTAG215 (504 bytes) is popular for vCards and richer data. Chips can be locked so the content cannot be overwritten — important for authentication.</p>
+      <h2>Cards vs tags vs labels</h2>
+      <p>NFC comes in many forms: printed cards (membership, business cards), durable tags and keyfobs (access, asset), and thin printed labels/stickers (packaging, posters). The form factor changes; the NFC principle stays the same.</p>
+      <h2>Encoding and security</h2>
+      <p>Tags are encoded with your URL, vCard or command and can be password-protected or permanently locked. For anti-counterfeiting, tamper-evident materials and unique, locked IDs make copying impractical.</p>
+      <h2>Applications</h2>
+      <p>Tap-to-share business cards, smart packaging and product authentication, tap-to-reorder, smart posters and menus, access control, and interactive marketing. NFC bridges a physical product and a digital experience in one tap.</p>
+      <h2>NFC form factors</h2>
+      <div style="overflow-x:auto;margin:14px 0 6px"><table style="width:100%;border-collapse:collapse;font-size:15px">
+        <thead><tr><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">Form</th><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">Best for</th></tr></thead><tbody><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">NFC card</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Membership, digital business cards</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">NFC label / sticker</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Packaging, posters, authentication</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">NFC tag / keyfob</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Access, asset tracking</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">NFC wristband</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Events, cashless, access</td></tr></tbody></table></div>
+      <h2>Related reading</h2>
+      <ul class="check-list"><li><a href="rfid-vs-nfc.html">RFID vs NFC</a></li><li><a href="nfc-printed-label.html">NFC printed labels</a></li><li><a href="rfid-nfc-card.html">RFID / NFC cards</a></li><li><a href="news-nfc-stickers.html">NFC stickers in everyday life</a></li></ul>
+      <h2>Frequently asked questions</h2>
+      <div class="faq" style="margin-top:8px"><details class="faq-item"><summary>Do NFC tags need an app?</summary><p>No. NTAG tags store an NDEF record (e.g. a URL), so a tap opens it directly in the phone’s browser without any app.</p></details><details class="faq-item"><summary>Can NFC be used for anti-counterfeiting?</summary><p>Yes. A locked, unique NFC chip plus tamper-evident material lets customers verify authenticity with a tap and makes cloning impractical.</p></details><details class="faq-item"><summary>Which NFC chip should I choose?</summary><p>NTAG213 for short URLs, NTAG215 for vCards/richer data, NTAG216 for the most memory. We can advise based on your content.</p></details></div>
+    </div>
+    <div class="article-back"><a href="guides.html" class="link-arrow"><span>←</span> All guides</a></div>
+  </div>
+</section>
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div><h2>Need help choosing the right RFID product?</h2><p>Tell us your application — we'll recommend the chip, frequency and format and quote within 24 hours.</p></div>
+    <a href="contact.html" class="btn btn--ghost btn--lg">Get Expert Advice</a>
+  </div>
+</section>
+</main>
+<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing since 1996.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="cases.html">Cases</a><a href="guides.html">Guides</a><a href="sustainability.html">Sustainability</a><a href="news.html">News</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8675523765843">+86 755 2376 5843</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>
+<a href="#" class="to-top" id="toTop" aria-label="Back to top">↑</a>
+<script src="script.js"></script>
+</body>
+</html>

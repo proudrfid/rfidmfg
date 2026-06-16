@@ -1,0 +1,16 @@
+# Build output (Vercel rebuilds from source)
+/dist/
+
+# Deploy package
+*.zip
+
+# Original-image backups (dev only, large)
+/images_orig_logo/
+
+# Temporary scan/check images created during editing
+_*.png
+
+# Dependencies / tooling / OS
+node_modules/
+.vercel/
+.DS_Store

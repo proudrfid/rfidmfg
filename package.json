@@ -1,0 +1,13 @@
+{
+  "name": "rfidmfg-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RFID MFG — static marketing site (foldered clean-URL build, zero dependencies)",
+  "scripts": {
+    "build": "node build-products.js && node build-articles.js && node build-content.js && node build-foldered.js",
+    "preview": "node build-products.js && node build-articles.js && node build-content.js && node build-foldered.js && npx --yes serve dist"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

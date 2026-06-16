@@ -1,0 +1,81 @@
+# RFID MFG — Full Site Index for AI/LLM
+
+> RFID MFG Co., Ltd. — Chinese RFID & smart-card manufacturer since 1996. OEM/ODM of RFID/NFC cards, labels, inlays, tags, RFID-blocking products and IoT hardware. ISO 9001/14001/45001, CE/FCC/FSC/RoHS/REACH. 20,000 m² facility, 6 production lines, exports to 100+ countries. Contact: peter@rfidmfg.com · +86 755 2376 5843.
+
+
+## Guides & comparisons
+
+- [RFID &amp; NFC Guides, Comparisons & Glossary | RFID MFG](https://www.rfidmfg.com/guides.html): RFID and NFC guides, comparisons and a glossary from RFID MFG — choose the right frequency, chip, material and format for your project.
+- [RFID Cards: The Complete Guide (Types, Chips, Uses) | RFID MFG](https://www.rfidmfg.com/rfid-cards-guide.html): A complete guide to RFID and smart cards: frequencies, chips, materials, printing and applications — everything you need to specify the right card.
+- [NFC Cards, Tags &amp; Labels: A Practical Guide | RFID MFG](https://www.rfidmfg.com/nfc-guide.html): A practical NFC guide: how NFC works, NTAG chips, cards vs tags vs labels, encoding, and real applications from marketing to authentication.
+- [RFID Labels &amp; Inlays: The Complete Guide | RFID MFG](https://www.rfidmfg.com/rfid-labels-inlays-guide.html): Understand RFID labels and inlays: dry vs wet inlays, white labels, UHF vs HF, encoding and converting — choose the right smart label for tagging at scale.
+- [RFID Blocking: How It Works &amp; What You Need | RFID MFG](https://www.rfidmfg.com/rfid-blocking-guide.html): How RFID blocking protects contactless cards from skimming: passive vs active blocking, cards, sleeves and wallets, and what actually works.
+- [RFID Readers &amp; Hardware: A Buyer’s Guide | RFID MFG](https://www.rfidmfg.com/rfid-readers-hardware-guide.html): Choose RFID hardware with confidence: reader types (desktop, fixed, handheld), frequencies, interfaces, antennas and SDKs for your deployment.
+- [RFID Frequencies: LF vs HF vs UHF — Which to Choose | RFID MFG](https://www.rfidmfg.com/rfid-frequencies-lf-hf-uhf.html): LF, HF and UHF RFID compared: read range, speed, cost and best uses. A practical guide to choosing the right RFID frequency for your application.
+- [RFID vs NFC: What Is the Difference? | RFID MFG](https://www.rfidmfg.com/rfid-vs-nfc.html): RFID vs NFC explained simply: NFC is a short-range subset of HF RFID for smartphones. Compare range, use cases and when to choose each.
+- [RFID vs Barcode: Pros, Cons and When to Switch | RFID MFG](https://www.rfidmfg.com/rfid-vs-barcode.html): RFID vs barcode compared: line of sight, read speed, range, durability and cost. Learn when RFID is worth it and when barcodes still win.
+- [MIFARE vs NTAG vs DESFire: RFID Chip Comparison | RFID MFG](https://www.rfidmfg.com/rfid-chips-mifare-ntag-desfire.html): Compare the most common 13.56 MHz RFID chips — MIFARE Classic, NTAG, MIFARE DESFire — by memory, security and use case to pick the right one.
+- [RFID Dry Inlay vs Wet Inlay: Differences &amp; Uses | RFID MFG](https://www.rfidmfg.com/rfid-dry-vs-wet-inlay.html): Dry inlay vs wet inlay explained: adhesive, conversion, cost and applications. Learn which RFID inlay type fits your label or product workflow.
+- [RFID Card Materials: PVC vs PET vs Eco vs Metal | RFID MFG](https://www.rfidmfg.com/rfid-card-materials.html): Compare RFID card materials — PVC, PET/PETG, PC, eco/BIO, wood and metal — by durability, print, sustainability and cost to choose the right card.
+- [RFID & NFC Glossary: Key Terms Explained | RFID MFG](https://www.rfidmfg.com/rfid-glossary.html): An A–Z glossary of RFID and NFC terms — frequencies, chips, inlays, standards and card materials explained in plain language by RFID MFG.
+
+## Products
+
+- [Contact IC Chip Card — RFID MFG](https://www.rfidmfg.com/contact-ic-chip-card.html): Contact IC chip cards carry a gold-plated chip module read through physical contact with a reader — strong on-card security for payment, access and loyalty.
+- [Hotel Keycard — RFID MFG](https://www.rfidmfg.com/hotel-key-card.html): Hotel keycards in RFID or magnetic-stripe formats, compatible with leading door-lock brands, with custom artwork for a branded guest touchpoint.
+- [PVC Cards — RFID MFG](https://www.rfidmfg.com/pvc-cards.html): Full-color PVC cards built for everyday durability — ideal for ID, membership, loyalty, gift and scratch cards with a wide range of finishes and options.
+- [RFID / NFC Card — RFID MFG](https://www.rfidmfg.com/rfid-nfc-card.html): Contactless RFID/NFC cards for access control, transit, loyalty and tap-to-share digital experiences, available across HF/NFC and UHF chips.
+- [RFID Epoxy Card — RFID MFG](https://www.rfidmfg.com/rfid-epoxy-card.html): Epoxy (crystal) tags encase the chip and antenna in tough resin — compact, water-resistant and ideal as keychain access tokens.
+- [Project-based Card — RFID MFG](https://www.rfidmfg.com/project-based-card.html): For system integrators and large rollouts, we engineer cards to your exact chip, encoding, security keys and artwork — with full QC and traceability.
+- [Wooden RFID Card — RFID MFG](https://www.rfidmfg.com/wooden-rfid-card.html): Wood-finish RFID cards bring a warm, premium and eco-conscious feel to membership and hotel keys, using FSC-certified wood veneer.
+- [Metal Card — RFID MFG](https://www.rfidmfg.com/metal-card.html): Premium metal cards in stainless steel or brushed finishes that make a statement for VIP, black-card and luxury membership tiers — with optional NFC.
+- [Eco-Friendly Card — RFID MFG](https://www.rfidmfg.com/eco-friendly-card.html): Lower-impact cards in recycled PVC, biodegradable BIO materials, FSC paper, wood and PLA — matching standard performance with a smaller footprint.
+- [NFC Printed Label / Sticker — RFID MFG](https://www.rfidmfg.com/nfc-printed-label.html): Printed NFC labels combine your artwork with an NFC chip for product authentication, tap-to-engage marketing and smart packaging.
+- [RFID Dry Inlay — RFID MFG](https://www.rfidmfg.com/rfid-dry-inlay.html): Dry inlays are the antenna-and-chip core without adhesive — ideal for customers who laminate or convert them into their own products.
+- [RFID Wet Inlay / Sticker — RFID MFG](https://www.rfidmfg.com/rfid-wet-inlay.html): Wet inlays add a pressure-sensitive adhesive so you can peel and stick for fast, item-level tagging in retail, logistics and asset tracking.
+- [RFID White Label / Sticker — RFID MFG](https://www.rfidmfg.com/rfid-white-label.html): White, printable RFID labels with a coated face for thermal-transfer printing and on-demand encoding at your facility.
+- [RFID Animal Tag — RFID MFG](https://www.rfidmfg.com/rfid-animal-tag.html): Durable LF animal tags — ear tags and racing tags — for livestock identification, traceability and event timing.
+- [RFID Anti-Metal Tag — RFID MFG](https://www.rfidmfg.com/rfid-anti-metal-tag.html): Anti-metal tags use a ferrite/absorber layer so RFID works reliably when mounted on metal surfaces — for IT assets, tools and equipment.
+- [RFID Keyfob — RFID MFG](https://www.rfidmfg.com/rfid-keyfob.html): Rugged ABS keyfobs for access control, time-and-attendance and membership — easy to carry and built to last.
+- [RFID Wristband — RFID MFG](https://www.rfidmfg.com/rfid-wristband.html): RFID wristbands for events, water parks, festivals and access — in silicone, woven fabric, Tyvek paper and more, for cashless and ticketing use.
+- [Special RFID Tags — RFID MFG](https://www.rfidmfg.com/special-rfid-tags.html): Specialty RFID tags engineered for niche needs: laundry tags that survive wash cycles, tiny jewelry tags, tree/plant tags and other custom formats.
+- [RFID Blocking Card — RFID MFG](https://www.rfidmfg.com/rfid-blocking-card.html): A single shielding card that disrupts unauthorized 13.56 MHz reads, protecting the cards around it from skimming.
+- [RFID Blocking Sleeves — RFID MFG](https://www.rfidmfg.com/rfid-blocking-sleeves.html): RFID-blocking sleeves for credit cards and passports — lightweight, printable and an effective low-cost privacy giveaway.
+- [RFID Blocking Wallet — RFID MFG](https://www.rfidmfg.com/rfid-blocking-wallet.html): Wallets and card holders with integrated RFID-shielding lining — combining everyday utility with contactless privacy protection.
+- [Barcode Scan Module / Engine — RFID MFG](https://www.rfidmfg.com/barcode-scan-module.html): Compact barcode scan engines to embed into kiosks, gates, vending and handheld devices — fast 1D/2D capture, including codes on phone screens.
+- [Industrial IoT DTU / RTU — RFID MFG](https://www.rfidmfg.com/industrial-iot-dtu-rtu.html): Industrial DTU/RTU units transmit field data over 4G/NB-IoT for remote monitoring and control of equipment, meters and sensors.
+- [RFID LF/HF/UHF Reader / Writer — RFID MFG](https://www.rfidmfg.com/rfid-reader-writer.html): A full range of RFID readers/writers — from desktop USB encoders to fixed and handheld UHF readers — across LF, HF and UHF.
+- [RFID Smart Cabinet / Terminal — RFID MFG](https://www.rfidmfg.com/rfid-smart-cabinet.html): RFID smart cabinets and terminals automatically track what is taken and returned — for tools, documents, medical and high-value asset control.
+
+## Cases
+
+- [Smart IC Bank Card — Case | RFID MFG](https://www.rfidmfg.com/case-bank-card.html): Smart IC bank cards add a secure chip to the familiar card format, supporting both contact and contactless (tap) payment with strong on-card security.
+- [Events &amp; Activities — Case | RFID MFG](https://www.rfidmfg.com/case-events.html): RFID wristbands, epoxy tags and tickets speed up access and enable cashless payment at festivals and events worldwide — fully customizable by OEM.
+- [RFID Gateways &amp; Portals — Case | RFID MFG](https://www.rfidmfg.com/case-gateways.html): Doorway-mounted RFID readers record tagged goods automatically as they pass through, so movement is tracked without anyone scanning anything.
+- [RFID ID Cards — Case | RFID MFG](https://www.rfidmfg.com/case-id-cards.html): RFID ID cards combine secure identification with contactless access, and can be made in PVC or premium eco materials such as PC and PETG.
+- [RFID Library System — Case | RFID MFG](https://www.rfidmfg.com/case-library.html): RFID lets library patrons borrow and return books in seconds at self-service kiosks, while staff inventory whole shelves by waving a reader.
+- [Logistics Management — Case | RFID MFG](https://www.rfidmfg.com/case-logistics.html): RFID tracks shipments accurately end to end with fast bulk reads, long range and secure data — cutting losses and speeding up handling.
+- [Magnetic Member Card &amp; Holder — Case | RFID MFG](https://www.rfidmfg.com/case-member-card.html): A new Japanese-cuisine food hall used member cards and holders for payment, top-ups and loyalty, building repeat custom from day one.
+- [NFC Solution — Honda Case | RFID MFG](https://www.rfidmfg.com/case-nfc-honda.html): Using RFID MFG NFC cards, customers tap an NFC-enabled phone to trigger an interaction — bridging a physical product and a digital experience.
+- [PVC Scratch Card — Case | RFID MFG](https://www.rfidmfg.com/case-scratch-card.html): A government project used PVC scratch cards carrying a serial number and hidden PIN for secure website login and registration — won on print quality.
+- [Public Transportation — Case | RFID MFG](https://www.rfidmfg.com/case-transit.html): Contactless RFID cards and tickets let passengers tap to pay and board in under a second, keeping transit networks moving at peak times.
+- [Warehouse Management with RFID — Case | RFID MFG](https://www.rfidmfg.com/case-warehouse.html): RFID lets a warehouse read hundreds of items at once without line of sight, turning multi-day stock counts into minutes and cutting picking errors.
+- [RFID for Warranty &amp; Repair — Case | RFID MFG](https://www.rfidmfg.com/case-warranty.html): Tagging each product with RFID gives it a reliable service history, so warranty, returns, testing and repairs are verified and recorded automatically.
+
+## News & insights
+
+- [RFID MFG Launches High-Performance RFID-Blocking Card | RFID MFG](https://www.rfidmfg.com/news-blocking-card.html): RFID MFG’s new blocking card sits in a wallet and disrupts unauthorized 13.56 MHz scans, shielding the cards around it from skimming.
+- [Why the Food Industry Needs RFID | RFID MFG](https://www.rfidmfg.com/news-food.html): RFID gives the food industry end-to-end traceability — fast, accurate tracking from production to shelf that supports freshness, recalls and compliance.
+- [NFC Stickers Have Entered Every Aspect of Our Lives | RFID MFG](https://www.rfidmfg.com/news-nfc-stickers.html): Slim, printable and inexpensive, NFC stickers turn ordinary objects into interactive touchpoints — for tap-to-share, smart packaging and authentication.
+- [Powering the Future of Rail with RFID | RFID MFG](https://www.rfidmfg.com/news-rail.html): RFID quietly improves rail safety, asset tracking and efficiency — identifying rolling stock and components automatically, without manual scanning.
+- [Walmart to Use RFID for Fresh-Food Products | RFID MFG](https://www.rfidmfg.com/news-walmart.html): A major retailer expanding RFID into fresh food is a strong signal that item-level tagging is going mainstream across grocery and retail.
+- [RFID Theme-Park Wristbands | RFID MFG](https://www.rfidmfg.com/news-wristband.html): A single RFID wristband handles park entry, cashless payment and ride access — cutting queues for guests and giving operators live data.
+
+## Company
+
+- [Products — RFID Cards, Labels, Tags, Blocking &amp; Hardware | RFID MFG](https://www.rfidmfg.com/products.html): Explore RFID MFG's full RFID product catalog: smart cards, NFC labels &amp; inlays, RFID tags, RFID-blocking products and IoT hardware — all customizable.
+- [About RFID MFG — RFID & Smart Card Manufacturer Since 1996](https://www.rfidmfg.com/about.html): RFID MFG Co., Ltd. — three decades of RFID & smart-card manufacturing, ISO-certified and exporting to 100+ countries. OEM/ODM since 1996.
+- [Sustainability — Eco-Friendly RFID Cards & Green Manufacturing | RFID MFG](https://www.rfidmfg.com/sustainability.html): RFID MFG's eco commitment: FSC-certified BIO-paper cards, biodegradable & recyclable materials, plus responsible water, air & waste management.
+- [Cases — RFID Applications & Customer Solutions | RFID MFG](https://www.rfidmfg.com/cases.html): Real-world RFID deployments by RFID MFG across warehousing, ID, payment, libraries, transport, events and NFC — proven solutions across industries.
+- [News &amp; Insights — RFID Industry Updates | RFID MFG](https://www.rfidmfg.com/news.html): Company news and RFID industry insights from RFID MFG — product launches, applications and trends across retail, transport, events and more.
+- [Contact RFID MFG — Request a Quote or Pricelist](https://www.rfidmfg.com/contact.html): Contact RFID MFG Co., Ltd. for RFID cards, labels, tags and hardware. Request a quote or pricelist — we reply within 24 hours. OEM/ODM welcome.

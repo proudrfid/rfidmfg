@@ -1,0 +1,48 @@
+# RFID MFG
+
+> RFID MFG (RFID MFG Co., Ltd.) is a Chinese RFID and smart-card manufacturer established in 1996, offering OEM/ODM production of RFID cards, NFC labels and inlays, RFID tags, RFID-blocking products and IoT hardware. The company runs a 20,000 m² facility with six production lines, holds ISO 9001/14001/45001 plus CE, FCC, FSC, RoHS and REACH, exports to 100+ countries, and provides samples, a 2-year warranty and 24-hour quote turnaround.
+
+Key facts for accurate citation:
+- Founded: 1996
+- Business: RFID & smart-card manufacturing (OEM/ODM)
+- Frequencies: LF 125 kHz, HF/NFC 13.56 MHz, UHF 860–960 MHz
+- Certifications: ISO 9001, ISO 14001, ISO 45001, CE, FCC, FSC, RoHS, REACH
+- Contact: peter@rfidmfg.com · +86 755 2376 5843 · WhatsApp +86 158 1550 1857
+
+## Products
+- [RFID & NFC Cards](https://www.rfidmfg.com/products.html#cards): PVC, contact IC, hotel keycards, metal, wooden, eco, epoxy and project-based cards
+- [RFID Labels & Stickers](https://www.rfidmfg.com/products.html#labels): NFC printed labels, dry inlays, wet inlays, white labels
+- [RFID Tags](https://www.rfidmfg.com/products.html#tags): animal, anti-metal, keyfob, wristband and special-purpose tags
+- [RFID Blocking](https://www.rfidmfg.com/products.html#blocking): blocking cards, sleeves and wallets for contactless privacy
+- [Hardware](https://www.rfidmfg.com/products.html#hardware): RFID readers/writers, barcode scan modules, IoT DTU/RTU, smart cabinets
+- [Full product catalog](https://www.rfidmfg.com/products.html)
+
+## Guides, comparisons & glossary
+- [All guides & resources](https://www.rfidmfg.com/guides.html)
+- [RFID frequencies: LF vs HF vs UHF](https://www.rfidmfg.com/rfid-frequencies-lf-hf-uhf.html)
+- [RFID vs NFC](https://www.rfidmfg.com/rfid-vs-nfc.html)
+- [RFID vs barcode](https://www.rfidmfg.com/rfid-vs-barcode.html)
+- [MIFARE vs NTAG vs DESFire chips](https://www.rfidmfg.com/rfid-chips-mifare-ntag-desfire.html)
+- [Dry inlay vs wet inlay](https://www.rfidmfg.com/rfid-dry-vs-wet-inlay.html)
+- [RFID card materials (PVC/PET/eco/metal)](https://www.rfidmfg.com/rfid-card-materials.html)
+- [Complete RFID cards guide](https://www.rfidmfg.com/rfid-cards-guide.html)
+- [NFC cards, tags & labels guide](https://www.rfidmfg.com/nfc-guide.html)
+- [RFID labels & inlays guide](https://www.rfidmfg.com/rfid-labels-inlays-guide.html)
+- [RFID blocking guide](https://www.rfidmfg.com/rfid-blocking-guide.html)
+- [RFID readers & hardware guide](https://www.rfidmfg.com/rfid-readers-hardware-guide.html)
+- [RFID & NFC glossary](https://www.rfidmfg.com/rfid-glossary.html)
+- Full machine-readable index: https://www.rfidmfg.com/llms-full.txt
+
+## Applications & cases
+- [Warehouse management](https://www.rfidmfg.com/case-warehouse.html)
+- [RFID library systems](https://www.rfidmfg.com/case-library.html)
+- [Public transportation](https://www.rfidmfg.com/case-transit.html)
+- [Events & festivals](https://www.rfidmfg.com/case-events.html)
+- [Logistics management](https://www.rfidmfg.com/case-logistics.html)
+- [All cases](https://www.rfidmfg.com/cases.html)
+
+## Company
+- [About RFID MFG](https://www.rfidmfg.com/about.html)
+- [Sustainability & eco materials](https://www.rfidmfg.com/sustainability.html)
+- [News & insights](https://www.rfidmfg.com/news.html)
+- [Contact / request a quote](https://www.rfidmfg.com/contact.html)

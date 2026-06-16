@@ -1,0 +1,3 @@
+# Canonical host: send apex (rfidmfg.com) to www.rfidmfg.com
+https://rfidmfg.com/*  https://www.rfidmfg.com/:splat  301
+http://rfidmfg.com/*   https://www.rfidmfg.com/:splat  301
