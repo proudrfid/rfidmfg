@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RFID Product Selector — Find the Right Chip, Frequency & Tag | RFID MFG</title>
+<meta name="description" content="Free RFID product selector: answer a few questions about your use case, read range and environment and get an instant recommendation on frequency (LF/HF/UHF), chip and the right RFID product." />
+<link rel="canonical" href="https://www.rfidmfg.com/tools/rfid-selector/" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="theme-color" content="#0a1b34" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="RFID MFG" />
+<meta property="og:title" content="RFID Product Selector — Find the Right Chip & Frequency | RFID MFG" />
+<meta property="og:description" content="Answer a few questions and get an instant RFID recommendation — frequency, chip and product." />
+<meta property="og:url" content="https://www.rfidmfg.com/tools/rfid-selector/" />
+<meta property="og:image" content="https://www.rfidmfg.com/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"RFID Product Selector","url":"https://www.rfidmfg.com/tools/rfid-selector/","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"RFID MFG","url":"https://www.rfidmfg.com/about.html"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.rfidmfg.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://www.rfidmfg.com/tools/rfid-selector/"},{"@type":"ListItem","position":3,"name":"RFID Selector","item":"https://www.rfidmfg.com/tools/rfid-selector/"}]}
+</script>
+<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin-700-normal.woff2" crossorigin /><link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin-400-normal.woff2" crossorigin />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+<link rel="stylesheet" href="styles.css" />
+<!-- Google Analytics 4 — replace G-XXXXXXXXXX with your Measurement ID, then remove this comment wrapper to activate
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+-->
+<style>
+.wz{max-width:880px;margin:0 auto}
+.wz-step{margin:0 0 22px}
+.wz-step h2{font-size:18px;margin:0 0 12px}
+.wz-opts{display:flex;flex-wrap:wrap;gap:10px}
+.wz-opt{cursor:pointer;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 16px;font-size:14.5px;font-weight:500;transition:border-color .15s,background .15s,color .15s;user-select:none}
+.wz-opt:hover{border-color:var(--brand)}
+.wz-opt.sel{background:linear-gradient(135deg,var(--brand),var(--brand-deep));border-color:transparent;color:#fff}
+.wz-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.wz-result{margin-top:30px;border:1px solid var(--line);border-radius:var(--radius);background:#f4f7fb;padding:26px;display:none}
+.wz-result.show{display:block;animation:wzfade .3s ease}
+@keyframes wzfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.wz-badges{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 18px}
+.wz-badge{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13.5px;font-weight:600}
+.wz-badge b{color:var(--brand-deep)}
+.wz-recs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.wz-rec{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s}
+.wz-rec:hover{transform:translateY(-3px);border-color:var(--brand)}
+.wz-rec strong{display:block;font-family:var(--display);font-size:15.5px;margin-bottom:3px}
+.wz-rec span{font-size:13px;color:var(--muted)}
+@media(max-width:560px){.wz-recs{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="container topbar__inner"><span class="topbar__item">Established 1996 · Shenzhen, China</span><div class="topbar__contact"><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8675523765843">+86 755 2376 5843</a></div></div></div>
+<header class="header" id="header"><div class="container header__inner"><a href="index.html" class="brand" aria-label="RFID MFG home"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="products.html">Products</a>
+      <a href="guides.html">Guides</a>
+      <a href="cases.html">Cases</a>
+      <a href="sustainability.html">Sustainability</a>
+      <a href="news.html">News</a>
+      <a href="contact.html">Contact</a>
+    </nav><a href="contact.html" class="btn btn--primary header__cta">Get a Quote</a><button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div></header>
+<main>
+<section class="page-hero">
+  <div class="page-hero__bg" aria-hidden="true"></div>
+  <div class="container page-hero__inner" style="padding:54px 24px 40px">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span>Tools<span>/</span>RFID Selector</nav>
+    <h1>RFID product selector</h1>
+    <p>Answer five quick questions and get an instant recommendation — frequency, chip and the right product for your application. Free, no sign-up.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container wz">
+    <div class="wz-step" data-q="use">
+      <h2>1. What is the main application?</h2>
+      <div class="wz-opts">
+        <span class="wz-opt" data-v="access">Access control</span>
+        <span class="wz-opt" data-v="payment">Payment / transit</span>
+        <span class="wz-opt" data-v="inventory">Inventory / logistics</span>
+        <span class="wz-opt" data-v="asset">Asset / tool tracking</span>
+        <span class="wz-opt" data-v="marketing">Marketing / authentication (tap)</span>
+        <span class="wz-opt" data-v="event">Events / cashless</span>
+        <span class="wz-opt" data-v="animal">Animal identification</span>
+        <span class="wz-opt" data-v="laundry">Laundry / textiles</span>
+        <span class="wz-opt" data-v="library">Library</span>
+      </div>
+    </div>
+    <div class="wz-step" data-q="phone">
+      <h2>2. Must a smartphone read it directly?</h2>
+      <div class="wz-opts">
+        <span class="wz-opt" data-v="yes">Yes — tap with a phone</span>
+        <span class="wz-opt" data-v="no">No — a dedicated reader is fine</span>
+      </div>
+    </div>
+    <div class="wz-step" data-q="range">
+      <h2>3. Read distance needed?</h2>
+      <div class="wz-opts">
+        <span class="wz-opt" data-v="tap">Tap (touch)</span>
+        <span class="wz-opt" data-v="short">Short (≤ 10 cm)</span>
+        <span class="wz-opt" data-v="medium">Medium (up to ~1 m)</span>
+        <span class="wz-opt" data-v="long">Long (up to ~10 m)</span>
+      </div>
+    </div>
+    <div class="wz-step" data-q="env">
+      <h2>4. Mounting environment?</h2>
+      <div class="wz-opts">
+        <span class="wz-opt" data-v="normal">Normal (plastic, paper, body)</span>
+        <span class="wz-opt" data-v="metal">On / near metal</span>
+        <span class="wz-opt" data-v="liquid">Near liquid / water</span>
+        <span class="wz-opt" data-v="outdoor">Outdoor / harsh</span>
+      </div>
+    </div>
+    <div class="wz-step" data-q="form">
+      <h2>5. Preferred form factor?</h2>
+      <div class="wz-opts">
+        <span class="wz-opt" data-v="card">Card</span>
+        <span class="wz-opt" data-v="label">Label / sticker</span>
+        <span class="wz-opt" data-v="tag">Tag / keyfob</span>
+        <span class="wz-opt" data-v="wristband">Wristband</span>
+        <span class="wz-opt" data-v="hardware">Reader / hardware</span>
+        <span class="wz-opt" data-v="any">No preference</span>
+      </div>
+    </div>
+    <div class="wz-actions">
+      <button class="btn btn--primary btn--lg" id="wzGo">Get my recommendation</button>
+      <button class="btn btn--lg" id="wzReset" style="border-color:var(--line)">Reset</button>
+    </div>
+    <div class="wz-result" id="wzResult" aria-live="polite"></div>
+  </div>
+</section>
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div><h2>Want a human to confirm the spec?</h2><p>Send us your application and quantity — our engineers reply within 24 hours with a quote and free sample options.</p></div>
+    <a href="contact.html" class="btn btn--ghost btn--lg">Talk to an Engineer</a>
+  </div>
+</section>
+</main>
+<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing since 1996.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="cases.html">Cases</a><a href="guides.html">Guides</a><a href="sustainability.html">Sustainability</a><a href="news.html">News</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8675523765843">+86 755 2376 5843</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>
+<a href="#" class="to-top" id="toTop" aria-label="Back to top">↑</a>
+<script src="script.js"></script>
+<script>
+(function(){
+  var sel={};
+  document.querySelectorAll('.wz-step').forEach(function(step){
+    var q=step.getAttribute('data-q');
+    step.querySelectorAll('.wz-opt').forEach(function(o){
+      o.addEventListener('click',function(){
+        step.querySelectorAll('.wz-opt').forEach(function(x){x.classList.remove('sel');});
+        o.classList.add('sel'); sel[q]=o.getAttribute('data-v');
+      });
+    });
+  });
+  var P={
+    'rfid-nfc-card':['RFID / NFC Card','/products/cards/rfid-nfc-card/'],
+    'contact-ic-chip-card':['Contact IC Chip Card','/products/cards/contact-ic-chip-card/'],
+    'hotel-key-card':['Hotel Keycard','/products/cards/hotel-key-card/'],
+    'metal-card':['Metal Card','/products/cards/metal-card/'],
+    'nfc-printed-label':['NFC Printed Label','/products/labels/nfc-printed-label/'],
+    'rfid-wet-inlay':['RFID Wet Inlay','/products/labels/rfid-wet-inlay/'],
+    'rfid-white-label':['RFID White Label','/products/labels/rfid-white-label/'],
+    'rfid-dry-inlay':['RFID Dry Inlay','/products/labels/rfid-dry-inlay/'],
+    'rfid-keyfob':['RFID Keyfob','/products/tags/rfid-keyfob/'],
+    'rfid-anti-metal-tag':['RFID Anti-Metal Tag','/products/tags/rfid-anti-metal-tag/'],
+    'rfid-animal-tag':['RFID Animal Tag','/products/tags/rfid-animal-tag/'],
+    'special-rfid-tags':['Special RFID Tags','/products/tags/special-rfid-tags/'],
+    'rfid-wristband':['RFID Wristband','/products/tags/rfid-wristband/'],
+    'rfid-reader-writer':['RFID Reader / Writer','/products/hardware/rfid-reader-writer/'],
+    'rfid-smart-cabinet':['RFID Smart Cabinet','/products/hardware/rfid-smart-cabinet/']
+  };
+  var CAT={cards:['Cards','/products/cards/'],labels:['Labels & inlays','/products/labels/'],tags:['Tags','/products/tags/'],hardware:['Hardware','/products/hardware/']};
+  var GUIDE={
+    freq:['RFID frequencies: LF vs HF vs UHF','/guides/rfid-frequencies-lf-hf-uhf/'],
+    chip:['MIFARE vs NTAG vs DESFire chips','/guides/rfid-chips-mifare-ntag-desfire/'],
+    inlay:['Dry vs wet inlay','/guides/rfid-dry-vs-wet-inlay/'],
+    nfc:['NFC cards, tags & labels guide','/guides/nfc-guide/'],
+    cards:['Complete RFID cards guide','/guides/rfid-cards-guide/']
+  };
+  function rec(){
+    var u=sel.use,phone=sel.phone,range=sel.range,env=sel.env,form=sel.form;
+    var freq,chip,why,guide,prods=[];
+    var isHF = phone==='yes' || range==='tap' || u==='library' || u==='marketing';
+    var isUHF = (!isHF) && (range==='long' || range==='medium' || u==='inventory' || u==='logistics' || u==='asset');
+    var isLF = (!isHF && !isUHF) && (u==='animal' || (env==='liquid') || (range==='short' && env==='metal'));
+    if(isHF){freq='HF / NFC (13.56 MHz)';guide=GUIDE.nfc;}
+    else if(isUHF){freq='UHF (860–960 MHz)';guide=GUIDE.freq;}
+    else if(isLF){freq='LF (125–134 kHz)';guide=GUIDE.freq;}
+    else {freq='HF / NFC (13.56 MHz)';guide=GUIDE.freq;}
+    // chip
+    if(freq.indexOf('HF')===0){
+      if(u==='payment'||u==='access') {chip='MIFARE DESFire (AES) or MIFARE Classic';}
+      else if(u==='marketing') {chip='NTAG213/215/216';}
+      else {chip='NTAG or MIFARE (per security need)';}
+      if(u==='payment'||u==='access') guide=GUIDE.chip;
+    } else if(freq.indexOf('UHF')===0){
+      chip='UCODE / Impinj Monza' + (env==='metal'?' (on-metal design)':'');
+    } else {
+      chip='EM4305 / Hitag-S (ISO 11784/85)';
+    }
+    // products by use + form + env
+    function add(k){ if(P[k]&&prods.indexOf(k)<0) prods.push(k); }
+    if(u==='access'){ add(form==='tag'?'rfid-keyfob':'rfid-nfc-card'); }
+    else if(u==='payment'){ add('rfid-nfc-card'); add('contact-ic-chip-card'); }
+    else if(u==='inventory'||u==='logistics'){ add('rfid-wet-inlay'); add('rfid-white-label'); }
+    else if(u==='asset'){ add(env==='metal'?'rfid-anti-metal-tag':'rfid-dry-inlay'); if(form==='hardware')add('rfid-smart-cabinet'); }
+    else if(u==='marketing'){ add('nfc-printed-label'); add('rfid-nfc-card'); }
+    else if(u==='event'){ add('rfid-wristband'); }
+    else if(u==='animal'){ add('rfid-animal-tag'); }
+    else if(u==='laundry'){ add('special-rfid-tags'); }
+    else if(u==='library'){ add('rfid-white-label'); }
+    // form override
+    if(form==='card'&&!prods.length) add('rfid-nfc-card');
+    if(form==='wristband') add('rfid-wristband');
+    if(form==='hardware') add('rfid-reader-writer');
+    if(env==='metal'&&freq.indexOf('UHF')===0) add('rfid-anti-metal-tag');
+    if(!prods.length){ var c=form&&CAT[form==='label'?'labels':form==='tag'?'tags':form==='hardware'?'hardware':'cards']; }
+    why = 'Based on '+(phone==='yes'?'phone-tap requirement':(range||'your')+' read range')+', a '+(u||'general')+' use case'+(env&&env!=='normal'?(' in a '+env+' environment'):'')+'.';
+    return {freq:freq,chip:chip,why:why,guide:guide,prods:prods.slice(0,4),form:form};
+  }
+  function render(){
+    var need=['use','phone','range','env','form'].filter(function(q){return !sel[q];});
+    var box=document.getElementById('wzResult');
+    if(need.length){ box.className='wz-result show'; box.innerHTML='<p style="margin:0;color:var(--muted)">Please answer all 5 questions to get a recommendation.</p>'; return; }
+    var r=rec();
+    var recCards = r.prods.map(function(k){var p=P[k];return '<a class="wz-rec" href="'+p[1]+'"><strong>'+p[0]+'</strong><span>View product & specs →</span></a>';}).join('');
+    if(!recCards){ var cat=CAT[r.form==='label'?'labels':r.form==='tag'?'tags':r.form==='hardware'?'hardware':'cards']; recCards='<a class="wz-rec" href="'+cat[1]+'"><strong>'+cat[0]+'</strong><span>Browse this category →</span></a>'; }
+    box.className='wz-result show';
+    box.innerHTML =
+      '<span class="eyebrow">Our recommendation</span>'+
+      '<h2 style="font-size:22px;margin:6px 0 10px">'+r.freq+'</h2>'+
+      '<div class="wz-badges"><span class="wz-badge">Frequency: <b>'+r.freq+'</b></span><span class="wz-badge">Suggested chip: <b>'+r.chip+'</b></span></div>'+
+      '<p style="margin:0 0 14px;color:var(--muted)">'+r.why+'</p>'+
+      '<h3 style="font-size:15px;margin:0 0 8px">Recommended products</h3>'+
+      '<div class="wz-recs">'+recCards+'</div>'+
+      '<p style="margin:14px 0 0;font-size:14px">Learn more: <a href="'+r.guide[1]+'" class="link-arrow">'+r.guide[0]+' <span>→</span></a></p>'+
+      '<p style="margin:16px 0 0"><a href="contact.html" class="btn btn--primary">Get a quote for this →</a></p>';
+    box.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  document.getElementById('wzGo').addEventListener('click',render);
+  document.getElementById('wzReset').addEventListener('click',function(){
+    sel={}; document.querySelectorAll('.wz-opt').forEach(function(x){x.classList.remove('sel');});
+    var b=document.getElementById('wzResult'); b.className='wz-result'; b.innerHTML='';
+  });
+})();
+</script>
+</body>
+</html>

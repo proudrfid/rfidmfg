@@ -34,6 +34,7 @@ const CAT_SUB = {
 const GUIDES = ['rfid-cards-guide', 'nfc-guide', 'rfid-labels-inlays-guide', 'rfid-blocking-guide', 'rfid-readers-hardware-guide',
   'rfid-frequencies-lf-hf-uhf', 'rfid-vs-nfc', 'rfid-vs-barcode', 'rfid-chips-mifare-ntag-desfire', 'rfid-dry-vs-wet-inlay', 'rfid-card-materials', 'rfid-glossary'];
 const STATIC = ['about', 'products', 'guides', 'cases', 'news', 'sustainability', 'contact', 'privacy', 'terms'];
+const TOOLS = ['rfid-selector'];
 
 // old file (no .html) -> clean path (no leading/trailing slash; '' = home)
 function cleanPath(base) {
@@ -42,6 +43,7 @@ function cleanPath(base) {
   if (STATIC.includes(base)) return base;
   if (base in CAT) return `products/${CAT[base]}/${base}`;
   if (GUIDES.includes(base)) return `guides/${base}`;
+  if (TOOLS.includes(base)) return `tools/${base}`;
   if (base.startsWith('case-')) return `cases/${base.slice(5)}`;
   if (base.startsWith('news-')) return `news/${base.slice(5)}`;
   return base;
@@ -175,6 +177,11 @@ fs.mkdirSync(path.join(OUT, 'fonts'), { recursive: true });
 for (const a of fs.readdirSync(path.join(ROOT, 'fonts')).filter((x) => x.endsWith('.woff2'))) fs.copyFileSync(path.join(ROOT, 'fonts', a), path.join(OUT, 'fonts', a));
 fs.mkdirSync(path.join(OUT, 'images'), { recursive: true });
 for (const a of fs.readdirSync(path.join(ROOT, 'images')).filter((x) => x.endsWith('.webp') || /^par.*\.png$/.test(x))) fs.copyFileSync(path.join(ROOT, 'images', a), path.join(OUT, 'images', a));
+// datasheets (pre-built PDFs — static assets)
+if (fs.existsSync(path.join(ROOT, 'datasheets'))) {
+  fs.mkdirSync(path.join(OUT, 'datasheets'), { recursive: true });
+  for (const a of fs.readdirSync(path.join(ROOT, 'datasheets')).filter((x) => x.endsWith('.pdf'))) fs.copyFileSync(path.join(ROOT, 'datasheets', a), path.join(OUT, 'datasheets', a));
+}
 
 // ---- sitemaps ----
 function pri(u) {
@@ -186,6 +193,7 @@ function pri(u) {
   if (u === '/cases/' || u === '/news/') return ['0.7', 'weekly'];
   if (/^\/products\/[a-z]+\/[a-z0-9-]+\/$/.test(u)) return ['0.7', 'monthly']; // product
   if (/^\/guides\/[a-z0-9-]+\/$/.test(u)) return ['0.7', 'monthly'];
+  if (/^\/tools\/[a-z0-9-]+\/$/.test(u)) return ['0.8', 'monthly'];
   if (/^\/(cases|news)\/[a-z0-9-]+\/$/.test(u)) return ['0.6', 'monthly'];
   if (u === '/privacy/' || u === '/terms/') return ['0.3', 'yearly'];
   return ['0.6', 'monthly'];

@@ -432,7 +432,7 @@ function hubPage() {
   const slug = 'guides.html';
   const card = (href, title, desc) => `<a class="cat-item" href="${href}" style="text-decoration:none"><div class="cat-item__body" style="padding:18px"><h3 style="margin:0 0 6px">${esc(title)}</h3><p style="margin:0;color:var(--muted)">${esc(desc)}</p></div></a>`;
   const guides = GUIDES.map((g) => card(g.slug, g.crumb.replace(' Guide', '') + ' guide', g.lead)).join('\n      ');
-  const comps = COMPARISONS.map((c) => card(c.slug, c.crumb, c.lead)).join('\n      ');
+  const comps = card('/tools/rfid-selector/', '★ RFID Selector tool', 'Answer 5 quick questions and get an instant frequency, chip and product recommendation.') + '\n      ' + COMPARISONS.map((c) => card(c.slug, c.crumb, c.lead)).join('\n      ');
   const ld = [
     { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'RFID & NFC Guides and Resources', url: SITE + '/' + slug, description: 'Guides, comparisons and a glossary to help you choose the right RFID and NFC products.' },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE + '/' }, { '@type': 'ListItem', position: 2, name: 'Guides', item: SITE + '/' + slug }] },
