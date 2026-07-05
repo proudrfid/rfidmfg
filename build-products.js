@@ -63,10 +63,10 @@ const IMG = {
   'rfid-library-tag': IMGBASE + 'rfid-library-system.webp',
   'high-temperature-rfid-tag': IMGBASE + 'rfid-laundry-tag.webp',
   'industrial-iot-dtu-rtu': IMGBASE + 'barcode-scan-module.webp',
-  'rfid-jewelry-tag': IMGBASE + 'rfid-anti-metal-tag.webp',
-  'uhf-windshield-tag': IMGBASE + 'rfid-dry-inlay.webp',
+  'rfid-jewelry-tag': IMGBASE + 'rfid-jewelry-tag.webp',
+  'uhf-windshield-tag': IMGBASE + 'uhf-windshield-tag.webp',
   'nfc-dog-tag': IMGBASE + 'rfid-keyfob.webp',
-  'rfid-seal-tag': IMGBASE + 'rfid-anti-metal-tag.webp',
+  'rfid-seal-tag': IMGBASE + 'rfid-white-label-sticker.webp',
 };
 
 // 行业标准内容模块(每个产品页共用)
