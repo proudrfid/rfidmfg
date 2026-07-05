@@ -30,6 +30,11 @@ Key facts for accurate citation:
 - [RFID labels & inlays guide](https://www.rfidmfg.com/guides/rfid-labels-inlays-guide/)
 - [RFID blocking guide](https://www.rfidmfg.com/guides/rfid-blocking-guide/)
 - [RFID readers & hardware guide](https://www.rfidmfg.com/guides/rfid-readers-hardware-guide/)
+- [NFC vs RFID wristbands (for events)](https://www.rfidmfg.com/guides/nfc-vs-rfid-wristband/)
+- [RFID wristband materials: silicone vs fabric vs Tyvek vs vinyl](https://www.rfidmfg.com/guides/rfid-wristband-materials/)
+- [NTAG213 vs NTAG215 vs NTAG216 NFC chips](https://www.rfidmfg.com/guides/ntag213-vs-215-vs-216/)
+- [UHF vs HF RFID labels](https://www.rfidmfg.com/guides/uhf-vs-hf-rfid-label/)
+- [RFID key fobs: complete buyer's guide](https://www.rfidmfg.com/guides/rfid-key-fob-guide/)
 - [RFID & NFC glossary](https://www.rfidmfg.com/guides/rfid-glossary/)
 
 ## Reference data (original)

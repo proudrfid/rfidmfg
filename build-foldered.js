@@ -35,7 +35,8 @@ const CAT_SUB = {
   hardware: 'RFID readers/writers, scan modules, IoT terminals and smart cabinets.',
 };
 const GUIDES = ['rfid-cards-guide', 'nfc-guide', 'rfid-labels-inlays-guide', 'rfid-blocking-guide', 'rfid-readers-hardware-guide',
-  'rfid-frequencies-lf-hf-uhf', 'rfid-vs-nfc', 'rfid-vs-barcode', 'rfid-chips-mifare-ntag-desfire', 'rfid-dry-vs-wet-inlay', 'rfid-card-materials', 'rfid-glossary'];
+  'rfid-frequencies-lf-hf-uhf', 'rfid-vs-nfc', 'rfid-vs-barcode', 'rfid-chips-mifare-ntag-desfire', 'rfid-dry-vs-wet-inlay', 'rfid-card-materials', 'rfid-glossary',
+  'nfc-vs-rfid-wristband', 'ntag213-vs-215-vs-216', 'uhf-vs-hf-rfid-label', 'rfid-wristband-materials', 'rfid-key-fob-guide'];
 const STATIC = ['about', 'products', 'guides', 'cases', 'news', 'sustainability', 'contact', 'privacy', 'terms'];
 const TOOLS = ['rfid-selector'];
 

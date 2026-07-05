@@ -69,6 +69,11 @@ const CONTENT_IMG = {
   'rfid-labels-inlays-guide.html': ['images/nfc-printed-label.webp', 'Printed NFC/RFID smart label with inlay inside', 'RFID labels pair an inlay with a printable face for tagging at scale.'],
   'rfid-blocking-guide.html': ['images/rfid-blocking-card.webp', 'RFID blocking card that shields a wallet from skimming', 'Blocking cards, sleeves and wallets stop unauthorized 13.56 MHz reads.'],
   'rfid-readers-hardware-guide.html': ['images/hf-usb-rfid-card-reader.webp', 'HF USB RFID card reader/writer for encoding and access', 'Readers range from desktop USB encoders to fixed and handheld UHF units.'],
+  'nfc-vs-rfid-wristband.html': ['images/rfid-event-wristbands.webp', 'NFC and RFID event wristbands for access and cashless payment', 'HF/NFC bands tap for payment; UHF bands read from metres for crowd flow.'],
+  'ntag213-vs-215-vs-216.html': ['images/nfc-metal-card.webp', 'NFC product built on an NXP NTAG chip (NTAG213/215/216)', 'NTAG213/215/216 differ mainly in user memory: 144 / 504 / 888 bytes.'],
+  'uhf-vs-hf-rfid-label.html': ['images/nfc-printed-label.webp', 'Printed RFID smart label — available in UHF or HF', 'UHF labels read from metres; HF labels tap at close range and are phone-readable.'],
+  'rfid-wristband-materials.html': ['images/leather-rfid-wristband.webp', 'RFID wristbands in silicone, fabric, Tyvek and vinyl materials', 'Material drives comfort, durability, waterproofing, reuse and cost.'],
+  'rfid-key-fob-guide.html': ['images/rfid-keyfob.webp', 'RFID key fob — a rugged keyring token for contactless access', 'Key fobs come in LF, HF/NFC and UHF for access, membership and ID.'],
 };
 
 function shell({ slug, title, desc, h1, lead, crumb, bodyHtml, faqs, howto }) {
@@ -171,7 +176,7 @@ const COMPARISONS = [
       ['Can one tag work at multiple frequencies?', 'Yes. Dual-frequency cards and tags combine two chips — commonly LF + HF (for mixed access systems) or HF + UHF — so one credential works across readers that use different bands.'],
       ['Does UHF frequency differ by country?', 'Yes. UHF RFID uses 902–928 MHz in North America, 865–868 MHz in Europe and 920–925 MHz in China. Tags read across regions but perform best on an antenna tuned for the target market; broadband inlays suit global deployments.'],
     ],
-    related: [['rfid-vs-nfc.html', 'RFID vs NFC: what is the difference?'], ['rfid-chips-mifare-ntag-desfire.html', 'MIFARE vs NTAG vs DESFire chips'], ['products.html#tags', 'Browse RFID tags by frequency']],
+    related: [['rfid-vs-nfc.html', 'RFID vs NFC: what is the difference?'], ['uhf-vs-hf-rfid-label.html', 'UHF vs HF RFID labels'], ['rfid-chips-mifare-ntag-desfire.html', 'MIFARE vs NTAG vs DESFire chips'], ['products.html#tags', 'Browse RFID tags by frequency']],
   },
   {
     slug: 'rfid-vs-nfc.html', crumb: 'RFID vs NFC',
@@ -183,7 +188,7 @@ const COMPARISONS = [
     tables: [{ cap: 'RFID vs NFC', head: ['Aspect', 'NFC', 'RFID (general)'], rows: [['Frequency', '13.56 MHz only', 'LF, HF or UHF'], ['Range', '≈ up to 4 cm', 'Up to ~10 m (UHF)'], ['Communication', 'Two-way', 'Mostly one-way'], ['Phone support', 'Built into smartphones', 'Needs a dedicated reader'], ['Reads many tags at once', 'No', 'Yes (UHF)'], ['Best for', 'Tap marketing, auth, access', 'Inventory, logistics, tracking']] }],
     body2: [{ h: 'When to choose NFC', p: ['Choose NFC when end users will tap with a phone: product authentication, tap-to-reorder packaging, smart posters, digital business cards and tap-to-pay. No app or pairing is needed because NFC is native to the phone.'] }, { h: 'When to choose broader RFID', p: ['Choose UHF RFID when you need to read many items quickly from a distance — retail stock counts, warehouse gates, asset tracking. Choose LF for animal ID or access near metal. These need a dedicated reader rather than a phone.'] }, { h: 'Cost, volume and sourcing', p: ['For item-level tagging at scale, passive UHF inlays are usually the lowest cost per piece, while NFC labels and cards cost a little more but unlock phone interaction. As a manufacturer we supply both families — NTAG, MIFARE and DESFire for HF/NFC, and NXP UCODE and Impinj for UHF — with low MOQs, free samples and custom encoding. If you are unsure which fits, tell us the use case and volume and we will recommend the chip, frequency and format and quote within 24 hours.'] }],
     faqs: [['Can a smartphone read RFID?', 'Smartphones can read NFC (HF 13.56 MHz) tags natively. They cannot read LF or UHF RFID without an external reader accessory.'], ['Is NFC less secure than RFID?', 'Security depends on the chip, not the category. Both NFC and RFID offer secure chips (e.g. DESFire) with encryption; short NFC range also limits eavesdropping.'], ['Which is cheaper, NFC or UHF RFID?', 'For high-volume item-level tagging, UHF inlays are usually the cheapest per tag; NFC labels cost a little more but enable phone interaction.'], ['Do NFC or RFID tags need a battery?', 'No. Standard NFC and passive RFID tags are unpowered — they harvest energy from the reader field. Only active UHF tags used for long-range tracking carry a built-in battery.']],
-    related: [['rfid-frequencies-lf-hf-uhf.html', 'LF vs HF vs UHF frequencies'], ['nfc-printed-label.html', 'NFC printed labels'], ['rfid-nfc-card.html', 'RFID / NFC cards']],
+    related: [['rfid-frequencies-lf-hf-uhf.html', 'LF vs HF vs UHF frequencies'], ['nfc-vs-rfid-wristband.html', 'NFC vs RFID wristbands'], ['nfc-printed-label.html', 'NFC printed labels'], ['rfid-nfc-card.html', 'RFID / NFC cards']],
   },
   {
     slug: 'rfid-vs-barcode.html', crumb: 'RFID vs Barcode',
@@ -207,7 +212,7 @@ const COMPARISONS = [
     tables: [{ cap: 'Common HF/NFC chips compared', head: ['Chip', 'Memory', 'Security', 'Best for'], rows: [['NTAG213/215/216', '144–888 bytes', 'Basic, password', 'NFC tap, marketing, auth'], ['MIFARE Classic 1K/4K', '1–4 KB', 'CRYPTO1 (legacy)', 'Access, loyalty, closed transit'], ['MIFARE Ultralight', '48–192 bytes', 'Basic', 'Disposable tickets'], ['MIFARE DESFire EV2/EV3', '2–8 KB', 'AES, strong', 'Payment, transit, secure ID'], ['ICODE SLIX', '~1 KB', 'Basic', 'Library, long-range HF']] }],
     body2: [{ h: 'NTAG (NFC)', p: ['NTAG chips are tuned for NFC phone interaction. They store a URL or vCard, can be locked, and are inexpensive — ideal for tap-to-engage marketing, product authentication and digital business cards.'] }, { h: 'MIFARE Classic', p: ['A long-standing workhorse for access control and closed-loop loyalty/transit. Its CRYPTO1 cipher is now considered legacy, so for new high-security projects DESFire is preferred.'] }, { h: 'MIFARE DESFire', p: ['DESFire EV2/EV3 adds AES encryption and a flexible file system, making it the modern choice for payment, public transit and government ID where security and multi-application support matter.'] }, { h: 'Ultralight and ICODE — tickets and libraries', p: ['Two more families round out the HF world. MIFARE Ultralight (and Ultralight EV1/C) is a low-cost, small-memory chip built for high-volume disposable use — single-ride transit tickets and event entry. NXP ICODE (SLIX/SLIX2, ISO 15693) offers longer HF read range and anti-collision, which is why it dominates library book tagging and some retail and healthcare applications where you scan a shelf of items at once.'] }, { h: 'Match the chip to your memory and security needs', p: ['Start from two questions: how much data must the tag hold, and how sensitive is it. For a URL or simple ID, NTAG213 (144 bytes) is plenty; for richer payloads or gaming, NTAG215 (504 bytes) and NTAG216 (888 bytes) give headroom. For access with legacy infrastructure, MIFARE Classic 1K/4K still fits; for anything touching money, identity or multiple applications on one card, choose DESFire EV2/EV3 with AES. Getting this right up front avoids a costly re-issue later.'] }],
     faqs: [['Which RFID chip is most secure?', 'Among common HF chips, MIFARE DESFire EV2/EV3 is the most secure, using AES encryption and mutual authentication — suited to payment, transit and ID.'], ['Which chip should I use for NFC marketing?', 'NTAG213/215/216 are the standard for NFC marketing and authentication: phone-readable, lockable and low cost. NTAG215 is popular for its 504-byte capacity.'], ['What is the difference between NTAG213, 215 and 216?', 'They differ mainly in user memory: NTAG213 has 144 bytes, NTAG215 has 504 bytes and NTAG216 has 888 bytes. NTAG213 suits URLs and simple records; 215 and 216 suit richer data, vCards and gaming tokens.'], ['Can you encode chips with our keys?', 'Yes — RFID MFG encodes MIFARE, DESFire and NTAG chips with your sectors, keys and data under NDA before delivery.']],
-    related: [['rfid-frequencies-lf-hf-uhf.html', 'RFID frequencies guide'], ['rfid-nfc-card.html', 'RFID / NFC cards'], ['contact-ic-chip-card.html', 'Contact IC chip cards']],
+    related: [['ntag213-vs-215-vs-216.html', 'NTAG213 vs 215 vs 216'], ['rfid-frequencies-lf-hf-uhf.html', 'RFID frequencies guide'], ['rfid-nfc-card.html', 'RFID / NFC cards'], ['contact-ic-chip-card.html', 'Contact IC chip cards']],
   },
   {
     slug: 'rfid-dry-vs-wet-inlay.html', crumb: 'Dry vs Wet Inlay',
@@ -233,6 +238,73 @@ const COMPARISONS = [
     howto: { name: 'How to choose an RFID card material', steps: [['Match durability to lifespan', 'Daily, multi-year use → PET/PETG or PC; short-term or low-cost → PVC or BIO paper.'], ['Decide on brand image', 'Premium → metal or wood; green positioning → eco/BIO.'], ['Confirm print & security needs', 'High-security ID with laser engraving → PC.'], ['Check sustainability goals', 'To cut plastic, choose BIO paper, recycled PVC or FSC wood.']] },
     faqs: [['What is the most durable RFID card material?', 'Polycarbonate (PC) and metal are the most durable. PC is laser-engravable for secure ID; metal is premium and very long-lasting.'], ['Are there eco-friendly RFID cards?', 'Yes — biodegradable BIO paper, recycled PVC, FSC-certified wood and PLA cards offer lower-plastic alternatives with comparable performance.'], ['How thick is a standard RFID card?', 'The standard CR80 card is 85.6 × 54 mm and 0.76 mm (30 mil) thick — the same size and thickness as a credit card — so it fits standard printers, wallets and slot readers. Custom thicknesses are available for special formats.'], ['Can metal cards still have RFID/NFC?', 'Yes, via a hybrid construction that embeds the antenna and chip so the metal card still works contactlessly.']],
     related: [['eco-friendly-card.html', 'Eco-friendly cards'], ['metal-card.html', 'Metal cards'], ['rfid-cards-guide.html', 'Complete RFID cards guide']],
+  },
+  {
+    slug: 'nfc-vs-rfid-wristband.html', crumb: 'NFC vs RFID Wristband',
+    title: 'NFC vs RFID Wristbands: Which to Choose for Events | RFID MFG',
+    desc: 'NFC vs RFID wristbands compared for events: read range, cashless payment, crowd tracking and cost. Learn when to choose HF/NFC vs UHF bands.',
+    h1: 'NFC vs RFID wristbands: which is right for your event?',
+    lead: 'HF/NFC wristbands work at a tap (a few centimetres) for cashless payment, access and phone/social interaction; UHF RFID wristbands read from several metres for automatic gate access and crowd tracking. Most events use HF/NFC.',
+    body: [
+      { h: 'They are both RFID — the difference is range', p: ['"NFC wristband" and "RFID wristband" are often used as if they were opposites, but NFC is itself a type of HF RFID. What really separates event wearables is the frequency band, because that sets read range, whether a phone can read the band, and how the system is built.', 'HF/NFC bands operate at 13.56 MHz and are read within roughly 1–10 cm — a deliberate tap. UHF bands operate at 860–960 MHz and can be read from 1–5 metres or more, which suits hands-free gate reads and locating attendees, but needs dedicated readers rather than phones.'] },
+      { h: 'How each is used at an event', p: ['HF/NFC is the default for cashless payment and access: a guest taps the band at a bar, gate or activation, and (because NFC is built into phones) the same chip can power social check-ins and tap-to-win games. UHF shines where you want to read many bands at once from a distance — automatic entry lanes, zone counting and real-time crowd flow — without anyone tapping.'] },
+    ],
+    tables: [{ cap: 'NFC (HF) vs UHF event wristbands', head: ['Aspect', 'NFC / HF band', 'UHF band'], rows: [['Frequency', '13.56 MHz', '860–960 MHz'], ['Read range', '≈ 1–10 cm (tap)', '≈ 1–5 m+'], ['Phone-readable', 'Yes', 'No (needs reader)'], ['Best for', 'Cashless pay, access, social', 'Gate flow, crowd tracking'], ['Chip examples', 'NTAG, MIFARE', 'UCODE, Impinj'], ['Interaction', 'Deliberate tap', 'Hands-free / bulk']] }],
+    body2: [
+      { h: 'Choose NFC/HF when', p: ['Your priority is cashless spend, secure access and phone/social interaction — festivals, conferences, VIP and brand activations. This is the most common event setup because it is secure at close range and works with the phones guests already carry.'] },
+      { h: 'Choose UHF when', p: ['You need to read many attendees automatically from a distance — high-throughput entry lanes, timing, or live zone-occupancy analytics at large venues. UHF is usually paired with fixed gate readers.'] },
+      { h: 'Sourcing both', p: ['We manufacture both HF/NFC and UHF wristbands in silicone, fabric and Tyvek, pre-encoded to your system, so you can match the band to the use case (or run a dual-frequency band) and get one branded, ready-to-issue batch. Tell us your event size and interactions and we will recommend the chip and material.'] },
+    ],
+    faqs: [
+      ['Is an NFC wristband the same as an RFID wristband?', 'NFC is a short-range subset of HF RFID (13.56 MHz). All NFC bands are RFID, but "RFID wristband" can also mean a longer-range UHF band. The practical difference is tap range vs metres of range.'],
+      ['Which is better for cashless payment at events?', 'HF/NFC wristbands are the standard for cashless payment — secure at tap range and readable by phones and bar terminals. UHF is used more for hands-free gate access and crowd tracking.'],
+      ['Can one wristband do both payment and gate tracking?', 'Yes — a dual-frequency band combines an HF/NFC chip for tap-to-pay with a UHF chip for long-range gate reads. Tell us your workflow and we will advise.'],
+    ],
+    related: [['rfid-wristband.html', 'RFID wristbands'], ['rfid-silicone-wristband.html', 'Silicone wristbands'], ['rfid-wristband-materials.html', 'Wristband materials compared'], ['case-events.html', 'Case: events & festivals']],
+  },
+  {
+    slug: 'ntag213-vs-215-vs-216.html', crumb: 'NTAG213 vs 215 vs 216',
+    title: 'NTAG213 vs NTAG215 vs NTAG216: NFC Chip Comparison | RFID MFG',
+    desc: 'NTAG213 vs 215 vs 216 compared: user memory (144/504/888 bytes), price and best uses. Choose the right NXP NTAG chip for your NFC project.',
+    h1: 'NTAG213 vs NTAG215 vs NTAG216: which NFC chip?',
+    lead: 'The three chips are near-identical except for user memory: NTAG213 holds 144 bytes, NTAG215 holds 504 bytes and NTAG216 holds 888 bytes. Pick 213 for URLs, 215 for vCards and gaming, 216 for the most data.',
+    body: [
+      { h: 'Same family, different memory', p: ['NTAG213, 215 and 216 are NXP\'s mainstream NFC chips — all operate at 13.56 MHz, follow ISO/IEC 14443A and the NFC Forum Type 2 standard, and are read by every modern smartphone. They share the same features (password protection, a scan counter, a unique 7-byte UID); the headline difference is how much data they can store.', 'That memory decides what you can encode. A short URL fits comfortably in NTAG213; a full vCard, several records or a game token needs the room of 215 or 216.'] },
+    ],
+    tables: [{ cap: 'NTAG213 vs 215 vs 216', head: ['Chip', 'User memory', 'Total memory', 'Typical use', 'Relative cost'], rows: [['NTAG213', '144 bytes', '180 bytes', 'URLs, simple records, marketing', 'Lowest'], ['NTAG215', '504 bytes', '540 bytes', 'vCards, gaming tokens, rich records', 'Mid'], ['NTAG216', '888 bytes', '924 bytes', 'Largest payloads, multiple records', 'Highest']] }],
+    body2: [
+      { h: 'Choose NTAG213', p: ['For the vast majority of tap-to-open marketing, product labels and simple authentication: it stores a URL or short record cheaply, which matters at high volume.'] },
+      { h: 'Choose NTAG215', p: ['When you need more room — a full vCard, several NDEF records, or a gaming token (215\'s 504 bytes is the well-known amiibo capacity). A popular balance of memory and cost for NFC business cards and collectibles.'] },
+      { h: 'Choose NTAG216', p: ['When you need the most on-tag data — larger payloads or many records without an internet lookup. Choose it when 215 is not enough.'] },
+    ],
+    faqs: [
+      ['What is the difference between NTAG213, 215 and 216?', 'Mainly user memory: NTAG213 has 144 bytes, NTAG215 has 504 bytes and NTAG216 has 888 bytes. They otherwise share the same 13.56 MHz operation, features and phone compatibility.'],
+      ['Which NTAG chip is used for amiibo and gaming?', 'NTAG215, because its 504-byte user memory fits the data these tokens use. It is a common choice for NFC gaming and collectibles.'],
+      ['Can I lock an NTAG chip so it cannot be changed?', 'Yes. All three support password protection and permanent locking, which is important for authentication and anti-tamper use. We can pre-encode and lock chips before delivery.'],
+    ],
+    related: [['nfc-guide.html', 'NFC cards, tags & labels guide'], ['rfid-chips-mifare-ntag-desfire.html', 'MIFARE vs NTAG vs DESFire'], ['nfc-business-card.html', 'NFC business cards'], ['nfc-printed-label.html', 'NFC printed labels']],
+  },
+  {
+    slug: 'uhf-vs-hf-rfid-label.html', crumb: 'UHF vs HF Labels',
+    title: 'UHF vs HF RFID Labels: Which Frequency to Choose | RFID MFG',
+    desc: 'UHF vs HF RFID labels compared: read range, bulk reading, phone compatibility and best uses. Choose the right smart label frequency for your application.',
+    h1: 'UHF vs HF RFID labels: which frequency?',
+    lead: 'UHF labels (860–960 MHz) read from metres away and scan hundreds at once — ideal for retail and logistics. HF labels (13.56 MHz) read at a few centimetres, are phone-readable, and suit libraries, pharma and NFC marketing.',
+    body: [
+      { h: 'Frequency decides the job', p: ['A smart label\'s frequency is the single biggest factor in how it performs. UHF is built for range and speed; HF is built for short-range, reliable, item-by-item reads and phone interaction. Picking the wrong one is the most common labelling mistake.', 'UHF (EPC Gen2 / ISO 18000-6C) reads passive labels at roughly 1–8 metres and can capture hundreds per second, which is why retail item-level tagging, warehouse gates and logistics run on it. HF (ISO 14443 / 15693, which includes NFC) reads within about 10 cm — a feature for libraries, pharmacy and any tap-with-a-phone use.'] },
+    ],
+    tables: [{ cap: 'UHF vs HF RFID labels', head: ['Aspect', 'UHF label', 'HF label'], rows: [['Frequency', '860–960 MHz', '13.56 MHz'], ['Read range', '≈ 1–8 m', '≈ up to 10 cm'], ['Bulk reading', 'Excellent (100s/sec)', 'Limited'], ['Phone-readable (NFC)', 'No', 'Yes'], ['Best for', 'Retail, warehouse, logistics', 'Library, pharma, marketing'], ['Chip examples', 'UCODE, Impinj', 'NTAG, ICODE'], ['Cost at volume', 'Lowest per label', 'Low–medium']] }],
+    body2: [
+      { h: 'Choose UHF labels when', p: ['You need range, speed and volume: apparel and retail item tagging, carton and pallet tracking, warehouse dock-door portals and asset management. UHF inlays are also usually the cheapest per label at scale.'] },
+      { h: 'Choose HF labels when', p: ['You need close, reliable single-item reads or phone interaction: library book tagging (ICODE/ISO 15693), pharmacy and healthcare item control, access, and NFC marketing where consumers tap with a phone (NTAG).'] },
+      { h: 'Not sure? Match it to the read environment', p: ['The decision follows how the label will be read, not its shape. Tell us the read distance, the surface (paper, plastic, metal or liquid) and volume, and we will spec the chip, antenna and face material and supply the labels blank or pre-encoded.'] },
+    ],
+    faqs: [
+      ['Is UHF or HF better for RFID labels?', 'Neither is universally better — UHF suits long-range, bulk reading (retail, logistics), while HF suits short-range, phone-readable, item-level uses (library, pharma, marketing). Match the frequency to how the label is read.'],
+      ['Can a phone read a UHF RFID label?', 'No. Phones read only HF/NFC (13.56 MHz). UHF labels need a dedicated UHF reader. For any tap-with-a-phone use, choose an HF/NFC label.'],
+      ['Which RFID label is cheapest?', 'At high volume, passive UHF inlays are usually the lowest cost per label, which is one reason retail and logistics adopted UHF for item-level tagging.'],
+    ],
+    related: [['uhf-rfid-label.html', 'UHF RFID labels'], ['nfc-printed-label.html', 'NFC printed labels'], ['rfid-labels-inlays-guide.html', 'RFID labels & inlays guide'], ['rfid-frequencies-lf-hf-uhf.html', 'LF vs HF vs UHF frequencies']],
   },
 ];
 
@@ -286,7 +358,7 @@ const GUIDES = [
     ],
     table: { cap: 'NFC form factors', head: ['Form', 'Best for'], rows: [['NFC card', 'Membership, digital business cards'], ['NFC label / sticker', 'Packaging, posters, authentication'], ['NFC tag / keyfob', 'Access, asset tracking'], ['NFC wristband', 'Events, cashless, access']] },
     faqs: [['Do NFC tags need an app?', 'No. NTAG tags store an NDEF record (e.g. a URL), so a tap opens it directly in the phone’s browser without any app.'], ['Can NFC be used for anti-counterfeiting?', 'Yes. A locked, unique NFC chip plus tamper-evident material lets customers verify authenticity with a tap and makes cloning impractical.'], ['Which NFC chip should I choose?', 'NTAG213 for short URLs, NTAG215 for vCards/richer data, NTAG216 for the most memory. We can advise based on your content.'], ['Does NFC work on iPhone and Android?', 'Yes. Modern Android phones read NFC natively, and iPhones have read NFC tags in the background since the iPhone XS/XR — users simply tap the tag, no app required.']],
-    related: [['rfid-vs-nfc.html', 'RFID vs NFC'], ['nfc-printed-label.html', 'NFC printed labels'], ['rfid-nfc-card.html', 'RFID / NFC cards'], ['news-nfc-stickers.html', 'NFC stickers in everyday life']],
+    related: [['ntag213-vs-215-vs-216.html', 'NTAG213 vs 215 vs 216'], ['rfid-vs-nfc.html', 'RFID vs NFC'], ['nfc-printed-label.html', 'NFC printed labels'], ['rfid-nfc-card.html', 'RFID / NFC cards'], ['news-nfc-stickers.html', 'NFC stickers in everyday life']],
   },
   {
     slug: 'rfid-labels-inlays-guide.html', crumb: 'Labels & Inlays Guide',
@@ -304,7 +376,7 @@ const GUIDES = [
     ],
     table: { cap: 'Which label type?', head: ['Need', 'Choose'], rows: [['Apply directly to items', 'Wet inlay / sticker'], ['Laminate or embed', 'Dry inlay'], ['Print + encode on demand', 'White printable label'], ['Retail / logistics range', 'UHF label'], ['Library / item-level', 'HF label']] },
     faqs: [['What is the difference between an inlay and a label?', 'An inlay is the bare antenna-and-chip; a label is a finished inlay with a printable face and often adhesive, ready to apply.'], ['Can I print RFID labels in-house?', 'Yes, with an RFID-capable thermal printer and white printable RFID labels you can print and encode on demand.'], ['What read range do UHF labels achieve?', 'Typically 1–8 m depending on chip, antenna size, reader and what the label is applied to.'], ['Can RFID labels go on metal or liquid?', 'Not standard ones — metal and liquid detune the antenna. Use on-metal labels with a spacer/ferrite for metal assets, and inlays designed for high-water-content items for bottles and bags. Tell us the surface and we will spec the right label.']],
-    related: [['rfid-dry-vs-wet-inlay.html', 'Dry vs wet inlay'], ['rfid-dry-inlay.html', 'Dry inlay'], ['rfid-wet-inlay.html', 'Wet inlay'], ['rfid-white-label.html', 'White printable label']],
+    related: [['uhf-vs-hf-rfid-label.html', 'UHF vs HF RFID labels'], ['rfid-dry-vs-wet-inlay.html', 'Dry vs wet inlay'], ['rfid-dry-inlay.html', 'Dry inlay'], ['rfid-wet-inlay.html', 'Wet inlay'], ['rfid-white-label.html', 'White printable label']],
   },
   {
     slug: 'rfid-blocking-guide.html', crumb: 'RFID Blocking Guide',
@@ -340,6 +412,49 @@ const GUIDES = [
     table: { cap: 'Reader selector', head: ['Task', 'Reader type'], rows: [['Encode / personalize cards', 'Desktop USB reader'], ['Doorway / conveyor reads', 'Fixed UHF reader + antennas'], ['Mobile inventory', 'Handheld UHF reader'], ['Embed into a device', 'OEM module / scan engine']] },
     faqs: [['Do your readers come with an SDK?', 'Yes — readers ship with an SDK and demo software so you can integrate with your own application and back-end systems.'], ['Which reader do I need to encode cards?', 'A desktop USB HF/UHF reader/writer is used to encode and personalize cards at a workstation.'], ['Can one reader handle LF, HF and UHF?', 'Most readers target one band. For multiple frequencies you typically use separate readers or a multi-frequency model where available.'], ['What read range can a UHF reader achieve?', 'A fixed UHF reader with a good antenna typically reads passive tags from about 3 to 10+ metres; handhelds read a few metres. Actual range depends on the tag, antenna gain, reader power and the environment.']],
     related: [['rfid-reader-writer.html', 'RFID readers / writers'], ['barcode-scan-module.html', 'Barcode scan modules'], ['industrial-iot-dtu-rtu.html', 'IoT DTU / RTU'], ['products.html#hardware', 'Browse hardware']],
+  },
+  {
+    slug: 'rfid-wristband-materials.html', crumb: 'Wristband Materials',
+    title: 'RFID Wristband Materials: Silicone vs Fabric vs Tyvek vs Vinyl | RFID MFG',
+    desc: 'Compare RFID wristband materials — silicone, woven fabric, Tyvek paper, vinyl and elastic — by durability, comfort, waterproofing, reuse and cost to pick the right band.',
+    h1: 'RFID wristband materials compared',
+    lead: 'Silicone is the durable, waterproof, reusable choice; woven fabric suits multi-day festivals; Tyvek paper is the low-cost single-use option; vinyl is tough and adjustable. Match the material to the event length, environment and budget.',
+    sections: [
+      { h: 'Why material matters more than the chip', p: ['In a wristband the RFID chip is often the same across options — the material decides comfort, durability, waterproofing, whether the band is reusable, and cost. A one-day concert and a season-long water park need very different bands even with identical NFC chips inside.'] },
+      { h: 'Silicone', p: ['Flexible, durable, fully waterproof and comfortable for long wear, silicone is the premium reusable choice — ideal for water parks, gyms, spas, VIP and any multi-use programme. Bands can be moulded in custom colours, debossed or printed, and collected and sanitised for re-issue across seasons.'] },
+      { h: 'Woven fabric / textile', p: ['Soft, breathable and hard to remove without cutting, woven fabric bands are the festival standard. A one-time slider closure makes them non-transferable for multi-day access, and they double as a keepsake — which is why attendees keep wearing them long after the event.'] },
+      { h: 'Tyvek / synthetic paper', p: ['Lightweight, tear-resistant and the lowest cost, Tyvek paper bands are made for single-day, high-volume events — concerts, day festivals and promotions. They are disposable and print edge to edge, so they are economical to brand and issue in the tens of thousands.'] },
+      { h: 'Vinyl and elastic', p: ['Vinyl (plastic) bands are waterproof, tough and usually close with an adjustable snap, suiting hospitals, theme parks and multi-day use where comfort and a secure fit matter. Elastic bands stretch on and off for casual or repeated wear, such as hotel or leisure passes.'] },
+      { h: 'Closures and customization', p: ['Closure is part of the security decision: a one-time snap or slider is non-transferable (good for paid access), while adjustable and elastic closures favour comfort and reuse. Every material supports full-colour printing (or debossing on silicone), custom sizing, serial numbering and NFC/UHF chips pre-encoded to your system.'] },
+    ],
+    table: { cap: 'Wristband material selector', head: ['Material', 'Best for', 'Reuse', 'Note'], rows: [['Silicone', 'Water parks, gyms, VIP', 'Reusable', 'Waterproof, premium feel'], ['Woven fabric', 'Multi-day festivals', 'Reusable', 'Non-transferable, keepsake'], ['Tyvek paper', 'Single-day events', 'Disposable', 'Lowest cost, print edge-to-edge'], ['Vinyl / plastic', 'Hospitals, theme parks', 'Reusable', 'Tough, adjustable snap'], ['Elastic', 'Casual / leisure', 'Reusable', 'Stretch on/off']] },
+    faqs: [
+      ['Which RFID wristband material is most durable and waterproof?', 'Silicone — it is fully waterproof, comfortable for long wear and reusable across seasons, making it the top choice for water parks, gyms and VIP programmes.'],
+      ['What is the cheapest RFID wristband material?', 'Tyvek synthetic paper is the lowest cost and is designed for single-use, high-volume events like concerts and day festivals.'],
+      ['Which wristband stops guests sharing or transferring it?', 'Woven fabric bands with a one-time slider, and vinyl bands with a one-time snap, cannot be removed and re-used without cutting — ideal for paid, non-transferable access.'],
+    ],
+    related: [['rfid-wristband.html', 'RFID wristbands'], ['rfid-silicone-wristband.html', 'Silicone wristbands'], ['disposable-paper-wristband.html', 'Paper wristbands'], ['nfc-vs-rfid-wristband.html', 'NFC vs RFID wristbands']],
+  },
+  {
+    slug: 'rfid-key-fob-guide.html', crumb: 'Key Fob Guide',
+    title: 'RFID Key Fobs: The Complete Buyer’s Guide (Types, Chips, Uses) | RFID MFG',
+    desc: 'A complete RFID key fob guide: LF vs HF vs UHF fobs, chips (T5577, MIFARE, NTAG), shapes, materials and applications — everything to specify and order the right fob.',
+    h1: 'RFID key fobs: the complete buyer’s guide',
+    lead: 'An RFID key fob is a durable keyring token with an embedded chip for contactless access, membership and identification. The right fob comes down to frequency (LF, HF or UHF), chip and shape.',
+    sections: [
+      { h: 'What is an RFID key fob?', p: ['A key fob is a small, rugged ABS token — usually on a keyring — with an RFID antenna and chip sealed inside. Held near a reader, it identifies the holder for door access, time-and-attendance, gym and club membership, transit and loyalty. It does the same job as an access card in a tougher, pocket-friendly form.'] },
+      { h: 'Frequencies: LF, HF and UHF fobs', p: ['LF (125 kHz) fobs (T5577, EM4200) are the classic proximity token for building access — simple and reliable near metal. HF/NFC (13.56 MHz) fobs (MIFARE, NTAG) add security and phone readability for encrypted access, cashless and NFC interactions. UHF (860–960 MHz) fobs give longer range for vehicle or hands-free access. Match the fob to your existing reader’s frequency.'] },
+      { h: 'Chips and security', p: ['The chip sets security and memory. For basic access, T5577 (LF) or MIFARE Classic (HF) are common; for encrypted, high-security access and multi-application use, MIFARE DESFire (AES) is preferred; for NFC/phone interaction, NTAG. We can encode your existing sectors and keys under NDA so new fobs drop into your current system.'] },
+      { h: 'Shapes, materials and branding', p: ['Fobs come in teardrop, round, square and custom shapes, moulded in durable ABS in your choice of colour, with options for epoxy, silicone or metal finishes. They can be printed or laser-marked with your logo and sequentially numbered, and paired with a keyring, strap or carabiner.'] },
+      { h: 'Applications', p: ['Access control and intercom entry, gym and club membership, hotel and apartment access, employee time-and-attendance, transit and parking, and event or loyalty tokens. Because the fob is sealed and rugged, it withstands daily keyring wear for years.'] },
+    ],
+    table: { cap: 'Which key fob?', head: ['Need', 'Choose'], rows: [['Basic building access', 'LF 125 kHz (T5577 / EM4200)'], ['Secure / encrypted access', 'HF MIFARE DESFire'], ['NFC / phone interaction', 'HF NTAG'], ['Vehicle / longer range', 'UHF fob'], ['Match an existing reader', 'Same frequency & chip as your cards']] },
+    faqs: [
+      ['What frequency is an RFID key fob?', 'Fobs come in LF (125 kHz) for basic proximity access, HF/NFC (13.56 MHz) for secure and phone-readable access, and UHF (860–960 MHz) for longer range. Choose the frequency your reader uses.'],
+      ['Can you copy or clone our existing key fobs?', 'We can supply new fobs encoded to your system when you provide the chip type and access credentials/keys (under NDA). We do not clone third-party secured credentials without authorisation.'],
+      ['What is the minimum order for custom key fobs?', 'MOQ is flexible — often from a few hundred pieces — and free samples are available. Share your frequency, chip, colour and quantity for a wholesale quote.'],
+    ],
+    related: [['rfid-keyfob.html', 'RFID key fob product'], ['rfid-frequencies-lf-hf-uhf.html', 'LF vs HF vs UHF frequencies'], ['rfid-chips-mifare-ntag-desfire.html', 'MIFARE vs NTAG vs DESFire'], ['rfid-cards-guide.html', 'Complete RFID cards guide']],
   },
 ];
 

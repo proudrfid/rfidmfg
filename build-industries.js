@@ -282,6 +282,12 @@ ${ldHtml}`;
   </div>
 </section>
 <section class="section">
+  <div class="container" style="max-width:820px">
+    <div class="lead-line" style="border-left:4px solid var(--brand,#0aa2e8);background:#f4f8fc;padding:14px 18px;border-radius:8px"><strong>In short:</strong> the right RFID solution is driven by your environment, not just your sector — read range, surface (metal or liquid), temperature and whether a phone must read the tag all shape the choice. Below, each industry page pairs the common challenges with the recommended chip, frequency and format, plus typical, measurable results.</div>
+    <p style="color:var(--muted);margin-top:16px">Most deployments run on UHF (860–960 MHz) for long-range bulk reads in <a href="industry-retail.html">retail</a> and <a href="industry-warehouse.html">warehousing</a>, or HF/NFC (13.56 MHz) for tap-based <a href="industry-hospitality.html">hospitality</a> and <a href="industry-events.html">event</a> credentials, while <a href="industry-livestock.html">livestock</a> uses LF ear tags. Not sure which fits? Compare bands in the <a href="rfid-frequencies-lf-hf-uhf.html">LF vs HF vs UHF guide</a>, weigh <a href="rfid-vs-barcode.html">RFID vs barcode</a>, or browse the full <a href="products.html">product catalog</a>.</p>
+  </div>
+</section>
+<section class="section section--alt">
   <div class="container">
     <div class="catalog-grid">
         ${items}
