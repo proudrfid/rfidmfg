@@ -57,6 +57,16 @@ const IMG = {
   'rfid-laundry-tag': IMGBASE + 'rfid-laundry-tag.webp',
   'rfid-silicone-wristband': IMGBASE + 'rfid-event-wristbands.webp',
   'disposable-paper-wristband': IMGBASE + 'paper-rfid-wristband.webp',
+  // 之前缺图的 8 个产品 —— 先用现有的干净 webp 就近匹配(无占位符、无水印)。
+  // 若要换成 mindrfid 的精确产品照,见 download-images.sh 里新增的 URL:跑脚本+去水印后我再把下面几行指到真实图。
+  'uhf-rfid-label': IMGBASE + 'rfid-white-label-sticker.webp',
+  'rfid-library-tag': IMGBASE + 'rfid-library-system.webp',
+  'high-temperature-rfid-tag': IMGBASE + 'rfid-laundry-tag.webp',
+  'industrial-iot-dtu-rtu': IMGBASE + 'barcode-scan-module.webp',
+  'rfid-jewelry-tag': IMGBASE + 'rfid-anti-metal-tag.webp',
+  'uhf-windshield-tag': IMGBASE + 'rfid-dry-inlay.webp',
+  'nfc-dog-tag': IMGBASE + 'rfid-keyfob.webp',
+  'rfid-seal-tag': IMGBASE + 'rfid-anti-metal-tag.webp',
 };
 
 // 行业标准内容模块(每个产品页共用)

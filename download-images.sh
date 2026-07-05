@@ -53,6 +53,9 @@ FILES=(
   "RFID-blocking-wallet-3-300x300.jpg"
   "13.56MHZ-ISO14443-Type-AB-USB-Smart-Card-Reader-1-300x300.jpg"
   "CA-T3-Cykeo-RFID-Smart-Tool-Cabinet-V2.0-1-300x300.png"
+  # 之前缺图产品的真实图(来自 mindrfid special-rfid-tags 页,已核对)
+  "RFID-Jewelry-tag-300x300.jpg"
+  "RFID-windshield-tag-300x300.jpg"
 )
 
 ok=0; fail=0
@@ -69,6 +72,9 @@ if [ -f "images/Sucessful-case-of-MIND-rfid-ID-cards.jpg" ]; then
   mv -f "images/Sucessful-case-of-MIND-rfid-ID-cards.jpg" "images/rfid-id-cards-case.jpg"
   echo "↳ 已重命名为 rfid-id-cards-case.jpg"
 fi
+# 缺图产品真实图 → 改成干净的 slug 名(下一步跑 remove-logo.py 去水印)
+[ -f "images/RFID-Jewelry-tag-300x300.jpg" ]   && mv -f "images/RFID-Jewelry-tag-300x300.jpg"   "images/rfid-jewelry-tag.jpg"   && echo "↳ rfid-jewelry-tag.jpg"
+[ -f "images/RFID-windshield-tag-300x300.jpg" ] && mv -f "images/RFID-windshield-tag-300x300.jpg" "images/uhf-windshield-tag.jpg" && echo "↳ uhf-windshield-tag.jpg"
 
 echo ""
 echo "完成:成功 $ok 张,失败 $fail 张,保存在 ./images/"
