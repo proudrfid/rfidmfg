@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>2026 RFID Selection Benchmark — Frequencies, Read Range, Chips & Materials | RFID MFG</title>
+<meta name="description" content="An original 2026 RFID selection benchmark from RFID MFG: frequency bands, typical passive read range by form factor, chip memory comparison and material temperature limits — a vendor reference for engineers and buyers." />
+<meta name="keywords" content="RFID benchmark, RFID read range, RFID frequency comparison, LF HF UHF, RFID chip comparison, MIFARE NTAG DESFire Impinj, RFID material temperature, RFID selection guide 2026" />
+<link rel="canonical" href="https://www.rfidmfg.com/rfid-benchmark-2026.html" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="theme-color" content="#0a1b34" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="RFID MFG" />
+<meta property="og:title" content="2026 RFID Selection Benchmark — Frequencies, Read Range, Chips & Materials" />
+<meta property="og:description" content="Original RFID reference data: frequency bands, typical read range by form factor, chip memory and material temperature limits." />
+<meta property="og:url" content="https://www.rfidmfg.com/rfid-benchmark-2026.html" />
+<meta property="og:image" content="https://www.rfidmfg.com/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="2026 RFID Selection Benchmark | RFID MFG" />
+<meta name="twitter:description" content="Frequency, read range, chip and material reference data for choosing RFID products." />
+<meta name="twitter:image" content="https://www.rfidmfg.com/og-image.jpg" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"2026 RFID Selection Benchmark — Frequencies, Read Range, Chips & Materials","description":"An original 2026 RFID selection benchmark: frequency bands, typical passive read range by form factor, chip memory comparison and material temperature limits.","datePublished":"2026-06-18","dateModified":"2026-06-18","author":{"@type":"Organization","name":"RFID MFG Co., Ltd.","url":"https://www.rfidmfg.com/"},"publisher":{"@type":"Organization","name":"RFID MFG Co., Ltd.","logo":{"@type":"ImageObject","url":"https://www.rfidmfg.com/icon-512.png"}},"image":"https://www.rfidmfg.com/og-image.jpg","mainEntityOfPage":"https://www.rfidmfg.com/rfid-benchmark-2026.html"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"RFID Selection Benchmark 2026","description":"Reference dataset of RFID frequency bands, typical passive read range by form factor, chip memory and standards, and material temperature limits, compiled from chip-maker datasheets, ISO/EPC standards and RFID MFG production experience.","creator":{"@type":"Organization","name":"RFID MFG Co., Ltd.","url":"https://www.rfidmfg.com/"},"temporalCoverage":"2026","isAccessibleForFree":true,"keywords":["RFID frequency","RFID read range","RFID chip memory","RFID material temperature","LF","HF","UHF","NFC"],"variableMeasured":["Frequency band","Typical passive read range","Chip memory","Operating temperature range"],"license":"https://www.rfidmfg.com/terms.html","url":"https://www.rfidmfg.com/rfid-benchmark-2026.html"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.rfidmfg.com/"},{"@type":"ListItem","position":2,"name":"2026 RFID Selection Benchmark","item":"https://www.rfidmfg.com/rfid-benchmark-2026.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which RFID frequency has the longest read range?","acceptedAnswer":{"@type":"Answer","text":"Passive UHF (860–960 MHz) has by far the longest range — typically 1–12 metres depending on the tag and reader — versus centimetre-scale range for LF (125 kHz) and HF/NFC (13.56 MHz)."}},{"@type":"Question","name":"Why does the same UHF tag read a shorter distance on metal or near liquids?","acceptedAnswer":{"@type":"Answer","text":"Metal and water detune and absorb the UHF antenna field, cutting read range. Use an on-metal (anti-metal) tag designed with a spacer or absorber layer to restore reliable reads on those surfaces."}},{"@type":"Question","name":"Which RFID chip is best for secure access or payment?","acceptedAnswer":{"@type":"Answer","text":"MIFARE DESFire EV3, which uses AES encryption and mutual authentication, is the common choice for secure access and payment. For simple NFC tap and authentication, NTAG213/215/216 are more cost-effective."}},{"@type":"Question","name":"What read range can I expect from a UHF RFID card?","acceptedAnswer":{"@type":"Answer","text":"A standard passive UHF card typically reads at about 1–3 metres; range drops when the card is held against the body or other water-rich material. Always validate with samples in your actual reader and antenna setup."}}]}
+</script>
+<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin-700-normal.woff2" crossorigin /><link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin-400-normal.woff2" crossorigin />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+<link rel="stylesheet" href="styles.css" />
+<!-- Google Analytics 4 — replace G-XXXXXXXXXX with your Measurement ID, then remove this comment wrapper to activate
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+-->
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container topbar__inner">
+    <span class="topbar__item">Established 1996 · Shenzhen, China</span>
+    <div class="topbar__contact">
+      <a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a>
+      <a href="tel:+8675523765843">+86 755 2376 5843</a>
+    </div>
+  </div>
+</div>
+
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="index.html" class="brand" aria-label="RFID MFG home">
+      <span class="brand__mark">R</span>
+      <span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="products.html">Products</a>
+      <a href="guides.html">Guides</a>
+      <a href="cases.html">Cases</a>
+      <a href="sustainability.html">Sustainability</a>
+      <a href="news.html">News</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a href="contact.html" class="btn btn--primary header__cta">Get a Quote</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="page-hero__bg" aria-hidden="true"></div>
+  <div class="container page-hero__inner">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span>2026 RFID Selection Benchmark</nav>
+    <h1>2026 RFID Selection Benchmark</h1>
+    <p>Frequency bands, typical read range, chip memory and material limits — an original reference for engineers and buyers choosing an RFID product.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container prose" style="max-width:920px">
+    <p style="color:var(--muted)">Published June 18, 2026 · By RFID MFG engineering · Reading time ~7 min</p>
+
+    <div style="background:var(--bg-alt);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:22px 0">
+      <strong style="font-family:var(--display);font-size:18px;color:var(--navy)">Key findings</strong>
+      <ul class="check-list" style="margin-top:14px">
+        <li><strong>Read range scales with frequency:</strong> LF and HF/NFC read at centimetres; passive UHF typically reads 1–12&nbsp;m.</li>
+        <li><strong>Form factor matters as much as frequency:</strong> the same UHF chip reads ~1–3&nbsp;m in a card but 6–10&nbsp;m in a windshield tag.</li>
+        <li><strong>Security lives in the chip:</strong> NTAG21x for simple tap; MIFARE DESFire EV3 (AES) for secure access and payment.</li>
+        <li><strong>Environment sets the material:</strong> PVC suits indoor cards; PPS, ceramic and silicone survive 200&nbsp;°C+ laundry, autoclave and paint lines.</li>
+      </ul>
+    </div>
+
+    <p>This benchmark consolidates the numbers buyers most often ask us for into one reference. Figures are <strong>representative typical values</strong> drawn from chip-maker datasheets, ISO / EPC standards and RFID MFG&rsquo;s production experience. Real-world results vary with reader power, antenna, tag size, mounting surface and environment — so treat these as a starting point and validate with samples. New to the basics first? See <a href="rfid-frequencies-lf-hf-uhf.html">our LF/HF/UHF frequency guide</a> or jump straight to the <a href="rfid-selector.html">interactive RFID selector</a>.</p>
+
+    <h2>1. Frequency benchmark</h2>
+    <p>The frequency band sets the ground rules: range, data rate, standards and how the tag behaves near metal and water.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Band</th><th>Frequency</th><th>Key standards</th><th>Typical read range</th><th>Best for</th><th>Watch-outs</th></tr></thead>
+        <tbody>
+          <tr><td>LF</td><td>125–134 kHz</td><td>ISO 11784/85, 14223</td><td>1–10 cm</td><td>Animal ID, access fobs, wet / near-metal</td><td>Low data rate, short range</td></tr>
+          <tr><td>HF / NFC</td><td>13.56 MHz</td><td>ISO 14443, 15693, NFC Forum</td><td>Tap–10 cm (vicinity to ~50 cm)</td><td>Access, payment, NFC tap, library, ticketing</td><td>Short range by design</td></tr>
+          <tr><td>UHF</td><td>860–960 MHz</td><td>ISO 18000-63, EPC Gen2v2</td><td>1–12 m (passive)</td><td>Inventory, supply chain, retail, parking, race timing</td><td>Detuned by metal / water</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>2. Typical passive read range by form factor</h2>
+    <p>Range is not just frequency — the antenna size and what the tag is mounted on change it dramatically. Typical passive figures with a fixed reader:</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Form factor</th><th>Frequency</th><th>Typical range</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Standard card</td><td>LF / HF</td><td>1–10 cm</td><td>Tap / proximity</td></tr>
+          <tr><td>Standard card</td><td>UHF</td><td>1–3 m</td><td>Body / water reduces range</td></tr>
+          <tr><td>Wet or dry inlay label</td><td>UHF</td><td>3–8 m</td><td>Depends on inlay antenna</td></tr>
+          <tr><td>Anti-metal hard tag</td><td>UHF</td><td>1–6 m</td><td>Tuned for on-metal mounting</td></tr>
+          <tr><td>Windshield tag</td><td>UHF</td><td>6–10 m</td><td>On-glass, parking / toll</td></tr>
+          <tr><td>Wristband</td><td>HF</td><td>Tap–5 cm</td><td>Cashless / access</td></tr>
+          <tr><td>Wristband</td><td>UHF</td><td>0.5–3 m</td><td>Events, timing</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:14px;color:var(--muted)">Browse the matching products: <a href="rfid-nfc-card.html">RFID / NFC cards</a>, <a href="uhf-rfid-label.html">UHF labels</a>, <a href="rfid-anti-metal-tag.html">anti-metal tags</a>, <a href="uhf-windshield-tag.html">windshield tags</a>.</p>
+
+    <h2>3. Chip comparison</h2>
+    <p>The chip decides memory, security and cost. The most common chips we supply, by frequency:</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Chip</th><th>Frequency</th><th>Memory</th><th>Standard</th><th>Typical use</th><th>Relative cost</th></tr></thead>
+        <tbody>
+          <tr><td>EM4200</td><td>LF 125 kHz</td><td>128-bit read-only</td><td>&mdash;</td><td>Access, fobs</td><td>$</td></tr>
+          <tr><td>T5577</td><td>LF 125 kHz</td><td>330-bit, rewritable</td><td>&mdash;</td><td>Programmable LF</td><td>$</td></tr>
+          <tr><td>MIFARE Classic 1K</td><td>HF 13.56 MHz</td><td>1 KB</td><td>ISO 14443A</td><td>Access, transit</td><td>$$</td></tr>
+          <tr><td>MIFARE DESFire EV3</td><td>HF 13.56 MHz</td><td>2 / 4 / 8 KB, AES</td><td>ISO 14443A</td><td>Secure access, payment</td><td>$$$</td></tr>
+          <tr><td>NTAG213 / 215 / 216</td><td>HF 13.56 MHz (NFC)</td><td>144 / 504 / 888 B user</td><td>ISO 14443A / NFC</td><td>NFC tap, marketing, auth</td><td>$</td></tr>
+          <tr><td>ICODE SLIX2</td><td>HF 13.56 MHz</td><td>~2.5 Kbit</td><td>ISO 15693</td><td>Library, vicinity</td><td>$</td></tr>
+          <tr><td>Impinj M730</td><td>UHF 860–960 MHz</td><td>96-bit EPC</td><td>EPC Gen2v2</td><td>High-volume retail / logistics</td><td>$</td></tr>
+          <tr><td>Impinj M750</td><td>UHF 860–960 MHz</td><td>96-bit EPC + 32-bit user</td><td>EPC Gen2v2</td><td>Retail, serialized encoding</td><td>$</td></tr>
+          <tr><td>NXP UCODE 9</td><td>UHF 860–960 MHz</td><td>96-bit EPC</td><td>EPC Gen2v2</td><td>Long-range item tagging</td><td>$</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:14px;color:var(--muted)">More detail in our <a href="rfid-chips-mifare-ntag-desfire.html">MIFARE vs NTAG vs DESFire comparison</a>.</p>
+
+    <h2>4. Material &amp; environment benchmark</h2>
+    <p>Match the housing to the environment. Approximate operating limits by material:</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Material</th><th>Approx. temperature</th><th>Durability</th><th>Typical products</th></tr></thead>
+        <tbody>
+          <tr><td>PVC</td><td>-10 to +50 °C</td><td>Indoor, printable</td><td>Cards, standard labels</td></tr>
+          <tr><td>PET</td><td>up to ~120 °C</td><td>Better heat / chemical</td><td>Inlays, durable labels</td></tr>
+          <tr><td>ABS</td><td>up to ~80 °C</td><td>Rigid, impact-resistant</td><td>Keyfobs, hard tags</td></tr>
+          <tr><td>Epoxy</td><td>up to ~85 °C</td><td>Waterproof</td><td>Tokens, small tags</td></tr>
+          <tr><td>PPS</td><td>up to ~200–250 °C</td><td>Autoclave / laundry</td><td>Laundry &amp; high-temp tags</td></tr>
+          <tr><td>Ceramic / FR4</td><td>up to ~200–250 °C</td><td>On-metal, heat-stable</td><td>Anti-metal, industrial</td></tr>
+          <tr><td>Silicone</td><td>-40 to +200 °C</td><td>Flexible, waterproof</td><td>Wristbands, laundry tags</td></tr>
+          <tr><td>Paper / Tyvek</td><td>Low (single-use)</td><td>Tear-resistant (Tyvek)</td><td>Event wristbands, labels</td></tr>
+          <tr><td>Metal + PVC</td><td>Durable</td><td>Premium, on-metal</td><td>Metal cards, anti-metal tags</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>5. Sourcing reference</h2>
+    <p>Typical RFID MFG lead times and minimums. Exact figures depend on configuration and volume and are confirmed in your quotation.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Stage</th><th>Cards</th><th>Labels / Inlays</th><th>Tags / Wristbands</th><th>Hardware</th></tr></thead>
+        <tbody>
+          <tr><td>Typical MOQ</td><td>from ~500</td><td>from ~1,000</td><td>from ~500</td><td>batch, samples from 1</td></tr>
+          <tr><td>Sample lead time</td><td>3–7 days</td><td>3–7 days</td><td>5–10 days</td><td>7–15 days</td></tr>
+          <tr><td>Production lead time</td><td>7–15 days</td><td>7–12 days</td><td>10–20 days</td><td>15–30 days</td></tr>
+          <tr><td>Custom tooling</td><td>+5–10 days</td><td>+5–10 days</td><td>+7–15 days</td><td>project-based</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Methodology &amp; caveats</h2>
+    <p>Values are representative typical figures consolidated from chip-maker datasheets, ISO / EPC standards and RFID MFG production experience as of June 2026. Read range depends on reader output power, antenna gain, tag size and antenna design, mounting surface, orientation and the surrounding environment; centimetre and metre figures above assume a typical fixed reader and a clear line of sight. Memory values are user/EPC memory as published by chip makers. Material temperature limits are approximate continuous-use ranges. Sourcing figures are typical and confirmed per quotation. Always validate performance with samples in your actual deployment before committing to volume.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      <details class="faq-item"><summary>Which RFID frequency has the longest read range?</summary><p>Passive UHF (860–960 MHz) has by far the longest range — typically 1–12 metres depending on the tag and reader — versus centimetre-scale range for LF (125 kHz) and HF/NFC (13.56 MHz).</p></details>
+      <details class="faq-item"><summary>Why does the same UHF tag read a shorter distance on metal or near liquids?</summary><p>Metal and water detune and absorb the UHF antenna field, cutting read range. Use an on-metal (anti-metal) tag designed with a spacer or absorber layer to restore reliable reads on those surfaces.</p></details>
+      <details class="faq-item"><summary>Which RFID chip is best for secure access or payment?</summary><p>MIFARE DESFire EV3, which uses AES encryption and mutual authentication, is the common choice for secure access and payment. For simple NFC tap and authentication, NTAG213/215/216 are more cost-effective.</p></details>
+      <details class="faq-item"><summary>What read range can I expect from a UHF RFID card?</summary><p>A standard passive UHF card typically reads at about 1–3 metres; range drops when the card is held against the body or other water-rich material. Always validate with samples in your actual reader and antenna setup.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div><h2>Not sure which spec fits your project?</h2><p>Answer five quick questions in our selector, or send your use case and we will recommend a frequency, chip and product.</p></div>
+    <a href="rfid-selector.html" class="btn btn--ghost btn--lg">Try the RFID Selector</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href="index.html" class="brand brand--light">
+        <span class="brand__mark">R</span>
+        <span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span>
+      </a>
+      <p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing since 1996.</p>
+    </div>
+    <div class="footer__col">
+      <h4>Company</h4>
+      <a href="about.html">About</a>
+      <a href="cases.html">Cases</a>
+      <a href="sustainability.html">Sustainability</a>
+      <a href="news.html">News</a>
+      <a href="rfid-benchmark-2026.html">2026 RFID Benchmark</a>
+    </div>
+    <div class="footer__col">
+      <h4>Products</h4>
+      <a href="products.html#cards">Cards</a>
+      <a href="products.html#labels">Labels &amp; Stickers</a>
+      <a href="products.html#tags">RFID Tags</a>
+      <a href="products.html#blocking">RFID Blocking</a>
+      <a href="products.html#hardware">Hardware</a>
+    </div>
+    <div class="footer__col">
+      <h4>Contact</h4>
+      <a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a>
+      <a href="tel:+8675523765843">+86 755 2376 5843</a>
+      <span>Shenzhen, China</span>
+    </div>
+  </div>
+  <div class="footer__bar">
+    <div class="container footer__bar-inner">
+      <span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span>
+      <span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="to-top" id="toTop" aria-label="Back to top">↑</a>
+<script src="script.js"></script>
+</body>
+</html>

@@ -88,33 +88,57 @@
         <li><span class="contact__ico" aria-hidden="true">💬</span><a href="https://api.whatsapp.com/send?phone=8615815501857" target="_blank" rel="noopener">WhatsApp: +86 158 1550 1857</a></li>
         <li><span class="contact__ico" aria-hidden="true">🧑‍💼</span><span>Careers / résumé: <a href="mailto:hr@rfidmfg.com">hr@rfidmfg.com</a></span></li>
       </ul>
+      <ul class="form-trust" aria-label="Why buyers choose us">
+        <li>★ Since 1996</li><li>ISO 9001/14001/45001</li><li>Free samples</li><li>100+ countries</li><li>2-year warranty</li><li>24h reply</li>
+      </ul>
     </div>
     <form class="contact__form" id="quoteForm" novalidate>
-      <div class="field">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name" required />
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" placeholder="you@company.com" autocomplete="email" required />
+        </div>
       </div>
-      <div class="field">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="you@company.com" required />
+      <div class="field-row">
+        <div class="field">
+          <label for="company">Company <span class="opt">(optional)</span></label>
+          <input type="text" id="company" name="company" placeholder="Company name" autocomplete="organization" />
+        </div>
+        <div class="field">
+          <label for="phone">Phone / WhatsApp <span class="opt">(optional)</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="+86 …" autocomplete="tel" />
+        </div>
       </div>
-      <div class="field">
-        <label for="product">Product of interest</label>
-        <select id="product" name="product">
-          <option value="">Select a category…</option>
-          <option>Cards</option>
-          <option>Labels &amp; Stickers</option>
-          <option>RFID Tags</option>
-          <option>RFID Blocking</option>
-          <option>Hardware</option>
-          <option>Custom / Other</option>
-        </select>
+      <div class="field-row">
+        <div class="field">
+          <label for="country">Country <span class="opt">(optional)</span></label>
+          <input type="text" id="country" name="country" placeholder="Your country" autocomplete="country-name" />
+        </div>
+        <div class="field">
+          <label for="product">Product of interest</label>
+          <select id="product" name="product">
+            <option value="">Select a category…</option>
+            <option>Cards</option>
+            <option>Labels &amp; Stickers</option>
+            <option>RFID Tags</option>
+            <option>RFID Blocking</option>
+            <option>Hardware</option>
+            <option>Custom / Other</option>
+          </select>
+        </div>
       </div>
       <div class="field">
         <label for="message">Message</label>
         <textarea id="message" name="message" rows="4" placeholder="Tell us about quantities, chip type, sizes, artwork…"></textarea>
       </div>
+      <label class="form-check"><input type="checkbox" id="samples" name="samples" value="yes" /> <span>I'd like free samples to evaluate</span></label>
+      <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
       <button type="submit" class="btn btn--primary btn--lg btn--block">Send Inquiry</button>
+      <p class="form-reassure">No obligation · We reply within 24 hours · Your details stay private.</p>
       <p class="form-note" id="formNote" hidden></p>
     </form>
   </div>

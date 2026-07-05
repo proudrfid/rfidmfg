@@ -8,6 +8,7 @@ cd "$(dirname "$0")"
 node build-products.js
 node build-articles.js
 node build-content.js
+node build-industries.js
 
 # 2) 转成目录式干净 URL 结构(/products/<分类>/<产品>/ 等)+ 分类页 + sitemap → dist/
 node build-foldered.js

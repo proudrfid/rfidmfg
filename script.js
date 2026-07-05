@@ -106,15 +106,49 @@
     }
   }
 
+  // ===== Analytics helper — fires only if GA4 (gtag) is installed =====
+  function track(name, params) { try { if (typeof window.gtag === 'function') window.gtag('event', name, params || {}); } catch (e) {} }
+
+  // Track high-intent clicks: WhatsApp, datasheet downloads, phone
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (/wa\.me|api\.whatsapp\.com/.test(href)) track('whatsapp_click', { link_url: href });
+    else if (/\/datasheets\/[^"']+\.pdf/.test(href)) track('datasheet_download', { file_name: href });
+    else if (/^tel:/.test(href)) track('phone_click', { number: href });
+  });
+
   // ===== Inquiry form =====
   // Paste your endpoint below to capture leads automatically:
-  //   • Formspree:        https://formspree.io/f/xxxxxxxx
+  //   • Formspree:          https://formspree.io/f/xxxxxxxx
   //   • Feishu lead Worker: https://your-worker.your-name.workers.dev
   // Leave it as '' to fall back to the visitor's email client (mailto).
   var FORM_ENDPOINT = '';
 
   var form = document.getElementById('quoteForm');
   var note = document.getElementById('formNote');
+
+  // Prefill product category + message when arriving from a product page (?product=&cat=)
+  (function prefillFromQuery() {
+    if (!form || !window.URLSearchParams) return;
+    var qs = new URLSearchParams(location.search);
+    var prod = qs.get('product');
+    var cat = qs.get('cat');
+    if (cat) {
+      var sel = form.querySelector('#product');
+      if (sel) {
+        for (var i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].text.trim().toLowerCase() === cat.trim().toLowerCase()) { sel.selectedIndex = i; break; }
+        }
+      }
+    }
+    if (prod) {
+      var msg = form.querySelector('#message');
+      if (msg && !msg.value) { msg.value = 'I would like a wholesale quote for: ' + prod + '\nTarget quantity: \nChip / frequency: \nCustom artwork / logo: '; }
+    }
+  })();
+
   function showNote(msg, ok) {
     if (!note) return;
     note.hidden = false;
@@ -122,16 +156,24 @@
     note.style.color = ok ? '#0a7f6f' : '#b91c1c';
     note.textContent = msg;
   }
+  function val(f, n) { return f[n] && typeof f[n].value === 'string' ? f[n].value.trim() : ''; }
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var name = (form.name.value || '').trim();
-      var email = (form.email.value || '').trim();
-      var product = form.product.value || '';
-      var message = (form.message.value || '').trim();
+      // Honeypot: if a bot filled the hidden field, pretend success and drop silently.
+      var hp = form.querySelector('input[name="_gotcha"]');
+      if (hp && hp.value) { showNote('Thank you! Your inquiry has been sent — we’ll reply within 24 hours.', true); form.reset(); return; }
+      var name = val(form, 'name');
+      var email = val(form, 'email');
+      var company = val(form, 'company');
+      var phone = val(form, 'phone');
+      var country = val(form, 'country');
+      var product = val(form, 'product');
+      var message = val(form, 'message');
+      var samples = form.samples && form.samples.checked ? 'Yes' : 'No';
       if (!name || !email) { showNote('Please enter your name and email so we can reply.', false); return; }
 
-      var payload = { name: name, email: email, product: product, message: message, source: location.href, _subject: 'Website inquiry from ' + name };
+      var payload = { name: name, email: email, company: company, phone: phone, country: country, product: product, samples: samples, message: message, source: location.href, _subject: (samples === 'Yes' ? '[Sample request] ' : '') + 'Website inquiry from ' + name + (company ? ' (' + company + ')' : '') };
 
       if (FORM_ENDPOINT) {
         var btn = form.querySelector('button[type=submit]');
@@ -143,13 +185,14 @@
           body: JSON.stringify(payload)
         })
           .then(function (r) { if (!r.ok) throw new Error('bad status'); return r; })
-          .then(function () { showNote('Thank you! Your inquiry has been sent — we’ll reply within 24 hours.', true); form.reset(); })
+          .then(function () { track('generate_lead', { product: product, samples: samples }); showNote('Thank you! Your inquiry has been sent — we’ll reply within 24 hours.', true); form.reset(); })
           .catch(function () { showNote('Sorry, sending failed. Please email us at peter@rfidmfg.com.', false); })
           .then(function () { if (btn) { btn.disabled = false; btn.textContent = label || 'Send Inquiry'; } });
       } else {
-        var subject = encodeURIComponent('Inquiry from ' + name + (product ? ' — ' + product : ''));
-        var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + (product ? '\nProduct: ' + product : '') + '\n\n' + message);
+        var subject = encodeURIComponent((samples === 'Yes' ? '[Sample request] ' : '') + 'Inquiry from ' + name + (product ? ' — ' + product : ''));
+        var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + (company ? '\nCompany: ' + company : '') + (phone ? '\nPhone/WhatsApp: ' + phone : '') + (country ? '\nCountry: ' + country : '') + (product ? '\nProduct: ' + product : '') + '\nFree samples: ' + samples + '\n\n' + message);
         window.location.href = 'mailto:peter@rfidmfg.com?subject=' + subject + '&body=' + body;
+        track('generate_lead', { product: product, samples: samples, method: 'mailto' });
         showNote('Opening your email app… If nothing happens, email us at peter@rfidmfg.com.', true);
         form.reset();
       }

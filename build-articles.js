@@ -28,12 +28,38 @@ const TOPBAR = `<div class="topbar"><div class="container topbar__inner"><span c
 const HEADER = `<header class="header" id="header"><div class="container header__inner"><a href="index.html" class="brand" aria-label="RFID MFG home"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><nav class="nav" id="nav">
 ${NAV}
     </nav><a href="contact.html" class="btn btn--primary header__cta">Get a Quote</a><button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div></header>`;
-const FOOTER = `<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing since 1996.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="cases.html">Cases</a><a href="sustainability.html">Sustainability</a><a href="news.html">News</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8675523765843">+86 755 2376 5843</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>`;
+const FOOTER = `<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing since 1996.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="industries.html">Industries</a><a href="cases.html">Cases</a><a href="sustainability.html">Sustainability</a><a href="news.html">News</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8675523765843">+86 755 2376 5843</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>`;
 const FONTS = `<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin-700-normal.woff2" crossorigin /><link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin-400-normal.woff2" crossorigin />`;
 
 // ---- content renderers ----
 const P = (arr) => arr.map((t) => `<p>${esc(t)}</p>`).join('\n      ');
 const POINTS = (arr) => `<ul class="check-list">${arr.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>`;
+function RELATED(arr) {
+  if (!arr || !arr.length) return '';
+  const links = arr.map((r) => `<a href="${r[0]}" class="link-arrow" style="display:inline-block;margin:0 16px 8px 0">${esc(r[1])} <span>→</span></a>`).join('');
+  return `<h2>Related products &amp; guides</h2>\n      <div style="margin-top:6px">${links}</div>`;
+}
+// 每篇案例/新闻的相关产品与指南内链(对标竞品:每个概念都链到可购买产品/指南)
+const RELATED_MAP = {
+  'case-warehouse.html': [['uhf-rfid-label.html', 'UHF RFID label'], ['rfid-vs-barcode.html', 'RFID vs barcode'], ['rfid-readers-hardware-guide.html', 'RFID readers & hardware guide']],
+  'case-id-cards.html': [['pvc-cards.html', 'PVC ID cards'], ['rfid-cards-guide.html', 'Complete RFID cards guide'], ['rfid-chips-mifare-ntag-desfire.html', 'MIFARE vs NTAG vs DESFire']],
+  'case-bank-card.html': [['dual-frequency-card.html', 'Dual-frequency card'], ['magnetic-stripe-card.html', 'Magnetic-stripe card'], ['rfid-chips-mifare-ntag-desfire.html', 'Secure chips compared']],
+  'case-library.html': [['rfid-library-tag.html', 'RFID library tag'], ['rfid-labels-inlays-guide.html', 'Labels & inlays guide'], ['rfid-frequencies-lf-hf-uhf.html', 'RFID frequencies (HF)']],
+  'case-gateways.html': [['rfid-reader-writer.html', 'RFID readers / writers'], ['uhf-rfid-label.html', 'UHF RFID label'], ['rfid-readers-hardware-guide.html', 'Readers & hardware guide']],
+  'case-warranty.html': [['rfid-anti-metal-tag.html', 'Anti-metal RFID tag'], ['high-temperature-rfid-tag.html', 'High-temperature tag'], ['products.html#tags', 'Browse RFID tags']],
+  'case-scratch-card.html': [['scratch-card.html', 'PVC scratch card'], ['pvc-cards.html', 'PVC cards'], ['rfid-cards-guide.html', 'RFID cards guide']],
+  'case-transit.html': [['rfid-nfc-card.html', 'RFID / NFC card'], ['rfid-chips-mifare-ntag-desfire.html', 'Transit chips (MIFARE)'], ['disposable-paper-wristband.html', 'Paper tickets & bands']],
+  'case-nfc-honda.html': [['nfc-business-card.html', 'NFC business card'], ['nfc-guide.html', 'NFC guide'], ['rfid-nfc-card.html', 'RFID / NFC card']],
+  'case-member-card.html': [['magnetic-stripe-card.html', 'Magnetic member card'], ['pvc-cards.html', 'PVC cards'], ['rfid-cards-guide.html', 'RFID cards guide']],
+  'case-logistics.html': [['uhf-rfid-label.html', 'UHF RFID label'], ['rfid-anti-metal-tag.html', 'Anti-metal tag'], ['rfid-vs-barcode.html', 'RFID vs barcode']],
+  'case-events.html': [['rfid-wristband.html', 'RFID wristband'], ['rfid-silicone-wristband.html', 'Silicone wristband'], ['disposable-paper-wristband.html', 'Paper wristband']],
+  'news-blocking-card.html': [['rfid-blocking-card.html', 'RFID blocking card'], ['rfid-blocking-guide.html', 'RFID blocking guide'], ['rfid-blocking-wallet.html', 'Blocking wallet']],
+  'news-rail.html': [['rfid-anti-metal-tag.html', 'Anti-metal RFID tag'], ['high-temperature-rfid-tag.html', 'High-temperature tag'], ['rfid-readers-hardware-guide.html', 'Readers & hardware guide']],
+  'news-nfc-stickers.html': [['nfc-printed-label.html', 'NFC printed label'], ['nfc-guide.html', 'NFC guide'], ['rfid-white-label.html', 'White label sticker']],
+  'news-wristband.html': [['rfid-wristband.html', 'RFID wristband'], ['rfid-silicone-wristband.html', 'Silicone wristband'], ['case-events.html', 'Events & festivals case']],
+  'news-food.html': [['uhf-rfid-label.html', 'UHF RFID label'], ['rfid-labels-inlays-guide.html', 'Labels & inlays guide'], ['case-logistics.html', 'Logistics case']],
+  'news-walmart.html': [['uhf-rfid-label.html', 'UHF RFID label'], ['rfid-labels-inlays-guide.html', 'Labels & inlays guide'], ['rfid-vs-barcode.html', 'RFID vs barcode']],
+};
 function TABLE(t) {
   if (!t) return '';
   const th = t.head.map((h) => `<th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">${esc(h)}</th>`).join('');
@@ -62,8 +88,9 @@ function buildBody(it) {
   const table = TABLE(it.table);
   const takeaways = it.points && it.points.length ? `<h2>Key takeaways</h2>\n      ${POINTS(it.points)}` : '';
   const help = it.help ? `<h2>How RFID MFG helps</h2>\n      ${P(it.help)}` : '';
+  const related = RELATED(it.related || RELATED_MAP[it.slug]);
   const faq = FAQ_HTML(it.faqs);
-  return [byline, lead, intro, table, takeaways, help, faq].filter(Boolean).join('\n      ');
+  return [byline, lead, intro, table, takeaways, help, related, faq].filter(Boolean).join('\n      ');
 }
 
 function shell(it) {
@@ -188,6 +215,7 @@ const CASES = [
     body: [
       'Payment cards fall into two families: magnetic-stripe cards, which store static data on a stripe, and smart IC cards, which carry a secure microchip. Smart IC cards include contact chip cards (inserted into a reader) and contactless RFID cards (tapped at 13.56 MHz).',
       'The chip performs cryptographic authentication for each transaction, which is far harder to clone than a magnetic stripe. Many cards are now dual-interface, offering both insert and tap in a single card for retail and banking environments.',
+      'Producing payment-grade cards is exacting work: the module must be milled and implanted to tight tolerances, the antenna tuned for reliable tap performance, and print and lamination held to financial-industry finish standards across the whole run. Cards can combine a contact chip, a contactless antenna, a magnetic stripe, embossing, a signature panel and hologram in one body, so a single card serves legacy and modern terminals alike — manufactured with the consistency and security controls that banking programmes demand.',
     ],
     table: { cap: 'Bank-card technologies compared', head: ['Type', 'How it works', 'Security'], rows: [['Magnetic stripe', 'Swipe, static data', 'Low — easily copied'], ['Contact IC', 'Insert chip into reader', 'High — dynamic auth'], ['Contactless RFID', 'Tap at 13.56 MHz', 'High — dynamic auth'], ['Dual-interface', 'Insert or tap', 'High — most flexible']] },
     points: ['Chip authentication is far more secure than a magnetic stripe', 'Contactless tap speeds up checkout', 'Dual-interface cards combine insert and tap', 'Manufactured to financial-grade quality and consistency'],
@@ -200,6 +228,7 @@ const CASES = [
     body: [
       'Libraries were early adopters of RFID because it solves two problems at once: slow circulation desks and time-consuming shelf management. An HF RFID label inside each book lets several items be checked out or returned in a single stack, without scanning each barcode.',
       'The same tags drive security gates at the exit, self-return chutes that pre-sort returns, and handheld readers that let staff inventory or find mis-shelved items in a fraction of the usual time.',
+      'Libraries standardise on HF 13.56 MHz labels to ISO 15693 / ISO 18000-3 because that band reads a stack of books reliably at close range with strong anti-collision — where UHF would over-read neighbouring shelves. Tags are thin, paper-thin adhesive labels applied inside the cover, optionally with a printed barcode and the library’s branding so they work alongside legacy systems during migration. We supply the labels pre-encoded to the catalogue scheme, plus matching security-gate and desk hardware, so a branch can convert without re-labelling later.',
     ],
     table: { cap: 'Manual/barcode vs RFID libraries', head: ['Task', 'Barcode', 'RFID'], rows: [['Checkout', 'One book at a time', 'A stack at once'], ['Shelf inventory', 'Hours of scanning', 'Minutes with a wand'], ['Self-service', 'Limited', 'Full self-checkout'], ['Anti-theft', 'Separate system', 'Same tag does both']] },
     points: ['Self-service checkout and return cut queues', 'Whole-shelf inventory in minutes, not hours', 'One tag handles circulation and security', 'Better experience for patrons and staff alike'],
@@ -212,6 +241,7 @@ const CASES = [
     body: [
       'A gateway or portal is simply a set of RFID antennas mounted around a doorway, dock or corridor. As tagged items pass through, the reader logs the time, direction and location — creating an automatic chain of custody across a building or site.',
       'This is ideal for tracking goods between zones, confirming shipments at dock doors, and monitoring high-value assets as they move around a facility, all without slowing people down or requiring manual checks.',
+      'A dependable portal is an exercise in antenna geometry. Two to four UHF antennas are positioned to flood the opening evenly, reader power is tuned to cover the doorway without reading the next aisle, and direction is inferred from the order in which antennas see the tag. Fast-moving forklift traffic, metal door frames and shrink-wrapped loads all change the read field, so we help select and place the readers, antennas and tag types together and test with your actual goods before go-live.',
     ],
     points: ['Automatic, hands-free recording at every doorway', 'Direction and timestamp give a clear chain of custody', 'Works for shipments, assets and inter-zone moves', 'Pairs with handheld readers for spot checks'],
     help: ['RFID MFG provides the fixed readers, gate antennas and tags that make portal tracking reliable — selected and tuned for your item types, throughput and read environment.'],
@@ -224,6 +254,7 @@ const CASES = [
     body: [
       'Service operations struggle when they cannot reliably identify which unit is which. RFID solves this by giving every item a unique, scannable identity that links to its full record — purchase date, warranty status, prior repairs and required checks.',
       'When an item arrives for service, a quick read confirms whether it is in warranty and what work or calibration is due, reducing disputes and speeding up turnaround.',
+      'The tag has to outlast the product, often on metal and through years of handling, so warranty and repair programmes use rugged on-metal, epoxy or PCB tags rather than paper labels. Each is encoded with a permanent serial and, where anti-counterfeiting matters, a factory-locked chip TID that cannot be transferred to a clone — so a genuine unit can always be told from a grey-market or counterfeit one. We manufacture these durable tags and encode your serial and warranty data before delivery, ready to attach on the line.',
     ],
     points: ['Unique RFID identity per unit links to its full history', 'Instantly verify warranty status and due checks', 'Fewer disputes over coverage and prior work', 'Faster, more accurate returns and repair flow'],
     help: ['RFID MFG supplies durable tags and on-metal labels suited to tools, electronics and equipment — encoded with serial data so each unit carries its identity for life.'],
@@ -236,6 +267,7 @@ const CASES = [
     body: [
       'Scratch cards pair a printed serial number with a PIN concealed under a scratch-off panel. The user reveals the PIN to authenticate — a low-cost, offline-friendly way to control access to a service or website.',
       'For this government registration project, security and print consistency were critical: every card had to be unique, legible and tamper-evident across a large print run. RFID MFG won the work on print quality and reliable, secure production.',
+      'The security is in the production, not just the design. Serials and PINs are generated as a controlled, non-sequential dataset, printed with variable-data equipment so no two cards repeat, and the PIN is hidden under a scratch panel that cannot be resealed once removed. Secure handling keeps unused codes protected through the whole run, and each card can carry a barcode or QR for activation. The same secure numbering approach extends to gift cards, top-up cards, loyalty codes and promotional pins.',
     ],
     points: ['Serial number plus hidden PIN for secure activation', 'Unique, sequential data across the whole run', 'Tamper-evident scratch panel', 'Won on print quality and production reliability'],
     faqs: [['How do scratch cards stay secure?', 'Each card carries a unique serial and a PIN hidden under a scratch panel; the PIN is only revealed by the end user, and unused codes stay protected.'], ['Can you produce unique numbering at volume?', 'Yes. We generate sequential or randomized serials and PINs and print them consistently across large, secure production runs.']],
@@ -247,6 +279,7 @@ const CASES = [
     body: [
       'Public transport runs on speed at the gate. Contactless fare media — cards, tokens and paper tickets with an embedded chip — let passengers tap and go in well under a second, far faster than cash or magnetic tickets.',
       'The same RFID technology RFID MFG supplies for transit also serves library management, animal identification and toll collection, making it a versatile backbone for smart-city services.',
+      'Choosing the right fare media matters. Reusable HF cards (typically the MIFARE family) hold a secure, re-loadable balance for regular commuters, while single-use paper tickets with an embedded chip suit tourists and events — cheap to issue and easy to recycle. For open-road tolling, UHF windshield tags read vehicles at speed from several metres. Because we produce cards, tokens, paper tickets and windshield tags in-house, a transit authority can source one supplier for the whole fare ecosystem and encode every credential to its own keys before delivery.',
     ],
     table: { cap: 'RFID frequencies for transit & access', head: ['Band', 'Range', 'Typical use'], rows: [['LF 125 kHz', 'A few cm', 'Simple access tokens'], ['HF 13.56 MHz', 'Tap (up to ~10 cm)', 'Fare cards, ticketing'], ['UHF 860–960 MHz', 'Up to several metres', 'Vehicle / toll tags']] },
     points: ['Sub-second tap-to-pay keeps gates flowing', 'Durable fare cards and disposable paper tickets', 'One platform spans transit, tolls and access', 'HF for fare media, UHF for vehicle tolling'],
@@ -259,6 +292,7 @@ const CASES = [
     body: [
       'NFC (Near Field Communication) is the short-range, tap-based subset of 13.56 MHz RFID built into virtually every modern smartphone. That ubiquity makes NFC cards a powerful bridge between a physical touchpoint and a digital experience — no app install required.',
       'Through a strategic partnership begun in 2017, RFID MFG NFC cards let customers tap their phone to open a link, verify authenticity or start an interaction, turning a simple card into an engagement channel.',
+      'What makes it work at scale is consistent encoding and locking. Each card is built on an NTAG chip written with an NDEF record — usually a redirect URL — then locked so the destination cannot be overwritten, while the landing page can still be updated centrally without re-issuing a single card. That lets a brand run seasonal campaigns on cards already in customers’ hands. We manufacture, print and encode these NFC cards in volume, with tamper and locking options where authenticity matters.',
     ],
     points: ['NFC works with the phone almost everyone already carries', 'A tap can open a URL, verify a product or launch an action', 'No app needed — the experience opens in the browser', 'Bridges physical products with digital marketing'],
     help: ['RFID MFG manufactures and encodes NTAG-based NFC cards, labels and tags, locking the data where needed so each tap delivers a consistent, secure experience.'],
@@ -271,6 +305,7 @@ const CASES = [
     body: [
       'For a food-and-beverage venue, a membership card is both a payment instrument and a marketing tool. This client needed a complete solution: cards members could use to pay and reload, plus a system to enroll new members and track spend.',
       'RFID MFG supplied the magnetic member cards and matching holders that powered the programme, helping the venue retain customers, encourage prepaid top-ups and understand buying behaviour.',
+      'A membership programme is a kit, not just a card. Alongside the magnetic-stripe (or RFID) cards, the venue used branded holders, and can add sleeves, lanyards and welcome packaging so the whole set reinforces the brand at first touch. Cards were personalised in the run with sequential numbering and could carry a barcode or QR for the POS, while an RFID or NFC upgrade path lets a later phase move to tap-to-pay and phone enrolment. Producing cards and accessories together keeps branding, colour and quality consistent across the programme.',
     ],
     points: ['Cards for payment, top-ups and member enrollment', 'Prepaid balances improve cash flow and loyalty', 'Spend tracking informs promotions', 'Branded cards and holders reinforce identity'],
     faqs: [['Can member cards store a prepaid balance?', 'Yes. Cards can hold stored value or link to an account so members top up and pay, which boosts loyalty and prepaid cash flow.'], ['Can you supply matching card holders and accessories?', 'Yes. We produce branded holders, sleeves and lanyards alongside the cards for a complete, consistent membership kit.']],
@@ -282,6 +317,7 @@ const CASES = [
     body: [
       'Logistics is a chain of hand-offs, and every manual scan is a chance for error or delay. RFID lets pallets and parcels be read in bulk as they move — at the dock, on the conveyor and onto the truck — so the system always knows what is where.',
       'The result is fewer lost shipments, faster loading and unloading, and accurate, real-time visibility that both operators and their customers can rely on.',
+      'The tag has to survive the journey. Cartons and parcels use economical UHF paper labels; returnable assets such as roll cages, totes and containers use rugged hard tags or on-metal tags that read reliably on steel and last for years of reuse. Pre-encoding to an SSCC or your own numbering scheme means tags work the moment they arrive, and pairing fixed dock-door readers with handheld units gives both automatic gate reads and spot checks. Because we manufacture the inlays, labels and hard tags together, the whole chain is sourced and tuned consistently.',
     ],
     points: ['Bulk reads at every hand-off remove manual bottlenecks', 'End-to-end visibility reduces losses and mis-ships', 'Long-range UHF suits pallet and parcel tracking', 'Real-time data improves customer transparency'],
     help: ['RFID MFG’s UHF labels, inlays and hard tags are built for the knocks of logistics, and can be pre-encoded to your SSCC or internal numbering for plug-in deployment.'],
@@ -294,6 +330,7 @@ const CASES = [
     body: [
       'At a busy event, the wristband is the whole experience: it is the ticket, the wallet and the access pass. RFID wristbands let guests tap to enter, top up and pay, removing queues at gates and bars and giving organisers live attendance data.',
       'RFID MFG offers full OEM customization — chip, shape, material and size — so each wristband, epoxy tag or ticket matches the event’s brand and security needs.',
+      'Material choice follows the event. Tyvek paper bands are the low-cost pick for single-day concerts and festivals; woven fabric bands, closed with a one-time slider, suit multi-day festivals where they double as a keepsake; and silicone bands are the durable, waterproof choice for water parks, gyms and VIP access. Chip choice follows the interaction: NTAG or MIFARE for tap-to-pay and social check-ins, or long-range UHF where organisers need to track crowd flow through gates. Operators typically report shorter entry queues and higher on-site spend once cashless wristbands replace cash and paper tickets.',
     ],
     table: { cap: 'Choosing an event wristband material', head: ['Material', 'Best for', 'Reuse'], rows: [['Tyvek paper', 'Single-day events', 'Disposable'], ['Fabric / woven', 'Multi-day festivals', 'Reusable'], ['Silicone', 'Water parks, VIP', 'Reusable']] },
     points: ['One wristband for entry, cashless pay and access', 'Live attendance and spend data for organisers', 'Tyvek, fabric or silicone to fit the event', 'Full OEM: chip, shape, material and artwork'],
@@ -322,6 +359,7 @@ const NEWS = [
     body: [
       'Rail networks are vast, distributed and safety-critical, which makes reliable identification essential. RFID tags on rolling stock, wagons and key components let trackside readers identify assets automatically as they pass, building an accurate, real-time picture of the network.',
       'Beyond identification, the same data underpins predictive maintenance and spare-parts inventory: knowing exactly which component is where, and when it was last serviced, keeps networks safe and running on time.',
+      'The hardware has to withstand a punishing environment — vibration, grease, weather and wide temperature swings — so rail uses rugged on-metal and industrial tags, often UHF for trackside range or specialised high-temperature tags near braking systems. Each tag carries a permanent, factory-locked ID (the chip TID) that is difficult to forge, which supports both authentication and chain-of-custody for safety-critical parts. Tags are typically read by fixed trackside or depot readers and reconciled against the asset database automatically, removing manual inspection error.',
     ],
     points: ['Automatic identification of rolling stock and components', 'Real-time asset location across a distributed network', 'Maintenance records tied to each physical asset', 'Supports safety, inventory and operational efficiency'],
     faqs: [['Why is RFID suited to rail asset tracking?', 'RFID reads automatically at speed and without line of sight, so trackside readers can identify passing rolling stock and components without stopping trains or manual scanning.'], ['What tags survive the rail environment?', 'Rugged on-metal and industrial tags rated for vibration, moisture and wide temperature ranges are used so they endure years of outdoor service.']],
@@ -333,6 +371,7 @@ const NEWS = [
     body: [
       'NFC stickers are one of the most versatile forms of RFID. Because nearly every smartphone can read NFC, a tiny chip under a printed label lets any object link to digital content with a single tap — no app, no pairing.',
       'You meet them everywhere now: on product packaging for authentication and reorders, on posters and menus for tap-to-open links, on equipment for maintenance logs, and on business cards for instant contact sharing.',
+      'Under the printed face, most stickers use an NTAG chip (213/215/216) sized to the data — a short URL, a vCard or a redirect that you can change later without reprinting. For anti-counterfeiting, a locked, unique chip on a tamper-evident face destroys itself if peeled, so a genuine tap can be trusted. Because the chip is invisible and cannot be photocopied like a QR code, brands increasingly pair a visible QR with a hidden NFC sticker: the QR for reach, the NFC for premium, verifiable interaction. We print and encode these to your artwork with locking and tamper options built in.',
     ],
     points: ['Work with almost any modern smartphone', 'A tap opens a link, verifies a product or shares data', 'Thin and printable for packaging and posters', 'Low cost makes large rollouts affordable'],
     help: ['RFID MFG prints and encodes NFC labels and stickers with your artwork, with tamper-evident options and locked data for authentication use cases.'],
@@ -345,6 +384,7 @@ const NEWS = [
     body: [
       'Theme parks were among the first to embrace RFID wristbands, and it is easy to see why. One waterproof band replaces tickets, cash and access cards: guests tap to enter, tap to pay for food and merchandise, and tap to access rides or lockers.',
       'For operators, that means shorter queues, less cash handling, and real-time insight into where guests are and how they spend — all of which improves both the experience and the bottom line.',
+      'The band itself is engineered for the environment: a waterproof silicone or coated-fabric strap, an adjustable or one-time closure, and an HF/NFC chip (NTAG or MIFARE) that links to a prepaid balance for tap-to-pay, or a UHF chip where the park wants longer-range gate and ride reads. Bands can be printed edge to edge in the park’s colours and pre-encoded so they work the instant a guest puts one on. Reusable silicone bands can also be collected, sanitised and re-issued across seasons to cut cost and waste.',
     ],
     points: ['One band for entry, payment and ride access', 'Waterproof and comfortable for all-day wear', 'Shorter queues and less cash handling', 'Live guest-flow and spend analytics'],
     faqs: [['Are theme-park wristbands waterproof?', 'Yes. Silicone and coated fabric bands are fully waterproof, which is essential for water parks and all-weather outdoor use.'], ['How does cashless payment on a wristband work?', 'The band’s chip links to a prepaid balance or registered card, so a tap at any point of sale charges the guest’s account securely.']],
@@ -356,6 +396,7 @@ const NEWS = [
     body: [
       'Food safety depends on knowing where a product came from and where it has been. Barcodes capture some of this, but only one item at a time and only with a clear line of sight. RFID records whole pallets automatically, building a complete, time-stamped trace from farm or factory to shelf.',
       'That visibility matters most when something goes wrong: a precise trace lets a recall target only the affected batch, protecting consumers and limiting waste — while everyday data helps manage freshness and shelf life.',
+      'The labels themselves must be food-safe and survive cold, damp and packaging lines. UHF paper labels applied to cartons and crates give whole-pallet reads for warehousing and distribution, while washable or freezer-grade constructions suit chilled and frozen goods. Applied to outer packaging rather than the food itself, and encoded with batch and expiry data, RFID becomes the backbone of first-expired-first-out rotation and rapid, targeted recalls across grocery and catering.',
     ],
     points: ['Whole-pallet reads build automatic traceability', 'Precise recalls limit waste and protect consumers', 'Better freshness and shelf-life management', 'Supports food-safety compliance and audits'],
     faqs: [['How does RFID improve food recalls?', 'Because each batch is traced automatically through the supply chain, a recall can target only the affected lots instead of pulling entire product lines, reducing waste and risk.'], ['Are RFID labels safe for food packaging?', 'Yes. Food-safe label constructions and adhesives are used, and tags are applied to packaging rather than the food itself.']],
@@ -367,6 +408,7 @@ const NEWS = [
     body: [
       'When one of the world’s largest retailers extends RFID from apparel into fresh food, the whole industry takes note. Item-level tagging improves on-shelf availability, speeds up stock counts and tightens freshness management — benefits that apply far beyond a single chain.',
       'Wider adoption like this drives demand for reliable, food-safe RFID labels and inlays at scale, an area where a manufacturer’s capacity and quality control become decisive.',
+      'Fresh food is harder to tag than apparel: labels meet cold, moisture and condensation, and often sit near metal shelving or high-water-content products that detune a standard antenna. That pushes retailers toward inlays tuned for chilled and damp conditions, food-safe adhesives, and consistent encoding to a GS1 EPC/SGTIN scheme so every store reads the same data. It is exactly the kind of high-volume, quality-critical program a multi-line factory with direct chip supply is built to serve — which is why upstream manufacturing capacity, not just the tag design, decides who can support a rollout at this scale.',
     ],
     points: ['Signals mainstream, item-level RFID in grocery', 'Improves on-shelf availability and freshness', 'Raises demand for food-safe labels at scale', 'Manufacturing quality and capacity become key'],
     help: ['With six production lines and first-hand chip supply, RFID MFG is positioned to deliver food-grade UHF labels and inlays in the volumes that large retail programs require.'],

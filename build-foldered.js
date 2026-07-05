@@ -16,8 +16,11 @@ const SITE = 'https://www.rfidmfg.com';
 const CAT = {
   'contact-ic-chip-card': 'cards', 'hotel-key-card': 'cards', 'pvc-cards': 'cards', 'rfid-nfc-card': 'cards',
   'rfid-epoxy-card': 'cards', 'project-based-card': 'cards', 'wooden-rfid-card': 'cards', 'metal-card': 'cards', 'eco-friendly-card': 'cards',
-  'nfc-printed-label': 'labels', 'rfid-dry-inlay': 'labels', 'rfid-wet-inlay': 'labels', 'rfid-white-label': 'labels',
+  'nfc-business-card': 'cards', 'dual-frequency-card': 'cards', 'magnetic-stripe-card': 'cards', 'scratch-card': 'cards',
+  'nfc-printed-label': 'labels', 'rfid-dry-inlay': 'labels', 'rfid-wet-inlay': 'labels', 'rfid-white-label': 'labels', 'uhf-rfid-label': 'labels',
   'rfid-animal-tag': 'tags', 'rfid-anti-metal-tag': 'tags', 'rfid-keyfob': 'tags', 'rfid-wristband': 'tags', 'special-rfid-tags': 'tags',
+  'rfid-laundry-tag': 'tags', 'nfc-dog-tag': 'tags', 'rfid-jewelry-tag': 'tags', 'rfid-library-tag': 'tags', 'uhf-windshield-tag': 'tags',
+  'high-temperature-rfid-tag': 'tags', 'rfid-seal-tag': 'tags', 'rfid-silicone-wristband': 'tags', 'disposable-paper-wristband': 'tags',
   'rfid-blocking-card': 'blocking', 'rfid-blocking-sleeves': 'blocking', 'rfid-blocking-wallet': 'blocking',
   'barcode-scan-module': 'hardware', 'industrial-iot-dtu-rtu': 'hardware', 'rfid-reader-writer': 'hardware', 'rfid-smart-cabinet': 'hardware',
 };
@@ -44,6 +47,8 @@ function cleanPath(base) {
   if (base in CAT) return `products/${CAT[base]}/${base}`;
   if (GUIDES.includes(base)) return `guides/${base}`;
   if (TOOLS.includes(base)) return `tools/${base}`;
+  if (base === 'industries') return 'industries';
+  if (base.startsWith('industry-')) return `industries/${base.slice(9)}`;
   if (base.startsWith('case-')) return `cases/${base.slice(5)}`;
   if (base.startsWith('news-')) return `news/${base.slice(5)}`;
   return base;
@@ -62,11 +67,14 @@ function rewrite(html, base) {
   html = html.replace(/(href|src)="([^"]+)"/g, (m, attr, val) => {
     if (/^(https?:|mailto:|tel:|#|\/)/.test(val)) return m;        // external / in-page / already-absolute
     if (ASSET_RE.test(val) || /^images\//.test(val) || /^fonts\//.test(val)) return `${attr}="/${val}"`;
-    const mm = val.match(/^([A-Za-z0-9_-]+)\.html(#([a-z]+))?$/);
+    const mm = val.match(/^([A-Za-z0-9_-]+)\.html(\?[^#"]*)?(#[A-Za-z0-9_-]+)?$/);
     if (mm) {
-      if (mm[1] === 'products' && mm[3] && CAT_ORDER.includes(mm[3])) return `${attr}="/products/${mm[3]}/"`;
+      const query = mm[2] || '';
+      const frag = mm[3] || '';
+      const catFrag = !query && /^#([a-z]+)$/.test(frag) ? frag.slice(1) : '';
+      if (mm[1] === 'products' && catFrag && CAT_ORDER.includes(catFrag)) return `${attr}="/products/${catFrag}/"`;
       if (mm[1] === '404') return `${attr}="/404.html"`;
-      return `${attr}="${urlFor(mm[1])}"`;
+      return `${attr}="${urlFor(mm[1])}${query}${frag}"`;
     }
     return m;
   });
@@ -194,6 +202,8 @@ function pri(u) {
   if (/^\/products\/[a-z]+\/[a-z0-9-]+\/$/.test(u)) return ['0.7', 'monthly']; // product
   if (/^\/guides\/[a-z0-9-]+\/$/.test(u)) return ['0.7', 'monthly'];
   if (/^\/tools\/[a-z0-9-]+\/$/.test(u)) return ['0.8', 'monthly'];
+  if (u === '/industries/') return ['0.8', 'weekly'];
+  if (/^\/industries\/[a-z0-9-]+\/$/.test(u)) return ['0.7', 'monthly'];
   if (/^\/(cases|news)\/[a-z0-9-]+\/$/.test(u)) return ['0.6', 'monthly'];
   if (u === '/privacy/' || u === '/terms/') return ['0.3', 'yearly'];
   return ['0.6', 'monthly'];
