@@ -124,7 +124,7 @@
   //   • Formspree:          https://formspree.io/f/xxxxxxxx
   //   • Feishu lead Worker: https://your-worker.your-name.workers.dev
   // Leave it as '' to fall back to the visitor's email client (mailto).
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = 'https://formspree.io/f/mqevnade';
 
   var form = document.getElementById('quoteForm');
   var note = document.getElementById('formNote');
