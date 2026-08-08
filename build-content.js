@@ -591,11 +591,78 @@ ${FOOTER}
 }
 
 // ================= HUB PAGE =================
+// ── 指南卡片原创 SVG 插图(与产品页示意图同一视觉语言)──
+const GUIDE_ART = {
+  'rfid-cards-guide.html': `<svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RFID cards illustration"><g>
+<rect x="118" y="34" rx="12" width="150" height="94" fill="var(--bg-alt)" stroke="var(--line)" transform="rotate(-8 193 81)"/>
+<rect x="148" y="28" rx="12" width="150" height="94" fill="#fff" stroke="var(--line)" transform="rotate(-3 223 75)"/>
+<rect x="178" y="24" rx="12" width="150" height="94" fill="#fff" stroke="var(--brand-deep)" stroke-width="2"/>
+<circle cx="216" cy="58" r="13" fill="none" stroke="var(--brand)" stroke-width="2.5"/><circle cx="216" cy="58" r="6.5" fill="none" stroke="var(--brand)" stroke-width="2"/><rect x="211" y="53" width="10" height="10" fill="var(--brand-deep)"/>
+<path d="M240 58h66M240 76h66M240 94h44" stroke="var(--line)" stroke-width="7" stroke-linecap="round"/>
+<path d="M196 118h114" stroke="var(--brand-2)" stroke-width="4" stroke-linecap="round"/></g></svg>`,
+  'nfc-guide.html': `<svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NFC phone tap illustration"><g>
+<rect x="96" y="18" rx="16" width="72" height="118" fill="#fff" stroke="var(--brand-deep)" stroke-width="2"/>
+<rect x="108" y="34" rx="4" width="48" height="70" fill="var(--bg-alt)"/><circle cx="132" cy="120" r="6" fill="none" stroke="var(--line)" stroke-width="2"/>
+<g stroke="var(--brand)" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M186 62c8 8 8 20 0 28"/><path d="M202 52c14 14 14 34 0 48"/><path d="M218 42c20 20 20 48 0 68"/></g>
+<circle cx="284" cy="76" r="30" fill="var(--bg-alt)" stroke="var(--line)"/><circle cx="284" cy="76" r="17" fill="none" stroke="var(--brand)" stroke-width="2.5"/><rect x="279" y="71" width="10" height="10" fill="var(--brand-deep)"/>
+<text x="322" y="82" font-size="13" fill="var(--muted)" font-weight="700">Tap</text></g></svg>`,
+  'rfid-labels-inlays-guide.html': `<svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RFID labels and inlays illustration"><g>
+<circle cx="86" cy="66" r="44" fill="var(--bg-alt)" stroke="var(--line)"/><circle cx="86" cy="66" r="13" fill="#fff" stroke="var(--line)"/>
+<path d="M86 110 H360" stroke="var(--line)" stroke-width="12" stroke-linecap="round"/>
+<g stroke="var(--brand-deep)" fill="#fff"><rect x="150" y="99" rx="6" width="56" height="22"/><rect x="226" y="99" rx="6" width="56" height="22"/><rect x="302" y="99" rx="6" width="56" height="22"/></g>
+<g stroke="var(--brand)" fill="none" stroke-width="2"><path d="M158 110h18m5 0h10"/><path d="M234 110h18m5 0h10"/><path d="M310 110h18m5 0h10"/></g>
+<rect x="238" y="26" rx="8" width="96" height="40" fill="#fff" stroke="var(--brand-deep)" stroke-width="2" transform="rotate(6 286 46)"/>
+<path d="M250 46h28m6 0h14" stroke="var(--brand)" stroke-width="2.5" transform="rotate(6 286 46)"/></g></svg>`,
+  'rfid-blocking-guide.html': `<svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RFID blocking illustration"><g>
+<g stroke="var(--brand)" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M96 96c8-10 8-22 0-32"/><path d="M112 104c14-16 14-32 0-48"/><path d="M128 112c20-22 20-42 0-64"/></g>
+<path d="M182 30v92" stroke="var(--brand-deep)" stroke-width="6" stroke-linecap="round"/>
+<path d="M182 30c26 8 26 76 0 92" fill="none" stroke="var(--brand-2)" stroke-width="2.5"/>
+<rect x="226" y="42" rx="10" width="132" height="80" fill="#fff" stroke="var(--line)"/>
+<rect x="242" y="58" rx="4" width="44" height="30" fill="var(--bg-alt)"/><path d="M298 62h44M298 76h44M298 90h28" stroke="var(--line)" stroke-width="6" stroke-linecap="round"/>
+<path d="M330 108l10 10 18-20" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></g></svg>`,
+  'rfid-readers-hardware-guide.html': `<svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RFID readers and hardware illustration"><g>
+<rect x="76" y="76" rx="10" width="120" height="50" fill="var(--bg-alt)" stroke="var(--brand-deep)" stroke-width="2"/>
+<circle cx="106" cy="101" r="9" fill="none" stroke="var(--brand)" stroke-width="2.5"/><path d="M126 94h52M126 108h36" stroke="var(--line)" stroke-width="6" stroke-linecap="round"/>
+<path d="M136 76V54h24" stroke="var(--line)" stroke-width="3"/>
+<rect x="252" y="30" rx="12" width="58" height="96" fill="#fff" stroke="var(--brand-deep)" stroke-width="2"/>
+<rect x="262" y="44" rx="4" width="38" height="52" fill="var(--bg-alt)"/><circle cx="281" cy="112" r="6" fill="none" stroke="var(--line)" stroke-width="2"/>
+<g stroke="var(--brand)" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M326 62c8 8 8 20 0 28"/><path d="M340 52c14 14 14 34 0 48"/></g></g></svg>`,
+  'rfid-wristband-materials.html': `<svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wristband materials illustration"><g>
+<rect x="66" y="30" rx="14" width="288" height="28" fill="var(--brand-2)" opacity=".85"/><circle cx="210" cy="44" r="9" fill="#fff"/><rect x="205" y="39" width="10" height="10" rx="2" fill="var(--brand-deep)"/>
+<rect x="66" y="66" rx="14" width="288" height="28" fill="#fff" stroke="var(--brand-deep)" stroke-width="2"/><path d="M80 80h260" stroke="var(--line)" stroke-width="2" stroke-dasharray="6 5"/><circle cx="210" cy="80" r="8" fill="none" stroke="var(--brand)" stroke-width="2"/>
+<rect x="66" y="102" rx="14" width="288" height="28" fill="var(--bg-alt)" stroke="var(--line)"/><path d="M96 102l-14 28M136 102l-14 28M176 102l-14 28M216 102l-14 28M256 102l-14 28M296 102l-14 28M336 102l-14 28" stroke="var(--line)" stroke-width="1.5"/></g></svg>`,
+  'rfid-key-fob-guide.html': `<svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RFID key fob illustration"><g>
+<circle cx="150" cy="46" r="20" fill="none" stroke="var(--brand-deep)" stroke-width="5"/>
+<rect x="128" y="60" rx="18" width="86" height="66" fill="var(--bg-alt)" stroke="var(--brand-deep)" stroke-width="2" transform="rotate(8 171 93)"/>
+<circle cx="172" cy="94" r="15" fill="none" stroke="var(--brand)" stroke-width="2.5" transform="rotate(8 171 93)"/><rect x="167" y="89" width="10" height="10" fill="var(--brand-deep)" transform="rotate(8 171 93)"/>
+<g stroke="var(--brand)" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M242 78c8 8 8 20 0 28"/><path d="M258 68c14 14 14 34 0 48"/></g>
+<rect x="292" y="58" rx="8" width="64" height="76" fill="#fff" stroke="var(--line)"/><circle cx="324" cy="86" r="10" fill="none" stroke="var(--brand-deep)" stroke-width="2.5"/><rect x="318" y="106" width="12" height="16" rx="2" fill="var(--bg-alt)" stroke="var(--line)"/></g></svg>`,
+};
+// 对比卡:术语药丸 + VS 徽章;工具/基准/术语表:专属图标
+function compArt(crumb) {
+  const parts = String(crumb).split(/\s+vs\s+/i).slice(0, 3);
+  const colors = ['var(--brand-2)', 'var(--brand)', 'var(--brand-deep)'];
+  const n = parts.length;
+  if (n < 2) return `<svg viewBox="0 0 420 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(crumb)}"><rect x="110" y="30" rx="18" width="200" height="36" fill="var(--bg-alt)" stroke="var(--line)"/><text x="210" y="53" text-anchor="middle" font-size="15" font-weight="700" fill="var(--brand-deep)">${esc(crumb)}</text></svg>`;
+  const w = 420, pw = Math.min(150, (w - 60 * (n - 1) - 20) / n), gap = 60;
+  const total = n * pw + (n - 1) * gap;
+  let x = (w - total) / 2, out = '';
+  parts.forEach((t, i) => {
+    out += `<rect x="${x}" y="28" rx="19" width="${pw}" height="40" fill="${i === 1 ? '#fff' : 'var(--bg-alt)'}" stroke="${colors[i]}" stroke-width="2.5"/><text x="${x + pw / 2}" y="53" text-anchor="middle" font-size="${t.length > 10 ? 11 : 14}" font-weight="700" fill="var(--ink)">${esc(t)}</text>`;
+    if (i < n - 1) { const cx = x + pw + gap / 2; out += `<circle cx="${cx}" cy="48" r="17" fill="var(--brand-deep)"/><text x="${cx}" y="53" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">VS</text>`; }
+    x += pw + gap;
+  });
+  return `<svg viewBox="0 0 420 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${esc(crumb)} comparison">${out}</svg>`;
+}
+const ART_SELECTOR = `<svg viewBox="0 0 420 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RFID selector tool"><g><path d="M90 60h240" stroke="var(--line)" stroke-width="8" stroke-linecap="round"/><path d="M90 60h150" stroke="var(--brand)" stroke-width="8" stroke-linecap="round"/><circle cx="240" cy="60" r="15" fill="#fff" stroke="var(--brand-deep)" stroke-width="3"/><path d="M118 30l8 8 14-16M196 30l8 8 14-16M274 30l8 8 14-16" stroke="var(--accent)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>`;
+const ART_BENCH = `<svg viewBox="0 0 420 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Benchmark data"><g><path d="M96 80h240" stroke="var(--line)" stroke-width="2"/><rect x="120" y="52" width="34" height="28" rx="4" fill="var(--brand-2)"/><rect x="176" y="38" width="34" height="42" rx="4" fill="var(--brand)"/><rect x="232" y="24" width="34" height="56" rx="4" fill="var(--brand-deep)"/><rect x="288" y="44" width="34" height="36" rx="4" fill="var(--bg-alt)" stroke="var(--line)"/></g></svg>`;
+const ART_GLOSSARY = `<svg viewBox="0 0 420 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Glossary A to Z"><g><rect x="118" y="24" rx="10" width="52" height="52" fill="var(--bg-alt)" stroke="var(--line)"/><text x="144" y="59" text-anchor="middle" font-size="26" font-weight="800" fill="var(--brand-deep)">A</text><path d="M192 50h36" stroke="var(--brand)" stroke-width="3" stroke-linecap="round"/><path d="M220 42l10 8-10 8" fill="none" stroke="var(--brand)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="250" y="24" rx="10" width="52" height="52" fill="#fff" stroke="var(--brand-deep)" stroke-width="2"/><text x="276" y="59" text-anchor="middle" font-size="26" font-weight="800" fill="var(--brand-deep)">Z</text></g></svg>`;
+
 function hubPage() {
   const slug = 'guides.html';
-  const card = (href, title, desc) => `<a class="cat-item" href="${href}" style="text-decoration:none"><div class="cat-item__body" style="padding:18px"><h3 style="margin:0 0 6px">${esc(title)}</h3><p style="margin:0;color:var(--muted)">${esc(desc)}</p></div></a>`;
-  const guides = GUIDES.map((g) => card(g.slug, g.crumb.replace(' Guide', '') + ' guide', g.lead)).join('\n      ');
-  const comps = card('/tools/rfid-selector/', '★ RFID Selector tool', 'Answer 5 quick questions and get an instant frequency, chip and product recommendation.') + '\n      ' + card('rfid-benchmark-2026.html', '★ 2026 RFID Selection Benchmark', 'Original reference data: frequency, read range, chip memory and material temperature limits.') + '\n      ' + COMPARISONS.map((c) => card(c.slug, c.crumb, c.lead)).join('\n      ');
+  const card = (href, title, desc, art) => `<a class="cat-item" href="${href}" style="text-decoration:none">${art ? `<div class="cat-item__art">${art}</div>` : ''}<div class="cat-item__body" style="padding:18px"><h3 style="margin:0 0 6px">${esc(title)}</h3><p style="margin:0;color:var(--muted)">${esc(desc)}</p></div></a>`;
+  const guides = GUIDES.map((g) => card(g.slug, g.crumb.replace(' Guide', '') + ' guide', g.lead, GUIDE_ART[g.slug] || '')).join('\n      ');
+  const comps = card('/tools/rfid-selector/', '★ RFID Selector tool', 'Answer 5 quick questions and get an instant frequency, chip and product recommendation.', ART_SELECTOR) + '\n      ' + card('rfid-benchmark-2026.html', '★ 2026 RFID Selection Benchmark', 'Original reference data: frequency, read range, chip memory and material temperature limits.', ART_BENCH) + '\n      ' + COMPARISONS.map((c) => card(c.slug, c.crumb, c.lead, compArt(c.crumb))).join('\n      ');
   const ld = [
     { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'RFID & NFC Guides and Resources', url: SITE + '/' + slug, description: 'Guides, comparisons and a glossary to help you choose the right RFID and NFC products.' },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE + '/' }, { '@type': 'ListItem', position: 2, name: 'Guides', item: SITE + '/' + slug }] },
@@ -650,7 +717,7 @@ ${HEADER}
     <div class="section__head"><span class="eyebrow">Compare & choose</span><h2 class="section__title">Comparisons & selection</h2></div>
     <div class="catalog-grid">
       ${comps}
-      ${card('rfid-glossary.html', 'RFID & NFC glossary', 'A–Z of RFID and NFC terms explained in plain language.')}
+      ${card('rfid-glossary.html', 'RFID & NFC glossary', 'A–Z of RFID and NFC terms explained in plain language.', ART_GLOSSARY)}
     </div>
   </div>
 </section>
