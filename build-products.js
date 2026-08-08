@@ -77,27 +77,76 @@ const FEATURES = {
   blocking: ['Effective 13.56 MHz scan protection', 'Passive shielding or active-jamming versions', 'Fully printable for your branding', 'Lightweight, everyday formats', 'Ideal as promotional giveaways'],
   hardware: ['Multiple interfaces (USB / RS232 / RS485 / Wi-Fi)', 'SDK and demo software included', 'Industrial-grade reliability', 'LF / HF / UHF coverage', 'OEM / ODM and integration support'],
 };
-const CUSTOMIZATION = [
-  'Chip & frequency — LF, HF/NFC (13.56 MHz) or UHF',
-  'Size, shape and material to your specification',
-  'Printing & artwork — full-color, Pantone, special finishes',
-  'Encoding, numbering, barcode / QR and database personalization',
-  'Packaging and branding to match your requirements',
+// 每品类差异化的定制项(避免 39 页共用同一份列表被搜索引擎判重)
+const CUSTOMIZATION_BY_CAT = {
+  cards: [
+    'Chip & antenna — LF, HF/NFC, UHF, dual-interface or contact IC modules',
+    'Card body — PVC, PET, recycled or bio materials, metal and wood hybrids',
+    'Print & finish — offset CMYK, Pantone, silkscreen, foil, embossing, frosted or matte lamination',
+    'Data services — encoding with diversified keys, numbering, QR / barcode, magstripe, signature panel',
+    'Carrier packaging — welcome sleeves, key-card wallets and retail blister packs',
+  ],
+  labels: [
+    'Inlay design — antenna geometry, die-cut size and reel pitch matched to your applicator',
+    'Face & adhesive — paper or PET face, permanent, removable or tamper-evident adhesive',
+    'Supply format — roll direction, core diameter and printer compatibility (Zebra, SATO, Postek)',
+    'Encoding & serialization — EPC schemes, NDEF records, locking and TID capture files',
+    'Converting — lamination, perforation and variable-data print before shipment',
+  ],
+  tags: [
+    'Housing — ABS, epoxy, silicone, PPS, ceramic or PCB builds for the target environment',
+    'Mounting — adhesive, screw hole, cable tie, sew-in channel or heat-weld patch',
+    'Environmental rating — IP67/IP68 sealing and temperature ranges to spec',
+    'Chip & frequency — LF, HF/NFC or UHF matched to your readers and range',
+    'Marking — laser logos, sequential numbering, color coding and custom shapes',
+  ],
+  blocking: [
+    'Shielding construction — passive foil laminate or active 13.56 MHz jamming circuit',
+    'Format — CR80 card, sleeve, passport size or full wallet builds',
+    'Branding — full-color print both sides, deboss or foil for leather goods',
+    'Packaging — retail hang-tab, polybag or promotional mailer formats',
+    'Verification — shielding effectiveness reports available per batch',
+  ],
+  hardware: [
+    'Interfaces — USB, TTL/UART, RS232, RS485, Wiegand, Wi-Fi or 4G options',
+    'Firmware & SDK — demo tools, API documentation and protocol customization',
+    'Read performance — antenna tuning and power settings for your tag population',
+    'Enclosure — OEM housings, logo printing and mounting accessories',
+    'Compliance — CE / FCC documentation and integration support',
+  ],
+};
+// 简短的工厂说明(替代原 6 卡片重复块;按品类差异化)
+const MFG_NOTE = {
+  cards: 'Card orders run on our own lamination, punching, offset-print and encoding lines in Shenzhen, so chip sourcing, body construction, personalization and QC stay under one roof — with pre-production samples before every run and a 2-year warranty after it.',
+  labels: 'Labels and inlays are converted reel-to-reel in-house — antenna bonding, adhesive lamination, die-cutting and 100% read/write testing on the same line — so every roll arrives printer-ready, with samples first and a 2-year warranty.',
+  tags: 'Tag production combines in-house injection molding, potting and assembly with 100% read testing before packing — engineered samples come first, bulk follows on our six Shenzhen lines, and everything carries a 2-year warranty.',
+  blocking: 'Shielding products are laminated and finished in-house with per-batch effectiveness checks, so blocking performance is verified before shipment — samples first, 2-year warranty included.',
+  hardware: 'Readers and modules are assembled and QA-tested in-house with firmware, SDK and integration support from our own engineers — evaluation units first, volume terms after your tests, 2-year warranty throughout.',
+};
+// 批发段落按品类措辞差异化(数值仍来自 wholesale(p))
+const WHOLESALE_COPY = {
+  cards: (p, w, unit, units) => `Order custom ${p.name} in production volume straight off our card lines — minimum runs from <strong>${moqFmt(w.moq)} ${units === 'pcs' ? 'pieces' : 'units'}</strong>, bulk lead times of ${w.bulkLow}–${w.bulkHigh} days after artwork approval, and free pre-production samples so you can sign off material, print and chip before committing. Full OEM/ODM covers your logo, chip choice, encoding and carrier packaging. Indicative pricing runs <strong>${money(w.low)}–${money(w.high)} per ${unit}</strong>, stepping down at volume breaks.`,
+  labels: (p, w, unit, units) => `Buy ${p.name} by the roll at factory pricing — from <strong>${moqFmt(w.moq)} ${units}</strong> per order, converted, tested and shipped in ${w.bulkLow}–${w.bulkHigh} days. Sample rolls ship free first so you can verify read performance on your own printer and surfaces. Indicative pricing is <strong>${money(w.low)}–${money(w.high)} per ${unit}</strong> and drops steeply at 10k+ volumes, with OEM die-cuts and pre-encoding available.`,
+  tags: (p, w, unit, units) => `Source ${p.name} at manufacturer terms — MOQs start at <strong>${moqFmt(w.moq)} ${units}</strong> with engineered samples in ${w.sample} days and bulk production in ${w.bulkLow}–${w.bulkHigh} days. We match housing, chip and mounting to your environment before quoting, so the indicative <strong>${money(w.low)}–${money(w.high)} per ${unit}</strong> range narrows to a firm price once your spec is fixed.`,
+  blocking: (p, w, unit, units) => `Stock ${p.name} for retail, promotions or corporate gifting — from <strong>${moqFmt(w.moq)} ${units}</strong> with your branding printed or debossed, produced in ${w.bulkLow}–${w.bulkHigh} days. Free samples let you verify shielding performance first. Indicative pricing of <strong>${money(w.low)}–${money(w.high)} per ${unit}</strong> scales down fast at giveaway quantities.`,
+  hardware: (p, w, unit, units) => `Purchase ${p.name} on OEM terms — evaluation units from <strong>${moqFmt(w.moq)} ${units}</strong> with SDK and integration support included, and volume batches in ${w.bulkLow}–${w.bulkHigh} days. Indicative pricing of <strong>${money(w.low)}–${money(w.high)} per ${unit}</strong> depends on interface, antenna and firmware options — send your integration plan for a firm quote.`,
+};
+// 批发 FAQ 三套措辞轮换,避免 39 页同句式
+const WHOLESALE_FAQ_VARIANTS = [
+  (p, w, unit, units) => [
+    [`What is the MOQ for ${p.name}?`, `Production runs start at ${moqFmt(w.moq)} ${units}, and we stay flexible on configuration — tell us your target quantity and we will match the best wholesale tier.`],
+    [`What does ${p.name} cost in bulk?`, `Plan around ${money(w.low)}–${money(w.high)} per ${unit} FOB Shenzhen as an indicative range; the firm price depends on chip, size, artwork and volume, and drops as quantities rise.`],
+  ],
+  (p, w, unit, units) => [
+    [`How many ${units} do I need to order ${p.name}?`, `The minimum is ${moqFmt(w.moq)} ${units} per run. Smaller trial batches are sometimes possible on standard specs — ask with your use case.`],
+    [`What is the wholesale price range for ${p.name}?`, `Indicatively ${money(w.low)}–${money(w.high)} per ${unit} (FOB Shenzhen). Send chip, size, artwork and quantity for an exact quote within 24 hours.`],
+  ],
+  (p, w, unit, units) => [
+    [`What minimum order does ${p.name} carry?`, `${moqFmt(w.moq)} ${units} is the standard starting volume; configuration changes can shift it, so share your numbers and we will confirm.`],
+    [`How is ${p.name} priced at volume?`, `Expect roughly ${money(w.low)}–${money(w.high)} per ${unit} FOB Shenzhen before volume breaks — final pricing follows your exact spec and quantity.`],
+  ],
 ];
-const WHYUS = [
-  { t: 'Since 1996', d: 'Nearly three decades specializing in RFID and smart-card manufacturing.' },
-  { t: '20,000 m² facility', d: 'Six modern production lines for high capacity and reliable lead times.' },
-  { t: 'First-hand chips', d: 'Direct sourcing with 50M+ in stock for stable supply and sharp pricing.' },
-  { t: '100+ countries', d: 'Export-ready support with full OEM and ODM services.' },
-  { t: 'Fully certified', d: 'ISO 9001 / 14001 / 45001, plus CE, FCC, FSC, RoHS and REACH.' },
-  { t: '2-year warranty', d: 'Samples available, on-time delivery and a 2-year guarantee.' },
-];
-const GENERIC_FAQ = [
-  ['What is the minimum order quantity?', 'MOQ is flexible and depends on the product and configuration — share your target quantity and we will advise.'],
-  ['Can I get a sample first?', 'Yes. Samples are available so you can verify material, print and chip performance before a production run.'],
-  ['Do you support OEM / ODM and custom encoding?', 'Yes — full OEM / ODM with in-house R&D, plus custom keys and encoding under NDA.'],
-  ['What are your payment and delivery terms?', 'Typically T/T in advance; we ship worldwide with on-time delivery and a 2-year warranty.'],
-];
+const variantIndex = (slug, n) => { let s = 0; for (let i = 0; i < slug.length; i++) s += slug.charCodeAt(i); return s % n; };
 
 // ── 批发/大宗订货经济性(指示性 FOB 深圳,USD)──────────────────────────
 // ⚠️ 用真实数字替换下面的默认值/覆盖值即可(改这一处 → 全站 39 个产品页同步)。
@@ -184,6 +233,638 @@ const PRODUCTS = [
   { slug: 'rfid-smart-cabinet', name: 'RFID Smart Cabinet / Terminal', cat: 'hardware', tag: 'Cabinet', tagline: 'Intelligent cabinets for automated asset control.', overview: 'RFID smart cabinets and terminals automatically track what is taken and returned — for tools, documents, medical and high-value asset control.', specs: [['Type', 'UHF smart cabinet / locker'], ['Antenna', 'Multi-zone'], ['Access', 'Card / PIN / biometric'], ['Software', 'Asset management'], ['Audit', 'Real-time logs']], apps: ['Tool cribs', 'Asset control', 'Medical supplies', 'Documents'], faqs: [['Real-time inventory?', 'Yes, the cabinet logs every take and return automatically.'], ['Access control?', 'Card, PIN and biometric options with audit trails.']] },
 ];
 
+// ── 每产品独有深度内容(差异化核心:介绍/场景/追加FAQ/meta,均为该产品专属文案)──
+const DETAILS = {
+  'contact-ic-chip-card': {
+    metaDesc: 'Contact IC cards on SLE4428/FM4428 memory chips or CPU/Java platforms, ISO 7816 modules milled and bonded in-house. Pre-encoding, numbering and magstripe combos.',
+    intro: [
+      'A contact IC card is built around an ISO 7816 chip module: the gold-plated contact plate is milled into the laminated card body, and the chip is wire-bonded and encapsulated beneath it. Because data moves only through physical contact with a terminal, these cards suit applications where a deliberate insert-to-read step is a feature — payment terminals, signature devices and government ID readers.',
+      'Choosing the right chip matters more here than in most card families. Simple memory chips like SLE4428 or FM4428 cover prepaid and membership schemes at low cost, while CPU and Java cards add cryptographic co-processors for PKI, digital signature and EMV-style security. Send us your terminal model or applet requirements and we will confirm chip compatibility before sampling.',
+    ],
+    useCases: [
+      ['Prepaid utility & canteen cards', 'Memory-chip cards hold stored value for campus canteens, utility prepayment meters and vending — cheap to issue and easy to re-load at kiosks.'],
+      ['Corporate PKI badges', 'CPU/Java cards carry employee certificates for VPN login and document signing, combined with printed photo-ID on the same card.'],
+      ['Health & insurance ID', 'Contact chips store policy or patient data that clinics read through desktop terminals, with the card doubling as printed ID.'],
+    ],
+    extraFaqs: [
+      ['Are your contact cards ISO 7816 compliant?', 'Yes — module milling, bonding and electrical behavior follow ISO 7816-1/2/3, so the cards work in standard-compliant terminals and card readers.'],
+      ['Can a contact chip be combined with magstripe or RFID?', 'Yes. Dual-interface and hybrid builds put a contact module, magstripe and/or a contactless antenna on one CR80 card for transition systems.'],
+    ],
+  },
+  'hotel-key-card': {
+    metaDesc: 'Hotel keycards matched to ADEL, Salto, Hune, Be-Tech and Ving locks — MIFARE, NTAG or T5577 encoded per system, magstripe versions included. Artwork-ready CR80 PVC.',
+    intro: [
+      'A hotel keycard only works if it matches the lock, so every order starts there: tell us the lock brand and model — or courier one working card — and we identify the chip family and encoding the system expects. MIFARE Classic dominates modern RFID locks, T5577 covers 125 kHz systems, and LoCo/HiCo magstripe remains common in older properties; we manufacture and encode all three.',
+      'Beyond function, the keycard is the one branded object every guest handles daily. Full-bleed CMYK artwork turns it into an in-room marketing surface — properties co-brand with restaurants, spas and local attractions, or print QR codes linking to guest services. For eco-positioned hotels we produce the same encodings in wood veneer or recycled-PVC bodies.',
+    ],
+    useCases: [
+      ['New-build hotel fit-out', 'A property opening with Salto or ADEL locks orders encoded cards in room-ready batches, with artwork proofs and a working sample approved before the full run.'],
+      ['Chain re-branding', 'Hotel groups refresh thousands of cards across properties with unified artwork while we keep each hotel’s lock encoding separate and labeled.'],
+      ['Resort upsell printing', 'Resorts print seasonal offers or spa promotions on the reverse side, replacing cards cheaply each season at bulk pricing.'],
+    ],
+    extraFaqs: [
+      ['How do I confirm the card will open our locks?', 'Send your lock brand/model or one working card. We match chip and encoding, then ship free pre-production samples for you to test in a real door before bulk production.'],
+      ['Do you offer eco alternatives for hotel keys?', 'Yes — the same lock-compatible chips laminated into FSC wood veneer, bamboo or recycled-PVC bodies, popular with sustainability-certified properties.'],
+    ],
+  },
+  'pvc-cards': {
+    metaDesc: 'Offset-printed PVC cards from 0.3 to 1.0 mm — ID, membership, gift and loyalty formats with magstripe, signature panel, embossing, foil and variable data.',
+    intro: [
+      'Our PVC cards are laminated from a printed core sheet sealed between clear overlays, then die-cut to CR80 — the construction that gives bank-card durability to everyday membership and ID cards. Offset printing handles photographic artwork and tight Pantone matches; thickness runs from 0.3 mm light cards up to 1.0 mm premium weight, with 0.76 mm as the standard.',
+      'Most projects add variable data, and that is where in-house personalization pays off: sequential numbering, Code 128 or QR barcodes, embossed numbers, foil accents, scratch panels and magstripes are applied on the same line as printing, so data integrity is checked before packing. Supply print-ready art with 3 mm bleed at 300 dpi CMYK, or send a brief and our studio lays it out.',
+    ],
+    useCases: [
+      ['Retail gift & loyalty programs', 'Numbered and barcoded cards tie into POS systems; frosted and foil finishes lift perceived value at the till.'],
+      ['Staff & student ID', 'Photo-panel layouts with barcodes and optional magstripe, shipped in batch order for easy distribution.'],
+      ['Promotional card decks', 'Short-run printed cards for campaigns and events, produced at bulk pricing with fast turnarounds.'],
+    ],
+    extraFaqs: [
+      ['What artwork files do you need?', 'Print-ready PDF/AI at 300 dpi CMYK with 3 mm bleed is ideal. If you only have a logo, our design team prepares proofs for approval at no extra charge.'],
+      ['Which thicknesses are available?', '0.3–1.0 mm. 0.76 mm is the bank-card standard; 0.5 mm suits mailer inserts and 1.0 mm gives a heavyweight premium feel.'],
+    ],
+  },
+  'rfid-nfc-card': {
+    metaDesc: 'Contactless cards across MIFARE Classic/DESFire, NTAG and UHF chips — access, transit and tap-to-share. Security-tiered chip advice and free encoded samples.',
+    intro: [
+      'A contactless card is a chip and etched antenna laminated invisibly inside a printed CR80 body. The chip decision drives everything: MIFARE Classic is the workhorse for door access, DESFire EV-series adds AES security for transit and payment-adjacent schemes, NTAG makes the card phone-readable for tap-to-share, and UHF chips extend range to metres for gate and vehicle scenarios.',
+      'Buyers migrating between systems should note that security expectations have shifted — legacy CRYPTO1-based deployments are increasingly replaced by AES-based DESFire or app-level encoding. We encode diversified keys under NDA, print any artwork on the body, and ship encoded samples so your readers verify the cards before a full run.',
+    ],
+    useCases: [
+      ['Office & residential access', 'MIFARE cards encoded to your access controller, printed with company branding and issued per employee or unit.'],
+      ['Transit & closed-loop payment', 'DESFire cards with AES keys for city cards, campus wallets and fare systems that demand real cryptographic security.'],
+      ['NFC marketing cards', 'NTAG cards that open a URL on any phone tap — for product registration, review collection or membership sign-up.'],
+    ],
+    extraFaqs: [
+      ['Which chip should I specify for security?', 'For simple door access, MIFARE Classic EV1 is fine; for fare, payment or ID schemes choose DESFire EV2/EV3 with AES and diversified keys. We advise per threat model.'],
+      ['Can you match cards to our existing reader fleet?', 'Yes — tell us the reader model or send one sample card; we confirm chip, protocol and encoding before sampling.'],
+    ],
+  },
+  'rfid-epoxy-card': {
+    metaDesc: 'Crystal epoxy RFID tags — printed cores potted in water-resistant resin with keyring holes. Custom shapes from 25 mm, LF/HF/UHF chips, doming logos.',
+    intro: [
+      'Epoxy tags start as a printed, chip-embedded core that we pot in clear resin and cure into a glossy, water-resistant token — smaller and tougher than a card, sized for a keyring. The doming process magnifies the printed artwork, which is why gyms and residential compounds like them: the logo looks embedded in glass.',
+      'They take the same chip menu as full-size cards (EM4200 and T5577 at 125 kHz, MIFARE and NTAG at 13.56 MHz, UHF on request) so they slot into existing access systems as a carry-friendly alternative. Custom die shapes — hearts, mascots, house outlines — need a one-time mold that pays for itself quickly at volume.',
+    ],
+    useCases: [
+      ['Gym & pool membership fobs', 'Waterproof epoxy tokens survive lockers, pockets and poolside use where printed PVC cards delaminate.'],
+      ['Residential access keyrings', 'Compounds issue epoxy tags on keyrings so residents stop forgetting full-size cards.'],
+      ['Branded event tokens', 'Custom-shaped epoxy tags double as collectible keepsakes with live NFC functions.'],
+    ],
+    extraFaqs: [
+      ['How durable is epoxy versus a PVC card?', 'The resin body is effectively waterproof and shrugs off daily keyring abrasion; print stays protected under the dome rather than on the surface.'],
+      ['Is there a tooling charge for custom shapes?', 'Standard rounds and squares ship from stock molds. A custom outline carries a one-time mold fee, quoted with your artwork.'],
+    ],
+  },
+  'project-based-card': {
+    metaDesc: 'Engineered card programs for integrators — custom keys and sector maps under NDA, phased rollouts, TID capture files and full batch traceability from Shenzhen.',
+    intro: [
+      'System integrators and government programs rarely need "a card" — they need a credential engineered to a written spec: exact chip and memory map, diversified keys, personalization data merged from a database, and proof that every unit left the line correct. Our project workflow runs spec review, prototype, pilot batch and mass production as separate approval gates.',
+      'Deliverables go beyond the cards themselves: TID/UID capture files for enrollment, per-batch QC reports, sealed key ceremonies under NDA, and phased shipments aligned to your rollout schedule. If your project mixes technologies — contact plus contactless, or LF plus HF during migration — we engineer hybrid constructions to bridge them.',
+    ],
+    useCases: [
+      ['City & campus one-card programs', 'A single credential spans access, library, canteen and transit sub-systems with sector-level key separation per department.'],
+      ['System migration bridges', 'Hybrid cards carry the legacy chip and the target chip during phased reader replacement, avoiding a big-bang cutover.'],
+      ['Government ID rollouts', 'Controlled personalization with database merges, serialized delivery and documented chain of custody.'],
+    ],
+    extraFaqs: [
+      ['What documentation comes with a project batch?', 'UID/TID lists in your requested format, encoding verification reports, and QC records per batch — plus pre-shipment samples from the actual production run.'],
+      ['Can shipments follow our rollout schedule?', 'Yes — we hold produced stock and release phased shipments to sites on your calendar, common for multi-building or multi-city deployments.'],
+    ],
+  },
+  'wooden-rfid-card': {
+    metaDesc: 'FSC bamboo and wood-veneer RFID cards, laser-engraved or UV-printed, with MIFARE/NTAG chips inside. Natural-grain premium keys for hotels and eco brands.',
+    intro: [
+      'Wooden cards laminate a real bamboo, cherry or sapele veneer over an embedded chip and antenna, so each card carries genuine grain — no two are identical, which brands turn into a feature rather than a flaw. Laser engraving burns crisp permanent logos into the surface; UV print adds color where artwork demands it.',
+      'The veneer is FSC Chain-of-Custody certified, which matters to hotels and retailers reporting on sustainability: the card is a visible, guest-facing proof point rather than a line in a report. Chips are the same MIFARE, NTAG and T5577 options as PVC cards, so wooden keys drop into existing lock and access systems without reader changes.',
+    ],
+    useCases: [
+      ['Eco-certified hotel keys', 'Boutique and green-certified properties replace plastic keys with engraved bamboo cards matched to their existing locks.'],
+      ['Premium membership tiers', 'Clubs issue wood cards for top tiers — the tactile difference from PVC signals status the moment it is handed over.'],
+      ['Sustainable gift cards', 'Retailers run wooden gift cards as limited editions, pairing NFC tap experiences with plantable or recyclable packaging.'],
+    ],
+    extraFaqs: [
+      ['How durable is a wooden card day to day?', 'Sealed veneer handles months of wallet and pocket use. For high-frequency swipe environments we recommend the thicker bamboo build or a protective matte seal.'],
+      ['Will grain variation affect my printed artwork?', 'Engraving works with the grain and always looks intentional; for exact color logos we UV-print a solid panel area. We send photo proofs of real material before production.'],
+    ],
+  },
+  'metal-card': {
+    metaDesc: 'Stainless and brass cards etched, PVD-colored and laser-finished — with hybrid NFC builds that read reliably through metal. VIP, black-card and executive programs.',
+    intro: [
+      'Metal cards are precision-etched from stainless or brass blanks, then finished with PVD coloring — matte black, gold, rose gold — and laser-engraved detail. The weight is the point: at 30–60 g versus a 5 g PVC card, the hand feels the difference before the eye does, which is why black-card programs and luxury brands specify them.',
+      'Adding NFC to metal is a real engineering problem, because a solid metal body shields the antenna. Our hybrid builds solve it with a chip cavity and ferrite isolation layer, or a metal-face/PVC-back sandwich, tuned so phones read the card reliably. Tell us whether your program needs tap function or pure prestige, and we will spec accordingly.',
+    ],
+    useCases: [
+      ['VIP & black-card tiers', 'Banks and clubs issue weighted metal cards for top members — etched numbering, PVD black, delivered in gift boxes.'],
+      ['Executive NFC business cards', 'Hybrid metal cards tap-share contact details, merging the premium object with a digital action.'],
+      ['Luxury brand membership', 'Fashion and hospitality brands use mirror or brushed finishes with engraved personalization per member.'],
+    ],
+    extraFaqs: [
+      ['Why does NFC need a special build in a metal card?', 'Solid metal blocks the 13.56 MHz field. We isolate the antenna with a ferrite layer or hybrid metal/PVC construction so phones and readers still get a clean read.'],
+      ['What weight and thickness should I expect?', 'Typical builds run 0.5–0.8 mm and 30–60 g depending on alloy and cutouts — we send physical samples so stakeholders can feel options before choosing.'],
+    ],
+  },
+  'eco-friendly-card': {
+    metaDesc: 'Recycled PVC, PLA, BIO and FSC-paper RFID cards with the same chips and print quality as standard PVC — material guidance plus certification documents for ESG reporting.',
+    intro: [
+      'Eco cards are a materials decision, and each option trades differently: recycled PVC (rPVC) cuts virgin plastic while keeping full durability; PLA and BIO formulations biodegrade under the right conditions; FSC paper and bamboo suit short-life cards where compostability beats longevity. All take the same chips and print processes as standard PVC, so system compatibility never changes.',
+      'What buyers usually need beyond the card is the paper trail — FSC Chain-of-Custody certificates, material declarations and RoHS/REACH documentation that plug into ESG reports and retail-chain supplier audits. We supply those per order, and can print recycled-content or FSC marks on the card itself where certification terms allow.',
+    ],
+    useCases: [
+      ['Retail loyalty going plastic-free', 'Chains switch loyalty and gift cards to FSC paper or rPVC and print the sustainability story on the card back.'],
+      ['Green-certified hotels', 'Key cards in bamboo or BIO material support LEED and Green Key certification narratives guests can literally hold.'],
+      ['Event credentials with an end-of-life plan', 'Short-use badges and cards in compostable materials avoid the post-event plastic bin.'],
+    ],
+    extraFaqs: [
+      ['Which eco material should my program pick?', 'Match lifetime to material: multi-year credentials → rPVC; 1-year memberships → BIO/PLA; days-to-weeks uses → FSC paper. We send a swatch pack with all of them.'],
+      ['Can you provide certificates for our sustainability audit?', 'Yes — FSC CoC numbers, material data sheets and RoHS/REACH declarations ship with the order, ready for retailer or ESG audit files.'],
+    ],
+  },
+  'nfc-business-card': {
+    metaDesc: 'NFC business cards on NTAG213/215/216 in PVC, metal or wood — tap opens your profile on any phone, no app. Team rollouts with per-person encoding and redirect URLs.',
+    intro: [
+      'An NFC business card encodes an NDEF record — usually a URL to your profile, booking page or vCard — on an NTAG chip that any modern iPhone or Android reads with a tap, no app installed. NTAG213 covers a simple link; 215 and 216 add memory for richer offline vCards. The smart move is encoding a redirect URL you control, so the destination updates without re-issuing cards.',
+      'For teams we handle per-person encoding from a spreadsheet: each card gets its member’s link plus printed name, in one production run. Bodies range from printed PVC through laser-engraved wood to hybrid metal — the material choice is a positioning decision, since the card is often the first physical object a prospect receives from you.',
+    ],
+    useCases: [
+      ['Sales team enablement', 'Every rep taps to share a tracked profile link; marketing updates destinations centrally as campaigns change.'],
+      ['Executive metal cards', 'Leadership carries engraved hybrid-metal NFC cards that pair prestige with a live digital action.'],
+      ['Real-estate & field services', 'Agents tap to open listing pages or booking calendars at the door, converting conversations on the spot.'],
+    ],
+    extraFaqs: [
+      ['Which phones can read the card?', 'Any NFC-enabled phone — iPhone 7 and later read NTAG tags natively (iOS 14+ without any app), as do effectively all modern Androids.'],
+      ['How do team orders with individual data work?', 'Send a sheet of names and URLs; we encode and print each card to its person, QC-scan every unit, and label the batch for easy distribution.'],
+    ],
+  },
+  'dual-frequency-card': {
+    metaDesc: 'Dual-frequency cards embedding two chips — LF+HF or HF+UHF — with antennas tuned to avoid detuning. One credential across access, gates and legacy systems.',
+    intro: [
+      'A dual-frequency card laminates two complete chip-and-antenna systems into one CR80 body — for example T5577 at 125 kHz beside MIFARE at 13.56 MHz, or MIFARE beside a UHF chip for long-range gates. The engineering is in the antenna layout: the two circuits must be positioned and tuned so neither detunes the other, which we verify with read-range testing on every design.',
+      'Programs choose dual cards for two reasons. Migrations: staff carry one card while old LF readers are phased out for HF. Or multi-system estates: tap access at doors (HF) plus drive-through identification at car parks (UHF) without carrying two credentials. Tell us both reader systems and we will pair the right chips.',
+    ],
+    useCases: [
+      ['Phased reader migration', 'One card works legacy 125 kHz doors and new MIFARE readers simultaneously, so replacement proceeds building by building.'],
+      ['Campus + parking estates', 'HF handles doors and payments while the UHF side opens vehicle barriers from several metres.'],
+      ['Multi-tenant facilities', 'A single credential spans different landlords’ systems that were never designed to interoperate.'],
+    ],
+    extraFaqs: [
+      ['Do the two chips interfere with each other?', 'Not in a properly engineered card — antenna geometry and tuning are designed together and verified by range testing. We ship samples for testing on both your systems.'],
+      ['Can each chip be encoded separately?', 'Yes — each side is encoded independently (e.g. site codes on LF, diversified keys on HF/UHF), exactly as if they were two cards.'],
+    ],
+  },
+  'magnetic-stripe-card': {
+    metaDesc: 'HiCo 2750/4000 Oe and LoCo magstripe cards encoded to ISO 7811 — tracks 1/2/3, hybrid swipe-plus-tap builds and full personalization from one Shenzhen line.',
+    intro: [
+      'Magstripe remains the cheapest machine-readable card technology, and for swipe-reader estates it is still the right answer. We laminate the stripe into the card (not stick it on), encode tracks 1/2/3 to ISO 7811, and verify every card on the line. HiCo (2750 or 4000 Oe) resists accidental erasure for daily-use cards; LoCo suits short-life hotel keys and promotions.',
+      'Many buyers are mid-transition, which is where hybrid builds earn their keep: one card carrying an encoded magstripe plus a contactless chip lets old swipe readers and new tap readers coexist during upgrades. Signature panels, sequential numbering, barcodes and embossing complete the classic bank-card feature set.',
+    ],
+    useCases: [
+      ['Membership & gift programs on legacy POS', 'Track-2 encoded cards run on existing swipe hardware without any system change.'],
+      ['Hotels on magstripe locks', 'LoCo keys at low unit cost, encoded and boxed per property standard.'],
+      ['Swipe-to-tap transitions', 'Hybrid stripe+RFID cards bridge the years where both reader generations coexist.'],
+    ],
+    extraFaqs: [
+      ['What data format do you encode on the stripe?', 'Any ISO 7811 track layout — send your track specification or a sample card and we replicate it exactly, verified card by card.'],
+      ['How long does an encoded stripe last?', 'HiCo stripes withstand thousands of swipes and casual magnet exposure; LoCo is rated for lighter duty. We advise per daily swipe count.'],
+    ],
+  },
+  'scratch-card': {
+    metaDesc: 'Secure PVC and paper scratch cards — variable PINs under silver/gold panels, encrypted code files, tamper-evident panels for top-up, gaming and promotions.',
+    intro: [
+      'A scratch card program is a data-security exercise wrapped in print. We generate or import unique PINs, print them as variable data, then apply the scratch panel over the top — with the code file exchanged encrypted, purged after production, and never reused across batches. The panel itself is tamper-evident: once scratched, there is no hiding it.',
+      'Construction choices follow the use: PVC bodies for retail rack durability and premium promotions, coated paper for high-volume top-up cards where unit cost rules. Silver or gold panels, serial numbers, barcodes for activation scans and full CMYK branding are standard options on both.',
+    ],
+    useCases: [
+      ['Telecom top-up', 'High-volume paper scratch cards with encrypted PIN files delivered straight to the operator’s activation system.'],
+      ['Retail promotions & instant-win', 'Branded PVC cards with prize codes under the panel drive footfall and social campaigns.'],
+      ['Gaming & gift codes', 'Serialized cards with activation barcodes tie physical retail sales to digital redemption.'],
+    ],
+    extraFaqs: [
+      ['How are the secret codes handled securely?', 'Codes are exchanged as encrypted files, live only in the production system during printing, are verified against duplicates, and are purged after delivery confirmation.'],
+      ['PVC or paper — which should we order?', 'Paper wins on cost for single-use top-ups; PVC survives retail display racks and suits premium campaigns. We quote both from the same artwork on request.'],
+    ],
+  },
+
+  'nfc-printed-label': {
+    metaDesc: 'CMYK-printed NFC labels encoded and locked on the converting line — NTAG and ICODE chips, tamper-void faces, Ø25–40 mm die-cuts for packaging and campaigns.',
+    intro: [
+      'Printed NFC labels come off our line as a finished product: face artwork printed, chip encoded with your URL or NDEF record, data locked if required, and every label read-verified before winding. That single-pass process matters at campaign scale — ten thousand stickers that each open the right link, without your team touching an encoder.',
+      'Anti-counterfeit programs add tamper features: fragile paper faces that shred on peeling, or tamper-loop inlays that flip a status flag when opened, so a scan can tell an intact seal from a resealed one. Size drives read behavior — Ø25 mm reads at a phone-touch, Ø38–40 mm gives more forgiveness on curved packaging.',
+    ],
+    useCases: [
+      ['Product authentication', 'Brands seal cartons with tamper NFC labels; customers verify authenticity with a tap that also registers the product.'],
+      ['Smart packaging campaigns', 'A tap on-pack opens recipes, refill orders or loyalty sign-up — measurable engagement from shelf to phone.'],
+      ['Fixed asset ID', 'Printed asset labels carry both a visible barcode and a tap-readable NFC record for audits.'],
+    ],
+    extraFaqs: [
+      ['Do you have on-metal NFC label versions?', 'Yes — ferrite-backed constructions read reliably on metal housings and equipment, at slightly larger sizes.'],
+      ['What size should we choose for curved bottles?', 'Ø38 mm or larger keeps the antenna flat enough to read consistently on tight curves; we send size samples to test on your actual packaging.'],
+    ],
+  },
+  'rfid-dry-inlay': {
+    metaDesc: 'HF and UHF dry inlays — etched aluminum antennas with NXP, Impinj and EM chips on reel, custom pitch and web width for converters and laminators.',
+    intro: [
+      'A dry inlay is the naked RFID engine: chip flip-bonded onto an etched aluminum antenna on PET, wound on reels with no adhesive layer. Converters laminate them into tickets, cards, baggage tags and their own label constructions — which is why the specs that matter here are converting specs: web width, pitch, core diameter, wind direction and liner behavior in your machine.',
+      'We match antenna designs to the chip and the end application — ICODE and NTAG for HF ticketing, UCODE and Monza families for UHF logistics — and supply TID lists where your process needs pre-association. Trial reels ship first so your line proves out lamination temperature and registration before volume.',
+    ],
+    useCases: [
+      ['Ticket converting', 'HF inlays laminated into transit and event tickets on the converter’s own paper stock.'],
+      ['Card lamination', 'Inlays sized for CR80 sheets feed card makers producing contactless cards in their own facility.'],
+      ['Composite label construction', 'Label houses sandwich dry inlays into branded multi-layer constructions with their choice of face and adhesive.'],
+    ],
+    extraFaqs: [
+      ['What reel specifications can you supply?', 'Custom pitch, web width, core size and wind direction to match your applicator or laminator — send your machine spec and we cut reels to it.'],
+      ['Can you deliver TID data with the reels?', 'Yes — TID capture files per reel in CSV or your format, so pre-association and serialization start before the reels arrive.'],
+    ],
+  },
+  'rfid-wet-inlay': {
+    metaDesc: 'Adhesive-backed wet inlays with Monza/M7xx and UCODE chips — peel-and-stick item tagging, tested adhesion on cartons, plastics and glass, 1–8 m UHF reads.',
+    intro: [
+      'Wet inlays add a pressure-sensitive acrylic adhesive and liner to the inlay core, turning it into a peel-and-stick tag ready for item-level work. They are the fastest route from box-of-tags to tagged-inventory: no printing step required, applied by hand or automatic applicator straight onto products, cartons or fixtures.',
+      'Adhesion is the spec buyers overlook — the same inlay behaves differently on corrugate, HDPE and glass, so we test our adhesive builds across surface types and supply application guidance (surface energy, minimum application temperature). Chips run the Impinj Monza/M700 and NXP UCODE ranges, pre-encoded and serialized on request.',
+    ],
+    useCases: [
+      ['Retail item tagging', 'Stores tag existing stock directly with clear wet inlays, enabling RFID stocktakes without relabeling.'],
+      ['Returnable asset tracking', 'Crates and totes get durable wet inlays that survive wash-down logistics loops.'],
+      ['Library & media', 'Clear HF wet inlays apply invisibly inside covers for circulation and security.'],
+    ],
+    extraFaqs: [
+      ['Will the adhesive hold on our specific surface?', 'Send us the surface (or a sample) — we match permanent, high-tack or low-surface-energy adhesive builds and confirm with test pieces before you order volume.'],
+      ['Can wet inlays arrive pre-encoded?', 'Yes — EPC schemes with serialization, verified on-line, plus a data file mapping EPC to reel position for your receiving system.'],
+    ],
+  },
+  'rfid-white-label': {
+    metaDesc: 'Printable white RFID labels for Zebra, SATO and Postek RFID printers — coated faces, calibrated inlay placement, blank or pre-encoded rolls, HF and UHF.',
+    intro: [
+      'White labels are the print-your-own workflow: a coated, thermal-transfer-printable face over an RFID inlay, wound for desktop and industrial RFID printers. The engineering detail that decides success is inlay placement — the chip position must match your printer’s encode antenna, so we manufacture placement to the printer model you name and test rolls on matching hardware.',
+      'Operations choose between two workflows: blank rolls encoded at print time by your printer, or pre-encoded rolls where the printer only prints — the second removes encode-failure stops on busy lines. Either way, faces take barcodes, text and logos crisply at 203–300 dpi with standard resin or wax-resin ribbons.',
+    ],
+    useCases: [
+      ['Warehouse label stations', 'Teams print location and case labels on demand, with RFID encoded in the same pass.'],
+      ['Retail back-room tagging', 'Stores print price/SKU labels that are simultaneously RFID stock tags.'],
+      ['Work-in-progress tracking', 'Factories print travel labels per order; readers track jobs between stations automatically.'],
+    ],
+    extraFaqs: [
+      ['Which printers are your rolls matched to?', 'Zebra ZD/ZT RFID series, SATO CL4/6NX and Postek models among others — name yours and we set inlay pitch and placement for it, with a test roll first.'],
+      ['What printer settings should we start with?', 'We ship a settings sheet per order — ribbon type, darkness, print speed and RFID calibration steps — so the first roll runs clean rather than by trial and error.'],
+    ],
+  },
+  'uhf-rfid-label': {
+    metaDesc: 'UHF smart labels on M730/M750 and UCODE 9 inlays, band-tuned for EU/US, SGTIN serialization for retail programs — bulk reads at metres, printed on demand.',
+    intro: [
+      'UHF labels are the workhorse of item-level retail and supply-chain visibility: an 860–960 MHz inlay under a printable face, read in bulk at dock doors and by handheld sweeps metres away. Chip generation matters — Impinj M730/M750 and NXP UCODE 9 read faster and further at smaller antenna sizes than older silicon, which shrinks label footprints on packaging.',
+      'Two program-level details we handle up front: band tuning (ETSI 866 MHz vs FCC 915 MHz antennas behave differently — global programs need broadband designs) and serialization (SGTIN-96 EPC schemes generated from your GS1 prefix, guaranteed duplicate-free across orders). Both are locked before the first production roll.',
+    ],
+    useCases: [
+      ['Retail apparel compliance', 'Suppliers tag garments to retailer RFID mandates with serialized EPCs and audit documentation.'],
+      ['Carton & pallet logistics', 'Dock-door portals read whole pallets without line-of-sight, closing the gap between shipped and received.'],
+      ['High-volume inventory', 'Weekly full-store or full-warehouse counts become an hours-long handheld sweep.'],
+    ],
+    extraFaqs: [
+      ['Do we need different labels for Europe and the US?', 'Single-region programs get band-optimized antennas; global supply chains get broadband inlays that perform acceptably across 860–960 MHz. Tell us the read geography and we spec accordingly.'],
+      ['Can you manage EPC serialization for us?', 'Yes — send your GS1 company prefix and SKU list; we generate SGTIN-96 EPCs, encode and verify them, and deliver the allocation file for your systems.'],
+    ],
+  },
+
+  'rfid-animal-tag': {
+    metaDesc: 'ISO 11784/85 FDX-B ear tags in flexible TPU — EM4305/Hitag chips, applicator-compatible, laser-numbered, IP68 for livestock traceability programs.',
+    intro: [
+      'Animal ear tags live outdoors on a moving animal for years, so the engineering targets are bite resistance, UV stability and retention — soft TPU that flexes instead of tearing, a stainless tip that pierces cleanly, and a locking cup that stays closed. Chips are LF 134.2 kHz FDX-B (ISO 11784/11785), the standard national traceability schemes read.',
+      'Programs usually pair the electronic ID with management data printed on the flag: laser-etched visual numbers, farm codes and barcodes that survive sun and mud. Tags fit standard universal applicators — tell us your applicator brand or order ours together with the tags — and we supply the EID number files for your herd software.',
+    ],
+    useCases: [
+      ['National livestock traceability', 'FDX-B tags enroll cattle and sheep in government ID schemes, readable by any ISO-compliant stick reader.'],
+      ['Dairy herd management', 'EID tags tie each animal to milking, feeding and health records automatically at the parlor.'],
+      ['Racing & breeding ID', 'Pigeon rings and small-animal tags carry chip ID for event timing and pedigree records.'],
+    ],
+    extraFaqs: [
+      ['Do the tags work with our existing applicator?', 'Our tags fit standard universal applicators; name your model and we confirm, or include matched applicators with the order.'],
+      ['Can you supply the EID numbers as a file?', 'Yes — every shipment includes a CSV of chip numbers matched to printed visual numbers, ready to import into herd-management software.'],
+    ],
+  },
+  'rfid-anti-metal-tag': {
+    metaDesc: 'On-metal RFID tags with ferrite isolation — FR4, ceramic and flexible builds reading 1–6 m on steel, IP67, -40 to 85 °C, adhesive or screw mount.',
+    intro: [
+      'Ordinary RFID tags fail on metal because the surface reflects the field and detunes the antenna. Anti-metal tags fix the physics with an isolation layer — ferrite or engineered foam — between antenna and surface, turning the metal from an enemy into a reflector that can actually extend range. On-metal UHF reads of 1–6 m are routine with the right size.',
+      'Housing choice follows the environment: FR4 (PCB) tags for general assets, ceramic for small tools and high heat, flexible on-metal labels where thickness matters, and heavy ABS blocks with screw mounts for outdoor plant. All are IP67-rated and temperature-stable from -40 to 85 °C in standard builds.',
+    ],
+    useCases: [
+      ['IT asset management', 'Servers and laptops carry slim on-metal labels; audits become a doorway scan instead of a serial-number hunt.'],
+      ['Tool crib control', 'Ceramic tags on hand tools survive impact and oil while enabling automated check-in/out.'],
+      ['Heavy equipment & fleet', 'Screw-mounted tags identify machines, skips and vehicles across yards and sites.'],
+    ],
+    extraFaqs: [
+      ['Why do standard labels stop working on metal?', 'Metal reflects the RF field and detunes a normal antenna to near-zero range. Anti-metal builds insert a ferrite/absorber layer engineered for the surface, restoring reliable reads.'],
+      ['How do I trade size against read range?', 'Bigger tag, longer range — roughly: 25 mm ceramic ≈ 1–2 m, 50–80 mm FR4 ≈ 3–6 m on metal. Tell us the required range and mounting space; we pick the smallest tag that meets it.'],
+    ],
+  },
+  'rfid-keyfob': {
+    metaDesc: 'ABS RFID keyfobs, ultrasonically welded and waterproof — EM4200, T5577, MIFARE and NTAG chips, laser numbering, custom colors and molded logos.',
+    intro: [
+      'The keyfob is access control’s most-carried form factor: an ABS shell around a chip and coil, ultrasonically welded shut so daily keyring life — drops, rain, pockets — cannot get in. Chip choice mirrors card systems exactly (EM4200 read-only LF, T5577 rewritable LF, MIFARE and NTAG at 13.56 MHz), so fobs and cards mix freely in one system.',
+      'Fleet management is where options matter: laser-engraved sequential numbers tie each fob to a unit or member without a printed label to wear off; color-coded shells separate buildings or membership tiers at a glance; molded custom shapes carry brands. For gyms and pools the sealed build outlasts laminated cards several times over.',
+    ],
+    useCases: [
+      ['Apartment & compound access', 'Color-coded, numbered fobs issued per unit make lost-fob replacement and auditing painless.'],
+      ['Gyms & leisure clubs', 'Waterproof fobs on members’ keyrings survive lockers and poolside where cards fail.'],
+      ['Time & attendance', 'Staff badge in with fobs on existing readers, numbered against the HR roster.'],
+    ],
+    extraFaqs: [
+      ['Can fobs be cloned — should we worry?', 'Basic EM4200/T5577 fobs are copyable; if that is a risk, specify MIFARE with diversified keys or DESFire and we encode securely under NDA.'],
+      ['What identification options exist per fob?', 'Laser sequential numbering, printed logos, color-coded shells, and a CSV mapping chip UID to engraved number for your access software.'],
+    ],
+  },
+  'rfid-wristband': {
+    metaDesc: 'RFID wristbands across silicone, woven fabric and Tyvek — event access, cashless and waterparks, one encoding line from single-use to premium reusable.',
+    intro: [
+      'This is the umbrella range: one encoding and QC line behind three material families. Tyvek paper bands are the single-use economy option with adhesive locks; woven fabric with sliding closures is the festival standard — comfortable for days, hard to transfer; molded silicone is the reusable, waterproof workhorse for venues and waterparks. Chips (MIFARE, NTAG, ICODE, UHF) drop into any of them.',
+      'Choosing between them is a cost-per-wear calculation we help run: a season pass belongs in silicone, a three-day festival in fabric, a one-night show in Tyvek. Mixed orders are common — VIP fabric plus GA Tyvek under one artwork system — and all bands ship encoded, numbered and match-listed for your access platform.',
+    ],
+    useCases: [
+      ['Festival access tiers', 'Fabric bands for multi-day passes, Tyvek for day tickets — one visual identity, one data format.'],
+      ['Waterpark & resort', 'Silicone bands open lockers and rooms and carry cashless credit through water and sun.'],
+      ['Conference & expo', 'Branded bands double as credentials and session-tracking tags at entrances.'],
+    ],
+    extraFaqs: [
+      ['Can one event order mix band materials?', 'Yes — shared artwork across Tyvek, fabric and silicone with tier-specific colors, all encoded into the same access system and delivered sorted by tier.'],
+      ['How do bands arrive for gate-day logistics?', 'Encoded, sequentially numbered, and boxed in labeled batches with a UID manifest — so distribution points hand out bands without any on-site pairing step.'],
+    ],
+  },
+  'special-rfid-tags': {
+    metaDesc: 'Custom-engineered RFID tags — nursery tree nails, 6 mm micro tags, PCB builds and one-off formats. Feasibility check, tooling quote and pilot runs from Shenzhen.',
+    intro: [
+      'When the standard catalog does not fit the object or the environment, we engineer the tag: nail tags hammered into tree trunks for nursery stock, micro tags a few millimetres across for instruments, PCB tags shaped around a housing, chemical-resistant builds for process industries. The constraint set — size, surface, temperature, range, attachment — defines the design.',
+      'The path is fixed and low-risk: feasibility review of your constraints, a tooling/sample quote, engineered prototypes tested against your readers, then a pilot batch before volume. One-time tooling typically amortizes within the first production run at four-figure quantities; below that we adapt the closest standard format instead.',
+    ],
+    useCases: [
+      ['Horticulture & forestry', 'Nail and stake tags identify trees and nursery stock through years of weather.'],
+      ['Instrument & electronics ID', 'Micro tags embed into tools and devices where label space does not exist.'],
+      ['Process-industry assets', 'Chemical- and heat-resistant builds track items through hostile production steps.'],
+    ],
+    extraFaqs: [
+      ['What does the custom engineering process look like?', 'Constraints review → feasibility answer within days → sample/tooling quote → prototypes for your testing → pilot batch → volume. You approve at every gate.'],
+      ['When is custom tooling worth it?', 'Roughly from 5,000+ units, tooling cost per unit becomes negligible. Below that we usually modify a standard tag — same function, no tooling fee.'],
+    ],
+  },
+  'rfid-laundry-tag': {
+    metaDesc: 'PPS and silicone laundry tags rated 200+ industrial wash cycles and 200 °C pressing — UHF bulk counting for hotel linen, hospital textiles and uniform rental.',
+    intro: [
+      'Industrial laundry is one of RFID’s harshest duty cycles: 60–90 °C washes with aggressive chemistry, tumble drying, and pressing that spikes past 180 °C — repeated hundreds of times. Laundry tags survive it by sealing the chip in PPS resin or medical-grade silicone, builds we rate conservatively at 200+ full cycles and verify with accelerated wash testing.',
+      'Attachment decides workflow fit: sewn into a hem pouch for linen, heat-sealed patches for garments that cannot show a tag, or hang-stitched for speed. UHF chips let a laundry count a full trolley in one pass — the operational win that pays for the program — while HF versions suit item-check stations. We advise per your sorting layout.',
+    ],
+    useCases: [
+      ['Hotel linen circulation', 'Every sheet and towel is counted in and out by trolley pass, ending count disputes with the laundry.'],
+      ['Hospital textile control', 'Tags survive thermal disinfection while tracking scrubs and bedding through sterile workflows.'],
+      ['Uniform rental billing', 'Rental firms bill per verified wash cycle, with wear history per garment.'],
+    ],
+    extraFaqs: [
+      ['How are the tags attached to textiles?', 'Sewn hem pouches (linen), heat-seal patches (garments) or hang stitching (speed). We send attachment samples so your seamstress line tests all three.'],
+      ['Do the tags withstand our wash chemistry?', 'PPS builds resist standard industrial detergents, bleach dosing and 200 °C pressing. Share your chemical process for confirmation against the material data sheet.'],
+    ],
+  },
+  'nfc-dog-tag': {
+    metaDesc: 'NFC pet ID tags in epoxy or engraved metal — a finder’s phone tap opens the owner profile, no app or reader. Bone and round shapes, waterproof, pet-brand OEM.',
+    intro: [
+      'An NFC pet tag closes the loop that a phone-number engraving cannot: whoever finds the animal taps the tag with any phone and lands on a live profile — owner contacts, medical notes, reward message — which the owner updates anytime without re-engraving anything. The chip is a standard NTAG encoded with the profile URL, potted in epoxy or set into a metal tag.',
+      'For pet brands we run OEM programs: custom shapes and colors, engraved branding, and per-tag unique URLs pointing at the brand’s own profile platform — each tag pre-linked and QC-tapped before packing. Builds are waterproof for daily collar wear and sized from cat-small to large-breed.',
+    ],
+    useCases: [
+      ['Lost-pet recovery', 'A finder taps and calls within a minute — no vet-office chip scanner needed, unlike implanted microchips.'],
+      ['Vet & clinic programs', 'Clinics issue tags linking to vaccination and medical records kept current online.'],
+      ['Pet-brand product lines', 'Brands sell NFC tags tied to their own app or profile service, manufactured and pre-encoded by us.'],
+    ],
+    extraFaqs: [
+      ['How is this different from an implanted microchip?', 'Implants need a vet’s scanner; this tag is read by any smartphone. They complement each other — the visible tag gets fast street-level recovery, the implant proves ownership.'],
+      ['Can we brand the tags for our pet business?', 'Yes — custom shapes, engraved logos and per-tag URLs to your platform, delivered pre-encoded with a manifest mapping tag to URL.'],
+    ],
+  },
+  'rfid-jewelry-tag': {
+    metaDesc: 'Barbell UHF jewelry tags from 45×10 mm — thousand-item stocktakes in minutes, printable price/barcode face, dense-stock read tuning for jewelers.',
+    intro: [
+      'Jewelry inventory is high value, tiny items, and hundreds of near-identical SKUs in a metre of tray — the exact scenario barcodes handle worst. A barbell tag loops its slim antenna tail around a ring shank or chain, keeps the printable face out where staff read prices, and lets a handheld UHF sweep count an entire showcase in seconds.',
+      'Dense-tag environments have real RF physics to manage: hundreds of tags in near-contact shadow each other. Our jewelry inlays and read guidance (tray materials, antenna sweep pattern, reader power) come from deployments where full-store counts dropped from a closed-doors day to a before-opening routine.',
+    ],
+    useCases: [
+      ['Daily showcase reconciliation', 'Morning and evening sweeps verify every piece against the register in minutes, shrinking loss windows to hours.'],
+      ['Full-store audits', 'Quarterly counts of tens of thousands of pieces finish before opening instead of closing the store.'],
+      ['Consignment tracking', 'Pieces moving between branches and consignors carry their identity and paper trail on the tag.'],
+    ],
+    extraFaqs: [
+      ['Does the tag damage or mark the jewelry?', 'No — the tail loops without adhesive on the piece and tears off cleanly at sale. Residue-free removal is part of the tag design.'],
+      ['Reads are unreliable in packed trays — can that be fixed?', 'Yes, mostly by technique: tray spacing inserts, correct sweep angles and tuned reader power. We supply a read-optimization sheet with every first order.'],
+    ],
+  },
+  'rfid-library-tag': {
+    metaDesc: 'ISO 15693 ICODE SLIX library labels with AFI/EAS security — self-checkout, shelf inventory and gate alarm in one 50×50 mm tag, retro-tagging support.',
+    intro: [
+      'Library tags standardize on HF ISO 15693 with ICODE SLIX chips because the ecosystem does: self-checkout kiosks, staff pads, inventory wands and security gates from the major library platforms all speak it. One 50×50 mm label inside the cover carries the item ID for circulation, the AFI/EAS flags for gate security, and enough memory for the data model your LMS uses.',
+      'Most orders are conversion projects — an existing collection of tens of thousands of items being retro-tagged. We support them with pre-encoded tags matched to your barcode file (tag maps to existing accession number), tagging-station workflow advice, and special formats for problem items: hub labels for DVDs/CDs and slim tags for thin periodicals.',
+    ],
+    useCases: [
+      ['Self-service circulation', 'Patrons stack books on a kiosk pad; all check out in one read, with security flags cleared in the same transaction.'],
+      ['Shelf inventory & misplaced-item hunts', 'A wand sweep along shelves finds miss-shelved and missing items that a barcode audit would never catch.'],
+      ['Gate security', 'EAS flags set on checkout trip the gates only for items that never passed the kiosk.'],
+    ],
+    extraFaqs: [
+      ['Can tags arrive matched to our existing barcodes?', 'Yes — send the accession/barcode file and we pre-encode each tag to its number, so retro-tagging is stick-and-scan-verify rather than encode-at-the-shelf.'],
+      ['What about DVDs, CDs and thin magazines?', 'Hub labels sit in the disc center without unbalancing it; slim narrow tags handle periodicals. Both run the same ISO 15693 standard as the book tags.'],
+    ],
+  },
+  'uhf-windshield-tag': {
+    metaDesc: 'On-glass tuned UHF windshield tags reading 6–10 m at lane speed — tamper-void on removal, for parking, gated estates, tolling and fleet yards.',
+    intro: [
+      'A windshield tag is tuned for one specific situation: antenna against glass, read from a lane-side or gantry reader while the vehicle moves. On-glass tuning matters — glass shifts antenna resonance, so a generic label stuck to a windscreen loses most of its range. Ours are designed against glass and deliver 6–10 m reliably at barrier speeds.',
+      'Because the tag is a credential, anti-transfer is built in: fragile substrates delaminate on any peeling attempt, killing the antenna, so a tag cannot migrate to an unauthorized vehicle. One caveat we flag honestly: metallized/athermic windscreens block UHF — those vehicles need the headlamp-mount variant instead, which we supply in the same program.',
+    ],
+    useCases: [
+      ['Residential & office parking', 'Barriers open hands-free for registered vehicles; guest and resident tags carry different access classes.'],
+      ['Fleet yard automation', 'Gates log every entry/exit by vehicle automatically, replacing gatehouse clipboards.'],
+      ['Campus & airport permits', 'Annual permits become electronically verifiable at speed, with expired tags flagged at the lane.'],
+    ],
+    extraFaqs: [
+      ['Our vehicles have athermic (metallized) windscreens — will tags work?', 'Standard tags will not read through metallized glass. Check for the dotted mounting window near the mirror, or use our headlamp-mounted variant, which reads off the lamp housing instead.'],
+      ['How do we enroll hundreds of vehicles efficiently?', 'Tags ship with printed IDs and a UID manifest; fleet admins match tag to plate in a spreadsheet and bulk-import to the barrier system — no per-vehicle encoding step.'],
+    ],
+  },
+  'high-temperature-rfid-tag': {
+    metaDesc: 'High-temp RFID in PPS, ceramic and FR4 — rated to 230–260 °C for paint lines, autoclaves and industrial laundry, with mounting and cycle-life guidance.',
+    intro: [
+      'Standard RFID dies quietly somewhere above 85 °C; these tags are engineered for processes that live far beyond it. PPS handles 200–230 °C with chemical resistance (laundry, sterilization), ceramic packages push to 260 °C peaks and shrug off paint-oven cycles, and high-Tg FR4 covers the economical middle. The rating that matters is cyclic, not single-shot — we spec against your repeated profile.',
+      'Placement engineering is half the solution: mounting distance from hottest surfaces, screw versus high-temp adhesive versus embedding, and read-window planning where racks shield tags in ovens. Send your process profile — peak temperature, dwell time, cycles per part — and we return a tag choice with expected service life rather than a bare datasheet number.',
+    ],
+    useCases: [
+      ['Automotive paint shops', 'Skid and body tags ride through e-coat and paint ovens, keeping body-to-order identity across the hottest zone of the plant.'],
+      ['Autoclave sterilization', 'Instrument trays and textile packs are tracked through 134 °C steam cycles with full audit history.'],
+      ['Bakery & food process racks', 'Rack tags survive oven cycles to automate throughput counting and rotation.'],
+    ],
+    extraFaqs: [
+      ['How many heat cycles will a tag actually survive?', 'PPS builds run thousands of 200 °C-class cycles; ceramic extends both temperature and cycle life. Give us peak temp, dwell and cycle count and we quote expected service life for the recommended model.'],
+      ['How should tags be attached in hot processes?', 'Above adhesive limits (~150–200 °C with specialty tapes), specify screw/rivet mounts or embedding. We supply mounting hardware and placement guidance per process.'],
+    ],
+  },
+  'rfid-seal-tag': {
+    metaDesc: 'One-time-lock RFID cable seals — nylon tie with NTAG/UCODE chip head, unique IDs for container, meter and extinguisher audit trails, 200–360 mm.',
+    intro: [
+      'A seal tag welds two functions into one disposable part: a self-locking nylon tie that shows physical tampering, and an RFID chip carrying a unique, unclonable serial — so every sealing event becomes a database record. Cut it off and the removal is obvious; scan it and you know exactly which seal, applied when, by whom.',
+      'The chip choice follows the audit workflow: NFC heads let field inspectors log checks with a phone tap (extinguishers, meters, first-aid cabinets), while UHF heads let a gate reader verify container and cage seals in bulk without stopping the trolley. Pull strengths and tie lengths are speced to the asset — from cabinet handles to shipping-container hasps.',
+    ],
+    useCases: [
+      ['Fire-extinguisher inspection rounds', 'Each inspection re-seals with a new tag; a phone tap logs date, inspector and unit into the compliance record.'],
+      ['Logistics cage & container sealing', 'Dock readers verify intact, expected seals in seconds and alarm on mismatches.'],
+      ['Utility meter integrity', 'Sealed meters carry tamper history; any break is evident physically and by missing scan continuity.'],
+    ],
+    extraFaqs: [
+      ['What pull strength do the ties provide?', 'Standard nylon builds hold 20–50 kg depending on width; they are tamper-evident seals, not security locks — the evidence trail, not brute resistance, is the control.'],
+      ['How do inspectors use the NFC head in practice?', 'A phone tap reads the seal’s unique ID into your inspection app or ours; the app logs GPS, time and inspector, building the audit trail with zero extra hardware.'],
+    ],
+  },
+  'rfid-silicone-wristband': {
+    metaDesc: 'Molded silicone RFID wristbands — IP68 waterproof, reusable for years, embossed or printed branding, sized adult/child, cashless and access encoding.',
+    intro: [
+      'Silicone bands are the durability end of the wristband family: one molded piece with the chip pod sealed inside, no seams, no closure to break, fully waterproof. They survive daily chlorine, sun cream and dishwasher-style cleaning for years — which flips the economics for venues: a band that costs more per unit but issues hundreds of times beats disposables within a season.',
+      'Branding is molded in, not stuck on: embossed or debossed logos survive where prints eventually wear, and dual-color molding adds contrast. Sizing matters more than buyers expect — we supply adult and child circumferences plus adjustable-stud versions, and encode any chip (MIFARE, NTAG, ICODE, UHF) to your access or payment platform.',
+    ],
+    useCases: [
+      ['Waterparks & pools', 'Bands open lockers, gates and cashless wallets through a full season of water exposure.'],
+      ['Gyms & spas', 'Members keep one band for the year — access, locker and payment in one wearable.'],
+      ['Cruise & resort wearables', 'Cabin key, boarding identity and onboard spending ride one branded band.'],
+    ],
+    extraFaqs: [
+      ['Embossed or printed logos — which lasts?', 'Embossed/debossed molding is permanent; printing offers finer detail but wears over heavy use. Many brands combine both — molded logo, printed accent.'],
+      ['How do we handle band hygiene between users?', 'Silicone tolerates disinfectant dips and machine washing; we provide cleaning-compatibility notes so rental/reissue workflows keep bands in service for years.'],
+    ],
+  },
+  'disposable-paper-wristband': {
+    metaDesc: 'Tyvek RFID wristbands with one-time adhesive locks — full-color printed, sequentially numbered, the lowest cost-per-guest credential for events and day passes.',
+    intro: [
+      'Tyvek bands are event logistics distilled: tear-resistant paper, full-color branding, an adhesive tab that locks once and shreds on removal, and an RFID chip that turns the cheapest credential in the building into a gate-speed access token. At high volumes the unit cost sits close to plain printed bands while adding electronic validation.',
+      'The operational details are what we optimize: sequential numbering and UID manifests so boxes map to ticket tiers, perforated stub options for manual backup, and gate-throughput advice (NFC vs UHF chip choice changes reader layout). For one-day and weekend events this is almost always the right band; longer wear favors fabric or silicone.',
+    ],
+    useCases: [
+      ['Concerts & day festivals', 'Gate staff validate by tap instead of eyeballing colors; counterfeit bands die instantly.'],
+      ['Theme-park day passes', 'Bands carry entitlements (rides, meal deals) checked at each point without paper tickets.'],
+      ['Charity runs & fairs', 'Numbered bands double as entry credential and finish-line/attendance record.'],
+    ],
+    extraFaqs: [
+      ['How fast can you deliver for a fixed event date?', 'Standard art-to-door runs 7–12 days plus shipping; express production for deadline events is available — tell us the event date and we plan backwards from it.'],
+      ['NFC or UHF chips for our gates?', 'NFC (tap) suits controlled entry lanes and payments; UHF enables walk-through and crowd-flow reads with portal antennas. Gate layout decides — send yours and we advise.'],
+    ],
+  },
+
+  'rfid-blocking-card': {
+    metaDesc: 'RFID blocking cards — passive shield or active E-field jamming versions that protect a whole wallet at 13.56 MHz, custom printed for bank and brand giveaways.',
+    intro: [
+      'A blocking card defends the cards around it. The passive version is a laminated shielding layer that absorbs and detunes the 13.56 MHz field; the active version harvests the reader’s own energy to power a jamming circuit that disrupts communication across the wallet — no battery, activated only when a reader tries to read. One card, slipped anywhere in the wallet, covers the rest.',
+      'These are giveaway products with a security story, which is why banks and insurers order them printed: your branding rides in the customer’s wallet, seen at every payment, for years. We verify shielding effectiveness per batch and print full CMYK on both faces, standard CR80 so it fits every card slot.',
+    ],
+    useCases: [
+      ['Bank & fintech onboarding gifts', 'New cardholders receive a branded protector with their card — a security message that lives in the wallet.'],
+      ['Insurance & security-brand promos', 'The product literally is the value proposition: protection your logo delivers daily.'],
+      ['Travel retail', 'Sold at airports alongside passports and travel wallets to skimming-conscious travelers.'],
+    ],
+    extraFaqs: [
+      ['Does one blocking card protect my whole wallet?', 'The active version disrupts reads across a normal bifold; the passive version protects adjacent slots. For maximum coverage put one card in each fold, which is how promo pairs are often gifted.'],
+      ['Does the active card need a battery?', 'No — it harvests power from the attacking reader’s own field, so it works for years with no maintenance and activates only when a read is attempted.'],
+    ],
+  },
+  'rfid-blocking-sleeves': {
+    metaDesc: 'Aluminum-laminate blocking sleeves for cards and passports — CMYK printed both sides, the lowest-cost RFID privacy giveaway for banks, travel and events.',
+    intro: [
+      'Sleeves are the simplest, cheapest RFID protection: an aluminum-laminate paper or Tyvek envelope that encloses the card or passport in a Faraday shield. Nothing to activate, nothing to wear out — the card inside is unreadable until it is pulled out to pay. Passport sleeves additionally cover the e-passport chip page against doorway skimming.',
+      'As print products they take edge-to-edge CMYK on both faces, which is why they work as direct-mail inserts and conference handouts: flat, light, letter-mailable and used daily. Card and passport sizes run as standard; custom die-cuts (thumb notches, closure flaps) are available at modest tooling cost.',
+    ],
+    useCases: [
+      ['Direct-mail campaigns', 'Banks mail branded sleeves with new cards — a physical security message inside the envelope.'],
+      ['Travel & border-crossing retail', 'Passport sleeves sell alongside luggage tags; frequent travelers buy sets.'],
+      ['Conference swag with a function', 'Sponsors hand out printed sleeves that attendees actually keep and use.'],
+    ],
+    extraFaqs: [
+      ['How effective is a sleeve compared to a blocking card?', 'A closed sleeve is a full Faraday enclosure — the strongest protection of the product family. Blocking cards trade a little coverage for wallet convenience.'],
+      ['What is the durability of a paper sleeve?', 'Aluminum-laminate paper handles months of daily wallet use; Tyvek versions extend that considerably. Both are cheap enough to reissue in campaigns.'],
+    ],
+  },
+  'rfid-blocking-wallet': {
+    metaDesc: 'RFID blocking wallets and card holders — PU, leather and aluminum builds with shielding lining, deboss or print branding for corporate gifts and retail lines.',
+    intro: [
+      'A blocking wallet integrates the shield where users already carry cards: a woven metallic lining laminated invisibly into the card compartments, so every slot is protected without the user thinking about it. Builds range from slim aluminum pop-up cases through PU bifolds to full-grain leather — the shielding layer is the same engineering underneath.',
+      'For corporate gifting this is the premium tier of the blocking family: a daily-use object with your brand debossed into leather, delivered in gift boxes. We manage the full build — leather selection, stitching, lining verification per batch, deboss/foil branding and packaging — as one order.',
+    ],
+    useCases: [
+      ['Executive & client gifts', 'Debossed leather wallets carry the brand into daily use for years — with a security story attached.'],
+      ['Retail accessory lines', 'Brands add verified-blocking wallets to travel and accessory ranges, manufactured to their spec.'],
+      ['Employee milestone gifts', 'Companies gift branded card holders at anniversaries — practical, premium, protective.'],
+    ],
+    extraFaqs: [
+      ['Are all pockets in the wallet shielded?', 'Card compartments and the main fold are lined; we can leave a designated “fast pocket” unshielded on request, so one transit card taps without opening the wallet.'],
+      ['What branding methods work on which materials?', 'Deboss and foil on leather/PU, laser engraving on aluminum, print on linings. We proof your logo on a physical sample before the run.'],
+    ],
+  },
+
+  'barcode-scan-module': {
+    metaDesc: '1D/2D CMOS scan engines for kiosks, gates and vending — screen-code reading, USB/TTL/RS232, auto-sense triggering and firmware customization at OEM volume.',
+    intro: [
+      'A scan module is the reading engine your product wraps around: a compact CMOS imager with decode board that you mount behind a window in a kiosk, turnstile or vending machine. Modern 2D engines decode paper and phone-screen codes — including cracked, dimmed screens — which is the capability that separates ticketing-grade modules from budget CCDs.',
+      'Integration is where we spend the support effort: mounting depth and window glass specs to kill internal reflections, trigger modes (auto-sense presentation, hardware trigger or host command), interface choice between USB-HID keyboard emulation for fastest software integration and TTL/RS232 for embedded boards. OEM volumes unlock firmware tweaks — beeper behavior, code-type locks, prefix/suffix formats.',
+    ],
+    useCases: [
+      ['Ticketing turnstiles', 'Gates read paper and phone QR at presentation speed with auto-sense triggering.'],
+      ['Self-service kiosks', 'Payment and loyalty flows scan codes from any screen brightness reliably.'],
+      ['Vending & lockers', 'Pickup codes scanned at the machine release goods without staff.'],
+    ],
+    extraFaqs: [
+      ['How should the module be mounted behind glass?', 'Angle the engine 10–15° off the window normal and use anti-reflective glass — we supply a mounting drawing per model that eliminates ghost reflections.'],
+      ['Can firmware be customized for our product?', 'At OEM volume, yes — enabled symbologies, data prefixes/suffixes, beeper/LED behavior and trigger logic tailored and flashed before shipment.'],
+    ],
+  },
+  'rfid-reader-writer': {
+    metaDesc: 'RFID readers across LF/HF/UHF — desktop encoders, embedded modules, fixed portals and Android handhelds, with SDK, demo tools and fleet-matching advice.',
+    intro: [
+      'Reader selection maps to job type. Desktop USB units are issuance and enrollment stations — encoding cards at a service counter. Embedded modules drop into your own devices via TTL/USB. Fixed readers with external antennas build portals and conveyor read points for logistics. Android UHF handhelds put inventory sweeps and item hunts in a worker’s hand. We supply all four, matched to the tags you run.',
+      'The SDK is the real product for integrators: ours ships with demo apps, API documentation for Windows/Android/Linux, and working sample code for common flows (inventory rounds, encode-verify, trigger-read). Before you commit, we bench-test your actual tags against the candidate reader and report ranges — no spec-sheet guessing.',
+    ],
+    useCases: [
+      ['Card issuance desks', 'Desktop encoders personalize and verify credentials at HR, hotels and clubs.'],
+      ['Warehouse portals', 'Fixed readers with tuned antennas log everything crossing a dock door.'],
+      ['Handheld stocktakes', 'Android UHF terminals sweep shelves and hunt individual items with Geiger-style search.'],
+    ],
+    extraFaqs: [
+      ['How do we pick between fixed and handheld UHF?', 'Fixed readers automate known choke points (doors, conveyors); handhelds cover wide areas and searches. Most operations start handheld and add portals where volume justifies them.'],
+      ['Will your readers work with our existing tags?', 'Send a tag sample (or its chip spec); we bench-test against the recommended reader and send you measured read ranges before you order.'],
+    ],
+  },
+  'rfid-smart-cabinet': {
+    metaDesc: 'UHF smart cabinets with multi-zone antennas — automatic take/return logging, card/PIN/biometric access, API integration for tools, medical and documents.',
+    intro: [
+      'A smart cabinet closes the loop that manual sign-out sheets never do: the user badges in, the door opens, and multi-zone UHF antennas inside inventory every tagged item the moment the door closes — so the system knows exactly what left, with whom, at what time, without anyone scanning anything. Discrepancies alarm immediately, not at month-end audit.',
+      'Deployments succeed on two details we engineer up front: antenna zoning against the cabinet’s metal interior (dense metal tools are the hard case — solved with zone design and tag choice), and integration, where our API pushes take/return events into your asset, ERP or maintenance system rather than trapping data in another silo.',
+    ],
+    useCases: [
+      ['Tool cribs & maintenance', 'Calibrated tools auto-log per technician; missing-at-shift-end alarms name the last holder.'],
+      ['Controlled medical supplies', 'Wards track high-value consumables and instruments with per-access accountability.'],
+      ['Document & evidence control', 'Files and evidence bags carry chain-of-custody automatically, access by authorized badge only.'],
+    ],
+    extraFaqs: [
+      ['Can the cabinet integrate with our asset-management system?', 'Yes — REST API and webhook events for every take/return, plus CSV export. We map events to your fields during commissioning.'],
+      ['Does it read reliably with dense metal tools inside?', 'That is the engineered case: multi-zone antennas plus on-metal tags per tool type. We validate with your actual item mix during acceptance testing.'],
+    ],
+  },
+  'industrial-iot-dtu-rtu': {
+    metaDesc: 'Industrial DTU/RTU terminals — RS485/Modbus to 4G/NB-IoT with MQTT, edge alarms, offline caching and DIN-rail builds for meters, sensors and remote plant.',
+    intro: [
+      'A DTU is a transparent serial-to-cellular pipe: whatever your meter or PLC speaks on RS232/485 arrives at your server over 4G. An RTU adds intelligence at the edge — local I/O, Modbus polling, threshold alarms and logic that acts even when the network does not. Choosing between them is a workflow question: pure transport, or edge decisions too.',
+      'Field reliability is the whole product: watchdog reconnection, store-and-forward caching that backfills data after outages, wide 9–36 V power tolerance and DIN-rail industrial housings. Units ship pre-configured to your APN and platform (MQTT topics or Modbus TCP mapping) so field electricians wire power and serial, and data appears.',
+    ],
+    useCases: [
+      ['Utility metering', 'Water and power meters report over NB-IoT with outage-proof cached readings.'],
+      ['Remote pump & tank control', 'RTUs alarm on thresholds and drive relays locally, reporting state to SCADA.'],
+      ['Agricultural monitoring', 'Field sensors reach the cloud over cellular where no network infrastructure exists.'],
+    ],
+    extraFaqs: [
+      ['How are SIMs and data plans handled?', 'Use your local operator SIMs — we pre-configure APN per your details, or supply units SIM-ready for your team to insert. Data usage guidance per polling rate is in the manual.'],
+      ['What happens to data during network outages?', 'Store-and-forward caching holds readings in local memory and backfills the server on reconnect, timestamped — no gaps in the historical record.'],
+    ],
+  },
+};
+
 const NAV = `      <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="products.html">Products</a>
@@ -266,19 +947,34 @@ ${JSON.stringify(prodLd)}
 </script>`;
   const specs = p.specs.map((r) => `<tr><th>${esc(r[0])}</th><td>${esc(r[1])}</td></tr>`).join('');
   const apps = p.apps.map((a) => `<li>${esc(a)}</li>`).join('');
-  const wholesaleFaq = [
-    [`What is the minimum order quantity (MOQ) for ${p.name}?`, `MOQ for ${p.name} starts at ${moqFmt(w.moq)} ${wUnitPl} and is flexible by configuration — share your target quantity and we will advise the best wholesale price.`],
-    [`How much does ${p.name} cost wholesale?`, `Indicative wholesale pricing is ${money(w.low)}–${money(w.high)} per ${wUnit} (FOB Shenzhen), scaling down with volume. Final pricing depends on chip, size, artwork and quantity — request a quote for exact figures.`],
-  ];
-  const faqPairs = p.faqs.concat(wholesaleFaq, GENERIC_FAQ.slice(1));
+  const d = DETAILS[p.slug] || {};
+  const wholesaleFaq = WHOLESALE_FAQ_VARIANTS[variantIndex(p.slug, WHOLESALE_FAQ_VARIANTS.length)](p, w, wUnit, wUnitPl);
+  const faqPairs = p.faqs.concat(d.extraFaqs || [], wholesaleFaq);
   const faqs = faqPairs.map((f) => `<details class="faq-item"><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join('');
   const faqLd = `<script type="application/ld+json">
 ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqPairs.map((f) => ({ '@type': 'Question', name: f[0], acceptedAnswer: { '@type': 'Answer', text: f[1] } })) })}
 </script>`;
   const rel = related.map((r) => `<a href="${r.slug}.html">${esc(r.name)}</a>`).join('');
   const featureList = (FEATURES[p.cat] || []).map((f) => `<li>${esc(f)}</li>`).join('');
-  const customList = CUSTOMIZATION.map((c) => `<li>${esc(c)}</li>`).join('');
-  const whyCards = WHYUS.map((w) => `<div class="feature"><h3>${esc(w.t)}</h3><p>${esc(w.d)}</p></div>`).join('');
+  const customList = (CUSTOMIZATION_BY_CAT[p.cat] || []).map((c) => `<li>${esc(c)}</li>`).join('');
+  const introSection = d.intro && d.intro.length ? `<section class="section">
+  <div class="container" style="max-width:880px">
+    <div class="section__head" style="margin-bottom:18px"><span class="eyebrow">In depth</span><h2 class="section__title">About ${esc(p.name)}</h2></div>
+    ${d.intro.map((t) => `<p style="margin-bottom:14px">${esc(t)}</p>`).join('')}
+  </div>
+</section>` : '';
+  const useCaseSection = d.useCases && d.useCases.length ? `<section class="section section--alt">
+  <div class="container">
+    <div class="section__head" style="margin-bottom:24px"><span class="eyebrow">In practice</span><h2 class="section__title">How buyers use ${esc(p.name)}</h2></div>
+    <div class="feature-grid">${d.useCases.map((u) => `<div class="feature"><h3>${esc(u[0])}</h3><p>${esc(u[1])}</p></div>`).join('')}</div>
+  </div>
+</section>` : '';
+  const mfgNote = `<section class="section">
+  <div class="container" style="max-width:880px">
+    <div class="section__head" style="margin-bottom:14px"><span class="eyebrow">From our factory</span><h2 class="section__title">Made in-house in Shenzhen</h2></div>
+    <p>${esc(MFG_NOTE[p.cat] || MFG_NOTE.cards)}</p>
+  </div>
+</section>`;
   const badges = [`MOQ from ${moqFmt(w.moq)} ${wUnitPl}`, 'Custom OEM / ODM', 'Free samples', '24-hour quote', '2-year warranty'].map((b) => `<li>${esc(b)}</li>`).join('');
   const wholesaleBadges = [`MOQ ${moqFmt(w.moq)} ${wUnitPl}`, `From ${money(w.low)}/${wUnit}`, 'Free samples', 'OEM / ODM'].map((b) => `<li>${esc(b)}</li>`).join('');
   const wholesaleSection = `<section class="section" id="wholesale">
@@ -286,8 +982,8 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnt
     <div class="about" style="align-items:start">
       <div>
         <span class="eyebrow">Wholesale &amp; bulk orders</span>
-        <h2 class="section__title" style="margin-bottom:14px">Buy ${esc(p.name)} wholesale — direct from the factory</h2>
-        <p>Order custom ${esc(p.name)} at wholesale prices directly from our Shenzhen factory (RFID manufacturer since 1996). Minimum order from <strong>${moqFmt(w.moq)} ${wUnitPl === 'pcs' ? 'pieces' : 'units'}</strong>, ${w.bulkLow}–${w.bulkHigh}-day bulk production, free pre-production samples, and full OEM / ODM — your logo, chip, encoding and packaging. Indicative pricing runs <strong>${money(w.low)}–${money(w.high)} per ${wUnit}</strong> and scales down with volume.</p>
+        <h2 class="section__title" style="margin-bottom:14px">${esc(({ cards: `Buy ${p.name} wholesale — straight from the card line`, labels: `Order ${p.name} by the roll — factory direct`, tags: `Source ${p.name} in volume — factory direct`, blocking: `Stock ${p.name} — factory-direct pricing`, hardware: `Buy ${p.name} on OEM terms` })[p.cat] || `Buy ${p.name} wholesale — direct from the factory`)}</h2>
+        <p>${(WHOLESALE_COPY[p.cat] || WHOLESALE_COPY.cards)({ name: esc(p.name) }, w, wUnit, wUnitPl)}</p>
         <ul class="prod-badges">${wholesaleBadges}</ul>
         <div class="prod__cta" style="margin-top:16px">
           <a href="${quoteHref}" class="btn btn--primary btn--lg">Request Wholesale Quote</a>
@@ -329,6 +1025,7 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnt
     </div>
   </div>
 </section>
+${introSection}
 ${wholesaleSection}
 <section class="section section--alt">
   <div class="container">
@@ -363,12 +1060,8 @@ ${wholesaleSection}
     </div>
   </div>
 </section>
-<section class="section section--alt">
-  <div class="container">
-    <div class="section__head"><span class="eyebrow">Why RFID MFG</span><h2 class="section__title">A manufacturer you can rely on</h2></div>
-    <div class="feature-grid">${whyCards}</div>
-  </div>
-</section>
+${useCaseSection}
+${mfgNote}
 <section class="section">
   <div class="container" style="max-width:880px">
     <div class="section__head" style="margin-bottom:24px"><span class="eyebrow">FAQ</span><h2 class="section__title">Frequently asked questions</h2></div>
@@ -394,7 +1087,7 @@ ${wholesaleSection}
   </div>
 </section>`;
   const title = `${p.name} Manufacturer & Wholesale Supplier | RFID MFG`;
-  const metaDesc = `${p.name} — custom OEM/ODM manufacturer & wholesale supplier since 1996. MOQ from ${moqFmt(w.moq)} ${wUnitPl}, free samples, 24-hour quote. Ships to 100+ countries.`;
+  const metaDesc = d.metaDesc || `${p.name} — custom OEM/ODM manufacturer & wholesale supplier since 1996. MOQ from ${moqFmt(w.moq)} ${wUnitPl}, free samples, 24-hour quote. Ships to 100+ countries.`;
   return page(title, metaDesc, `${p.slug}.html`, ld + '\n' + faqLd, body);
 }
 
