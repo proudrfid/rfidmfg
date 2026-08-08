@@ -1,7 +1,7 @@
 /*
  * build-foldered.js — 把扁平的 .html 站点转换成"目录式干净 URL"的部署版,输出到 dist/。
  * 结构: /about/  /products/  /products/<分类>/  /products/<分类>/<产品>/  /guides/<slug>/
- *       /cases/<slug>/  /news/<slug>/  并生成 5 个产品分类落地页 + 干净 sitemap。
+ *       /cases/<slug>/  /blog/<slug>/  并生成 5 个产品分类落地页 + 干净 sitemap。
  * 资源(css/js/images/fonts/icons)统一用根绝对路径 /xxx,确保任意目录深度都能加载。
  * 运行: 先 node build-products.js && node build-articles.js && node build-content.js,再 node build-foldered.js
  */
@@ -37,7 +37,7 @@ const CAT_SUB = {
 const GUIDES = ['rfid-cards-guide', 'nfc-guide', 'rfid-labels-inlays-guide', 'rfid-blocking-guide', 'rfid-readers-hardware-guide',
   'rfid-frequencies-lf-hf-uhf', 'rfid-vs-nfc', 'rfid-vs-barcode', 'rfid-chips-mifare-ntag-desfire', 'rfid-dry-vs-wet-inlay', 'rfid-card-materials', 'rfid-glossary',
   'nfc-vs-rfid-wristband', 'ntag213-vs-215-vs-216', 'uhf-vs-hf-rfid-label', 'rfid-wristband-materials', 'rfid-key-fob-guide'];
-const STATIC = ['about', 'products', 'guides', 'cases', 'news', 'sustainability', 'contact', 'privacy', 'terms'];
+const STATIC = ['about', 'products', 'guides', 'cases', 'sustainability', 'contact', 'privacy', 'terms'];
 const TOOLS = ['rfid-selector'];
 
 // old file (no .html) -> clean path (no leading/trailing slash; '' = home)
@@ -51,7 +51,8 @@ function cleanPath(base) {
   if (base === 'industries') return 'industries';
   if (base.startsWith('industry-')) return `industries/${base.slice(9)}`;
   if (base.startsWith('case-')) return `cases/${base.slice(5)}`;
-  if (base.startsWith('news-')) return `news/${base.slice(5)}`;
+  if (base === 'news') return 'blog';
+  if (base.startsWith('news-')) return `blog/${base.slice(5)}`;
   return base;
 }
 function urlFor(base) { const p = cleanPath(base); return p === '' ? '/' : '/' + p + '/'; }
@@ -199,7 +200,7 @@ function pri(u) {
   if (/^\/products\/[a-z]+\/$/.test(u)) return ['0.8', 'weekly'];      // category
   if (u === '/guides/') return ['0.8', 'weekly'];
   if (u === '/about/' || u === '/contact/') return ['0.8', 'monthly'];
-  if (u === '/cases/' || u === '/news/') return ['0.7', 'weekly'];
+  if (u === '/cases/' || u === '/blog/') return ['0.7', 'weekly'];
   if (/^\/products\/[a-z]+\/[a-z0-9-]+\/$/.test(u)) return ['0.7', 'monthly']; // product
   if (/^\/guides\/[a-z0-9-]+\/$/.test(u)) return ['0.7', 'monthly'];
   if (/^\/tools\/[a-z0-9-]+\/$/.test(u)) return ['0.8', 'monthly'];

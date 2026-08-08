@@ -79,12 +79,12 @@
 
 ## News & insights
 
-- [RFID MFG Launches High-Performance RFID-Blocking Card | RFID MFG](https://www.rfidmfg.com/news/blocking-card/): RFID MFG’s new blocking card sits in a wallet and disrupts unauthorized 13.56 MHz scans, shielding the cards around it from skimming.
-- [Why the Food Industry Needs RFID | RFID MFG](https://www.rfidmfg.com/news/food/): RFID gives the food industry end-to-end traceability — fast, accurate tracking from production to shelf that supports freshness, recalls and compliance.
-- [NFC Stickers Have Entered Every Aspect of Our Lives | RFID MFG](https://www.rfidmfg.com/news/nfc-stickers/): Slim, printable and inexpensive, NFC stickers turn ordinary objects into interactive touchpoints — for tap-to-share, smart packaging and authentication.
-- [Powering the Future of Rail with RFID | RFID MFG](https://www.rfidmfg.com/news/rail/): RFID quietly improves rail safety, asset tracking and efficiency — identifying rolling stock and components automatically, without manual scanning.
-- [Walmart to Use RFID for Fresh-Food Products | RFID MFG](https://www.rfidmfg.com/news/walmart/): A major retailer expanding RFID into fresh food is a strong signal that item-level tagging is going mainstream across grocery and retail.
-- [RFID Theme-Park Wristbands | RFID MFG](https://www.rfidmfg.com/news/wristband/): A single RFID wristband handles park entry, cashless payment and ride access — cutting queues for guests and giving operators live data.
+- [RFID MFG Launches High-Performance RFID-Blocking Card | RFID MFG](https://www.rfidmfg.com/blog/blocking-card/): RFID MFG’s new blocking card sits in a wallet and disrupts unauthorized 13.56 MHz scans, shielding the cards around it from skimming.
+- [Why the Food Industry Needs RFID | RFID MFG](https://www.rfidmfg.com/blog/food/): RFID gives the food industry end-to-end traceability — fast, accurate tracking from production to shelf that supports freshness, recalls and compliance.
+- [NFC Stickers Have Entered Every Aspect of Our Lives | RFID MFG](https://www.rfidmfg.com/blog/nfc-stickers/): Slim, printable and inexpensive, NFC stickers turn ordinary objects into interactive touchpoints — for tap-to-share, smart packaging and authentication.
+- [Powering the Future of Rail with RFID | RFID MFG](https://www.rfidmfg.com/blog/rail/): RFID quietly improves rail safety, asset tracking and efficiency — identifying rolling stock and components automatically, without manual scanning.
+- [Walmart to Use RFID for Fresh-Food Products | RFID MFG](https://www.rfidmfg.com/blog/walmart/): A major retailer expanding RFID into fresh food is a strong signal that item-level tagging is going mainstream across grocery and retail.
+- [RFID Theme-Park Wristbands | RFID MFG](https://www.rfidmfg.com/blog/wristband/): A single RFID wristband handles park entry, cashless payment and ride access — cutting queues for guests and giving operators live data.
 
 ## Company
 
@@ -92,5 +92,5 @@
 - [About RFID MFG — RFID & Smart Card Manufacturer Since 1996](https://www.rfidmfg.com/about/): RFID MFG Co., Ltd. — three decades of RFID & smart-card manufacturing, ISO-certified and exporting to 100+ countries. OEM/ODM since 1996.
 - [Sustainability — Eco-Friendly RFID Cards & Green Manufacturing | RFID MFG](https://www.rfidmfg.com/sustainability/): RFID MFG's eco commitment: FSC-certified BIO-paper cards, biodegradable & recyclable materials, plus responsible water, air & waste management.
 - [Cases — RFID Applications & Customer Solutions | RFID MFG](https://www.rfidmfg.com/cases/): Real-world RFID deployments by RFID MFG across warehousing, ID, payment, libraries, transport, events and NFC — proven solutions across industries.
-- [News &amp; Insights — RFID Industry Updates | RFID MFG](https://www.rfidmfg.com/news/): Company news and RFID industry insights from RFID MFG — product launches, applications and trends across retail, transport, events and more.
+- [News &amp; Insights — RFID Industry Updates | RFID MFG](https://www.rfidmfg.com/blog/): Company news and RFID industry insights from RFID MFG — product launches, applications and trends across retail, transport, events and more.
 - [Contact RFID MFG — Request a Quote or Pricelist](https://www.rfidmfg.com/contact/): Contact RFID MFG Co., Ltd. for RFID cards, labels, tags and hardware. Request a quote or pricelist — we reply within 24 hours. OEM/ODM welcome.

@@ -22,17 +22,19 @@ const NAV = `      <a href="index.html">Home</a>
       <a href="guides.html">Guides</a>
       <a href="cases.html">Cases</a>
       <a href="sustainability.html">Sustainability</a>
-      <a href="news.html">News</a>
+      <a href="news.html">Blog</a>
       <a href="contact.html">Contact</a>`;
 const TOPBAR = `<div class="topbar"><div class="container topbar__inner"><span class="topbar__item">Established 1996 · Shenzhen, China</span><div class="topbar__contact"><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8675523765843">+86 755 2376 5843</a></div></div></div>`;
 const HEADER = `<header class="header" id="header"><div class="container header__inner"><a href="index.html" class="brand" aria-label="RFID MFG home"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><nav class="nav" id="nav">
 ${NAV}
     </nav><a href="contact.html" class="btn btn--primary header__cta">Get a Quote</a><button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div></header>`;
-const FOOTER = `<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing since 1996.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="industries.html">Industries</a><a href="cases.html">Cases</a><a href="sustainability.html">Sustainability</a><a href="news.html">News</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8675523765843">+86 755 2376 5843</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>`;
+const FOOTER = `<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing since 1996.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="industries.html">Industries</a><a href="cases.html">Cases</a><a href="sustainability.html">Sustainability</a><a href="news.html">Blog</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8675523765843">+86 755 2376 5843</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>`;
 const FONTS = `<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin-700-normal.woff2" crossorigin /><link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin-400-normal.woff2" crossorigin />`;
 
 // ---- content renderers ----
 const P = (arr) => arr.map((t) => `<p>${esc(t)}</p>`).join('\n      ');
+// 段落间插入插图:art = [{after: 段落索引, svg, cap}]
+const P_ART = (arr, art) => arr.map((t, i) => `<p>${esc(t)}</p>` + (art || []).filter((a) => a.after === i).map((a) => `\n      <figure class="figure figure--article">${a.svg}<figcaption>${esc(a.cap)}</figcaption></figure>`).join('')).join('\n      ');
 const POINTS = (arr) => `<ul class="check-list">${arr.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>`;
 function RELATED(arr) {
   if (!arr || !arr.length) return '';
@@ -84,7 +86,7 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnt
 function buildBody(it) {
   const lead = it.lead ? `<div class="lead-line" style="border-left:4px solid var(--brand,#0aa2e8);background:#f4f8fc;padding:14px 18px;border-radius:8px;margin-bottom:22px"><strong>In short:</strong> ${esc(it.lead)}</div>` : '';
   const byline = `<p style="font-size:13px;color:var(--muted,#6b7a90);margin:-4px 0 18px">By ${esc(AUTHOR)} · Updated ${esc(BUILD_DATE_DISPLAY)}</p>`;
-  const intro = P(it.body);
+  const intro = P_ART(it.body, it.art);
   const table = TABLE(it.table);
   const takeaways = it.points && it.points.length ? `<h2>Key takeaways</h2>\n      ${POINTS(it.points)}` : '';
   const help = it.help ? `<h2>How RFID MFG helps</h2>\n      ${P(it.help)}` : '';
@@ -337,76 +339,327 @@ const CASES = [
 ];
 
 // ---------- NEWS (6) ----------
+// ── 博客插图库(原创场景隐喻 SVG,图内数字均来自文章事实)──
+const ART = {
+blocking_thief: `<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="RFID blocking card stopping a hidden reader from skimming wallet cards at 13.56 MHz">
+<defs><pattern id="pbt" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0b6fb8" opacity="0.07"/></pattern></defs>
+<rect width="1200" height="620" rx="18" fill="#fffdf6"/><rect width="1200" height="620" rx="18" fill="url(#pbt)"/>
+<text x="600" y="58" text-anchor="middle" font-size="30" font-weight="800" fill="#0a1b34">The wallet with a bodyguard</text>
+<text x="600" y="90" text-anchor="middle" font-size="16" fill="#5b6b82">A hidden reader tries its luck. The blocking card answers for everyone.</text>
+<g><circle cx="205" cy="270" r="34" fill="#fbd38d"/><path d="M171 262 a34 34 0 0 1 68 0 l-6 -20 a30 30 0 0 0 -56 0 Z" fill="#0a1b34"/><circle cx="194" cy="266" r="3.4" fill="#0a1b34"/><circle cx="216" cy="266" r="3.4" fill="#0a1b34"/><path d="M196 284 q9 -5 18 0" fill="none" stroke="#0a1b34" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="176" y="308" width="58" height="88" rx="18" fill="#0a1b34"/><line x1="234" y1="330" x2="292" y2="318" stroke="#0a1b34" stroke-width="13" stroke-linecap="round"/>
+<rect x="284" y="298" width="56" height="36" rx="8" fill="#5b6b82"/><rect x="292" y="306" width="26" height="20" rx="3" fill="#22d3ee" opacity=".7"/>
+<text x="205" y="440" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">the "customer"</text></g>
+<g stroke="#0aa2e8" fill="none" stroke-width="4" stroke-linecap="round"><path d="M366 316 c16 -22 16 -58 0 -80"/><path d="M406 326 c26 -32 26 -78 0 -110"/><path d="M446 336 c36 -42 36 -98 0 -140"/></g>
+<g><rect x="520" y="200" width="230" height="300" rx="26" fill="#e8d9c3"/><path d="M520 240 q115 -34 230 0 V500 H520 Z" fill="#d9c5a6"/>
+<rect x="558" y="150" width="150" height="230" rx="14" fill="#0b6fb8"/><path d="M633 196 l34 14 v30 c0 30 -20 50 -34 56 c-14 -6 -34 -26 -34 -56 v-30 Z" fill="#fffdf6"/><path d="M618 254 l12 12 22 -24" fill="none" stroke="#0b6fb8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="596" y="392" width="180" height="26" rx="13" fill="#0a1b34"/><text x="686" y="410" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">13.56 MHz — BLOCKED</text></g>
+<g><rect x="840" y="228" width="140" height="92" rx="12" fill="#fff" stroke="#e4e9f1" stroke-width="2" transform="rotate(-6 910 274)"/><circle cx="884" cy="262" r="4" fill="#0a1b34"/><circle cx="922" cy="262" r="4" fill="#0a1b34"/><path d="M886 284 q18 12 36 0" fill="none" stroke="#0a1b34" stroke-width="3" stroke-linecap="round"/>
+<rect x="880" y="340" width="140" height="92" rx="12" fill="#fff" stroke="#e4e9f1" stroke-width="2" transform="rotate(5 950 386)"/><circle cx="926" cy="376" r="4" fill="#0a1b34"/><circle cx="964" cy="376" r="4" fill="#0a1b34"/><path d="M928 398 q18 12 36 0" fill="none" stroke="#0a1b34" stroke-width="3" stroke-linecap="round"/>
+<text x="946" y="480" text-anchor="middle" font-size="14" font-weight="700" fill="#15803d">your cards, unbothered</text></g>
+<rect x="384" y="530" width="432" height="40" rx="20" fill="#dcfce7"/><text x="600" y="556" text-anchor="middle" font-size="16" font-weight="700" fill="#15803d">One card in the wallet shields the cards around it</text>
+</svg>`,
+blocking_vs: `<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="Passive shielding versus active jamming RFID blocking cards compared">
+<defs><pattern id="pbv" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0b6fb8" opacity="0.07"/></pattern></defs>
+<rect width="1200" height="620" rx="18" fill="#fffdf6"/><rect width="1200" height="620" rx="18" fill="url(#pbv)"/>
+<text x="600" y="58" text-anchor="middle" font-size="30" font-weight="800" fill="#0a1b34">Two bodyguards, two styles</text>
+<text x="600" y="90" text-anchor="middle" font-size="16" fill="#5b6b82">Same job — stop unauthorized 13.56 MHz reads. Very different personalities.</text>
+<rect x="80" y="130" width="480" height="400" rx="20" fill="#fff" stroke="#e4e9f1" stroke-width="2"/>
+<text x="320" y="176" text-anchor="middle" font-size="21" font-weight="800" fill="#0b6fb8">PASSIVE — the monk</text>
+<rect x="240" y="210" width="160" height="230" rx="16" fill="#0b6fb8"/><circle cx="300" cy="270" r="9" fill="#fffdf6"/><circle cx="340" cy="270" r="9" fill="#fffdf6"/><circle cx="300" cy="270" r="3" fill="#0a1b34"/><circle cx="340" cy="270" r="3" fill="#0a1b34"/><path d="M302 306 q18 8 36 0" fill="none" stroke="#fffdf6" stroke-width="4" stroke-linecap="round"/>
+<g stroke="#0aa2e8" fill="none" stroke-width="3.5" stroke-linecap="round"><path d="M150 300 c12 -14 12 -36 0 -50"/><path d="M180 310 c18 -22 18 -50 0 -72"/></g>
+<circle cx="228" cy="290" r="5" fill="#0aa2e8"/><circle cx="222" cy="320" r="4" fill="#0aa2e8" opacity=".6"/><circle cx="218" cy="264" r="3.4" fill="#0aa2e8" opacity=".4"/>
+<text x="320" y="474" text-anchor="middle" font-size="15" fill="#5b6b82">absorbs and detunes the field</text>
+<rect x="200" y="490" width="240" height="30" rx="15" fill="#0a1b34"/><text x="320" y="510" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">No battery. Ever.</text>
+<rect x="640" y="130" width="480" height="400" rx="20" fill="#fff" stroke="#e4e9f1" stroke-width="2"/>
+<text x="880" y="176" text-anchor="middle" font-size="21" font-weight="800" fill="#d97706">ACTIVE — the bouncer</text>
+<rect x="800" y="210" width="160" height="230" rx="16" fill="#f59e0b"/><circle cx="860" cy="270" r="9" fill="#fffdf6"/><circle cx="900" cy="270" r="9" fill="#fffdf6"/><circle cx="862" cy="268" r="3" fill="#0a1b34"/><circle cx="898" cy="268" r="3" fill="#0a1b34"/><path d="M860 308 h40" stroke="#fffdf6" stroke-width="4" stroke-linecap="round"/>
+<path d="M770 300 l-36 -20 14 26 -30 -6 22 24" fill="none" stroke="#ef4444" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="842" y="330" width="36" height="58" rx="7" fill="#0a1b34"/><rect x="852" y="322" width="16" height="10" rx="3" fill="#0a1b34"/><rect x="848" y="342" width="24" height="16" fill="#16d6c1"/>
+<text x="880" y="474" text-anchor="middle" font-size="15" fill="#5b6b82">emits a disrupting signal</text>
+<rect x="760" y="490" width="240" height="30" rx="15" fill="#0a1b34"/><text x="880" y="510" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">Battery included</text>
+<circle cx="600" cy="330" r="44" fill="#0a1b34"/><text x="600" y="341" text-anchor="middle" font-size="26" font-weight="900" fill="#f59e0b">VS</text>
+<text x="600" y="580" text-anchor="middle" font-size="15" font-weight="700" fill="#5b6b82">Both fit a normal card slot. Both take your branding.</text>
+</svg>`,
+rail_gate: `<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="Trackside RFID reader identifying passing rail wagons automatically with factory-locked TID chips">
+<defs><pattern id="prg" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0b6fb8" opacity="0.07"/></pattern></defs>
+<rect width="1200" height="620" rx="18" fill="#fffdf6"/><rect width="1200" height="620" rx="18" fill="url(#prg)"/>
+<text x="600" y="58" text-anchor="middle" font-size="30" font-weight="800" fill="#0a1b34">Reads at speed. No clipboards.</text>
+<text x="600" y="90" text-anchor="middle" font-size="16" fill="#5b6b82">Every wagon announces itself to the trackside reader as it passes.</text>
+<rect x="96" y="150" width="26" height="330" rx="6" fill="#0a1b34"/><rect x="76" y="140" width="112" height="56" rx="12" fill="#0b6fb8"/><circle cx="132" cy="168" r="10" fill="#16d6c1"/>
+<path d="M188 190 L560 300 L188 410 Z" fill="#0aa2e8" opacity="0.13"/>
+<g><path d="M120 508 H1140" stroke="#0a1b34" stroke-width="7"/><path d="M140 522 H1140" stroke="#5b6b82" stroke-width="3" stroke-dasharray="26 18"/></g>
+<g><rect x="360" y="330" width="220" height="130" rx="10" fill="#0b6fb8"/><circle cx="410" cy="478" r="22" fill="#0a1b34"/><circle cx="530" cy="478" r="22" fill="#0a1b34"/><rect x="380" y="352" width="180" height="56" rx="6" fill="#fffdf6" opacity=".22"/>
+<rect x="470" y="300" width="150" height="30" rx="15" fill="#0a1b34"/><text x="545" y="320" text-anchor="middle" font-size="13.5" font-weight="800" fill="#16d6c1">ID: WGN-0417</text></g>
+<g><rect x="650" y="330" width="220" height="130" rx="10" fill="#5b6b82"/><circle cx="700" cy="478" r="22" fill="#0a1b34"/><circle cx="820" cy="478" r="22" fill="#0a1b34"/>
+<rect x="760" y="300" width="150" height="30" rx="15" fill="#0a1b34"/><text x="835" y="320" text-anchor="middle" font-size="13.5" font-weight="800" fill="#16d6c1">ID: WGN-0418</text></g>
+<g><rect x="940" y="330" width="180" height="130" rx="10" fill="#0b6fb8"/><circle cx="985" cy="478" r="22" fill="#0a1b34"/><circle cx="1075" cy="478" r="22" fill="#0a1b34"/>
+<rect x="1000" y="300" width="130" height="30" rx="15" fill="#0a1b34"/><text x="1065" y="320" text-anchor="middle" font-size="13.5" font-weight="800" fill="#16d6c1">reading…</text></g>
+<g stroke="#16d6c1" stroke-width="5" stroke-linecap="round"><path d="M330 360 h-64"/><path d="M330 396 h-40"/><path d="M330 432 h-52"/></g>
+<rect x="330" y="546" width="540" height="40" rx="20" fill="#0a1b34"/><text x="600" y="572" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">Chip TID: factory-locked, hard to forge — real chain of custody</text>
+</svg>`,
+rail_gauntlet: `<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="Rugged rail RFID tag surviving vibration, grease, weather and wide temperature swings">
+<defs><pattern id="prq" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0b6fb8" opacity="0.07"/></pattern></defs>
+<rect width="1200" height="620" rx="18" fill="#fffdf6"/><rect width="1200" height="620" rx="18" fill="url(#prq)"/>
+<text x="600" y="58" text-anchor="middle" font-size="30" font-weight="800" fill="#0a1b34">The ugliest job in transport</text>
+<text x="600" y="90" text-anchor="middle" font-size="16" fill="#5b6b82">Rail tags live outdoors, on metal, next to brakes — and keep answering.</text>
+<rect x="450" y="250" width="300" height="140" rx="22" fill="#0b6fb8"/><rect x="470" y="270" width="260" height="100" rx="14" fill="#fffdf6" opacity=".14"/>
+<circle cx="486" cy="286" r="7" fill="#fffdf6"/><circle cx="714" cy="286" r="7" fill="#fffdf6"/><circle cx="486" cy="354" r="7" fill="#fffdf6"/><circle cx="714" cy="354" r="7" fill="#fffdf6"/>
+<circle cx="600" cy="320" r="26" fill="none" stroke="#16d6c1" stroke-width="4"/><rect x="590" y="310" width="20" height="20" fill="#16d6c1"/>
+<g><rect x="120" y="170" width="200" height="96" rx="16" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><path d="M150 232 l18 -26 14 20 16 -30 14 22 16 -26" fill="none" stroke="#ef4444" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text x="220" y="252" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">vibration</text></g>
+<g><rect x="120" y="360" width="200" height="96" rx="16" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><path d="M204 388 c-16 22 -16 34 0 46 c16 -12 16 -24 0 -46" fill="#0a1b34"/><circle cx="238" cy="424" r="8" fill="#0a1b34" opacity=".55"/><text x="220" y="442" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">grease</text></g>
+<g><rect x="880" y="170" width="200" height="96" rx="16" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><circle cx="950" cy="202" r="16" fill="#5b6b82" opacity=".35"/><circle cx="976" cy="196" r="20" fill="#5b6b82" opacity=".45"/><g stroke="#0aa2e8" stroke-width="4" stroke-linecap="round"><path d="M942 224 l-6 12"/><path d="M966 224 l-6 12"/><path d="M990 224 l-6 12"/></g><text x="980" y="252" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">weather</text></g>
+<g><rect x="880" y="360" width="200" height="96" rx="16" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><rect x="916" y="378" width="12" height="40" rx="6" fill="none" stroke="#ef4444" stroke-width="4"/><circle cx="922" cy="426" r="9" fill="#ef4444"/><text x="1002" y="404" text-anchor="middle" font-size="15" font-weight="800" fill="#0a1b34">-40…+85 °C</text><text x="1002" y="436" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">temp swings</text></g>
+<g stroke="#f59e0b" stroke-width="4" stroke-linecap="round" fill="none"><path d="M330 232 c40 20 70 46 96 70"/><path d="M330 400 c40 -14 70 -34 96 -56"/><path d="M870 232 c-40 20 -70 46 -96 70"/><path d="M870 400 c-40 -14 -70 -34 -96 -56"/></g>
+<rect x="330" y="470" width="240" height="34" rx="17" fill="#0a1b34"/><text x="450" y="492" text-anchor="middle" font-size="14.5" font-weight="800" fill="#fff">On-metal UHF range</text>
+<rect x="630" y="470" width="240" height="34" rx="17" fill="#0a1b34"/><text x="750" y="492" text-anchor="middle" font-size="14.5" font-weight="800" fill="#fff">High-temp near brakes</text>
+<text x="600" y="566" text-anchor="middle" font-size="15" font-weight="700" fill="#5b6b82">Fixed depot readers reconcile every pass against the asset database — no manual inspection error.</text>
+</svg>`,
+nfc_constellation: `<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="One phone tap connecting posters, menus, packaging and business cards through NFC stickers">
+<defs><pattern id="pnc" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0b6fb8" opacity="0.07"/></pattern></defs>
+<rect width="1200" height="620" rx="18" fill="#fffdf6"/><rect width="1200" height="620" rx="18" fill="url(#pnc)"/>
+<text x="600" y="58" text-anchor="middle" font-size="30" font-weight="800" fill="#0a1b34">The 2-cent hyperlink</text>
+<text x="600" y="90" text-anchor="middle" font-size="16" fill="#5b6b82">A chip under a printed label turns any object into a website. No app, no pairing.</text>
+<g stroke="#e4e9f1" stroke-width="2.5" stroke-dasharray="6 7"><path d="M600 330 L240 240"/><path d="M600 330 L950 230"/><path d="M600 330 L260 470"/><path d="M600 330 L950 470"/></g>
+<rect x="540" y="220" width="120" height="220" rx="22" fill="#0a1b34"/><rect x="556" y="248" width="88" height="140" rx="8" fill="#0b6fb8"/><circle cx="600" cy="416" r="10" fill="none" stroke="#fffdf6" stroke-width="3"/>
+<g stroke="#16d6c1" fill="none" stroke-width="4" stroke-linecap="round"><path d="M676 300 c10 12 10 32 0 44"/><path d="M700 288 c16 20 16 48 0 68"/></g>
+<g><rect x="130" y="150" width="150" height="180" rx="10" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><rect x="150" y="172" width="110" height="64" rx="6" fill="#0aa2e8" opacity=".25"/><path d="M150 260 h110 M150 282 h84 M150 304 h96" stroke="#e4e9f1" stroke-width="7" stroke-linecap="round"/><circle cx="256" cy="310" r="9" fill="#16d6c1"/><text x="205" y="356" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">poster</text></g>
+<g><rect x="880" y="140" width="150" height="180" rx="10" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><text x="955" y="176" text-anchor="middle" font-size="15" font-weight="800" fill="#0a1b34">MENU</text><path d="M902 196 h106 M902 220 h80 M902 244 h92 M902 268 h70" stroke="#e4e9f1" stroke-width="7" stroke-linecap="round"/><circle cx="1006" cy="292" r="9" fill="#16d6c1"/><text x="955" y="346" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">menu</text></g>
+<g><path d="M180 420 l80 -34 80 34 v90 l-80 34 -80 -34 Z" fill="#e8d9c3"/><path d="M180 420 l80 34 80 -34" fill="none" stroke="#c9b28e" stroke-width="3"/><path d="M260 454 v90" stroke="#c9b28e" stroke-width="3"/><circle cx="300" cy="440" r="9" fill="#16d6c1"/><text x="260" y="580" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">packaging</text></g>
+<g><rect x="880" y="420" width="170" height="104" rx="12" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><rect x="898" y="440" width="52" height="10" rx="5" fill="#0a1b34"/><path d="M898 466 h120 M898 486 h96" stroke="#e4e9f1" stroke-width="6" stroke-linecap="round"/><circle cx="1022" cy="500" r="9" fill="#16d6c1"/><text x="965" y="560" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">business card</text></g>
+<rect x="360" y="540" width="200" height="36" rx="18" fill="#0a1b34"/><text x="460" y="563" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">One tap. No app.</text>
+<rect x="590" y="540" width="330" height="36" rx="18" fill="#dcfce7"/><text x="755" y="563" text-anchor="middle" font-size="14.5" font-weight="800" fill="#15803d">NTAG213 · 215 · 216 — sized to the data</text>
+</svg>`,
+nfc_tamper: `<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="Tamper-evident NFC sticker self-destructing on removal while a QR code is easily photocopied">
+<defs><pattern id="pnt" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0b6fb8" opacity="0.07"/></pattern></defs>
+<rect width="1200" height="620" rx="18" fill="#fffdf6"/><rect width="1200" height="620" rx="18" fill="url(#pnt)"/>
+<text x="600" y="58" text-anchor="middle" font-size="30" font-weight="800" fill="#0a1b34">Why counterfeiters hate NFC</text>
+<text x="600" y="90" text-anchor="middle" font-size="16" fill="#5b6b82">A QR code photocopies in seconds. A locked chip doesn't photocopy at all.</text>
+<rect x="90" y="130" width="480" height="410" rx="20" fill="#fff" stroke="#e4e9f1" stroke-width="2"/>
+<text x="330" y="172" text-anchor="middle" font-size="19" font-weight="800" fill="#5b6b82">THE QR CODE</text>
+<rect x="180" y="200" width="130" height="130" rx="10" fill="#fffdf6" stroke="#0a1b34" stroke-width="3"/>
+<g fill="#0a1b34"><rect x="196" y="216" width="30" height="30"/><rect x="264" y="216" width="30" height="30"/><rect x="196" y="284" width="30" height="30"/><rect x="240" y="250" width="14" height="14"/><rect x="270" y="270" width="22" height="12"/><rect x="240" y="292" width="12" height="22"/></g>
+<path d="M330 264 h96" stroke="#5b6b82" stroke-width="5" stroke-linecap="round"/><path d="M410 252 l18 12 -18 12" fill="none" stroke="#5b6b82" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="436" y="204" width="118" height="122" rx="10" fill="#fffdf6" stroke="#5b6b82" stroke-width="3" stroke-dasharray="8 6" transform="rotate(6 495 265)"/>
+<g fill="#5b6b82" opacity=".75" transform="rotate(6 495 265)"><rect x="450" y="218" width="27" height="27"/><rect x="512" y="218" width="27" height="27"/><rect x="450" y="280" width="27" height="27"/></g>
+<rect x="150" y="380" width="360" height="36" rx="18" fill="#fee2e2"/><text x="330" y="404" text-anchor="middle" font-size="15" font-weight="800" fill="#ef4444">copied in seconds — looks identical</text>
+<text x="330" y="470" text-anchor="middle" font-size="14.5" fill="#5b6b82">Great for reach. Useless as proof.</text>
+<rect x="630" y="130" width="480" height="410" rx="20" fill="#fff" stroke="#16d6c1" stroke-width="2.5"/>
+<text x="870" y="172" text-anchor="middle" font-size="19" font-weight="800" fill="#0b6fb8">THE NFC STICKER</text>
+<g><path d="M700 240 h150 l-14 16 14 16 h-150 Z" fill="#16d6c1" opacity=".85"/><path d="M866 232 c22 -18 56 -12 64 8" fill="none" stroke="#5b6b82" stroke-width="4" stroke-linecap="round"/>
+<circle cx="775" cy="256" r="12" fill="none" stroke="#0a1b34" stroke-width="3"/><rect x="770" y="251" width="10" height="10" fill="#0a1b34"/>
+<path d="M852 226 l10 -18 M868 224 l4 -20 M884 226 l14 -16" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/></g>
+<text x="700" y="238" text-anchor="middle" font-size="13" font-weight="700" fill="#ef4444" transform="rotate(-8 700 238)">VOID</text>
+<text x="820" y="300" text-anchor="middle" font-size="14.5" fill="#5b6b82">peel it — the face shreds, the antenna dies</text>
+<g><rect x="700" y="330" width="340" height="80" rx="14" fill="#0a1b34"/><text x="870" y="362" text-anchor="middle" font-size="15.5" font-weight="800" fill="#fff">Locked, unique chip inside</text><text x="870" y="390" text-anchor="middle" font-size="14" fill="#16d6c1">cannot be photocopied · verified by a tap</text></g>
+<rect x="700" y="440" width="340" height="36" rx="18" fill="#dcfce7"/><text x="870" y="464" text-anchor="middle" font-size="14.5" font-weight="800" fill="#15803d">QR for reach + hidden NFC for proof</text>
+<text x="870" y="516" text-anchor="middle" font-size="14.5" fill="#5b6b82">The pairing brands increasingly ship.</text>
+</svg>`,
+band_replaces: `<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="One RFID wristband replacing paper tickets, cash and access keycards at a theme park">
+<defs><pattern id="pbr" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0b6fb8" opacity="0.07"/></pattern></defs>
+<rect width="1200" height="620" rx="18" fill="#fffdf6"/><rect width="1200" height="620" rx="18" fill="url(#pbr)"/>
+<text x="600" y="58" text-anchor="middle" font-size="30" font-weight="800" fill="#0a1b34">One band. Three jobs. Zero pockets.</text>
+<text x="600" y="90" text-anchor="middle" font-size="16" fill="#5b6b82">Entry, payment and ride access move onto a waterproof strap.</text>
+<g><path d="M150 320 a150 105 0 1 0 300 0 a150 105 0 1 0 -300 0" fill="none" stroke="#16d6c1" stroke-width="46"/><rect x="252" y="270" width="96 " height="100" rx="22" fill="#0b6fb8"/><circle cx="300" cy="320" r="22" fill="none" stroke="#fffdf6" stroke-width="4"/><rect x="292" y="312" width="16" height="16" fill="#fffdf6"/>
+<text x="300" y="486" text-anchor="middle" font-size="15" font-weight="800" fill="#0b6fb8">the band</text></g>
+<path d="M492 320 h120" stroke="#5b6b82" stroke-width="6" stroke-linecap="round"/><path d="M588 304 l26 16 -26 16" fill="none" stroke="#5b6b82" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="552" y="292" text-anchor="middle" font-size="15" font-weight="800" fill="#5b6b82">replaces</text>
+<g opacity=".92"><rect x="680" y="180" width="190" height="86" rx="10" fill="#fff" stroke="#e4e9f1" stroke-width="2" transform="rotate(-7 775 223)"/><circle cx="712" cy="223" r="9" fill="none" stroke="#5b6b82" stroke-width="3" transform="rotate(-7 775 223)"/><path d="M740 206 h96 M740 226 h72 M740 246 h84" stroke="#e4e9f1" stroke-width="7" stroke-linecap="round" transform="rotate(-7 775 223)"/><text x="775" y="286" text-anchor="middle" font-size="13.5" font-weight="700" fill="#5b6b82">paper ticket</text></g>
+<g opacity=".92"><rect x="920" y="200" width="190" height="92" rx="10" fill="#dcfce7" stroke="#15803d" stroke-width="2"/><circle cx="1015" cy="246" r="26" fill="none" stroke="#15803d" stroke-width="3"/><text x="1015" y="254" text-anchor="middle" font-size="20" font-weight="800" fill="#15803d">$</text><text x="1015" y="316" text-anchor="middle" font-size="13.5" font-weight="700" fill="#5b6b82">cash handling</text></g>
+<g opacity=".92"><rect x="800" y="360" width="190" height="110" rx="12" fill="#fff" stroke="#e4e9f1" stroke-width="2" transform="rotate(5 895 415)"/><rect x="824" y="384" width="56" height="40" rx="6" fill="#0aa2e8" opacity=".3" transform="rotate(5 895 415)"/><path d="M900 396 h70 M900 420 h52 M900 444 h64" stroke="#e4e9f1" stroke-width="7" stroke-linecap="round" transform="rotate(5 895 415)"/><text x="895" y="502" text-anchor="middle" font-size="13.5" font-weight="700" fill="#5b6b82">access card</text></g>
+<g stroke="#ef4444" stroke-width="6" stroke-linecap="round"><path d="M690 196 L1106 300"/><path d="M1106 196 L690 300"/></g>
+<rect x="210" y="540" width="780" height="40" rx="20" fill="#0a1b34"/><text x="600" y="566" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">Tap to enter · tap to pay · tap for rides &amp; lockers — printed edge to edge in park colours</text>
+</svg>`,
+band_queue: `<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="Theme park queues shrinking after RFID wristbands with live operator dashboard">
+<defs><pattern id="pbq" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0b6fb8" opacity="0.07"/></pattern></defs>
+<rect width="1200" height="620" rx="18" fill="#fffdf6"/><rect width="1200" height="620" rx="18" fill="url(#pbq)"/>
+<text x="600" y="58" text-anchor="middle" font-size="30" font-weight="800" fill="#0a1b34">Queues are a hardware problem</text>
+<text x="600" y="90" text-anchor="middle" font-size="16" fill="#5b6b82">Tickets get fumbled. Taps don't.</text>
+<rect x="80" y="130" width="640" height="200" rx="20" fill="#fff" stroke="#e4e9f1" stroke-width="2"/>
+<text x="130" y="172" font-size="17" font-weight="800" fill="#ef4444">BEFORE</text>
+<rect x="600" y="170" width="18" height="130" rx="6" fill="#0a1b34"/><rect x="560" y="170" width="18" height="130" rx="6" fill="#0a1b34"/>
+<g fill="#fbd38d"><circle cx="150" cy="240" r="15"/><circle cx="192" cy="252" r="15"/><circle cx="234" cy="240" r="15"/><circle cx="276" cy="252" r="15"/><circle cx="318" cy="240" r="15"/><circle cx="360" cy="252" r="15"/><circle cx="402" cy="240" r="15"/><circle cx="444" cy="252" r="15"/><circle cx="486" cy="240" r="15"/><circle cx="524" cy="252" r="15"/></g>
+<text x="380" y="312" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">paper tickets, one fumble at a time</text>
+<rect x="80" y="360" width="640" height="200" rx="20" fill="#fff" stroke="#16d6c1" stroke-width="2.5"/>
+<text x="130" y="402" font-size="17" font-weight="800" fill="#15803d">AFTER</text>
+<rect x="600" y="400" width="18" height="130" rx="6" fill="#0a1b34"/><rect x="560" y="400" width="18" height="130" rx="6" fill="#0a1b34"/>
+<path d="M540 448 c14 -12 34 -12 48 0" fill="none" stroke="#16d6c1" stroke-width="5" stroke-linecap="round"/>
+<g fill="#fbd38d"><circle cx="440" cy="470" r="15"/><circle cx="488" cy="478" r="15"/><circle cx="534" cy="470" r="15"/></g>
+<text x="330" y="480" text-anchor="middle" font-size="15" font-weight="800" fill="#15803d">tap · walk through</text>
+<rect x="770" y="130" width="350 " height="430" rx="20" fill="#0a1b34"/>
+<text x="945" y="176" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">OPERATOR VIEW — LIVE</text>
+<rect x="810" y="210" width="270" height="10" rx="5" fill="#16d6c1" opacity=".25"/><rect x="810" y="210" width="216" height="10" rx="5" fill="#16d6c1"/><text x="810" y="248" font-size="13.5" fill="#94a3b8">gate throughput</text>
+<rect x="810" y="280" width="270" height="10" rx="5" fill="#0aa2e8" opacity=".25"/><rect x="810" y="280" width="176" height="10" rx="5" fill="#0aa2e8"/><text x="810" y="318" font-size="13.5" fill="#94a3b8">cashless spend</text>
+<g><rect x="810" y="350" width="60" height="90" rx="6" fill="#16d6c1" opacity=".8"/><rect x="884" y="380" width="60" height="60" rx="6" fill="#16d6c1" opacity=".55"/><rect x="958" y="330" width="60" height="110" rx="6" fill="#16d6c1"/><path d="M810 458 h270" stroke="#334155" stroke-width="2"/></g>
+<text x="945" y="500" text-anchor="middle" font-size="13.5" fill="#94a3b8">where guests are · how they spend</text>
+<text x="945" y="534" text-anchor="middle" font-size="14.5" font-weight="700" fill="#16d6c1">shorter queues · less cash · live data</text>
+</svg>`,
+food_pallet: `<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="Barcode scanning one box at a time versus an RFID portal reading a whole pallet automatically">
+<defs><pattern id="pfp" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0b6fb8" opacity="0.07"/></pattern></defs>
+<rect width="1200" height="620" rx="18" fill="#fffdf6"/><rect width="1200" height="620" rx="18" fill="url(#pfp)"/>
+<text x="600" y="58" text-anchor="middle" font-size="30" font-weight="800" fill="#0a1b34">Barcode counts boxes. RFID counts pallets.</text>
+<text x="600" y="90" text-anchor="middle" font-size="16" fill="#5b6b82">One needs line of sight and patience. The other needs a doorway.</text>
+<g><circle cx="200" cy="240" r="26" fill="#fbd38d"/><circle cx="191" cy="236" r="2.6" fill="#0a1b34"/><circle cx="209" cy="236" r="2.6" fill="#0a1b34"/><path d="M192 250 q8 5 16 0" fill="none" stroke="#0a1b34" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="178" y="266" width="44" height="64" rx="14" fill="#0b6fb8"/><line x1="222" y1="284" x2="266" y2="272" stroke="#0b6fb8" stroke-width="11" stroke-linecap="round"/>
+<rect x="258" y="258" width="40" height="26" rx="6" fill="#5b6b82"/><path d="M298 271 l50 20" stroke="#ef4444" stroke-width="3.5" stroke-dasharray="7 6"/>
+<rect x="344" y="272" width="86" height="66" rx="8" fill="#e8d9c3"/><path d="M354 288 h10 M370 288 h4 M382 288 h8 M396 288 h6 M354 300 v22 M366 300 v22 M380 300 v22 M394 300 v22 M408 300 v22" stroke="#0a1b34" stroke-width="3"/>
+<text x="290" y="392" text-anchor="middle" font-size="14.5" font-weight="700" fill="#5b6b82">one at a time · line of sight only</text>
+<rect x="140" y="430" width="300" height="34" rx="17" fill="#fee2e2"/><text x="290" y="452" text-anchor="middle" font-size="14" font-weight="800" fill="#ef4444">the whole truck? see you at midnight</text></g>
+<circle cx="600" cy="320" r="40" fill="#0a1b34"/><text x="600" y="331" text-anchor="middle" font-size="24" font-weight="900" fill="#f59e0b">VS</text>
+<g><rect x="720" y="150" width="26" height="360" rx="8" fill="#0b6fb8"/><rect x="1120" y="150" width="26" height="360" rx="8" fill="#0b6fb8"/><rect x="720" y="140" width="426" height="22" rx="8" fill="#0b6fb8"/>
+<g stroke="#16d6c1" stroke-width="3.5" fill="none" opacity=".8"><path d="M760 250 c30 22 30 118 0 140"/><path d="M1106 250 c-30 22 -30 118 0 140"/></g>
+<g><rect x="820" y="404" width="70" height="52" rx="6" fill="#e8d9c3"/><rect x="898" y="404" width="70" height="52" rx="6" fill="#e8d9c3"/><rect x="976" y="404" width="70" height="52" rx="6" fill="#e8d9c3"/><rect x="820" y="344" width="70" height="52" rx="6" fill="#e8d9c3"/><rect x="898" y="344" width="70" height="52" rx="6" fill="#e8d9c3"/><rect x="976" y="344" width="70" height="52" rx="6" fill="#e8d9c3"/><rect x="858" y="284" width="70" height="52" rx="6" fill="#e8d9c3"/><rect x="936" y="284" width="70" height="52" rx="6" fill="#e8d9c3"/>
+<rect x="806" y="464" width="256" height="18" rx="4" fill="#c9b28e"/></g>
+<g fill="#15803d"><circle cx="890" cy="404" r="11"/><circle cx="968" cy="404" r="11"/><circle cx="1046" cy="404" r="11"/><circle cx="890" cy="344" r="11"/><circle cx="968" cy="344" r="11"/><circle cx="1046" cy="344" r="11"/><circle cx="928" cy="284" r="11"/><circle cx="1006" cy="284" r="11"/></g>
+<g stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M885 404 l4 4 7 -8"/><path d="M963 404 l4 4 7 -8"/><path d="M1041 404 l4 4 7 -8"/><path d="M885 344 l4 4 7 -8"/><path d="M963 344 l4 4 7 -8"/><path d="M1041 344 l4 4 7 -8"/><path d="M923 284 l4 4 7 -8"/><path d="M1001 284 l4 4 7 -8"/></g>
+<text x="933" y="540" text-anchor="middle" font-size="14.5" font-weight="700" fill="#15803d">whole pallet, time-stamped, automatic</text></g>
+<text x="600" y="588" text-anchor="middle" font-size="15" font-weight="700" fill="#5b6b82">A complete trace from farm or factory to shelf — the backbone of freshness and recalls.</text>
+</svg>`,
+food_recall: `<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="Targeted food recall pulling only batch B-17 while other traced batches stay on shelf">
+<defs><pattern id="pfr" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0b6fb8" opacity="0.07"/></pattern></defs>
+<rect width="1200" height="620" rx="18" fill="#fffdf6"/><rect width="1200" height="620" rx="18" fill="url(#pfr)"/>
+<text x="600" y="58" text-anchor="middle" font-size="30" font-weight="800" fill="#0a1b34">Recall one batch, not the whole aisle</text>
+<text x="600" y="90" text-anchor="middle" font-size="16" fill="#5b6b82">When every lot is traced, the crane knows exactly what to lift.</text>
+<path d="M330 130 h14 v96 h-14 Z" fill="#5b6b82"/><path d="M200 130 h340 v14 h-340 Z" fill="#5b6b82"/><path d="M337 226 q0 22 22 22 h60" fill="none" stroke="#5b6b82" stroke-width="7" stroke-linecap="round"/>
+<g transform="rotate(-4 470 300)"><rect x="400" y="252" width="140" height="96" rx="10" fill="#f59e0b"/><rect x="418" y="270" width="104" height="34" rx="8" fill="#0a1b34"/><text x="470" y="293" text-anchor="middle" font-size="16" font-weight="800" fill="#fff">B-17</text><text x="470" y="330" text-anchor="middle" font-size="13" font-weight="700" fill="#7c2d12">the bad apple</text></g>
+<g>
+<rect x="130" y="410" width="140" height="96" rx="10" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><text x="200" y="450" text-anchor="middle" font-size="15" font-weight="800" fill="#0a1b34">B-14</text><circle cx="200" cy="478" r="12" fill="#15803d"/><path d="M194 478 l4 5 9 -10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="290" y="410" width="140" height="96" rx="10" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><text x="360" y="450" text-anchor="middle" font-size="15" font-weight="800" fill="#0a1b34">B-15</text><circle cx="360" cy="478" r="12" fill="#15803d"/><path d="M354 478 l4 5 9 -10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="450" y="410" width="140" height="96" rx="10" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><text x="520" y="450" text-anchor="middle" font-size="15" font-weight="800" fill="#0a1b34">B-16</text><circle cx="520" cy="478" r="12" fill="#15803d"/><path d="M514 478 l4 5 9 -10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="610" y="410" width="140" height="96" rx="10" fill="#fff" stroke="#e4e9f1" stroke-width="2" stroke-dasharray="8 6"/><text x="680" y="450" text-anchor="middle" font-size="15" font-weight="800" fill="#94a3b8">B-17</text><text x="680" y="482" text-anchor="middle" font-size="12.5" font-weight="700" fill="#f59e0b">lifted ↑</text>
+<rect x="770" y="410" width="140" height="96" rx="10" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><text x="840" y="450" text-anchor="middle" font-size="15" font-weight="800" fill="#0a1b34">B-18</text><circle cx="840" cy="478" r="12" fill="#15803d"/><path d="M834 478 l4 5 9 -10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="930" y="410" width="140" height="96" rx="10" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><text x="1000" y="450" text-anchor="middle" font-size="15" font-weight="800" fill="#0a1b34">B-19</text><circle cx="1000" cy="478" r="12" fill="#15803d"/><path d="M994 478 l4 5 9 -10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+</g>
+<g><rect x="700" y="180 " width="400" height="150" rx="16" fill="#0a1b34"/><text x="900" y="222" text-anchor="middle" font-size="17" font-weight="800" fill="#fff">Batch + expiry encoded on every label</text><text x="900" y="256" text-anchor="middle" font-size="14.5" fill="#16d6c1">first-expired-first-out rotation</text><text x="900" y="288" text-anchor="middle" font-size="14.5" fill="#16d6c1">cold, damp &amp; freezer-grade constructions</text><text x="900" y="316" text-anchor="middle" font-size="13.5" fill="#94a3b8">applied to packaging — never the food itself</text></g>
+<text x="600" y="576" text-anchor="middle" font-size="15" font-weight="700" fill="#15803d">Consumers protected. Waste limited. Auditors satisfied.</text>
+</svg>`,
+walmart_domino: `<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="Walmart apparel RFID success tipping into fresh food and the wider grocery industry like dominoes">
+<defs><pattern id="pwd" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0b6fb8" opacity="0.07"/></pattern></defs>
+<rect width="1200" height="620" rx="18" fill="#fffdf6"/><rect width="1200" height="620" rx="18" fill="url(#pwd)"/>
+<text x="600" y="58" text-anchor="middle" font-size="30" font-weight="800" fill="#0a1b34">When the biggest shelf moves, shelves move</text>
+<text x="600" y="90" text-anchor="middle" font-size="16" fill="#5b6b82">Apparel tagging proved it. Fresh food makes it mainstream.</text>
+<path d="M110 500 H1090" stroke="#e4e9f1" stroke-width="5" stroke-linecap="round"/>
+<g transform="rotate(58 240 500)"><rect x="170" y="230" width="140" height="270" rx="14" fill="#0a1b34"/><text x="240" y="380" text-anchor="middle" font-size="19" font-weight="800" fill="#fff" transform="rotate(-58 240 380)">APPAREL</text><circle cx="240" cy="290" r="14" fill="#16d6c1"/></g>
+<g transform="rotate(24 520 500)"><rect x="455" y="260" width="130" height="240" rx="13" fill="#f59e0b"/><text x="520" y="390" text-anchor="middle" font-size="17" font-weight="800" fill="#fff" transform="rotate(-24 520 390)">FRESH FOOD</text><circle cx="520" cy="316" r="12" fill="#fffdf6"/></g>
+<g><rect x="700" y="290" width="110" height="210" rx="12" fill="#0b6fb8"/><text x="755" y="404" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">GROCERY</text></g>
+<g><rect x="860" y="310" width="96" height="190" rx="11" fill="#0aa2e8"/><text x="908" y="412" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">RETAIL</text></g>
+<g><rect x="996" y="330" width="84" height="170" rx="10" fill="#16d6c1"/><text x="1038" y="422" text-anchor="middle" font-size="12.5" font-weight="800" fill="#0a1b34">EVERYONE</text></g>
+<path d="M330 250 c60 -40 140 -40 190 -6" fill="none" stroke="#ef4444" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 12"/><path d="M506 232 l18 14 -24 6" fill="#ef4444"/>
+<rect x="300" y="540" width="600" height="40" rx="20" fill="#0a1b34"/><text x="600" y="566" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">Item-level tagging goes mainstream — and label demand goes vertical</text>
+</svg>`,
+walmart_hostile: `<svg viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" role="img" aria-label="Fresh food environment challenges for RFID labels: cold, condensation, metal shelving and high water content produce">
+<defs><pattern id="pwh" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="2" fill="#0b6fb8" opacity="0.07"/></pattern></defs>
+<rect width="1200" height="620" rx="18" fill="#fffdf6"/><rect width="1200" height="620" rx="18" fill="url(#pwh)"/>
+<text x="600" y="58" text-anchor="middle" font-size="30" font-weight="800" fill="#0a1b34">Fresh food: hostile terrain for a radio</text>
+<text x="600" y="90" text-anchor="middle" font-size="16" fill="#5b6b82">Cold, damp, metal and watery produce all detune a standard antenna.</text>
+<g><rect x="480" y="260" width="240" height="120" rx="14" fill="#fff" stroke="#0b6fb8" stroke-width="3"/><path d="M508 320 h44 m8 0 h24 m8 0 h44 m8 0 h24" stroke="#0aa2e8" stroke-width="4" stroke-linecap="round"/><circle cx="600" cy="320" r="17" fill="none" stroke="#0b6fb8" stroke-width="3"/><rect x="593" y="313" width="14" height="14" fill="#0b6fb8"/>
+<text x="600" y="416" text-anchor="middle" font-size="15" font-weight="800" fill="#0b6fb8">tuned, food-safe label</text></g>
+<g><rect x="120" y="150" width="190" height="110" rx="16" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><g stroke="#0aa2e8" stroke-width="4" stroke-linecap="round"><path d="M215 176 v52"/><path d="M193 189 l44 26"/><path d="M237 189 l-44 26"/></g><text x="215" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">cold chain</text></g>
+<g><rect x="120" y="330" width="190" height="110" rx="16" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><g fill="#0aa2e8"><path d="M195 356 c-11 15 -11 24 0 32 c11 -8 11 -17 0 -32"/><path d="M230 368 c-9 13 -9 20 0 27 c9 -7 9 -14 0 -27"/></g><text x="215" y="422" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">condensation</text></g>
+<g><rect x="890" y="150" width="190" height="110" rx="16" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><rect x="920" y="180" width="130" height="14" rx="4" fill="#5b6b82"/><rect x="920" y="204" width="130" height="14" rx="4" fill="#94a3b8"/><text x="985" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">metal shelving</text></g>
+<g><rect x="890" y="330" width="190" height="110" rx="16" fill="#fff" stroke="#e4e9f1" stroke-width="2"/><circle cx="944" cy="382" r="22" fill="#dcfce7" stroke="#15803d" stroke-width="3"/><path d="M930 375 q14 -12 28 0 M930 389 q14 -10 28 0" fill="none" stroke="#15803d" stroke-width="2.5"/><text x="1030" y="388" text-anchor="middle" font-size="13" font-weight="800" fill="#15803d">95% water</text><text x="985" y="422" text-anchor="middle" font-size="14" font-weight="700" fill="#5b6b82">wet produce</text></g>
+<g stroke="#ef4444" stroke-width="4" stroke-linecap="round" fill="none" opacity=".8"><path d="M312 214 c70 30 110 62 160 90"/><path d="M312 380 c70 -14 110 -34 160 -48"/><path d="M888 214 c-70 30 -110 62 -160 90"/><path d="M888 380 c-70 -14 -110 -34 -160 -48"/></g>
+<rect x="180" y="480" width="250" height="36" rx="18" fill="#0a1b34"/><text x="305" y="504" text-anchor="middle" font-size="14.5" font-weight="800" fill="#fff">chilled-tuned inlays</text>
+<rect x="470" y="480" width="250" height="36" rx="18" fill="#0a1b34"/><text x="595" y="504" text-anchor="middle" font-size="14.5" font-weight="800" fill="#fff">food-safe adhesives</text>
+<rect x="760" y="480" width="260" height="36" rx="18" fill="#0a1b34"/><text x="890" y="504" text-anchor="middle" font-size="14.5" font-weight="800" fill="#fff">GS1 EPC / SGTIN encoding</text>
+<text x="600" y="574" text-anchor="middle" font-size="15" font-weight="700" fill="#5b6b82">At this scale, manufacturing capacity decides who can actually supply the rollout.</text>
+</svg>`,
+};
+
 const NEWS = [
   {
-    slug: 'news-blocking-card.html', oldUrl: 'https://www.rfidmfg.com/news/chengdu-mind-iot-technology-launches-high-performance-rfid-blocking-card-for-enhanced-data-privacy/', crumbCat: 'News', crumbCatHref: 'news.html',
-    title: 'RFID MFG Launches High-Performance RFID-Blocking Card | RFID MFG', h1: 'RFID MFG launches a high-performance RFID-blocking card for data privacy', meta: 'Company News · May 25, 2026', img: '', date: '2026-05-25',
-    lead: 'RFID MFG’s new blocking card sits in a wallet and disrupts unauthorized 13.56 MHz scans, shielding the cards around it from skimming.',
+    slug: 'news-blocking-card.html', oldUrl: 'https://www.rfidmfg.com/news/chengdu-mind-iot-technology-launches-high-performance-rfid-blocking-card-for-enhanced-data-privacy/', crumbCat: 'Blog', crumbCatHref: 'news.html',
+    title: 'The Card That Silences Skimmers — Our RFID-Blocking Card | RFID MFG', h1: 'The card that silences skimmers: our high-performance RFID-blocking card', meta: 'Company News · May 25, 2026', img: '', date: '2026-05-25',
+    lead: 'Every contactless card is always ready to chat. RFID MFG’s new blocking card makes sure it only chats with readers you actually meant to tap.',
     body: [
-      'As contactless payment, smart ID and wireless access become everyday technology, so does the risk of unauthorized scanning. A criminal with a hidden reader can, in theory, attempt to read a contactless card through a bag or pocket. RFID MFG’s new blocking card is designed to neutralise that threat.',
-      'Slipped into a wallet or cardholder, the card disrupts unauthorized reads at 13.56 MHz so the cards beside it cannot be silently scanned. It is a simple, brandable way for banks and businesses to give customers peace of mind.',
+      'Every contactless card in your wallet is, technically, always ready to talk — to payment terminals, to door readers, and unfortunately to anyone who walks past with a hidden reader. As tap-to-pay, smart ID and wireless access become everyday habits, that uninvited conversation is the risk. RFID MFG’s new blocking card is designed to end it.',
+      'Slip one card into a wallet or cardholder and it disrupts unauthorized reads at 13.56 MHz, so the cards beside it cannot be silently scanned. No app, no pairing, no maintenance — just a printable, everyday card format that banks and brands can hand to customers as peace of mind with a logo on it.',
+    ],
+    art: [
+      { after: 0, svg: ART.blocking_thief, cap: 'The hidden reader gets exactly one answer — and it isn’t from your bank card.' },
+      { after: 1, svg: ART.blocking_vs, cap: 'Passive absorbs and detunes the field; active answers back with a disrupting signal. Same card slot, same branding, very different temperament.' },
     ],
     table: { cap: 'Passive vs active blocking cards', head: ['Type', 'How it works', 'Power'], rows: [['Passive shield', 'Detunes/absorbs the field', 'None needed'], ['Active jammer', 'Emits a disrupting signal', 'Built-in battery']] },
     points: ['Protects a whole wallet from contactless skimming', 'Passive shielding or active LED-jamming versions', 'Fully printable for bank and brand promotions', 'Lightweight, everyday card format'],
     faqs: [['How does an RFID-blocking card work?', 'It either absorbs and detunes the 13.56 MHz field (passive) or emits a disrupting signal (active), so nearby contactless cards cannot be read without your knowledge.'], ['Does one blocking card protect all my cards?', 'A single card placed in the same wallet or sleeve shields the contactless cards around it; very large wallets may benefit from one on each side.']],
   },
   {
-    slug: 'news-rail.html', oldUrl: 'https://www.rfidmfg.com/news/the-invisible-network-powering-the-future-of-rail-with-rfid/', crumbCat: 'News', crumbCatHref: 'news.html',
-    title: 'Powering the Future of Rail with RFID | RFID MFG', h1: 'The invisible network: powering the future of rail with RFID', meta: 'Industry News · May 12, 2026', img: '', date: '2026-05-12',
-    lead: 'RFID quietly improves rail safety, asset tracking and efficiency — identifying rolling stock and components automatically, without manual scanning.',
+    slug: 'news-rail.html', oldUrl: 'https://www.rfidmfg.com/news/the-invisible-network-powering-the-future-of-rail-with-rfid/', crumbCat: 'Blog', crumbCatHref: 'news.html',
+    title: 'Railways Run on Steel, Timetables — and Tiny Radio Chips | RFID MFG', h1: 'Railways run on steel, timetables — and tiny radio chips', meta: 'Industry News · May 12, 2026', img: '', date: '2026-05-12',
+    lead: 'A rail network is thousands of near-identical assets with a safety case attached to each one. RFID is how the network remembers which is which — automatically, at speed.',
     body: [
-      'Rail networks are vast, distributed and safety-critical, which makes reliable identification essential. RFID tags on rolling stock, wagons and key components let trackside readers identify assets automatically as they pass, building an accurate, real-time picture of the network.',
-      'Beyond identification, the same data underpins predictive maintenance and spare-parts inventory: knowing exactly which component is where, and when it was last serviced, keeps networks safe and running on time.',
+      'A rail network is thousands of moving assets that all look alike, spread over thousands of kilometres, with a safety case attached to every one of them. Reliable identification is not a nice-to-have; it is the whole game. RFID tags on rolling stock, wagons and key components let trackside readers identify assets automatically as they pass — no stopping, no clipboards — building an accurate, real-time picture of the network.',
+      'The same reads quietly feed predictive maintenance and spare-parts inventory: knowing exactly which component is where, and when it was last serviced, is what keeps networks safe and trains on time.',
       'The hardware has to withstand a punishing environment — vibration, grease, weather and wide temperature swings — so rail uses rugged on-metal and industrial tags, often UHF for trackside range or specialised high-temperature tags near braking systems. Each tag carries a permanent, factory-locked ID (the chip TID) that is difficult to forge, which supports both authentication and chain-of-custody for safety-critical parts. Tags are typically read by fixed trackside or depot readers and reconciled against the asset database automatically, removing manual inspection error.',
+    ],
+    art: [
+      { after: 0, svg: ART.rail_gate, cap: 'Every wagon announces itself at line speed. The reader logs it, the database reconciles it, and nobody climbs down with a torch.' },
+      { after: 2, svg: ART.rail_gauntlet, cap: 'Vibration, grease, weather and -40…+85 °C — in rail, the environment is the spec sheet. Factory-locked TIDs keep every identity honest.' },
     ],
     points: ['Automatic identification of rolling stock and components', 'Real-time asset location across a distributed network', 'Maintenance records tied to each physical asset', 'Supports safety, inventory and operational efficiency'],
     faqs: [['Why is RFID suited to rail asset tracking?', 'RFID reads automatically at speed and without line of sight, so trackside readers can identify passing rolling stock and components without stopping trains or manual scanning.'], ['What tags survive the rail environment?', 'Rugged on-metal and industrial tags rated for vibration, moisture and wide temperature ranges are used so they endure years of outdoor service.']],
   },
   {
-    slug: 'news-nfc-stickers.html', oldUrl: 'https://www.rfidmfg.com/news/nfc-stickers-have-entered-every-aspect-of-our-lives/', crumbCat: 'News', crumbCatHref: 'news.html',
-    title: 'NFC Stickers Have Entered Every Aspect of Our Lives | RFID MFG', h1: 'NFC stickers have entered every aspect of our lives', meta: 'Industry News · Feb 28, 2026', img: '', date: '2026-02-28',
-    lead: 'Slim, printable and inexpensive, NFC stickers turn ordinary objects into interactive touchpoints — for tap-to-share, smart packaging and authentication.',
+    slug: 'news-nfc-stickers.html', oldUrl: 'https://www.rfidmfg.com/news/nfc-stickers-have-entered-every-aspect-of-our-lives/', crumbCat: 'Blog', crumbCatHref: 'news.html',
+    title: 'The 2-Cent Chip That Turned Everything Into a Website | RFID MFG', h1: 'The 2-cent chip that turned everything into a website', meta: 'Industry News · Feb 28, 2026', img: '', date: '2026-02-28',
+    lead: 'NFC stickers are the most underestimated form of RFID: a chip under a printed label that connects any object to the internet with one tap — no app, no pairing, no typing.',
     body: [
-      'NFC stickers are one of the most versatile forms of RFID. Because nearly every smartphone can read NFC, a tiny chip under a printed label lets any object link to digital content with a single tap — no app, no pairing.',
-      'You meet them everywhere now: on product packaging for authentication and reorders, on posters and menus for tap-to-open links, on equipment for maintenance logs, and on business cards for instant contact sharing.',
+      'NFC stickers are the most underestimated form of RFID. Nearly every smartphone ships with an NFC reader built in, which means a tiny chip under a printed label can link any object to digital content with a single tap — no app, no pairing, no squinting at a URL on a poster.',
+      'Once you start noticing them, they are everywhere: product packaging that verifies itself and reorders, posters and menus that open with a tap, equipment that carries its own maintenance log, and business cards that introduce you before the handshake ends.',
       'Under the printed face, most stickers use an NTAG chip (213/215/216) sized to the data — a short URL, a vCard or a redirect that you can change later without reprinting. For anti-counterfeiting, a locked, unique chip on a tamper-evident face destroys itself if peeled, so a genuine tap can be trusted. Because the chip is invisible and cannot be photocopied like a QR code, brands increasingly pair a visible QR with a hidden NFC sticker: the QR for reach, the NFC for premium, verifiable interaction. We print and encode these to your artwork with locking and tamper options built in.',
+    ],
+    art: [
+      { after: 1, svg: ART.nfc_constellation, cap: 'Poster, menu, package, business card — one tap each. The chip is the hyperlink; the object becomes the button.' },
+      { after: 2, svg: ART.nfc_tamper, cap: 'A QR code photocopies in seconds; a locked NTAG chip does not photocopy at all. That asymmetry is the entire anti-counterfeit business case.' },
     ],
     points: ['Work with almost any modern smartphone', 'A tap opens a link, verifies a product or shares data', 'Thin and printable for packaging and posters', 'Low cost makes large rollouts affordable'],
     help: ['RFID MFG prints and encodes NFC labels and stickers with your artwork, with tamper-evident options and locked data for authentication use cases.'],
     faqs: [['What can an NFC sticker do when tapped?', 'It can open a website, show product or authentication info, share a contact, or trigger an action on the phone — all encoded into the chip as NDEF data.'], ['Can NFC stickers be tamper-evident?', 'Yes. Fragile face materials and special die-cuts destroy the sticker if removal is attempted, which suits anti-counterfeit and seal applications.']],
   },
   {
-    slug: 'news-wristband.html', oldUrl: 'https://www.rfidmfg.com/news/rfid-theme-park-wristband/', crumbCat: 'News', crumbCatHref: 'news.html',
-    title: 'RFID Theme-Park Wristbands | RFID MFG', h1: 'RFID theme-park wristbands', meta: 'Industry News · Oct 18, 2025', img: '', date: '2025-10-18',
-    lead: 'A single RFID wristband handles park entry, cashless payment and ride access — cutting queues for guests and giving operators live data.',
+    slug: 'news-wristband.html', oldUrl: 'https://www.rfidmfg.com/news/rfid-theme-park-wristband/', crumbCat: 'Blog', crumbCatHref: 'news.html',
+    title: 'One Wristband, Zero Tickets: How Theme Parks Killed the Queue | RFID MFG', h1: 'One wristband, zero tickets: how theme parks killed the queue', meta: 'Industry News · Oct 18, 2025', img: '', date: '2025-10-18',
+    lead: 'A park is a small city where everyone carries too much. One waterproof RFID band replaces tickets, cash and access cards — and hands operators live data as a bonus.',
     body: [
-      'Theme parks were among the first to embrace RFID wristbands, and it is easy to see why. One waterproof band replaces tickets, cash and access cards: guests tap to enter, tap to pay for food and merchandise, and tap to access rides or lockers.',
-      'For operators, that means shorter queues, less cash handling, and real-time insight into where guests are and how they spend — all of which improves both the experience and the bottom line.',
+      'Theme parks adopted RFID wristbands before almost anyone else, for a simple reason: a park is a small city where every visitor is carrying too much. One waterproof band replaces tickets, cash and access cards — guests tap to enter, tap to pay for food and merchandise, tap into rides and lockers, and nobody excavates a wet pocket at the top of a water slide.',
+      'Operators get the other half of the deal: shorter queues, less cash handling, and real-time insight into where guests are and how they spend — the numbers that improve both the experience and the bottom line.',
       'The band itself is engineered for the environment: a waterproof silicone or coated-fabric strap, an adjustable or one-time closure, and an HF/NFC chip (NTAG or MIFARE) that links to a prepaid balance for tap-to-pay, or a UHF chip where the park wants longer-range gate and ride reads. Bands can be printed edge to edge in the park’s colours and pre-encoded so they work the instant a guest puts one on. Reusable silicone bands can also be collected, sanitised and re-issued across seasons to cut cost and waste.',
+    ],
+    art: [
+      { after: 0, svg: ART.band_replaces, cap: 'Entry, payment, rides and lockers move onto one strap — printed edge to edge in the park’s colours and working the instant it goes on.' },
+      { after: 1, svg: ART.band_queue, cap: 'The before/after every operations manager wants: fewer fumbles at the gate, and a dashboard that finally tells the truth in real time.' },
     ],
     points: ['One band for entry, payment and ride access', 'Waterproof and comfortable for all-day wear', 'Shorter queues and less cash handling', 'Live guest-flow and spend analytics'],
     faqs: [['Are theme-park wristbands waterproof?', 'Yes. Silicone and coated fabric bands are fully waterproof, which is essential for water parks and all-weather outdoor use.'], ['How does cashless payment on a wristband work?', 'The band’s chip links to a prepaid balance or registered card, so a tap at any point of sale charges the guest’s account securely.']],
   },
   {
-    slug: 'news-food.html', oldUrl: 'https://www.rfidmfg.com/news/why-is-it-said-that-the-food-industry-is-in-great-need-of-rfid/', crumbCat: 'News', crumbCatHref: 'news.html',
-    title: 'Why the Food Industry Needs RFID | RFID MFG', h1: 'Why the food industry needs RFID', meta: 'Industry News · Oct 13, 2025', img: '', date: '2025-10-13',
-    lead: 'RFID gives the food industry end-to-end traceability — fast, accurate tracking from production to shelf that supports freshness, recalls and compliance.',
+    slug: 'news-food.html', oldUrl: 'https://www.rfidmfg.com/news/why-is-it-said-that-the-food-industry-is-in-great-need-of-rfid/', crumbCat: 'Blog', crumbCatHref: 'news.html',
+    title: 'Why Your Lettuce Needs a Radio | RFID MFG', h1: 'Why your lettuce needs a radio', meta: 'Industry News · Oct 13, 2025', img: '', date: '2025-10-13',
+    lead: 'Food safety is a memory problem — where has this product been? Barcodes remember one box at a time. RFID remembers whole pallets, automatically, with timestamps.',
     body: [
-      'Food safety depends on knowing where a product came from and where it has been. Barcodes capture some of this, but only one item at a time and only with a clear line of sight. RFID records whole pallets automatically, building a complete, time-stamped trace from farm or factory to shelf.',
-      'That visibility matters most when something goes wrong: a precise trace lets a recall target only the affected batch, protecting consumers and limiting waste — while everyday data helps manage freshness and shelf life.',
+      'Food safety is fundamentally a memory problem: where did this product come from, and where has it been? Barcodes remember some of it — one item at a time, with a clear line of sight and a patient human attached. RFID remembers whole pallets automatically, building a complete, time-stamped trace from farm or factory to shelf.',
+      'That memory earns its keep on the day something goes wrong: a precise trace lets a recall target only the affected batch — protecting consumers, sparing the stock that was never at risk, and keeping the waste bill small. On calmer days, the same data quietly manages freshness and shelf life.',
       'The labels themselves must be food-safe and survive cold, damp and packaging lines. UHF paper labels applied to cartons and crates give whole-pallet reads for warehousing and distribution, while washable or freezer-grade constructions suit chilled and frozen goods. Applied to outer packaging rather than the food itself, and encoded with batch and expiry data, RFID becomes the backbone of first-expired-first-out rotation and rapid, targeted recalls across grocery and catering.',
+    ],
+    art: [
+      { after: 0, svg: ART.food_pallet, cap: 'One needs line of sight and patience. The other needs a doorway. Guess which one finishes the truck before midnight.' },
+      { after: 1, svg: ART.food_recall, cap: 'With batch and expiry encoded on every label, a recall becomes a surgical lift — not a warehouse funeral.' },
     ],
     points: ['Whole-pallet reads build automatic traceability', 'Precise recalls limit waste and protect consumers', 'Better freshness and shelf-life management', 'Supports food-safety compliance and audits'],
     faqs: [['How does RFID improve food recalls?', 'Because each batch is traced automatically through the supply chain, a recall can target only the affected lots instead of pulling entire product lines, reducing waste and risk.'], ['Are RFID labels safe for food packaging?', 'Yes. Food-safe label constructions and adhesives are used, and tags are applied to packaging rather than the food itself.']],
   },
   {
-    slug: 'news-walmart.html', oldUrl: 'https://www.rfidmfg.com/news/walmart-will-start-using-rfid-technology-for-fresh-food-products/', crumbCat: 'News', crumbCatHref: 'news.html',
-    title: 'Walmart to Use RFID for Fresh-Food Products | RFID MFG', h1: 'Walmart to use RFID for fresh-food products', meta: 'Industry News · Oct 10, 2025', img: '', date: '2025-10-10',
-    lead: 'A major retailer expanding RFID into fresh food is a strong signal that item-level tagging is going mainstream across grocery and retail.',
+    slug: 'news-walmart.html', oldUrl: 'https://www.rfidmfg.com/news/walmart-will-start-using-rfid-technology-for-fresh-food-products/', crumbCat: 'Blog', crumbCatHref: 'news.html',
+    title: 'When Walmart Tags Lettuce, the Whole Industry Listens | RFID MFG', h1: 'When Walmart tags lettuce, the whole industry listens', meta: 'Industry News · Oct 10, 2025', img: '', date: '2025-10-10',
+    lead: 'A giant retailer extending RFID from apparel into fresh food is the clearest signal yet that item-level tagging has gone mainstream — and it resets the math for every supplier.',
     body: [
-      'When one of the world’s largest retailers extends RFID from apparel into fresh food, the whole industry takes note. Item-level tagging improves on-shelf availability, speeds up stock counts and tightens freshness management — benefits that apply far beyond a single chain.',
-      'Wider adoption like this drives demand for reliable, food-safe RFID labels and inlays at scale, an area where a manufacturer’s capacity and quality control become decisive.',
+      'When one of the world’s largest retailers extends RFID from apparel into fresh food, nobody in the supply chain gets to shrug. Item-level tagging improves on-shelf availability, speeds up stock counts and tightens freshness management — and a rollout at that scale resets expectations for every grocer watching from the next aisle.',
+      'It also resets the supplier math: adoption like this drives demand for reliable, food-safe RFID labels and inlays in serious volume — the point where a manufacturer’s capacity and quality control stop being brochure words and start being the product.',
       'Fresh food is harder to tag than apparel: labels meet cold, moisture and condensation, and often sit near metal shelving or high-water-content products that detune a standard antenna. That pushes retailers toward inlays tuned for chilled and damp conditions, food-safe adhesives, and consistent encoding to a GS1 EPC/SGTIN scheme so every store reads the same data. It is exactly the kind of high-volume, quality-critical program a multi-line factory with direct chip supply is built to serve — which is why upstream manufacturing capacity, not just the tag design, decides who can support a rollout at this scale.',
+    ],
+    art: [
+      { after: 0, svg: ART.walmart_domino, cap: 'Apparel proved the economics; fresh food makes it mainstream. Dominoes rarely fall back up.' },
+      { after: 2, svg: ART.walmart_hostile, cap: 'Cold, condensation, metal shelving and 95%-water produce — fresh food detunes a standard antenna, which is why tuned inlays and GS1 encoding decide who can supply the rollout.' },
     ],
     points: ['Signals mainstream, item-level RFID in grocery', 'Improves on-shelf availability and freshness', 'Raises demand for food-safe labels at scale', 'Manufacturing quality and capacity become key'],
     help: ['With six production lines and first-hand chip supply, RFID MFG is positioned to deliver food-grade UHF labels and inlays in the volumes that large retail programs require.'],
