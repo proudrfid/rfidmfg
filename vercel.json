@@ -4,6 +4,10 @@
   "outputDirectory": "dist",
   "trailingSlash": true,
   "cleanUrls": false,
+  "redirects": [
+    { "source": "/products/cards/project-based-card/", "destination": "/products/cards/custom-card-program/", "permanent": true },
+    { "source": "/products/tags/special-rfid-tags/", "destination": "/products/tags/specialty-rfid-tags/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

@@ -15,10 +15,10 @@ const SITE = 'https://www.rfidmfg.com';
 // 产品 slug -> 分类
 const CAT = {
   'contact-ic-chip-card': 'cards', 'hotel-key-card': 'cards', 'pvc-cards': 'cards', 'rfid-nfc-card': 'cards',
-  'rfid-epoxy-card': 'cards', 'project-based-card': 'cards', 'wooden-rfid-card': 'cards', 'metal-card': 'cards', 'eco-friendly-card': 'cards',
+  'rfid-epoxy-card': 'cards', 'custom-card-program': 'cards', 'wooden-rfid-card': 'cards', 'metal-card': 'cards', 'eco-friendly-card': 'cards',
   'nfc-business-card': 'cards', 'dual-frequency-card': 'cards', 'magnetic-stripe-card': 'cards', 'scratch-card': 'cards',
   'nfc-printed-label': 'labels', 'rfid-dry-inlay': 'labels', 'rfid-wet-inlay': 'labels', 'rfid-white-label': 'labels', 'uhf-rfid-label': 'labels',
-  'rfid-animal-tag': 'tags', 'rfid-anti-metal-tag': 'tags', 'rfid-keyfob': 'tags', 'rfid-wristband': 'tags', 'special-rfid-tags': 'tags',
+  'rfid-animal-tag': 'tags', 'rfid-anti-metal-tag': 'tags', 'rfid-keyfob': 'tags', 'rfid-wristband': 'tags', 'specialty-rfid-tags': 'tags',
   'rfid-laundry-tag': 'tags', 'nfc-dog-tag': 'tags', 'rfid-jewelry-tag': 'tags', 'rfid-library-tag': 'tags', 'uhf-windshield-tag': 'tags',
   'high-temperature-rfid-tag': 'tags', 'rfid-seal-tag': 'tags', 'rfid-silicone-wristband': 'tags', 'disposable-paper-wristband': 'tags',
   'rfid-blocking-card': 'blocking', 'rfid-blocking-sleeves': 'blocking', 'rfid-blocking-wallet': 'blocking',
@@ -185,7 +185,7 @@ for (const a of rootAssets) { if (fs.existsSync(path.join(ROOT, a))) fs.copyFile
 fs.mkdirSync(path.join(OUT, 'fonts'), { recursive: true });
 for (const a of fs.readdirSync(path.join(ROOT, 'fonts')).filter((x) => x.endsWith('.woff2'))) fs.copyFileSync(path.join(ROOT, 'fonts', a), path.join(OUT, 'fonts', a));
 fs.mkdirSync(path.join(OUT, 'images'), { recursive: true });
-for (const a of fs.readdirSync(path.join(ROOT, 'images')).filter((x) => x.endsWith('.webp') || /^par.*\.png$/.test(x))) fs.copyFileSync(path.join(ROOT, 'images', a), path.join(OUT, 'images', a));
+for (const a of fs.readdirSync(path.join(ROOT, 'images')).filter((x) => x.endsWith('.webp') || false)) fs.copyFileSync(path.join(ROOT, 'images', a), path.join(OUT, 'images', a));
 // datasheets (pre-built PDFs — static assets)
 if (fs.existsSync(path.join(ROOT, 'datasheets'))) {
   fs.mkdirSync(path.join(OUT, 'datasheets'), { recursive: true });
