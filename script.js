@@ -109,6 +109,50 @@
   // ===== Analytics helper — fires only if GA4 (gtag) is installed =====
   function track(name, params) { try { if (typeof window.gtag === 'function') window.gtag('event', name, params || {}); } catch (e) {} }
 
+  // ===== Products megamenu (desktop) =====
+  (function megamenu() {
+    var nav = document.getElementById('nav');
+    if (!nav) return;
+    var links = nav.querySelectorAll('a'), prodLink = null, i;
+    for (i = 0; i < links.length; i++) {
+      var h = links[i].getAttribute('href') || '';
+      if (h === 'products.html' || h === '/products/' || h === '/products') { prodLink = links[i]; break; }
+    }
+    if (!prodLink) return;
+    var MENU = [
+      { t: 'Cards', u: '/products/cards/', items: [['Hotel Keycard', 'hotel-key-card'], ['RFID / NFC Card', 'rfid-nfc-card'], ['NFC Business Card', 'nfc-business-card'], ['PVC Cards', 'pvc-cards'], ['Metal Card', 'metal-card'], ['Eco-Friendly Card', 'eco-friendly-card']] },
+      { t: 'Labels & Stickers', u: '/products/labels/', items: [['UHF RFID Label', 'uhf-rfid-label'], ['NFC Printed Label', 'nfc-printed-label'], ['RFID Wet Inlay', 'rfid-wet-inlay'], ['RFID Dry Inlay', 'rfid-dry-inlay'], ['White Label', 'rfid-white-label']] },
+      { t: 'RFID Tags', u: '/products/tags/', items: [['RFID Wristband', 'rfid-wristband'], ['Laundry Tag', 'rfid-laundry-tag'], ['Anti-Metal Tag', 'rfid-anti-metal-tag'], ['RFID Keyfob', 'rfid-keyfob'], ['Animal Tag', 'rfid-animal-tag'], ['Windshield Tag', 'uhf-windshield-tag']] },
+      { t: 'RFID Blocking', u: '/products/blocking/', items: [['Blocking Card', 'rfid-blocking-card'], ['Blocking Sleeves', 'rfid-blocking-sleeves'], ['Blocking Wallet', 'rfid-blocking-wallet']] },
+      { t: 'Hardware', u: '/products/hardware/', items: [['Reader / Writer', 'rfid-reader-writer'], ['Scan Module', 'barcode-scan-module'], ['Smart Cabinet', 'rfid-smart-cabinet'], ['IoT DTU / RTU', 'industrial-iot-dtu-rtu']] },
+    ];
+    var wrap = document.createElement('div');
+    wrap.className = 'mm';
+    prodLink.parentNode.insertBefore(wrap, prodLink);
+    wrap.appendChild(prodLink);
+    prodLink.setAttribute('aria-haspopup', 'true');
+    prodLink.setAttribute('aria-expanded', 'false');
+    var html = '';
+    for (i = 0; i < MENU.length; i++) {
+      var c = MENU[i], its = '';
+      for (var j = 0; j < c.items.length; j++) its += '<a href="' + c.u + c.items[j][1] + '/">' + c.items[j][0] + '</a>';
+      html += '<div class="mm__col"><a class="mm__cat" href="' + c.u + '">' + c.t + '</a>' + its + '<a class="mm__more" href="' + c.u + '">View all →</a></div>';
+    }
+    html += '<div class="mm__foot"><a href="/products/">Browse all 39 products →</a><a href="/contact/?sample=1#quoteForm">Get free samples →</a></div>';
+    var panel = document.createElement('div');
+    panel.className = 'mm__panel';
+    panel.setAttribute('role', 'menu');
+    panel.innerHTML = html;
+    wrap.appendChild(panel);
+    prodLink.addEventListener('click', function (e) {
+      var touch = window.matchMedia && window.matchMedia('(hover: none)').matches;
+      if (touch && !wrap.className.match(/\bopen\b/) && window.innerWidth > 980) { e.preventDefault(); wrap.className += ' open'; prodLink.setAttribute('aria-expanded', 'true'); }
+    });
+    document.addEventListener('click', function (e) {
+      if (!wrap.contains(e.target)) { wrap.className = wrap.className.replace(/ ?\bopen\b/, ''); prodLink.setAttribute('aria-expanded', 'false'); }
+    });
+  })();
+
   // Track high-intent clicks: WhatsApp, datasheet downloads, phone
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest ? e.target.closest('a') : null;

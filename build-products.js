@@ -1035,6 +1035,17 @@ ${FOOTER}
 `;
 }
 
+// ── sticky 左侧产品导航(汇总页与产品单页共用)──
+function sideNav(currentSlug, currentCat, forHub) {
+  const groups = CAT_ORDER.map((c) => {
+    const items = PRODUCTS.filter((x) => x.cat === c);
+    const expanded = forHub || c === currentCat;
+    const list = expanded ? `<ul>${items.map((x) => `<li${x.slug === currentSlug ? ' class="on"' : ''}><a href="/products/${c}/${x.slug}/">${esc(x.name)}</a></li>`).join('')}</ul>` : '';
+    return `<div class="snav__group"><a class="snav__cat" href="${forHub ? '#' + c : '/products/' + c + '/'}">${esc(CATS[c].name)}<span class="snav__count">${items.length}</span></a>${list}</div>`;
+  }).join('');
+  return `<aside class="snav" aria-label="Product navigation"><div class="snav__inner"><div class="snav__title">All products</div>${groups}<a class="snav__all" href="/products/">Product overview →</a><a class="snav__all" href="/contact/">Get a quote →</a></div></aside>`;
+}
+
 function productPage(p) {
   const cat = CATS[p.cat];
   const img = IMG[p.slug] || '';
@@ -1165,7 +1176,7 @@ var all=est.querySelectorAll('.est__tier'),i;for(i=0;i<all.length;i++)(function(
     </div>
   </div>
 </section>`;
-  const body = `<section class="section">
+  const inner = `<section class="section">
   <div class="container">
     <nav class="breadcrumb" style="justify-content:flex-start;color:var(--muted)"><a href="index.html">Home</a><span>/</span><a href="products.html">Products</a><span>/</span>${esc(p.name)}</nav>
     <div class="prod" style="margin-top:18px">
@@ -1252,6 +1263,7 @@ ${mfgNote}
     <a href="${quoteHref}" class="btn btn--ghost btn--lg">Request Wholesale Quote</a>
   </div>
 </section>`;
+  const body = `<div class="side-layout"><div class="side-layout__grid">${sideNav(p.slug, p.cat, false)}<div class="side-main">${inner}</div></div></div>`;
   const title = `${p.name} Manufacturer & Wholesale Supplier | RFID MFG`;
   const metaDesc = d.metaDesc || `${p.name} — custom OEM/ODM manufacturer & wholesale supplier since 1996. MOQ from ${moqFmt(w.moq)} ${wUnitPl}, free samples, 24-hour quote. Ships to 100+ countries.`;
   return page(title, metaDesc, `${p.slug}.html`, ld + '\n' + faqLd, body);
@@ -1280,12 +1292,12 @@ function catalogPage() {
     <p>Five core categories, hundreds of configurations — every item customizable to your chip, frequency, size, encoding and artwork.</p>
   </div>
 </section>
-<section class="section">
+<div class="side-layout"><div class="side-layout__grid">${sideNav('', '', true)}<div class="side-main"><section class="section">
   <div class="container">
     <nav class="cat-nav">${catNav}</nav>
     ${sections}
   </div>
-</section>
+</section></div></div></div>
 <section class="cta-band">
   <div class="container cta-band__inner">
     <div><h2>Can't find the exact spec you need?</h2><p>Send us your chip, frequency, size and artwork — we'll quote within 24 hours.</p></div>
