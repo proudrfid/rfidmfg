@@ -147,6 +147,19 @@
       var msg = form.querySelector('#message');
       if (msg && !msg.value) { msg.value = 'I would like a wholesale quote for: ' + prod + '\nTarget quantity: \nChip / frequency: \nCustom artwork / logo: '; }
     }
+    // Estimator handoff: ?qty= fills the target quantity; ?sample=1 ticks the sample box
+    var qty = qs.get('qty');
+    if (qty) {
+      var m2 = form.querySelector('#message');
+      if (m2) {
+        if (m2.value.indexOf('Target quantity: ') !== -1) m2.value = m2.value.replace('Target quantity: ', 'Target quantity: ' + qty + ' ');
+        else m2.value = (m2.value ? m2.value + '\n' : '') + 'Target quantity: ' + qty;
+      }
+    }
+    if (qs.get('sample')) {
+      var cb = form.querySelector('input[name="samples"]');
+      if (cb) cb.checked = true;
+    }
   })();
 
   function showNote(msg, ok) {

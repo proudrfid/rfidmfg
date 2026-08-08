@@ -146,6 +146,116 @@ const WHOLESALE_FAQ_VARIANTS = [
 ];
 const variantIndex = (slug, n) => { let s = 0; for (let i = 0; i < slug.length; i++) s += slug.charCodeAt(i); return s % n; };
 
+// ── 交互式阶梯估价器:数量档位由 MOQ 推导,单价在已发布 low–high 区间内几何插值 ──
+function tierLadder(moq) {
+  if (moq <= 10) return { qtys: [10, 50, 200, 500], quoteAt: '1,000+' };
+  if (moq <= 500) return { qtys: [500, 1000, 5000, 10000], quoteAt: '25,000+' };
+  if (moq <= 1000) return { qtys: [1000, 2500, 10000, 25000], quoteAt: '50,000+' };
+  return { qtys: [2000, 5000, 20000, 50000], quoteAt: '100,000+' };
+}
+function tierPrices(w) {
+  const { qtys, quoteAt } = tierLadder(w.moq);
+  const n = qtys.length;
+  const prices = qtys.map((q, i) => {
+    const p = w.high * Math.pow(w.low / w.high, i / (n - 1));
+    return Math.round(p * (p < 1 ? 1000 : 100)) / (p < 1 ? 1000 : 100);
+  });
+  return { qtys, prices, quoteAt };
+}
+
+// ── 品类 SVG 示意图(原创矢量,继承站点 CSS 变量配色)──
+const SVG_CAPTION = {
+  cards: 'Inside a contactless card: the chip and etched antenna laminate invisibly between printed PVC layers.',
+  labels: 'Smart label construction: printable face, RFID inlay and adhesive, converted reel-to-reel for your printer or applicator.',
+  tags: 'Built for the environment: sealed housings with adhesive, screw or cable-tie mounting.',
+  blocking: 'How blocking works: the shielding layer disrupts 13.56 MHz reads before they reach your cards.',
+  hardware: 'From tag to system: readers capture tag data and hand it to your software over standard interfaces.',
+};
+const CAT_SVG = {
+  cards: `<svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RFID card layer construction diagram">
+<g font-family="inherit" font-size="12" fill="var(--muted)">
+<rect x="60" y="28" rx="10" width="240" height="34" fill="#fff" stroke="var(--line)"/><text x="315" y="49">Clear overlay</text>
+<rect x="70" y="70" rx="10" width="240" height="34" fill="var(--bg-alt)" stroke="var(--line)"/><text x="325" y="91">Printed artwork</text>
+<rect x="80" y="112" rx="10" width="240" height="34" fill="#fff" stroke="var(--brand-deep)"/>
+<circle cx="130" cy="129" r="11" fill="none" stroke="var(--brand)" stroke-width="2"/><circle cx="130" cy="129" r="6" fill="none" stroke="var(--brand)" stroke-width="2"/><rect x="126" y="125" width="8" height="8" fill="var(--brand-deep)"/>
+<path d="M150 129h140" stroke="var(--brand)" stroke-width="2" stroke-dasharray="4 4"/>
+<text x="335" y="133" fill="var(--brand-deep)" font-weight="700">Chip + antenna</text>
+<rect x="90" y="154" rx="10" width="240" height="34" fill="var(--bg-alt)" stroke="var(--line)"/><text x="345" y="175">PVC core</text>
+<rect x="100" y="196" rx="10" width="240" height="34" fill="#fff" stroke="var(--line)"/><text x="355" y="217">Overlay</text>
+</g></svg>`,
+  labels: `<svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RFID label reel construction diagram">
+<g font-family="inherit" font-size="12" fill="var(--muted)">
+<circle cx="88" cy="96" r="58" fill="var(--bg-alt)" stroke="var(--line)"/><circle cx="88" cy="96" r="16" fill="#fff" stroke="var(--line)"/>
+<path d="M88 154 H392" stroke="var(--line)" stroke-width="14" stroke-linecap="round"/>
+<g stroke="var(--brand-deep)" fill="#fff"><rect x="150" y="141" rx="6" width="64" height="26"/><rect x="236" y="141" rx="6" width="64" height="26"/><rect x="322" y="141" rx="6" width="64" height="26"/></g>
+<g stroke="var(--brand)" fill="none"><path d="M160 154h20m6 0h12" stroke-width="2"/><path d="M246 154h20m6 0h12" stroke-width="2"/><path d="M332 154h20m6 0h12" stroke-width="2"/></g>
+<text x="150" y="127" fill="var(--brand-deep)" font-weight="700">Die-cut labels with inlay</text>
+<text x="40" y="30">Supply reel</text>
+<text x="240" y="196">Printable face · adhesive · liner</text>
+<text x="240" y="214">Matched to your printer pitch</text>
+</g></svg>`,
+  tags: `<svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rugged RFID tag mounting options diagram">
+<g font-family="inherit" font-size="12" fill="var(--muted)">
+<rect x="150" y="78" rx="16" width="120" height="84" fill="var(--bg-alt)" stroke="var(--brand-deep)" stroke-width="2"/>
+<circle cx="210" cy="120" r="17" fill="none" stroke="var(--brand)" stroke-width="2"/><rect x="205" y="115" width="10" height="10" fill="var(--brand-deep)"/>
+<text x="164" y="60" fill="var(--brand-deep)" font-weight="700">Sealed housing</text>
+<g text-anchor="middle">
+<circle cx="70" cy="120" r="26" fill="#fff" stroke="var(--line)"/><path d="M70 108v24M62 116l8-8 8 8" stroke="var(--brand-deep)" stroke-width="2" fill="none"/><text x="70" y="168">Screw</text>
+<circle cx="350" cy="120" r="26" fill="#fff" stroke="var(--line)"/><rect x="338" y="112" width="24" height="16" rx="3" fill="none" stroke="var(--brand-deep)" stroke-width="2"/><path d="M338 124h24" stroke="var(--brand)" stroke-width="2"/><text x="350" y="168">Adhesive</text>
+<circle cx="210" cy="212" r="0"/><text x="210" y="216">Cable-tie · sew-in · weld options per model</text>
+</g>
+<path d="M104 120h36M314 120h-34" stroke="var(--line)" stroke-width="2"/>
+</g></svg>`,
+  blocking: `<svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RFID blocking shield diagram">
+<g font-family="inherit" font-size="12" fill="var(--muted)">
+<rect x="20" y="86" rx="8" width="70" height="70" fill="var(--bg-alt)" stroke="var(--line)"/><text x="26" y="176">Reader / skimmer</text>
+<g stroke="var(--brand)" fill="none" stroke-width="2"><path d="M104 121c10-14 10-28 0-42"/><path d="M122 131c16-22 16-42 0-62"/><path d="M140 141c22-30 22-56 0-84"/></g>
+<path d="M196 58v126" stroke="var(--brand-deep)" stroke-width="5" stroke-linecap="round"/>
+<text x="162" y="212" fill="var(--brand-deep)" font-weight="700">Shielding layer</text>
+<rect x="238" y="84" rx="10" width="150" height="46" fill="#fff" stroke="var(--line)"/><text x="252" y="112">Your cards — safe</text>
+<rect x="252" y="142" rx="10" width="150" height="46" fill="#fff" stroke="var(--line)"/><text x="266" y="170">13.56 MHz blocked</text>
+</g></svg>`,
+  hardware: `<svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RFID reader system integration diagram">
+<g font-family="inherit" font-size="12" fill="var(--muted)">
+<g text-anchor="middle"><rect x="30" y="52" rx="6" width="44" height="28" fill="#fff" stroke="var(--line)"/><rect x="30" y="106" rx="6" width="44" height="28" fill="#fff" stroke="var(--line)"/><rect x="30" y="160" rx="6" width="44" height="28" fill="#fff" stroke="var(--line)"/><text x="52" y="70">Tag</text><text x="52" y="124">Tag</text><text x="52" y="178">Tag</text></g>
+<g stroke="var(--brand)" fill="none" stroke-width="2"><path d="M92 66c14 18 14 90 0 108"/><path d="M104 80c10 12 10 68 0 80"/></g>
+<rect x="150" y="88" rx="12" width="120" height="64" fill="var(--bg-alt)" stroke="var(--brand-deep)" stroke-width="2"/><text x="172" y="124" fill="var(--brand-deep)" font-weight="700">Reader</text>
+<path d="M270 120h60" stroke="var(--line)" stroke-width="3"/><path d="M322 112l12 8-12 8" fill="none" stroke="var(--line)" stroke-width="3"/>
+<rect x="338" y="88" rx="12" width="66" height="64" fill="#fff" stroke="var(--line)"/><text x="344" y="124">System</text>
+<text x="150" y="188">USB · RS232/485 · Wiegand · Wi-Fi</text>
+</g></svg>`,
+};
+// 频段-读距对比图:当产品规格同时涉及多个频段时展示
+const FREQ_SVG = `<figure class="figure">
+<svg viewBox="0 0 460 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RFID frequency bands and typical read range comparison">
+<g font-family="inherit" font-size="12" fill="var(--muted)">
+<text x="10" y="20" fill="var(--ink)" font-weight="700">Typical read range by frequency</text>
+<text x="10" y="52">LF 125 kHz</text><rect x="120" y="40" rx="7" width="42" height="16" fill="var(--brand-2)"/><text x="170" y="52">≈ up to 10 cm</text>
+<text x="10" y="86">HF / NFC 13.56 MHz</text><rect x="120" y="74" rx="7" width="70" height="16" fill="var(--brand)"/><text x="198" y="86">tap ≈ 10 cm (ISO 14443) · up to ~1 m (ISO 15693)</text>
+<text x="10" y="120">UHF 860–960 MHz</text><rect x="120" y="108" rx="7" width="290" height="16" fill="var(--brand-deep)"/><text x="120" y="142">1 m —————— 10 m+</text>
+</g></svg>
+<figcaption>Typical ranges — actual performance varies with reader, antenna, tag size and environment.</figcaption>
+</figure>`;
+
+// ── 工厂实数表(全部来自站内已发布数字)与下单时间线 ──
+const FACTORY_ROWS = [
+  ['Established', '1996, Shenzhen'],
+  ['Facility', '20,000 m² · 6 production lines'],
+  ['Team', '300+ staff · in-house R&D and QC lab'],
+  ['Chip inventory', '50M+ first-hand chips in stock'],
+  ['Capacity', 'Millions of units per month'],
+  ['Markets', '100+ countries served'],
+  ['Quality system', 'ISO 9001 · ISO 14001 · ISO 45001'],
+  ['Compliance', 'CE · FCC · FSC · RoHS · REACH'],
+  ['Warranty', '2 years, with free pre-production samples'],
+];
+const TIMELINE_STEPS = [
+  ['1 · Send your spec', 'Chip, size, artwork, quantity — or just the goal. We reply with an exact quote within 24 hours.'],
+  ['2 · Samples & proof', 'Free pre-production samples in 3–7 days plus an artwork proof, so you verify material, print and chip.'],
+  ['3 · Your approval', 'Bulk production starts only after you approve the sample and proof — 7–18 days on our six lines.'],
+  ['4 · Tracked delivery', 'Express door-to-door shipping worldwide, with a 2-year warranty and ongoing support.'],
+];
+
 // ── 批发/大宗订货经济性(指示性 FOB 深圳,USD)──────────────────────────
 // ⚠️ 用真实数字替换下面的默认值/覆盖值即可(改这一处 → 全站 39 个产品页同步)。
 //    价格为"起批/指示性"区间,页面已注明"最终以报价为准",符合 B2B 惯例。
@@ -174,6 +284,7 @@ function wholesale(p) {
   return Object.assign({}, WHOLESALE_DEFAULTS[p.cat] || WHOLESALE_DEFAULTS.cards, WHOLESALE_OVERRIDE[p.slug] || {});
 }
 const money = (n) => (n < 1 ? '$' + n.toFixed(2) : '$' + (Number.isInteger(n) ? n : n.toFixed(2)));
+const fmtP = (n) => (n < 0.1 ? '$' + n.toFixed(3) : n < 1 ? '$' + n.toFixed(2) : money(n));
 const moqFmt = (n) => n.toLocaleString('en-US');
 
 // 每个品类对应的支柱指南(产品页 → 指南的上下文内链,强化话题集群)
@@ -953,10 +1064,34 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnt
   const rel = related.map((r) => `<a href="${r.slug}.html">${esc(r.name)}</a>`).join('');
   const featureList = (FEATURES[p.cat] || []).map((f) => `<li>${esc(f)}</li>`).join('');
   const customList = (CUSTOMIZATION_BY_CAT[p.cat] || []).map((c) => `<li>${esc(c)}</li>`).join('');
+  // 技术徽章与频段检测(仅由该产品真实规格派生)
+  const specText = JSON.stringify(p.specs) + ' ' + p.overview + ' ' + p.tagline;
+  const freqChips = [];
+  if (/\bLF\b|125\s?kHz|134\.2|T5577|EM4[23]00|EM4305|Hitag/i.test(specText)) freqChips.push('LF 125 kHz');
+  if (/\bHF\b|13\.56|NFC|NTAG|MIFARE|ICODE|ISO ?1444|ISO ?15693/i.test(specText)) freqChips.push('HF / NFC 13.56 MHz');
+  if (/\bUHF\b|860|915|UCODE|Impinj|Monza|EPC/i.test(specText)) freqChips.push('UHF 860–960 MHz');
+  const chipBrands = [];
+  if (/MIFARE/i.test(specText)) chipBrands.push('NXP MIFARE®');
+  if (/NTAG/i.test(specText)) chipBrands.push('NXP NTAG®');
+  if (/ICODE/i.test(specText)) chipBrands.push('NXP ICODE®');
+  if (/UCODE/i.test(specText)) chipBrands.push('NXP UCODE®');
+  if (/Impinj|Monza|M7[0-9]0|M830|M750/i.test(specText)) chipBrands.push('Impinj');
+  if (/EM4[0-9]{3}|EM Micro/i.test(specText)) chipBrands.push('EM Microelectronic');
+  if (/T5577|Hitag/i.test(specText)) chipBrands.push('T5577 / Hitag');
+  const phoneTap = /NTAG|NFC/i.test(specText) ? ['Works with iPhone &amp; Android tap'] : [];
+  const heroChips = freqChips.concat(chipBrands.slice(0, 3), phoneTap).map((c) => `<li>${c}</li>`).join('');
+  const showFreqSvg = freqChips.length >= 2;
+  const tiers = tierPrices(w);
   const introSection = d.intro && d.intro.length ? `<section class="section">
-  <div class="container" style="max-width:880px">
-    <div class="section__head" style="margin-bottom:18px"><span class="eyebrow">In depth</span><h2 class="section__title">About ${esc(p.name)}</h2></div>
-    ${d.intro.map((t) => `<p style="margin-bottom:14px">${esc(t)}</p>`).join('')}
+  <div class="container">
+    <div class="about intro2" style="align-items:center">
+      <div>
+        <span class="eyebrow">In depth</span>
+        <h2 class="section__title" style="margin-bottom:14px">About ${esc(p.name)}</h2>
+        ${d.intro.map((t) => `<p style="margin-bottom:14px">${esc(t)}</p>`).join('')}
+      </div>
+      <figure class="figure">${CAT_SVG[p.cat] || ''}<figcaption>${esc(SVG_CAPTION[p.cat] || '')}</figcaption></figure>
+    </div>
   </div>
 </section>` : '';
   const useCaseSection = d.useCases && d.useCases.length ? `<section class="section section--alt">
@@ -965,10 +1100,23 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnt
     <div class="feature-grid">${d.useCases.map((u) => `<div class="feature"><h3>${esc(u[0])}</h3><p>${esc(u[1])}</p></div>`).join('')}</div>
   </div>
 </section>` : '';
+  const factoryTable = FACTORY_ROWS.map((r) => `<tr><th>${esc(r[0])}</th><td>${esc(r[1])}</td></tr>`).join('');
+  const timeline = TIMELINE_STEPS.map((s) => `<div><b>${esc(s[0])}</b><p>${esc(s[1])}</p></div>`).join('');
   const mfgNote = `<section class="section">
-  <div class="container" style="max-width:880px">
-    <div class="section__head" style="margin-bottom:14px"><span class="eyebrow">From our factory</span><h2 class="section__title">Made in-house in Shenzhen</h2></div>
-    <p>${esc(MFG_NOTE[p.cat] || MFG_NOTE.cards)}</p>
+  <div class="container">
+    <div class="about" style="align-items:start">
+      <div>
+        <span class="eyebrow">From our factory</span>
+        <h2 class="section__title" style="margin-bottom:14px">Our factory, in numbers</h2>
+        <table class="spec-table">${factoryTable}</table>
+        <p style="margin-top:12px;color:var(--muted);font-size:14px">${esc(MFG_NOTE[p.cat] || MFG_NOTE.cards)}</p>
+      </div>
+      <div>
+        <span class="eyebrow">How ordering works</span>
+        <h2 class="section__title" style="margin-bottom:14px">From inquiry to delivery</h2>
+        <div class="otimeline">${timeline}</div>
+      </div>
+    </div>
   </div>
 </section>`;
   const badges = [`MOQ from ${moqFmt(w.moq)} ${wUnitPl}`, 'Custom OEM / ODM', 'Free samples', '24-hour quote', '2-year warranty'].map((b) => `<li>${esc(b)}</li>`).join('');
@@ -987,15 +1135,32 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnt
         </div>
       </div>
       <div>
-        <table class="spec-table">
-          <tr><th>Minimum order (MOQ)</th><td>${moqFmt(w.moq)} ${wUnitPl}</td></tr>
-          <tr><th>Indicative unit price</th><td>${money(w.low)}–${money(w.high)} / ${wUnit}*</td></tr>
-          <tr><th>Sample lead time</th><td>${w.sample} days</td></tr>
-          <tr><th>Bulk production</th><td>${w.bulkLow}–${w.bulkHigh} days</td></tr>
-          <tr><th>Customization</th><td>Logo, chip, size, encoding, packaging</td></tr>
-          <tr><th>Payment &amp; shipping</th><td>T/T · ships to 100+ countries</td></tr>
-        </table>
-        <p style="margin-top:10px;color:var(--muted);font-size:13px">*Indicative FOB Shenzhen, USD — final quote depends on chip, artwork and quantity.</p>
+        <div class="est" id="est">
+          <div class="est__head">Volume price guide <span>Indicative · FOB Shenzhen</span></div>
+          <div class="est__tiers">${tiers.qtys.map((q, i) => {
+            const tp = tiers.prices[i];
+            const sv = i === 0 ? 'MOQ' : 'Save ' + Math.round((1 - tp / tiers.prices[0]) * 100) + '%';
+            return `<button type="button" class="est__tier${i === 0 ? ' on' : ''}" data-q="${q}" data-p="${tp}"><b>${q.toLocaleString('en-US')} ${wUnitPl}</b><small>&asymp; ${fmtP(tp)} / ${wUnit}</small><span class="sv">${sv}</span></button>`;
+          }).join('')}<button type="button" class="est__tier" data-quote="1" data-q="${tiers.quoteAt}"><b>${tiers.quoteAt} ${wUnitPl}</b><small>volume pricing</small><span class="sv">Best rate</span></button></div>
+          <div class="est__sum">
+            <div><span>Per ${wUnit}</span><b id="estUnit">&asymp; ${fmtP(tiers.prices[0])} / ${wUnit}</b></div>
+            <div><span>Order total</span><b id="estTotal">&asymp; $${Math.round(tiers.qtys[0] * tiers.prices[0]).toLocaleString('en-US')}</b></div>
+          </div>
+          <p class="est__note">Guide pricing from our published range — the exact quote depends on chip, size and artwork, and lands in your inbox within 24 hours. T/T · ships to 100+ countries.</p>
+          <a class="btn btn--primary btn--lg" id="estCta" href="/contact/?product=${encodeURIComponent(p.name)}&amp;cat=${encodeURIComponent(SELECT_LABEL[p.cat] || '')}&amp;qty=${tiers.qtys[0]}#quoteForm">Get Exact Quote for ${tiers.qtys[0].toLocaleString('en-US')} ${wUnitPl} &rarr;</a>
+        </div>
+        <script>(function(){
+var est=document.getElementById('est');if(!est)return;
+var base='/contact/?product='+encodeURIComponent(${JSON.stringify(p.name)})+'&cat='+encodeURIComponent(${JSON.stringify(SELECT_LABEL[p.cat] || '')});
+var unitEl=document.getElementById('estUnit'),totEl=document.getElementById('estTotal'),cta=document.getElementById('estCta');
+var UNIT=${JSON.stringify(wUnit)},UNITS=${JSON.stringify(wUnitPl)};
+function fp(n){return n<0.1?'$'+n.toFixed(3):n<1?'$'+n.toFixed(2):'$'+(n%1?n.toFixed(2):n)}
+function sel(b){var all=est.querySelectorAll('.est__tier'),i;for(i=0;i<all.length;i++)all[i].className=all[i].className.replace(' on','');b.className+=' on';
+if(b.getAttribute('data-quote')){unitEl.textContent='volume rate';totEl.textContent='custom quote';cta.textContent='Get Volume Quote ('+b.getAttribute('data-q')+' '+UNITS+') →';cta.href=base+'&qty='+encodeURIComponent(b.getAttribute('data-q'))+'#quoteForm';}
+else{var q=parseInt(b.getAttribute('data-q'),10),pv=parseFloat(b.getAttribute('data-p'));unitEl.textContent='≈ '+fp(pv)+' / '+UNIT;totEl.textContent='≈ $'+Math.round(q*pv).toLocaleString('en-US');cta.textContent='Get Exact Quote for '+q.toLocaleString('en-US')+' '+UNITS+' →';cta.href=base+'&qty='+q+'#quoteForm';}
+try{if(typeof gtag==='function')gtag('event','estimator_select',{product:${JSON.stringify(p.name)},qty:b.getAttribute('data-q')});}catch(e){}}
+var all=est.querySelectorAll('.est__tier'),i;for(i=0;i<all.length;i++)(function(b){b.addEventListener('click',function(){sel(b)})})(all[i]);
+})();</script>
       </div>
     </div>
   </div>
@@ -1009,14 +1174,18 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnt
         <span class="eyebrow">${esc(cat.name)}</span>
         <h1 class="section__title">${esc(p.name)}</h1>
         <p class="lead-line">${esc(p.tagline)}</p>
+        ${heroChips ? `<ul class="trust__list chips-hero">${heroChips}</ul>` : ''}
         <p>${esc(p.overview)}</p>
         <p style="margin-top:-4px;font-size:14px"><a class="link-arrow" href="${CAT_GUIDE[p.cat][0]}">New to this? Read ${esc(CAT_GUIDE[p.cat][1])} <span>→</span></a></p>
         <ul class="prod-badges">${badges}</ul>
+        <p class="fastfacts">Samples in ${w.sample} days · Bulk production ${w.bulkLow}–${w.bulkHigh} days · Door-to-door express to 100+ countries</p>
         <div class="prod__cta">
-          <a href="${quoteHref}" class="btn btn--primary btn--lg">Request Wholesale Quote</a>
-          <a href="https://api.whatsapp.com/send?phone=8615815501857" target="_blank" rel="noopener" class="btn btn--lg" style="border-color:var(--brand-deep);color:var(--brand-deep)">WhatsApp</a>
+          <a href="${quoteHref}" class="btn btn--primary btn--lg">Get Exact Quote — 24h Reply</a>
+          <a href="${quoteHref.replace('#quoteForm', '&sample=1#quoteForm')}" class="btn btn--lg" style="border-color:var(--brand-deep);color:var(--brand-deep)">Request Free Sample</a>
+          <a href="https://api.whatsapp.com/send?phone=8615815501857" target="_blank" rel="noopener" class="btn btn--lg" style="border-color:var(--line)">WhatsApp</a>
           <a href="/datasheets/${p.slug}.pdf" download class="btn btn--lg" style="border-color:var(--line)">↓ Datasheet (PDF)</a>
         </div>
+        <p class="cta-micro">✓ We reply within 24 hours &nbsp;·&nbsp; ✓ Free proof &amp; samples before production &nbsp;·&nbsp; ✓ 2-year warranty</p>
       </div>
     </div>
   </div>
@@ -1047,6 +1216,7 @@ ${wholesaleSection}
         <h2 class="section__title" style="margin-bottom:14px">Technical details</h2>
         <table class="spec-table">${specs}</table>
         <p style="margin-top:12px;color:var(--muted);font-size:14px">All specifications are customizable — tell us your requirements.</p>
+        ${showFreqSvg ? `<div style="margin-top:18px">${FREQ_SVG}</div>` : ''}
       </div>
       <div>
         <span class="eyebrow">Applications</span>
