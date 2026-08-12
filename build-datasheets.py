@@ -36,7 +36,7 @@ def deco(c,d):
     # footer (stacked, non-overlapping)
     c.setStrokeColor(LINE); c.setLineWidth(0.6); c.line(18*mm,16*mm,LETTER[0]-18*mm,16*mm)
     c.setFillColor(MUT); c.setFont('Helvetica',7.5)
-    c.drawString(18*mm,11.5*mm,'RFID MFG Co., Ltd.   ·   peter@rfidmfg.com   ·   +86 755 2376 5843   ·   Shenzhen, China')
+    c.drawString(18*mm,11.5*mm,'RFID MFG Co., Ltd.   ·   peter@rfidmfg.com   ·   +86 158 1550 1857   ·   Shenzhen, China')
     c.setFont('Helvetica',7)
     c.drawString(18*mm,8*mm,'OEM/ODM · ISO 9001/14001/45001 · CE/FCC/FSC/RoHS/REACH · samples available · 2-year warranty')
     c.drawString(18*mm,5*mm,'Specifications are customizable and subject to change without notice; confirmed on written quotation.')
