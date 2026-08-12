@@ -6,6 +6,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const DATES = require('./content-dates.js');
 const OUT = __dirname;
 const SITE = 'https://www.rfidmfg.com';
 
@@ -117,7 +118,7 @@ const CUSTOMIZATION_BY_CAT = {
 const MFG_NOTE = {
   cards: 'Card orders run on our own lamination, punching, offset-print and encoding lines in Shenzhen, so chip sourcing, body construction, personalization and QC stay under one roof — with pre-production samples before every run and a 2-year warranty after it.',
   labels: 'Labels and inlays are converted reel-to-reel in-house — antenna bonding, adhesive lamination, die-cutting and 100% read/write testing on the same line — so every roll arrives printer-ready, with samples first and a 2-year warranty.',
-  tags: 'Tag production combines in-house injection molding, potting and assembly with 100% read testing before packing — engineered samples come first, bulk follows on our six Shenzhen lines, and everything carries a 2-year warranty.',
+  tags: 'Tag production combines in-house injection molding, potting and assembly with 100% read testing before packing — engineered samples come first, bulk follows on our own Shenzhen lines, and everything carries a 2-year warranty.',
   blocking: 'Shielding products are laminated and finished in-house with per-batch effectiveness checks, so blocking performance is verified before shipment — samples first, 2-year warranty included.',
   hardware: 'Readers and modules are assembled and QA-tested in-house with firmware, SDK and integration support from our own engineers — evaluation units first, volume terms after your tests, 2-year warranty throughout.',
 };
@@ -990,7 +991,7 @@ const HEADER = `<header class="header" id="header"><div class="container header_
 ${NAV}
     </nav><a href="contact.html" class="btn btn--primary header__cta">Get a Quote</a><button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div></header>`;
 
-const FOOTER = `<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing since 1996.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="industries.html">Industries</a><a href="cases.html">Cases</a><a href="sustainability.html">Sustainability</a><a href="news.html">Blog</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8675523765843">+86 755 2376 5843</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>`;
+const FOOTER = `<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing since 1996.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="industries.html">Industries</a><a href="cases.html">Cases</a><a href="sustainability.html">Sustainability</a><a href="news.html">Blog</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a><a href="datasheets.html">Datasheets</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8675523765843">+86 755 2376 5843</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>`;
 
 const FONTS = `<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin-700-normal.woff2" crossorigin /><link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin-400-normal.woff2" crossorigin />`;
 
@@ -1195,7 +1196,7 @@ var all=est.querySelectorAll('.est__tier'),i;for(i=0;i<all.length;i++)(function(
           <a href="${quoteHref}" class="btn btn--primary btn--lg">Get Exact Quote — 24h Reply</a>
           <a href="${quoteHref.replace('#quoteForm', '&sample=1#quoteForm')}" class="btn btn--lg" style="border-color:var(--brand-deep);color:var(--brand-deep)">Request Free Sample</a>
           <a href="https://api.whatsapp.com/send?phone=8615815501857" target="_blank" rel="noopener" class="btn btn--lg" style="border-color:var(--line)">WhatsApp</a>
-          <a href="/datasheets/${p.slug}.pdf" download class="btn btn--lg" style="border-color:var(--line)">↓ Datasheet (PDF)</a>
+          <a href="datasheet-${p.slug}.html" class="btn btn--lg" style="border-color:var(--line)">View Datasheet</a>
         </div>
         <p class="cta-micro">✓ We reply within 24 hours &nbsp;·&nbsp; ✓ Free proof &amp; samples before production &nbsp;·&nbsp; ✓ 2-year warranty</p>
       </div>
@@ -1227,7 +1228,7 @@ ${wholesaleSection}
         <span class="eyebrow">Specifications</span>
         <h2 class="section__title" style="margin-bottom:14px">Technical details</h2>
         <table class="spec-table">${specs}</table>
-        <p style="margin-top:12px;color:var(--muted);font-size:14px">All specifications are customizable — tell us your requirements.</p>
+        <p style="margin-top:12px;color:var(--muted);font-size:14px">All specifications are customizable — tell us your requirements. Full datasheet: <a href="datasheet-${p.slug}.html">HTML</a> · <a href="/datasheets/${p.slug}.pdf" download>PDF</a>.</p>
         ${showFreqSvg ? `<div style="margin-top:18px">${FREQ_SVG}</div>` : ''}
       </div>
       <div>
@@ -1308,8 +1309,144 @@ function catalogPage() {
   return page('RFID Products Wholesale — Cards, Key Fobs, Wristbands, Labels & Tags | RFID MFG', "RFID MFG's full catalog: RFID cards, key fobs, wristbands, labels, tags, blocking products & readers. Custom OEM/ODM & wholesale — low MOQ, free samples, 24h quote.", 'products.html', catLd, body);
 }
 
+
+// ── HTML datasheets(datasheet-<slug>.html → /datasheets/<slug>/)+ 索引页 ──
+function dsFreq(p) {
+  const t = JSON.stringify(p.specs) + ' ' + p.overview + ' ' + p.tagline;
+  const f = [];
+  if (/\bLF\b|125\s?kHz|134\.2|T5577|EM4[23]00|EM4305|Hitag/i.test(t)) f.push('LF 125 kHz');
+  if (/\bHF\b|13\.56|NFC|NTAG|MIFARE|ICODE|ISO ?1444|ISO ?15693/i.test(t)) f.push('HF / NFC 13.56 MHz');
+  if (/\bUHF\b|860|915|UCODE|Impinj|Monza|EPC/i.test(t)) f.push('UHF 860–960 MHz');
+  return f;
+}
+function datasheetPage(p) {
+  const cat = CATS[p.cat];
+  const img = IMG[p.slug] || '';
+  const w = wholesale(p);
+  const wUnit = w.unit || 'pc';
+  const wUnitPl = wUnit === 'unit' ? 'units' : 'pcs';
+  const dates = DATES.track('datasheet-' + p.slug + '.html', JSON.stringify([p.name, p.tagline, p.overview, p.specs, p.apps]), DATES.TODAY);
+  const quoteHref = `contact.html?product=${encodeURIComponent(p.name)}&cat=${encodeURIComponent(SELECT_LABEL[p.cat] || '')}#quoteForm`;
+  const prodLd = { '@context': 'https://schema.org', '@type': 'Product', name: p.name, sku: p.slug, category: cat.name, brand: { '@type': 'Brand', name: 'RFID MFG' }, manufacturer: { '@type': 'Organization', name: 'RFID MFG Co., Ltd.' }, description: p.overview, url: `${SITE}/${p.slug}.html`, additionalProperty: p.specs.map((r) => ({ '@type': 'PropertyValue', name: r[0], value: r[1] })) };
+  if (img) prodLd.image = SITE + '/' + img;
+  const ld = `<script type="application/ld+json">
+${JSON.stringify(prodLd)}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":${JSON.stringify(p.name + ' — Datasheet')},"url":"${SITE}/datasheet-${p.slug}.html","datePublished":"${dates.published}","dateModified":"${dates.modified}","isPartOf":{"@type":"WebSite","name":"RFID MFG","url":"${SITE}/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"${SITE}/"},{"@type":"ListItem","position":2,"name":"Datasheets","item":"${SITE}/datasheets.html"},{"@type":"ListItem","position":3,"name":${JSON.stringify(p.name)},"item":"${SITE}/datasheet-${p.slug}.html"}]}
+</script>`;
+  const specRows = p.specs.map((r) => `<tr><th>${esc(r[0])}</th><td>${esc(r[1])}</td></tr>`).join('');
+  const freq = dsFreq(p);
+  const ordRows = [
+    ['MOQ', `${moqFmt(w.moq)} ${wUnitPl}`],
+    ['Samples', `Free pre-production samples, ${w.sample} days`],
+    ['Bulk lead time', `${w.bulkLow}–${w.bulkHigh} days after artwork/encoding approval`],
+    ['Indicative price', `${money(w.low)}–${money(w.high)} per ${wUnit} (FOB Shenzhen; confirmed on written quotation)`],
+    ['Quality system', 'ISO 9001 · ISO 14001 · ISO 45001 (Shenzhen site; certificate details on request)'],
+    ['Product compliance', 'CE / FCC declarations issued per product model and target market'],
+    ['Material compliance', 'RoHS / REACH statements issued per material and batch'],
+    ['Warranty', '2 years'],
+  ].map((r) => `<tr><th>${esc(r[0])}</th><td>${esc(r[1])}</td></tr>`).join('');
+  const body = `<section class="section">
+  <div class="container">
+    <nav class="breadcrumb" style="justify-content:flex-start;color:var(--muted)"><a href="index.html">Home</a><span>/</span><a href="datasheets.html">Datasheets</a><span>/</span>${esc(p.name)}</nav>
+    <div class="prod" style="margin-top:18px">
+      <div class="prod__media">${img ? `<img src="${img}" alt="${esc(p.name)}" loading="lazy" width="300" height="300" />` : `${esc(p.tag)}`}</div>
+      <div class="prod__text">
+        <span class="eyebrow">${esc(cat.name)} · Datasheet</span>
+        <h1 class="section__title">${esc(p.name)} — Datasheet</h1>
+        <p class="lead-line">${esc(p.tagline)}</p>
+        <p>${esc(p.overview)}</p>
+        <p class="fastfacts">Published ${esc(dates.publishedHuman)} · Specifications last updated ${esc(dates.modifiedHuman)}</p>
+        <div class="prod__cta">
+          <a href="/datasheets/${p.slug}.pdf" download class="btn btn--primary btn--lg">↓ Download PDF</a>
+          <a href="${p.slug}.html" class="btn btn--lg" style="border-color:var(--brand-deep);color:var(--brand-deep)">Product page &amp; pricing</a>
+          <a href="${quoteHref}" class="btn btn--lg" style="border-color:var(--line)">Get a Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section section--alt">
+  <div class="container">
+    <div class="section__head" style="margin-bottom:18px"><span class="eyebrow">Specifications</span><h2 class="section__title">Technical details</h2></div>
+    <table class="spec-table">${specRows}</table>
+    ${freq.length ? `<p style="margin-top:14px;color:var(--muted);font-size:14px">Operating frequency for this product family: ${freq.join(' · ')}.</p>` : ''}
+    <p style="margin-top:10px;color:var(--muted);font-size:14px">All specifications are customizable. RF read performance depends on reader, antenna, tag size and mounting environment — values above are typical for standard builds; confirmed specifications are stated on the written quotation and approved sample.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="about" style="align-items:start">
+      <div>
+        <span class="eyebrow">Applications</span>
+        <h2 class="section__title" style="margin-bottom:14px">Where it's used</h2>
+        <ul class="prod-badges">${p.apps.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>
+        <p style="margin-top:14px;font-size:14px"><a class="link-arrow" href="${CAT_GUIDE[p.cat][0]}">Background reading: ${esc(CAT_GUIDE[p.cat][1])} <span>→</span></a></p>
+      </div>
+      <div>
+        <span class="eyebrow">Ordering &amp; compliance</span>
+        <h2 class="section__title" style="margin-bottom:14px">Commercial summary</h2>
+        <table class="spec-table">${ordRows}</table>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div><h2>Need the exact spec confirmed?</h2><p>Send chip, size, artwork and quantity — engineering review and a firm quote within 24 hours.</p></div>
+    <a href="${quoteHref}" class="btn btn--ghost btn--lg">Request a Quote</a>
+  </div>
+</section>`;
+  const title = `${p.name} Datasheet — Full Specifications | RFID MFG`;
+  const desc = `${p.name} datasheet: ${p.specs.slice(0, 3).map((r) => r[1]).join('; ').slice(0, 110)} — full specifications, applications and ordering details. PDF available.`;
+  return page(title, desc, `datasheet-${p.slug}.html`, ld, body);
+}
+function datasheetsIndexPage() {
+  const ld = `<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"${SITE}/"},{"@type":"ListItem","position":2,"name":"Datasheets","item":"${SITE}/datasheets.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage","name":"RFID MFG Product Datasheets","url":"${SITE}/datasheets.html","description":"Full technical specifications for every RFID MFG product — HTML datasheets with PDF downloads."}
+</script>`;
+  const sections = CAT_ORDER.map((c) => {
+    const rows = PRODUCTS.filter((p) => p.cat === c).map((p) => `<tr><th><a href="datasheet-${p.slug}.html">${esc(p.name)}</a></th><td>${esc(p.tagline)}</td><td style="white-space:nowrap"><a href="/datasheets/${p.slug}.pdf" download>PDF</a></td></tr>`).join('');
+    return `<div class="catalog-cat" id="${c}">
+      <div class="catalog-cat__head"><div class="product-card__icon">${CATS[c].icon}</div><div><h2>${esc(CATS[c].name)}</h2><span>${esc(CATS[c].sub)}</span></div></div>
+      <table class="spec-table">${rows}</table>
+    </div>`;
+  }).join('\n');
+  const body = `<section class="page-hero">
+  <div class="page-hero__bg" aria-hidden="true"></div>
+  <div class="container page-hero__inner">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span>Datasheets</nav>
+    <h1>Product datasheets</h1>
+    <p>Full technical specifications for every product — readable HTML datasheets, each with a downloadable PDF. Specifications are customizable; confirmed values are stated on the written quotation.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    ${sections}
+  </div>
+</section>
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div><h2>Can't find the spec you need?</h2><p>Send us your chip, frequency, size and artwork — we'll quote within 24 hours.</p></div>
+    <a href="contact.html" class="btn btn--ghost btn--lg">Get a Quote</a>
+  </div>
+</section>`;
+  return page('RFID Product Datasheets — Specifications Library | RFID MFG', 'Datasheets for all RFID MFG products: cards, labels & inlays, tags, blocking products and hardware — full specifications in HTML with PDF downloads.', 'datasheets.html', ld, body);
+}
+
 // ---- generate ----
 let n = 0;
 for (const p of PRODUCTS) { fs.writeFileSync(path.join(OUT, `${p.slug}.html`), productPage(p)); n++; }
 fs.writeFileSync(path.join(OUT, 'products.html'), catalogPage());
-console.log(`Generated ${n} product pages + products.html`);
+let nds = 0;
+for (const p of PRODUCTS) { fs.writeFileSync(path.join(OUT, `datasheet-${p.slug}.html`), datasheetPage(p)); nds++; }
+fs.writeFileSync(path.join(OUT, 'datasheets.html'), datasheetsIndexPage());
+DATES.save('datasheets');
+console.log(`Generated ${n} product pages + products.html + ${nds} HTML datasheets + datasheets.html`);

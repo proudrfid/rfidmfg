@@ -45,6 +45,8 @@ function cleanPath(base) {
   if (base === 'index') return '';
   if (base === '404') return '404'; // special, stays as 404.html at root
   if (STATIC.includes(base)) return base;
+  if (base === 'datasheets') return 'datasheets';
+  if (base.startsWith('datasheet-')) return 'datasheets/' + base.slice(10);
   if (base in CAT) return `products/${CAT[base]}/${base}`;
   if (GUIDES.includes(base)) return `guides/${base}`;
   if (TOOLS.includes(base)) return `tools/${base}`;
@@ -203,6 +205,8 @@ function pri(u) {
   if (u === '/cases/' || u === '/blog/') return ['0.7', 'weekly'];
   if (/^\/products\/[a-z]+\/[a-z0-9-]+\/$/.test(u)) return ['0.7', 'monthly']; // product
   if (/^\/guides\/[a-z0-9-]+\/$/.test(u)) return ['0.7', 'monthly'];
+  if (u === '/datasheets/') return ['0.7', 'weekly'];
+  if (/^\/datasheets\/[a-z0-9-]+\/$/.test(u)) return ['0.6', 'monthly'];
   if (/^\/tools\/[a-z0-9-]+\/$/.test(u)) return ['0.8', 'monthly'];
   if (u === '/industries/') return ['0.8', 'weekly'];
   if (/^\/industries\/[a-z0-9-]+\/$/.test(u)) return ['0.7', 'monthly'];
@@ -213,9 +217,13 @@ function pri(u) {
 const urls = new Set(['/']);
 for (const f of htmlFiles) { const b = f.replace(/\.html$/, ''); if (b !== '404') urls.add(urlFor(b)); }
 for (const c of CAT_ORDER) urls.add('/products/' + c + '/');
-const TODAY = '2026-06-15';
+// lastmod 只写真实追踪到的日期(content-dates.json);未追踪的页面省略 lastmod,避免虚假时效信号
+let DATESDB = {};
+try { DATESDB = JSON.parse(fs.readFileSync(path.join(ROOT, 'content-dates.json'), 'utf8')); } catch (e) {}
+const URLKEY = new Map();
+for (const f of htmlFiles) { const b = f.replace(/\.html$/, ''); if (b !== '404') URLKEY.set(urlFor(b), f); }
 let sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-[...urls].sort().forEach((u) => { const [p, fr] = pri(u); sm += `  <url>\n    <loc>${SITE}${u}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${fr}</changefreq>\n    <priority>${p}</priority>\n  </url>\n`; });
+[...urls].sort().forEach((u) => { const [p, fr] = pri(u); const rec = DATESDB[URLKEY.get(u)]; const lm = rec && rec.modified ? `\n    <lastmod>${rec.modified}</lastmod>` : ''; sm += `  <url>\n    <loc>${SITE}${u}</loc>${lm}\n    <changefreq>${fr}</changefreq>\n    <priority>${p}</priority>\n  </url>\n`; });
 sm += '</urlset>\n';
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sm);
 

@@ -61,10 +61,10 @@ def build(p):
     fl.append(Paragraph(' · '.join(p.get('apps',[])),BODY))
     fl.append(Paragraph('Why RFID MFG',H2))
     items=['Since 1996 — nearly three decades in RFID & smart-card manufacturing',
-           '20,000 m² ISO-certified facility with six production lines',
+           'ISO 9001/14001/45001-certified Shenzhen site — lamination, bonding, die-cutting and personalisation in house',
            'First-hand chip sourcing for stable supply and sharp pricing',
            'Full OEM / ODM, custom encoding under NDA',
-           'Exports to 100+ countries · samples available · 2-year warranty']
+           'Worldwide shipping · samples available · 2-year warranty']
     fl.append(ListFlowable([ListItem(Paragraph(x,BODY),leftIndent=10) for x in items],
                            bulletType='bullet',start='•',bulletColor=ACC,leftIndent=10))
     doc.build(fl)

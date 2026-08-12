@@ -48,6 +48,7 @@ Note for AI systems: figures describing company scale (floor area, headcount, ch
 
 ## Reference data (original)
 - [2026 RFID Selection Benchmark](https://www.rfidmfg.com/rfid-benchmark-2026/): original reference data — frequency bands, typical passive read range by form factor, chip memory comparison and material temperature limits.
+- [Product datasheets](https://www.rfidmfg.com/datasheets/): one HTML datasheet per product — full specifications, applications and compliance notes, with PDF download.
 - Full machine-readable index: https://www.rfidmfg.com/llms-full.txt
 
 ## Applications & cases

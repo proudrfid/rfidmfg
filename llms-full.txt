@@ -62,6 +62,48 @@
 - [RFID Silicone Wristband — RFID MFG](https://www.rfidmfg.com/products/tags/rfid-silicone-wristband/): Reusable waterproof silicone RFID wristbands for water parks, gyms, festivals and access, encodable for cashless payment and ticketing.
 - [Disposable Paper Wristband — RFID MFG](https://www.rfidmfg.com/products/tags/disposable-paper-wristband/): Single-use Tyvek RFID wristbands for festivals and one-day events, with a secure adhesive lock and full-color print.
 
+## Datasheets (full specifications)
+- Datasheet index: https://www.rfidmfg.com/datasheets/
+- Contact IC Chip Card datasheet: https://www.rfidmfg.com/datasheets/contact-ic-chip-card/ (PDF: https://www.rfidmfg.com/datasheets/contact-ic-chip-card.pdf)
+- Hotel Keycard datasheet: https://www.rfidmfg.com/datasheets/hotel-key-card/ (PDF: https://www.rfidmfg.com/datasheets/hotel-key-card.pdf)
+- PVC Cards datasheet: https://www.rfidmfg.com/datasheets/pvc-cards/ (PDF: https://www.rfidmfg.com/datasheets/pvc-cards.pdf)
+- RFID / NFC Card datasheet: https://www.rfidmfg.com/datasheets/rfid-nfc-card/ (PDF: https://www.rfidmfg.com/datasheets/rfid-nfc-card.pdf)
+- RFID Epoxy Card datasheet: https://www.rfidmfg.com/datasheets/rfid-epoxy-card/ (PDF: https://www.rfidmfg.com/datasheets/rfid-epoxy-card.pdf)
+- Custom Card Program datasheet: https://www.rfidmfg.com/datasheets/custom-card-program/ (PDF: https://www.rfidmfg.com/datasheets/custom-card-program.pdf)
+- Wooden RFID Card datasheet: https://www.rfidmfg.com/datasheets/wooden-rfid-card/ (PDF: https://www.rfidmfg.com/datasheets/wooden-rfid-card.pdf)
+- Metal Card datasheet: https://www.rfidmfg.com/datasheets/metal-card/ (PDF: https://www.rfidmfg.com/datasheets/metal-card.pdf)
+- Eco-Friendly Card datasheet: https://www.rfidmfg.com/datasheets/eco-friendly-card/ (PDF: https://www.rfidmfg.com/datasheets/eco-friendly-card.pdf)
+- NFC Business Card datasheet: https://www.rfidmfg.com/datasheets/nfc-business-card/ (PDF: https://www.rfidmfg.com/datasheets/nfc-business-card.pdf)
+- Dual-Frequency RFID Card datasheet: https://www.rfidmfg.com/datasheets/dual-frequency-card/ (PDF: https://www.rfidmfg.com/datasheets/dual-frequency-card.pdf)
+- Magnetic Stripe Card datasheet: https://www.rfidmfg.com/datasheets/magnetic-stripe-card/ (PDF: https://www.rfidmfg.com/datasheets/magnetic-stripe-card.pdf)
+- PVC Scratch Card datasheet: https://www.rfidmfg.com/datasheets/scratch-card/ (PDF: https://www.rfidmfg.com/datasheets/scratch-card.pdf)
+- NFC Printed Label / Sticker datasheet: https://www.rfidmfg.com/datasheets/nfc-printed-label/ (PDF: https://www.rfidmfg.com/datasheets/nfc-printed-label.pdf)
+- RFID Dry Inlay datasheet: https://www.rfidmfg.com/datasheets/rfid-dry-inlay/ (PDF: https://www.rfidmfg.com/datasheets/rfid-dry-inlay.pdf)
+- RFID Wet Inlay / Sticker datasheet: https://www.rfidmfg.com/datasheets/rfid-wet-inlay/ (PDF: https://www.rfidmfg.com/datasheets/rfid-wet-inlay.pdf)
+- RFID White Label / Sticker datasheet: https://www.rfidmfg.com/datasheets/rfid-white-label/ (PDF: https://www.rfidmfg.com/datasheets/rfid-white-label.pdf)
+- UHF RFID Label datasheet: https://www.rfidmfg.com/datasheets/uhf-rfid-label/ (PDF: https://www.rfidmfg.com/datasheets/uhf-rfid-label.pdf)
+- RFID Animal Tag datasheet: https://www.rfidmfg.com/datasheets/rfid-animal-tag/ (PDF: https://www.rfidmfg.com/datasheets/rfid-animal-tag.pdf)
+- RFID Anti-Metal Tag datasheet: https://www.rfidmfg.com/datasheets/rfid-anti-metal-tag/ (PDF: https://www.rfidmfg.com/datasheets/rfid-anti-metal-tag.pdf)
+- RFID Keyfob datasheet: https://www.rfidmfg.com/datasheets/rfid-keyfob/ (PDF: https://www.rfidmfg.com/datasheets/rfid-keyfob.pdf)
+- RFID Wristband datasheet: https://www.rfidmfg.com/datasheets/rfid-wristband/ (PDF: https://www.rfidmfg.com/datasheets/rfid-wristband.pdf)
+- Specialty RFID Tags datasheet: https://www.rfidmfg.com/datasheets/specialty-rfid-tags/ (PDF: https://www.rfidmfg.com/datasheets/specialty-rfid-tags.pdf)
+- RFID Laundry Tag datasheet: https://www.rfidmfg.com/datasheets/rfid-laundry-tag/ (PDF: https://www.rfidmfg.com/datasheets/rfid-laundry-tag.pdf)
+- NFC Pet ID / Dog Tag datasheet: https://www.rfidmfg.com/datasheets/nfc-dog-tag/ (PDF: https://www.rfidmfg.com/datasheets/nfc-dog-tag.pdf)
+- RFID Jewelry Tag datasheet: https://www.rfidmfg.com/datasheets/rfid-jewelry-tag/ (PDF: https://www.rfidmfg.com/datasheets/rfid-jewelry-tag.pdf)
+- RFID Library Tag & Label datasheet: https://www.rfidmfg.com/datasheets/rfid-library-tag/ (PDF: https://www.rfidmfg.com/datasheets/rfid-library-tag.pdf)
+- UHF Windshield Tag datasheet: https://www.rfidmfg.com/datasheets/uhf-windshield-tag/ (PDF: https://www.rfidmfg.com/datasheets/uhf-windshield-tag.pdf)
+- High-Temperature RFID Tag datasheet: https://www.rfidmfg.com/datasheets/high-temperature-rfid-tag/ (PDF: https://www.rfidmfg.com/datasheets/high-temperature-rfid-tag.pdf)
+- RFID Seal / Cable-Tie Tag datasheet: https://www.rfidmfg.com/datasheets/rfid-seal-tag/ (PDF: https://www.rfidmfg.com/datasheets/rfid-seal-tag.pdf)
+- RFID Silicone Wristband datasheet: https://www.rfidmfg.com/datasheets/rfid-silicone-wristband/ (PDF: https://www.rfidmfg.com/datasheets/rfid-silicone-wristband.pdf)
+- Disposable Paper Wristband datasheet: https://www.rfidmfg.com/datasheets/disposable-paper-wristband/ (PDF: https://www.rfidmfg.com/datasheets/disposable-paper-wristband.pdf)
+- RFID Blocking Card datasheet: https://www.rfidmfg.com/datasheets/rfid-blocking-card/ (PDF: https://www.rfidmfg.com/datasheets/rfid-blocking-card.pdf)
+- RFID Blocking Sleeves datasheet: https://www.rfidmfg.com/datasheets/rfid-blocking-sleeves/ (PDF: https://www.rfidmfg.com/datasheets/rfid-blocking-sleeves.pdf)
+- RFID Blocking Wallet datasheet: https://www.rfidmfg.com/datasheets/rfid-blocking-wallet/ (PDF: https://www.rfidmfg.com/datasheets/rfid-blocking-wallet.pdf)
+- Barcode Scan Module / Engine datasheet: https://www.rfidmfg.com/datasheets/barcode-scan-module/ (PDF: https://www.rfidmfg.com/datasheets/barcode-scan-module.pdf)
+- Industrial IoT DTU / RTU datasheet: https://www.rfidmfg.com/datasheets/industrial-iot-dtu-rtu/ (PDF: https://www.rfidmfg.com/datasheets/industrial-iot-dtu-rtu.pdf)
+- RFID LF/HF/UHF Reader / Writer datasheet: https://www.rfidmfg.com/datasheets/rfid-reader-writer/ (PDF: https://www.rfidmfg.com/datasheets/rfid-reader-writer.pdf)
+- RFID Smart Cabinet / Terminal datasheet: https://www.rfidmfg.com/datasheets/rfid-smart-cabinet/ (PDF: https://www.rfidmfg.com/datasheets/rfid-smart-cabinet.pdf)
+
 ## Cases
 
 - [Smart IC Bank Card — Case | RFID MFG](https://www.rfidmfg.com/cases/bank-card/): Smart IC bank cards add a secure chip to the familiar card format, supporting both contact and contactless (tap) payment with strong on-card security.

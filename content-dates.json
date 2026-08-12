@@ -59,6 +59,201 @@
     "modified": "2026-08-12",
     "hash": "5a3b03b374a7eecb"
   },
+  "datasheet-barcode-scan-module.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "5d2b99f5242eee99"
+  },
+  "datasheet-contact-ic-chip-card.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "1e4b197c9d1b6c0d"
+  },
+  "datasheet-custom-card-program.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "66f7c9ac634e3ac8"
+  },
+  "datasheet-disposable-paper-wristband.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "4790f7e90df7c179"
+  },
+  "datasheet-dual-frequency-card.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "96022571f57c68a6"
+  },
+  "datasheet-eco-friendly-card.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "e5109e3a761bae3a"
+  },
+  "datasheet-high-temperature-rfid-tag.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "d6cb3c11f47a8777"
+  },
+  "datasheet-hotel-key-card.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "9adb13d4036158f7"
+  },
+  "datasheet-industrial-iot-dtu-rtu.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "86a79898de0a2bb2"
+  },
+  "datasheet-magnetic-stripe-card.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "f836d543160ca5d2"
+  },
+  "datasheet-metal-card.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "805265ceb7ce0c5d"
+  },
+  "datasheet-nfc-business-card.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "24b6e66d112245c6"
+  },
+  "datasheet-nfc-dog-tag.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "98eff838bc12fd73"
+  },
+  "datasheet-nfc-printed-label.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "c42b7d6920aabac6"
+  },
+  "datasheet-pvc-cards.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "29739c2c915d49c3"
+  },
+  "datasheet-rfid-animal-tag.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "e6d6ccea38e2b7ab"
+  },
+  "datasheet-rfid-anti-metal-tag.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "ced46f84ac9670ac"
+  },
+  "datasheet-rfid-blocking-card.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "45b4883bd5de1c72"
+  },
+  "datasheet-rfid-blocking-sleeves.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "d6852c199630f638"
+  },
+  "datasheet-rfid-blocking-wallet.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "cc81a33a617a4338"
+  },
+  "datasheet-rfid-dry-inlay.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "62a9052509c59489"
+  },
+  "datasheet-rfid-epoxy-card.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "a96789ebb3bbbf14"
+  },
+  "datasheet-rfid-jewelry-tag.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "bb7660581de1052e"
+  },
+  "datasheet-rfid-keyfob.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "1c5b666cae973a15"
+  },
+  "datasheet-rfid-laundry-tag.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "0f938fabd0047f7f"
+  },
+  "datasheet-rfid-library-tag.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "98cbda2eebbe7a36"
+  },
+  "datasheet-rfid-nfc-card.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "a6931bb8bac7cefb"
+  },
+  "datasheet-rfid-reader-writer.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "27558b37bdd32c3a"
+  },
+  "datasheet-rfid-seal-tag.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "5c811e9bc6f7efd1"
+  },
+  "datasheet-rfid-silicone-wristband.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "f4ccee2f4a082f15"
+  },
+  "datasheet-rfid-smart-cabinet.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "8df284cda4dc56d3"
+  },
+  "datasheet-rfid-wet-inlay.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "c6d699d0b42e5dc6"
+  },
+  "datasheet-rfid-white-label.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "5a09a6df38566c16"
+  },
+  "datasheet-rfid-wristband.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "2ebe9f79014a2986"
+  },
+  "datasheet-scratch-card.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "9c60615a4babe6a3"
+  },
+  "datasheet-specialty-rfid-tags.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "5d67ab8547135a87"
+  },
+  "datasheet-uhf-rfid-label.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "dbff4080700442ca"
+  },
+  "datasheet-uhf-windshield-tag.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "8a4956e621fbaa7a"
+  },
+  "datasheet-wooden-rfid-card.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "79a6cfee78c1fc7f"
+  },
   "industry-events.html": {
     "published": "2026-06-18",
     "modified": "2026-08-12",

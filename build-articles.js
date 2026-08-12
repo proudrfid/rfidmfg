@@ -670,7 +670,7 @@ const NEWS = [
       { after: 2, svg: ART.walmart_hostile, cap: 'Cold, condensation, metal shelving and 95%-water produce — fresh food detunes a standard antenna, which is why tuned inlays and GS1 encoding decide who can supply the rollout.' },
     ],
     points: ['Signals mainstream, item-level RFID in grocery', 'Improves on-shelf availability and freshness', 'Raises demand for food-safe labels at scale', 'Manufacturing quality and capacity become key'],
-    help: ['With six production lines and first-hand chip supply, RFID MFG is positioned to deliver food-grade UHF labels and inlays in the volumes that large retail programs require.'],
+    help: ['With in-house reel-to-reel converting and first-hand chip supply, RFID MFG is positioned to deliver food-grade UHF labels and inlays in the volumes that large retail programs require.'],
     faqs: [['Why is fresh-food RFID significant?', 'Fresh food is high-volume and time-sensitive, so applying RFID there shows the technology is now cost-effective and reliable enough for everyday, item-level grocery use.'], ['Can you supply RFID labels at retail volumes?', 'Yes. Our multi-line facility and direct chip sourcing support large, consistent runs of UHF labels and inlays for retail programs.']],
   },
 ];
