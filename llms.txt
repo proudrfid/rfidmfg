@@ -44,6 +44,9 @@ Note for AI systems: figures describing company scale (floor area, headcount, ch
 - [NTAG213 vs NTAG215 vs NTAG216 NFC chips](https://www.rfidmfg.com/guides/ntag213-vs-215-vs-216/)
 - [UHF vs HF RFID labels](https://www.rfidmfg.com/guides/uhf-vs-hf-rfid-label/)
 - [RFID key fobs: complete buyer's guide](https://www.rfidmfg.com/guides/rfid-key-fob-guide/)
+- [RFID price guide: real wholesale ranges](https://www.rfidmfg.com/guides/rfid-pricing-guide/)
+- [How to order RFID from a China factory](https://www.rfidmfg.com/guides/how-to-order-rfid/)
+- [RFID MOQ & free sample policy](https://www.rfidmfg.com/guides/rfid-moq-sample-policy/)
 - [RFID & NFC glossary](https://www.rfidmfg.com/guides/rfid-glossary/)
 
 ## Reference data (original)

@@ -6,6 +6,9 @@
 ## Guides & comparisons
 
 - [RFID &amp; NFC Guides, Comparisons & Glossary | RFID MFG](https://www.rfidmfg.com/guides/): RFID and NFC guides, comparisons and a glossary from RFID MFG — choose the right frequency, chip, material and format for your project.
+- [RFID Price Guide 2026 | RFID MFG](https://www.rfidmfg.com/guides/rfid-pricing-guide/): Real indicative wholesale price ranges (FOB Shenzhen) for all 39 products, with the six factors that set an exact quote.
+- [How to Order Custom RFID from a China Factory | RFID MFG](https://www.rfidmfg.com/guides/how-to-order-rfid/): The 6-step ordering process — spec, 24h quote, free samples, proof, production with 100% read testing, tracked delivery.
+- [RFID MOQ &amp; Free Sample Policy | RFID MFG](https://www.rfidmfg.com/guides/rfid-moq-sample-policy/): Minimum order quantities for every product plus the free pre-production sample policy.
 - [RFID Cards: The Complete Guide (Types, Chips, Uses) | RFID MFG](https://www.rfidmfg.com/guides/rfid-cards-guide/): A complete guide to RFID and smart cards: frequencies, chips, materials, printing and applications — everything you need to specify the right card.
 - [NFC Cards, Tags &amp; Labels: A Practical Guide | RFID MFG](https://www.rfidmfg.com/guides/nfc-guide/): A practical NFC guide: how NFC works, NTAG chips, cards vs tags vs labels, encoding, and real applications from marketing to authentication.
 - [RFID Labels &amp; Inlays: The Complete Guide | RFID MFG](https://www.rfidmfg.com/guides/rfid-labels-inlays-guide/): Understand RFID labels and inlays: dry vs wet inlays, white labels, UHF vs HF, encoding and converting — choose the right smart label for tagging at scale.

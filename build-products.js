@@ -1159,7 +1159,7 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnt
             <div><span>Per ${wUnit}</span><b id="estUnit">&asymp; ${fmtP(tiers.prices[0])} / ${wUnit}</b></div>
             <div><span>Order total</span><b id="estTotal">&asymp; $${Math.round(tiers.qtys[0] * tiers.prices[0]).toLocaleString('en-US')}</b></div>
           </div>
-          <p class="est__note">Guide pricing from our published range — the exact quote depends on chip, size and artwork, and lands in your inbox within 24 hours. T/T · worldwide shipping.</p>
+          <p class="est__note">Guide pricing from our published range — the exact quote depends on chip, size and artwork, and lands in your inbox within 24 hours. T/T · worldwide shipping. Full range: <a href="rfid-pricing-guide.html">RFID price guide</a>.</p>
           <a class="btn btn--primary btn--lg" id="estCta" href="/contact/?product=${encodeURIComponent(p.name)}&amp;cat=${encodeURIComponent(SELECT_LABEL[p.cat] || '')}&amp;qty=${tiers.qtys[0]}#quoteForm">Get Exact Quote for ${tiers.qtys[0].toLocaleString('en-US')} ${wUnitPl} &rarr;</a>
         </div>
         <script>(function(){
@@ -1449,4 +1449,5 @@ let nds = 0;
 for (const p of PRODUCTS) { fs.writeFileSync(path.join(OUT, `datasheet-${p.slug}.html`), datasheetPage(p)); nds++; }
 fs.writeFileSync(path.join(OUT, 'datasheets.html'), datasheetsIndexPage());
 DATES.save('datasheets');
+fs.writeFileSync(path.join(OUT, 'wholesale-data.json'), JSON.stringify(PRODUCTS.map((p) => { const w = wholesale(p); return { slug: p.slug, name: p.name, cat: p.cat, moq: w.moq, low: w.low, high: w.high, unit: w.unit || 'pc', sample: w.sample, bulkLow: w.bulkLow, bulkHigh: w.bulkHigh }; })));
 console.log(`Generated ${n} product pages + products.html + ${nds} HTML datasheets + datasheets.html`);

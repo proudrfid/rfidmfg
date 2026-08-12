@@ -75,9 +75,9 @@ const CONTENT_IMG = {
   'rfid-key-fob-guide.html': ['images/rfid-keyfob.webp', 'RFID key fob — a rugged keyring token for contactless access', 'Key fobs come in LF, HF/NFC and UHF for access, membership and ID.'],
 };
 
-function shell({ slug, title, desc, h1, lead, crumb, bodyHtml, faqs, howto }) {
+function shell({ slug, title, desc, h1, lead, crumb, bodyHtml, faqs, howto, seed }) {
   // 指纹只覆盖正文内容，不含日期，避免自我循环
-  const _d = DATES.track(slug, [h1, desc, lead, bodyHtml, JSON.stringify(faqs || []), JSON.stringify(howto || null)].join('\u0000'), UPDATED_ISO);
+  const _d = DATES.track(slug, [h1, desc, lead, bodyHtml, JSON.stringify(faqs || []), JSON.stringify(howto || null)].join('\u0000'), seed || UPDATED_ISO);
   const _wc = String(bodyHtml || '').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
   const readMins = Math.max(2, Math.round(_wc / 200));
   const cimg = CONTENT_IMG[slug];
@@ -459,13 +459,101 @@ const GUIDES = [
   },
 ];
 
+// ── 交易型指南:定价 / 订购 / MOQ(数据来自 wholesale-data.json,由 build-products.js 先行生成)──
+let WD = [];
+try { WD = JSON.parse(fs.readFileSync(path.join(__dirname, 'wholesale-data.json'), 'utf8')); } catch (e) {}
+if (!WD.length) {
+  console.warn('  ⚠ wholesale-data.json 缺失 — 请先运行 node build-products.js(npm run build 顺序已保证)');
+} else {
+  const CATN2 = { cards: 'Cards', labels: 'Labels & Inlays', tags: 'Tags', blocking: 'Blocking', hardware: 'Hardware' };
+  const CATORD2 = ['cards', 'labels', 'tags', 'blocking', 'hardware'];
+  const wdSorted = CATORD2.flatMap((c) => WD.filter((x) => x.cat === c));
+  const fmtQty = (n) => n >= 1000 ? (n / 1000) + ',000' : String(n);
+  const fmtMoney = (v) => '$' + (v < 0.1 ? v.toFixed(3) : v < 1 ? v.toFixed(2) : (v % 1 ? v.toFixed(2) : v));
+  const units = (u) => u === 'unit' ? 'units' : 'pcs';
+  const priceRows = wdSorted.map((x) => [x.name, CATN2[x.cat] || x.cat, fmtQty(x.moq) + ' ' + units(x.unit), fmtMoney(x.low) + '–' + fmtMoney(x.high) + ' / ' + x.unit, x.bulkLow + '–' + x.bulkHigh + ' days']);
+  const moqRows = wdSorted.map((x) => [x.name, fmtQty(x.moq) + ' ' + units(x.unit), x.sample + ' days', x.bulkLow + '–' + x.bulkHigh + ' days']);
+  const lo = (c) => fmtMoney(Math.min(...WD.filter((x) => x.cat === c).map((x) => x.low)));
+  const hi = (c) => fmtMoney(Math.max(...WD.filter((x) => x.cat === c).map((x) => x.high)));
+  const minMoq = fmtQty(Math.min(...WD.map((x) => x.moq)));
+  const SEED_NEW = '2026-08-12';
+
+  GUIDES.push({
+    slug: 'rfid-pricing-guide.html', crumb: 'Price Guide', seed: SEED_NEW,
+    title: 'RFID Price Guide 2026: Wholesale Cost of Cards, Tags, Wristbands & Labels | RFID MFG',
+    desc: 'Real indicative wholesale prices (FOB Shenzhen) for all 39 RFID products we manufacture — cards, labels, inlays, tags, wristbands, blocking products and readers — plus the six factors that set your exact quote.',
+    h1: 'RFID price guide: what cards, tags and labels really cost',
+    lead: `Indicative wholesale ranges from our published tiers: RFID cards run ${lo('cards')}–${hi('cards')} per piece, labels and inlays ${lo('labels')}–${hi('labels')}, tags and wristbands ${lo('tags')}–${hi('tags')}, all FOB Shenzhen. Your exact price depends on chip, size, material, printing and volume — the table below lists the real range for every product we make, and a written quote lands within 24 hours.`,
+    sections: [
+      { h: 'What these prices include', p: ['Every range in the table comes from our published volume tiers, not a marketing estimate. The price covers the chip and antenna, the finished construction, and standard printing; free pre-production samples and an artwork proof are included before any bulk run, and everything ships with a 2-year warranty. Anything unusual — special tooling, uncommon chips — is called out separately on the written quotation before you commit.'] },
+      { h: 'The six factors that set your exact price', p: ['Chip is the biggest single driver: a basic LF or MIFARE Classic token costs a fraction of a DESFire EV-series or long-range Impinj part. Size and antenna geometry set the second tier — larger antennas read further but use more material. Then come material and housing (PVC vs metal vs ceramic vs woven fabric), print and finish (offset CMYK vs foil, embossing, laser), data services (encoding, serialisation, key diversification), and finally volume — the factor you control most directly.'] },
+      { h: 'How volume breaks work', p: ['Unit prices step down hard with quantity because setup, tooling and reel changeover are spread across more pieces. Across our range, moving from MOQ to the 10,000-piece tier typically cuts the per-unit price by 50–88% — the volume selector on each product page shows the exact curve for that product. If your annual demand is large but each release is small, ask about blanket orders with scheduled releases.'] },
+      { h: 'Getting an exact quote in 24 hours', p: ['Send the chip (or your reader model), size, material, artwork and target quantity — or just describe the application and we will spec it for you. The written quotation you receive is binding for the stated spec and validity window, unlike the indicative ranges on this page.'] },
+    ],
+    table: { cap: 'Indicative wholesale price ranges by product (FOB Shenzhen)', head: ['Product', 'Category', 'MOQ', 'Indicative price', 'Bulk lead time'], rows: priceRows },
+    faqs: [
+      ['How much does a custom RFID card cost?', `Across our card range, indicative wholesale pricing runs ${lo('cards')}–${hi('cards')} per card (FOB Shenzhen). Basic PVC proximity cards sit at the bottom of that range; metal, wood and dual-interface constructions at the top. Chip choice and volume move the number most.`],
+      ['How much do UHF RFID labels cost at volume?', `Labels and inlays run ${lo('labels')}–${hi('labels')} per piece indicatively, and are the most volume-sensitive products we make — at 10,000+ pieces on reels the per-unit price falls steeply because converting runs continuously.`],
+      ['Why is my quote different from the table?', 'The table shows indicative ranges from published tiers. Your written quote reflects the exact chip, size, artwork, encoding and destination — it can land below the range at high volume or above it for premium constructions, and the written quote is what we commit to.'],
+      ['Do you charge for samples before an order?', 'No — pre-production samples are free, arrive in 3–7 days, and bulk production only starts after you approve the sample and artwork proof.'],
+    ],
+    related: [['rfid-moq-sample-policy.html', 'MOQ & free sample policy'], ['how-to-order-rfid.html', 'How to order, step by step'], ['products.html', 'Full product catalog'], ['contact.html', 'Request an exact quote']],
+  },
+  {
+    slug: 'how-to-order-rfid.html', crumb: 'How to Order', seed: SEED_NEW,
+    title: 'How to Order Custom RFID Cards & Tags from a China Factory (Step by Step) | RFID MFG',
+    desc: 'The exact 6-step process for ordering custom RFID products from a China factory: spec, 24-hour quote, free samples, artwork proof, bulk production with 100% read testing, and tracked delivery.',
+    h1: 'How to order custom RFID products from a China factory',
+    lead: 'Six steps: send your spec, get a written quote within 24 hours, test free samples in 3–7 days, approve the artwork proof, bulk production runs 7–18 days with 100% read testing, and tracked door-to-door delivery follows. Payment is by T/T and everything carries a 2-year warranty.',
+    sections: [
+      { h: 'Step 1 — Define your spec (or just describe the goal)', p: ['The five things that define an RFID order: chip or frequency (match your existing readers — this is the most common mistake), size and form factor, material, artwork, and quantity. If you can only answer some of these, describe the application instead — "we need 5,000 wristbands for a 3-day festival with tap payment" is enough for our engineers to spec the rest.'] },
+      { h: 'Step 2 — Written quote within 24 hours', p: ['You get an exact, binding price for the stated spec — not an indicative range. If you are still comparing options, the price guide on this site shows the real range for every product before you ever send an email.'] },
+      { h: 'Step 3 — Free samples in 3–7 days', p: ['Pre-production samples cost nothing and exist so you can test the actual chip, material and print on your own readers and in your own environment before committing. If a sample fails your tests, we adjust chip, antenna or material and resample — bulk never starts on a failed sample.'] },
+      { h: 'Step 4 — Artwork proof and approval', p: ['Alongside samples you receive an artwork proof for print layout, colours and variable data. Encoding files, sector maps and keys are handled under NDA. Production starts only after you approve both sample and proof — this approval gate is your protection.'] },
+      { h: 'Step 5 — Bulk production with QC (7–18 days)', p: ['Lamination, inlay bonding, die-cutting and personalisation run in house, with full-process traceability and a 100% read test before packing. Typical bulk lead time is 7–18 days depending on construction and volume; the exact date is on your quotation.'] },
+      { h: 'Step 6 — Delivery and after-sales', p: ['Orders ship express, door to door, with tracking and full export documentation. Every product carries a 2-year warranty with ongoing technical support — if something reads wrong in the field, you talk to the engineers who built it.'] },
+      { h: 'Common mistakes to avoid', p: ['Ordering a frequency your readers cannot see (always confirm reader model first); skipping the sample stage to save a week and losing a production run; sending encoding data after production has started; and leaving artwork sign-off to the last minute — the proof cycle is fast, but only if someone on your side owns it.'] },
+    ],
+    table: { cap: 'Timeline at a glance', head: ['Stage', 'Typical time'], rows: [['Written quote', 'Within 24 hours'], ['Free pre-production samples', '3–7 days'], ['Artwork proof', 'Alongside samples'], ['Bulk production', '7–18 days after approval'], ['Shipping', 'Express, tracked, door-to-door'], ['Warranty', '2 years']] },
+    howto: { name: 'How to order custom RFID products', steps: [['Send your spec or goal', 'Chip/frequency, size, material, artwork and quantity — or describe the application and we spec it.'], ['Receive a written quote in 24 hours', 'Exact, binding pricing for your stated spec.'], ['Test free samples (3–7 days)', 'Verify chip, print and material on your own readers before committing.'], ['Approve the artwork proof', 'Print layout and encoding data confirmed under NDA.'], ['Bulk production (7–18 days)', 'In-house production with 100% read testing before packing.'], ['Tracked delivery', 'Door-to-door express with export documentation and a 2-year warranty.']] },
+    faqs: [
+      ['What payment terms do you accept?', 'T/T (bank transfer). Exact terms and any deposit schedule are stated on the written quotation before you commit.'],
+      ['Can you encode our existing system keys and sectors?', 'Yes — custom keys, sector maps and serialisation are handled under NDA, so replacement or expansion orders drop straight into your current system.'],
+      ['What artwork files do you need?', 'Vector files (AI, PDF or EPS) print best. Send what you have — you approve a proof before anything is printed, so file issues are caught before production.'],
+      ['What happens if the samples fail our tests?', 'We adjust the chip, antenna or material and send new samples. Bulk production only ever starts on a sample you have approved.'],
+    ],
+    related: [['rfid-pricing-guide.html', 'RFID price guide'], ['rfid-moq-sample-policy.html', 'MOQ & free sample policy'], ['rfid-frequencies-lf-hf-uhf.html', 'Pick the right frequency first'], ['contact.html', 'Start your order']],
+  },
+  {
+    slug: 'rfid-moq-sample-policy.html', crumb: 'MOQ & Samples', seed: SEED_NEW,
+    title: 'RFID MOQ & Free Sample Policy: Minimum Order Quantities by Product | RFID MFG',
+    desc: `Minimum order quantities for all 39 RFID products we manufacture — from ${minMoq} pcs — plus the free pre-production sample policy: 3–7 day samples, artwork proof, and no bulk run until you approve.`,
+    h1: 'RFID minimum order quantities & free sample policy',
+    lead: `MOQs start at ${minMoq} pieces for cards, fobs, tags and wristbands, and are higher for reel-converted labels and inlays. Every order starts with free pre-production samples in 3–7 days — bulk production begins only after you approve the sample and artwork proof. The table below lists the real MOQ for every product.`,
+    sections: [
+      { h: 'How MOQ works here', p: ['MOQ is set per production run, not per year — it reflects the point where setup, tooling and material changeover stop dominating the unit cost. Different constructions have different economics, which is why a PVC card and a reel-converted inlay have very different minimums. The table below is the same data our quotes are built from.'] },
+      { h: 'Why labels and inlays have higher MOQs', p: ['Labels and inlays are converted reel-to-reel: antenna bonding, adhesive lamination and die-cutting run as a continuous process, and starting the line for a short run wastes most of a reel. That is why label MOQs are counted in thousands while cards and tags start in the hundreds.'] },
+      { h: 'The free sample policy', p: ['Pre-production samples are free and arrive in 3–7 days. They exist so you can verify the chip on your own readers, check print and material in hand, and catch spec problems while they are still free to fix. An artwork proof accompanies the samples; bulk production starts only after you approve both.'] },
+      { h: 'Below-MOQ trial runs', p: ['Smaller trial batches are sometimes possible on standard specs — existing constructions without custom tooling. If you are piloting a system before a larger rollout, say so in the inquiry: we would rather support a serious pilot than lose the rollout.'] },
+    ],
+    table: { cap: 'MOQ, sample and bulk lead time by product', head: ['Product', 'MOQ', 'Sample lead', 'Bulk lead'], rows: moqRows },
+    faqs: [
+      ['What is the minimum order for custom RFID cards?', `Card MOQs start at ${minMoq} pieces per run for standard constructions. Specialty builds (metal, dual-interface) can differ — the table on this page shows the real minimum for each product.`],
+      ['Are samples really free?', 'Yes. Pre-production samples are free, ship in 3–7 days, and carry no obligation — bulk production only starts after you approve them.'],
+      ['Can I order less than the MOQ?', 'Sometimes, on standard specs without custom tooling. Share your use case and target quantity — pilot runs ahead of a larger rollout are usually workable.'],
+      ['Do sample chips match production chips?', 'Yes — samples are built with the same chip and construction quoted for production, so what you validate is what you receive in bulk.'],
+    ],
+    related: [['rfid-pricing-guide.html', 'RFID price guide'], ['how-to-order-rfid.html', 'How to order, step by step'], ['products.html', 'Full product catalog'], ['contact.html', 'Ask about a pilot run']],
+  });
+}
+
 function guidePage(g) {
   const body = [
     SECTIONS(g.sections),
     g.table ? TABLE(g.table) : '',
     RELATED(g.related),
   ].filter(Boolean).join('\n      ');
-  return shell({ slug: g.slug, title: g.title, desc: g.desc, h1: g.h1, lead: g.lead, crumb: g.crumb, bodyHtml: body, faqs: g.faqs });
+  return shell({ slug: g.slug, title: g.title, desc: g.desc, h1: g.h1, lead: g.lead, crumb: g.crumb, bodyHtml: body, faqs: g.faqs, howto: g.howto, seed: g.seed });
 }
 
 // ================= GLOSSARY =================

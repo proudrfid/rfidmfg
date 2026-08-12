@@ -254,6 +254,11 @@
     "modified": "2026-08-12",
     "hash": "79a6cfee78c1fc7f"
   },
+  "how-to-order-rfid.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "8ddca22c2ec03a85"
+  },
   "industry-events.html": {
     "published": "2026-06-18",
     "modified": "2026-08-12",
@@ -368,6 +373,16 @@
     "published": "2026-06-15",
     "modified": "2026-08-12",
     "hash": "50e35f3b21104c0b"
+  },
+  "rfid-moq-sample-policy.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "f7ac710d75f33849"
+  },
+  "rfid-pricing-guide.html": {
+    "published": "2026-08-12",
+    "modified": "2026-08-12",
+    "hash": "8117534eb308b459"
   },
   "rfid-readers-hardware-guide.html": {
     "published": "2026-06-15",
