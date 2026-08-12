@@ -1058,7 +1058,7 @@ function productPage(p) {
   const quoteHref = `contact.html?product=${encodeURIComponent(p.name)}&cat=${encodeURIComponent(SELECT_LABEL[p.cat] || '')}#quoteForm`;
   const prodLd = { '@context': 'https://schema.org', '@type': 'Product', name: p.name, category: cat.name, brand: { '@type': 'Brand', name: 'RFID MFG' }, manufacturer: { '@type': 'Organization', name: 'RFID MFG Co., Ltd.' }, description: p.overview };
   if (img) prodLd.image = SITE + '/' + img;
-  prodLd.offers = { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: w.low, highPrice: w.high, availability: 'https://schema.org/InStock', seller: { '@type': 'Organization', name: 'RFID MFG Co., Ltd.' } };
+  prodLd.offers = { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: w.low, highPrice: w.high, offerCount: tierPrices(w).prices.length, availability: 'https://schema.org/InStock', seller: { '@type': 'Organization', name: 'RFID MFG Co., Ltd.' } };
   const ld = `<script type="application/ld+json">
 ${JSON.stringify(prodLd)}
 </script>
@@ -1327,7 +1327,7 @@ function datasheetPage(p) {
   const wUnitPl = wUnit === 'unit' ? 'units' : 'pcs';
   const dates = DATES.track('datasheet-' + p.slug + '.html', JSON.stringify([p.name, p.tagline, p.overview, p.specs, p.apps]), DATES.TODAY);
   const quoteHref = `contact.html?product=${encodeURIComponent(p.name)}&cat=${encodeURIComponent(SELECT_LABEL[p.cat] || '')}#quoteForm`;
-  const prodLd = { '@context': 'https://schema.org', '@type': 'Product', name: p.name, sku: p.slug, category: cat.name, brand: { '@type': 'Brand', name: 'RFID MFG' }, manufacturer: { '@type': 'Organization', name: 'RFID MFG Co., Ltd.' }, description: p.overview, url: `${SITE}/${p.slug}.html`, additionalProperty: p.specs.map((r) => ({ '@type': 'PropertyValue', name: r[0], value: r[1] })) };
+  const prodLd = { '@context': 'https://schema.org', '@type': 'Product', name: p.name, sku: p.slug, category: cat.name, brand: { '@type': 'Brand', name: 'RFID MFG' }, manufacturer: { '@type': 'Organization', name: 'RFID MFG Co., Ltd.' }, description: p.overview, url: `${SITE}/${p.slug}.html`, additionalProperty: p.specs.map((r) => ({ '@type': 'PropertyValue', name: r[0], value: r[1] })), offers: { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: w.low, highPrice: w.high, offerCount: tierPrices(w).prices.length, availability: 'https://schema.org/InStock', seller: { '@type': 'Organization', name: 'RFID MFG Co., Ltd.' } } };
   if (img) prodLd.image = SITE + '/' + img;
   const ld = `<script type="application/ld+json">
 ${JSON.stringify(prodLd)}
