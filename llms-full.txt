@@ -1,6 +1,6 @@
 # RFID MFG — Full Site Index for AI/LLM
 
-> RFID MFG Co., Ltd. — Chinese RFID & smart-card manufacturer since 1996. OEM/ODM of RFID/NFC cards, labels, inlays, tags, RFID-blocking products and IoT hardware. ISO 9001/14001/45001, CE/FCC/FSC/RoHS/REACH. 20,000 m² facility, 6 production lines, exports to 100+ countries. Contact: peter@rfidmfg.com · +86 755 2376 5843.
+> RFID MFG Co., Ltd. — Chinese RFID & smart-card manufacturer since 1996. OEM/ODM of RFID/NFC cards, labels, inlays, tags, RFID-blocking products and IoT hardware. ISO 9001/14001/45001 certified Shenzhen site (certificate details on request); CE/FCC per product model, RoHS/REACH per material batch, FSC for paper products only. In-house lamination, inlay bonding, die-cutting and personalisation. Worldwide shipping. Contact: peter@rfidmfg.com · +86 755 2376 5843.
 
 
 ## Guides & comparisons
@@ -89,7 +89,7 @@
 ## Company
 
 - [Products — RFID Cards, Labels, Tags, Blocking &amp; Hardware | RFID MFG](https://www.rfidmfg.com/products/): Explore RFID MFG's full RFID product catalog: smart cards, NFC labels &amp; inlays, RFID tags, RFID-blocking products and IoT hardware — all customizable.
-- [About RFID MFG — RFID & Smart Card Manufacturer Since 1996](https://www.rfidmfg.com/about/): RFID MFG Co., Ltd. — three decades of RFID & smart-card manufacturing, ISO-certified and exporting to 100+ countries. OEM/ODM since 1996.
+- [About RFID MFG — RFID & Smart Card Manufacturer Since 1996](https://www.rfidmfg.com/about/): RFID MFG Co., Ltd. — three decades of RFID & smart-card manufacturing from an ISO 9001 certified Shenzhen site, shipping worldwide. OEM/ODM since 1996.
 - [Sustainability — Eco-Friendly RFID Cards & Green Manufacturing | RFID MFG](https://www.rfidmfg.com/sustainability/): RFID MFG's eco commitment: FSC-certified BIO-paper cards, biodegradable & recyclable materials, plus responsible water, air & waste management.
 - [Cases — RFID Applications & Customer Solutions | RFID MFG](https://www.rfidmfg.com/cases/): Real-world RFID deployments by RFID MFG across warehousing, ID, payment, libraries, transport, events and NFC — proven solutions across industries.
 - [News &amp; Insights — RFID Industry Updates | RFID MFG](https://www.rfidmfg.com/blog/): Company news and RFID industry insights from RFID MFG — product launches, applications and trends across retail, transport, events and more.

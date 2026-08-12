@@ -8,8 +8,9 @@ const fs = require('fs');
 const path = require('path');
 const OUT = __dirname;
 const SITE = 'https://www.rfidmfg.com';
-const UPDATED = 'June 15, 2026';
+const UPDATED = 'June 15, 2026';        // 历史首发日期，仅作首次登记的种子
 const UPDATED_ISO = '2026-06-15';
+const DATES = require('./content-dates.js');
 const AUTHOR = 'RFID MFG Editorial Team';
 const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -75,12 +76,14 @@ const CONTENT_IMG = {
 };
 
 function shell({ slug, title, desc, h1, lead, crumb, bodyHtml, faqs, howto }) {
+  // 指纹只覆盖正文内容，不含日期，避免自我循环
+  const _d = DATES.track(slug, [h1, desc, lead, bodyHtml, JSON.stringify(faqs || []), JSON.stringify(howto || null)].join('\u0000'), UPDATED_ISO);
   const _wc = String(bodyHtml || '').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
   const readMins = Math.max(2, Math.round(_wc / 200));
   const cimg = CONTENT_IMG[slug];
   const figureHtml = cimg ? `<figure style="margin:6px auto 26px;max-width:560px"><img src="${cimg[0]}" alt="${esc(cimg[1])}" loading="lazy" width="300" height="300" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--line,#e5e9f0)" /><figcaption style="font-size:13px;color:var(--muted,#6b7a90);margin-top:8px;text-align:center">${esc(cimg[2] || cimg[1])}</figcaption></figure>` : '';
   const ld = [];
-  ld.push({ '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, image: cimg ? SITE + '/' + cimg[0] : SITE + '/og-image.jpg', datePublished: UPDATED_ISO, dateModified: UPDATED_ISO, author: { '@type': 'Organization', name: 'RFID MFG', url: SITE + '/about.html' }, publisher: { '@type': 'Organization', name: 'RFID MFG', logo: { '@type': 'ImageObject', url: SITE + '/icon-512.png' } }, mainEntityOfPage: SITE + '/' + slug });
+  ld.push({ '@context': 'https://schema.org', '@type': 'Article', headline: h1, description: desc, image: cimg ? SITE + '/' + cimg[0] : SITE + '/og-image.jpg', datePublished: _d.published, dateModified: _d.modified, author: { '@type': 'Organization', name: 'RFID MFG', url: SITE + '/about.html' }, publisher: { '@type': 'Organization', name: 'RFID MFG', logo: { '@type': 'ImageObject', url: SITE + '/icon-512.png' } }, mainEntityOfPage: SITE + '/' + slug });
   ld.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE + '/' }, { '@type': 'ListItem', position: 2, name: 'Guides', item: SITE + '/guides.html' }, { '@type': 'ListItem', position: 3, name: crumb, item: SITE + '/' + slug }] });
   if (faqs && faqs.length) ld.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f[0], acceptedAnswer: { '@type': 'Answer', text: f[1] } })) });
   if (howto) ld.push({ '@context': 'https://schema.org', '@type': 'HowTo', name: howto.name, step: howto.steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s[0], text: s[1] })) });
@@ -101,7 +104,7 @@ function shell({ slug, title, desc, h1, lead, crumb, bodyHtml, faqs, howto }) {
 <meta property="og:description" content="${esc(desc)}" />
 <meta property="og:url" content="${SITE}/${slug}" />
 <meta property="og:image" content="${SITE}/og-image.jpg" />
-<meta property="article:modified_time" content="${UPDATED_ISO}" />
+<meta property="article:modified_time" content="${_d.modified}" />
 <meta name="twitter:card" content="summary_large_image" />
 ${ldHtml}
 ${FONTS}
@@ -123,7 +126,7 @@ ${HEADER}
 <section class="section">
   <div class="container article">
     <div class="article-body">
-      <p style="font-size:13px;color:var(--muted,#6b7a90);margin:0 0 18px">By ${esc(AUTHOR)} · Updated ${esc(UPDATED)} · ${readMins} min read</p>
+      <p style="font-size:13px;color:var(--muted,#6b7a90);margin:0 0 18px">By ${esc(AUTHOR)} · Updated ${esc(_d.modifiedHuman)} · ${readMins} min read</p>
       <div class="lead-line" style="border-left:4px solid var(--brand,#0aa2e8);background:#f4f8fc;padding:14px 18px;border-radius:8px;margin-bottom:22px"><strong>In short:</strong> ${esc(lead)}</div>
       ${figureHtml}
       ${bodyHtml}
@@ -196,8 +199,8 @@ const COMPARISONS = [
     lead: 'Barcodes are cheap but need line of sight and one-at-a-time scanning. RFID reads many tags at once, without line of sight, and stores re-writable data — at a higher per-tag cost.',
     body: [{ h: 'The core difference', p: ['Barcodes are printed patterns read optically, one at a time, in direct line of sight. RFID tags are read by radio, in bulk, through packaging and without aiming. For many operations RFID turns a multi-hour stock count into minutes — but barcodes remain unbeatable on raw cost for simple, low-volume needs.'] }],
     tables: [{ cap: 'RFID vs barcode', head: ['Factor', 'Barcode', 'RFID'], rows: [['Line of sight', 'Required', 'Not required'], ['Items per scan', 'One', 'Hundreds at once'], ['Range', 'A few cm', 'Up to ~10 m (UHF)'], ['Re-writable data', 'No', 'Yes'], ['Durability', 'Low (print wears)', 'High (sealed tag)'], ['Unit cost', 'Near zero', 'Cents and up'], ['Reads through packaging', 'No', 'Yes']] }],
-    body2: [{ h: 'When RFID is worth it', p: ['RFID pays off when labour, speed or accuracy matter: warehouse and retail inventory, asset tracking, returnable assets, work-in-progress, and anywhere manual scanning is a bottleneck. The tag cost is offset by faster counts, fewer errors and less shrinkage.'] }, { h: 'When barcodes still win', p: ['For low-volume, single-item checkout, disposable packaging or tight per-unit budgets, barcodes are still the rational choice. Many operations run both — barcodes at the consumer level, RFID for cases and pallets.'] }, { h: 'The ROI math', p: ['The business case for RFID is rarely the tag price — it is labour and accuracy. A cycle count that takes hours by barcode scanning can drop to minutes with a UHF handheld reading hundreds of tags per second. In retail, moving from manual counts to RFID typically lifts inventory accuracy from roughly 65% to 95% or higher, which cuts stockouts, over-ordering and shrinkage. Those recurring savings usually pay back the one-time tag and reader investment within the first year for medium-to-high volume operations.'] }, { h: 'A hybrid approach is common', p: ['Most operations do not switch overnight. A practical path is to keep barcodes at the item and consumer level, add RFID at the case, pallet or asset level where bulk reading pays off, and use dual RFID-plus-barcode labels during the transition so both systems keep working.'] }],
-    faqs: [['Is RFID replacing barcodes?', 'Not entirely. RFID is replacing barcodes where bulk, no-line-of-sight reading adds value (inventory, logistics), but barcodes remain common for low-cost, single-item use.'], ['How much more does an RFID tag cost than a barcode?', 'A printed barcode is essentially free; a UHF RFID inlay costs from a few cents upward depending on volume and type, which is justified by labour and accuracy savings.'], ['How accurate is RFID inventory versus barcode?', 'Barcode-based manual counts often leave inventory accuracy around 65%. RFID cycle counting commonly raises accuracy to 95–99% because every tagged item is read quickly and without line of sight.'], ['Can RFID and barcodes be combined?', 'Yes. Many RFID labels are also printed with a barcode and human-readable text so they work with both systems.']],
+    body2: [{ h: 'When RFID is worth it', p: ['RFID pays off when labour, speed or accuracy matter: warehouse and retail inventory, asset tracking, returnable assets, work-in-progress, and anywhere manual scanning is a bottleneck. The tag cost is offset by faster counts, fewer errors and less shrinkage.'] }, { h: 'When barcodes still win', p: ['For low-volume, single-item checkout, disposable packaging or tight per-unit budgets, barcodes are still the rational choice. Many operations run both — barcodes at the consumer level, RFID for cases and pallets.'] }, { h: 'The ROI math', p: ['The business case for RFID is rarely the tag price — it is labour and accuracy. A cycle count that takes hours by barcode scanning can drop to minutes with a UHF handheld reading hundreds of tags per second. In retail, Auburn University RFID Lab research cited by GS1 US puts the shift at an average of 63% inventory accuracy before RFID to 95% after, alongside a 96% reduction in cycle-count time and out-of-stock reductions of up to 50%. Those recurring savings usually pay back the one-time tag and reader investment within the first year for medium-to-high volume operations.'] }, { h: 'A hybrid approach is common', p: ['Most operations do not switch overnight. A practical path is to keep barcodes at the item and consumer level, add RFID at the case, pallet or asset level where bulk reading pays off, and use dual RFID-plus-barcode labels during the transition so both systems keep working.'] }],
+    faqs: [['Is RFID replacing barcodes?', 'Not entirely. RFID is replacing barcodes where bulk, no-line-of-sight reading adds value (inventory, logistics), but barcodes remain common for low-cost, single-item use.'], ['How much more does an RFID tag cost than a barcode?', 'A printed barcode is essentially free; a UHF RFID inlay costs from a few cents upward depending on volume and type, which is justified by labour and accuracy savings.'], ['How accurate is RFID inventory versus barcode?', 'Auburn University RFID Lab research, cited by GS1 US, puts average retail inventory accuracy at 63% without RFID and 95% with item-level RFID, with cycle-count time down 96%. Actual results depend on tag choice, read infrastructure, product material and process discipline.'], ['Can RFID and barcodes be combined?', 'Yes. Many RFID labels are also printed with a barcode and human-readable text so they work with both systems.']],
     related: [['rfid-frequencies-lf-hf-uhf.html', 'RFID frequencies guide'], ['case-warehouse.html', 'Case: warehouse management with RFID'], ['products.html#labels', 'RFID labels & inlays']],
   },
   {
@@ -742,4 +745,5 @@ for (const c of COMPARISONS) { fs.writeFileSync(path.join(OUT, c.slug), comparis
 for (const g of GUIDES) { fs.writeFileSync(path.join(OUT, g.slug), guidePage(g)); n++; }
 fs.writeFileSync(path.join(OUT, 'rfid-glossary.html'), glossaryPage()); n++;
 fs.writeFileSync(path.join(OUT, 'guides.html'), hubPage()); n++;
+DATES.save('content');
 console.log(`Generated ${n} content pages (${COMPARISONS.length} comparisons + ${GUIDES.length} guides + glossary + hub).`);

@@ -240,19 +240,20 @@ const FREQ_SVG = `<figure class="figure">
 // ── 工厂实数表(全部来自站内已发布数字)与下单时间线 ──
 const FACTORY_ROWS = [
   ['Established', '1996, Shenzhen'],
-  ['Facility', '20,000 m² · 6 production lines'],
-  ['Team', '300+ staff · in-house R&D and QC lab'],
-  ['Chip inventory', '50M+ first-hand chips in stock'],
-  ['Capacity', 'Millions of units per month'],
-  ['Markets', '100+ countries served'],
-  ['Quality system', 'ISO 9001 · ISO 14001 · ISO 45001'],
-  ['Compliance', 'CE · FCC · FSC · RoHS · REACH'],
+  ['Production', 'Card lamination, inlay bonding, die-cutting and personalisation in house'],
+  ['Chip sourcing', 'Direct from NXP, Impinj and EM Microelectronic product lines'],
+  ['Engineering', 'In-house R&D, tooling and QC lab'],
+  ['Frequencies', 'LF 125 kHz · HF 13.56 MHz · UHF 860–960 MHz'],
+  ['Shipping', 'Worldwide express, with full export documentation'],
+  ['Quality system', 'ISO 9001 · ISO 14001 · ISO 45001 — certificate number, issuing body and certified scope on request'],
+  ['Product compliance', 'CE / FCC declarations issued per product model and target market'],
+  ['Material compliance', 'RoHS / REACH statements issued per material and batch'],
   ['Warranty', '2 years, with free pre-production samples'],
 ];
 const TIMELINE_STEPS = [
   ['1 · Send your spec', 'Chip, size, artwork, quantity — or just the goal. We reply with an exact quote within 24 hours.'],
   ['2 · Samples & proof', 'Free pre-production samples in 3–7 days plus an artwork proof, so you verify material, print and chip.'],
-  ['3 · Your approval', 'Bulk production starts only after you approve the sample and proof — 7–18 days on our six lines.'],
+  ['3 · Your approval', 'Bulk production starts only after you approve the sample and proof — 7–18 days in house.'],
   ['4 · Tracked delivery', 'Express door-to-door shipping worldwide, with a 2-year warranty and ongoing support.'],
 ];
 
@@ -1157,7 +1158,7 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnt
             <div><span>Per ${wUnit}</span><b id="estUnit">&asymp; ${fmtP(tiers.prices[0])} / ${wUnit}</b></div>
             <div><span>Order total</span><b id="estTotal">&asymp; $${Math.round(tiers.qtys[0] * tiers.prices[0]).toLocaleString('en-US')}</b></div>
           </div>
-          <p class="est__note">Guide pricing from our published range — the exact quote depends on chip, size and artwork, and lands in your inbox within 24 hours. T/T · ships to 100+ countries.</p>
+          <p class="est__note">Guide pricing from our published range — the exact quote depends on chip, size and artwork, and lands in your inbox within 24 hours. T/T · worldwide shipping.</p>
           <a class="btn btn--primary btn--lg" id="estCta" href="/contact/?product=${encodeURIComponent(p.name)}&amp;cat=${encodeURIComponent(SELECT_LABEL[p.cat] || '')}&amp;qty=${tiers.qtys[0]}#quoteForm">Get Exact Quote for ${tiers.qtys[0].toLocaleString('en-US')} ${wUnitPl} &rarr;</a>
         </div>
         <script>(function(){
@@ -1189,7 +1190,7 @@ var all=est.querySelectorAll('.est__tier'),i;for(i=0;i<all.length;i++)(function(
         <p>${esc(p.overview)}</p>
         <p style="margin-top:-4px;font-size:14px"><a class="link-arrow" href="${CAT_GUIDE[p.cat][0]}">New to this? Read ${esc(CAT_GUIDE[p.cat][1])} <span>→</span></a></p>
         <ul class="prod-badges">${badges}</ul>
-        <p class="fastfacts">Samples in ${w.sample} days · Bulk production ${w.bulkLow}–${w.bulkHigh} days · Door-to-door express to 100+ countries</p>
+        <p class="fastfacts">Samples in ${w.sample} days · Bulk production ${w.bulkLow}–${w.bulkHigh} days · Door-to-door express worldwide</p>
         <div class="prod__cta">
           <a href="${quoteHref}" class="btn btn--primary btn--lg">Get Exact Quote — 24h Reply</a>
           <a href="${quoteHref.replace('#quoteForm', '&sample=1#quoteForm')}" class="btn btn--lg" style="border-color:var(--brand-deep);color:var(--brand-deep)">Request Free Sample</a>
@@ -1265,7 +1266,7 @@ ${mfgNote}
 </section>`;
   const body = `<div class="side-layout"><div class="side-layout__grid">${sideNav(p.slug, p.cat, false)}<div class="side-main">${inner}</div></div></div>`;
   const title = `${p.name} Manufacturer & Wholesale Supplier | RFID MFG`;
-  const metaDesc = d.metaDesc || `${p.name} — custom OEM/ODM manufacturer & wholesale supplier since 1996. MOQ from ${moqFmt(w.moq)} ${wUnitPl}, free samples, 24-hour quote. Ships to 100+ countries.`;
+  const metaDesc = d.metaDesc || `${p.name} — custom OEM/ODM manufacturer & wholesale supplier since 1996. MOQ from ${moqFmt(w.moq)} ${wUnitPl}, free samples, 24-hour quote. Worldwide shipping.`;
   return page(title, metaDesc, `${p.slug}.html`, ld + '\n' + faqLd, body);
 }
 

@@ -9,8 +9,9 @@ const fs = require('fs');
 const path = require('path');
 const OUT = __dirname;
 const SITE = 'https://www.rfidmfg.com';
-const UPDATED = 'June 18, 2026';
+const UPDATED = 'June 18, 2026';        // 历史首发日期，仅作首次登记的种子
 const UPDATED_ISO = '2026-06-18';
+const DATES = require('./content-dates.js');
 const AUTHOR = 'RFID MFG Editorial Team';
 const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -49,15 +50,16 @@ const INDUSTRIES = [
   {
     slug: 'retail', crumb: 'Retail & Apparel',
     title: 'RFID for Retail & Apparel — Inventory Accuracy & Loss Prevention',
-    desc: 'How item-level RFID lifts retail inventory accuracy to 95%+, cuts out-of-stocks and shrink, and powers accurate omnichannel fulfilment — with the tags and labels to deploy it.',
+    desc: 'How item-level RFID lifts retail inventory accuracy from an average of 63% to 95% (Auburn University RFID Lab), cuts out-of-stocks and shrink, and powers accurate omnichannel fulfilment — with the tags and labels to deploy it.',
     h1: 'RFID for Retail & Apparel',
-    lead: 'Item-level RFID raises retail inventory accuracy from a typical 60–70% to 95%+, cutting out-of-stocks and shrink and enabling fast, accurate omnichannel fulfilment.',
+    lead: 'Item-level RFID raises retail inventory accuracy from an average of 63% to 95%, cuts out-of-stocks by up to 50% and reduces cycle-count time by 96%, according to Auburn University RFID Lab research cited by GS1 US.',
     challenges: ['Inventory records that drift from reality, causing missed sales', 'Out-of-stocks and overstocks from inaccurate counts', 'Shrinkage and theft at the shelf and exit', 'Slow, labour-heavy manual stock takes', 'Errors in buy-online / ship-from-store fulfilment'],
     solution: ['Each item is tagged at source with a low-cost UHF RFID label or hang-tag carrying a unique EPC. Staff cycle-count a whole rail or shelf in seconds with a handheld reader, and overhead or exit readers flag stock movement and theft in real time.', 'Because every unit is individually identified, the same data drives store replenishment, online availability and ship-from-store — so the customer sees accurate stock wherever they shop.', 'Rollout is straightforward when the tags are right. Apparel and general merchandise use UHF paper labels or hang-tags; small, high-value items such as jewelry and cosmetics use miniature or on-metal tags; and many retailers specify a combined RFID-plus-barcode label so existing POS keeps working through the transition. As a manufacturer we supply these pre-encoded to your EPC/SGTIN scheme and printed with your artwork, so tags arrive ready to apply at source or in the DC.'],
-    benefits: ['Inventory accuracy commonly reaches 95–99%', 'Stock takes run 10–20× faster than barcode', 'Out-of-stocks fall, lifting sales of in-demand lines', 'Shrink is reduced with EAS at the exit', 'Reliable omnichannel (BOPIS / ship-from-store) fulfilment'],
+    benefits: ['Inventory accuracy rises from an average of 63% to 95% (Auburn RFID Lab)', 'Cycle-count time cut by 96% versus manual barcode counts (Auburn RFID Lab)', 'Out-of-stocks fall, lifting sales of in-demand lines', 'Shrink is reduced with EAS at the exit', 'Reliable omnichannel (BOPIS / ship-from-store) fulfilment'],
     products: [['uhf-rfid-label.html', 'UHF RFID Label', 'Roll-fed smart labels for item-level apparel and retail tagging.'], ['rfid-wet-inlay.html', 'RFID Wet Inlay', 'Adhesive UHF inlays for fast peel-and-stick tagging.'], ['rfid-jewelry-tag.html', 'RFID Jewelry Tag', 'Tiny UHF tags for high-value jewelry and accessories.'], ['rfid-reader-writer.html', 'RFID Readers / Writers', 'Handheld and fixed UHF readers for counts and exits.']],
-    metricsHead: ['KPI', 'Typical before', 'With item-level RFID'],
-    metricsRows: [['Inventory accuracy', '60–70%', '95–99%'], ['Full stock count', 'Hours / days', 'Minutes'], ['Out-of-stock rate', 'Baseline', 'Down ~20–30%'], ['Shrink visibility', 'Periodic', 'Continuous (EAS)']],
+    metricsHead: ['KPI', 'Before', 'With item-level RFID', 'Source'],
+    metricsRows: [['Inventory accuracy', '63% (average)', '95%', 'Auburn RFID Lab'], ['Cycle-count time', 'Baseline', 'Down 96%', 'Auburn RFID Lab'], ['Out-of-stock rate', 'Baseline', 'Down up to 50%', 'Auburn RFID Lab'], ['Order accuracy (DC to retailer)', '31% of orders error-free', '99.9% when shipments are reconciled', 'Project Zipper, Phase 1']],
+    sourceNote: '<p style="font-size:13px;color:var(--muted)">Sources: inventory accuracy, out-of-stock and cycle-count figures are Auburn University RFID Lab studies as cited in the <a href="https://www.gs1us.org/" rel="nofollow noopener" target="_blank">GS1 US</a> executive summary of the EPC/RFID Retail Supply Chain Data Exchange Study. Order-accuracy figures are from that study itself — “Project Zipper” Phase 1, conducted by the <a href="https://rfid.auburn.edu/" rel="nofollow noopener" target="_blank">Auburn University RFID Lab</a> and GS1 US between June 2017 and July 2018 across 8 brand owners and 5 retailers. Note that order accuracy and inventory accuracy are different metrics and are not interchangeable. Your own results will depend on tag selection, read infrastructure, product material, store layout and process discipline — we recommend a pilot before full rollout.</p>',
     caseLink: ['cases.html', 'See related deployments in our case studies'],
     guides: [['rfid-vs-barcode.html', 'RFID vs barcode: when to switch'], ['rfid-frequencies-lf-hf-uhf.html', 'Why UHF suits retail (frequency guide)'], ['rfid-dry-vs-wet-inlay.html', 'Dry vs wet inlay for labels']],
     faqs: [['Which RFID frequency does retail use?', 'Retail item-level tagging uses passive UHF (860–960 MHz, EPC Gen2) for fast bulk reads at 1–8 metres.'], ['How much does an RFID apparel tag cost?', 'High-volume UHF labels and hang-tags are low-cost per unit; share your volume and format for a quote.'], ['Will RFID replace our barcodes?', 'Most retailers run both during transition — many tags carry a printed barcode and a UHF chip so existing POS keeps working.']],
@@ -70,10 +72,11 @@ const INDUSTRIES = [
     lead: 'UHF RFID reads entire pallets and cartons at once through dock-door portals, automating receiving, cycle counts and dispatch for real-time inventory and near-zero shipping errors.',
     challenges: ['Slow, manual barcode scanning at receiving and dispatch', 'Miscounts and lost or misplaced stock', 'No real-time view of what is on hand or in transit', 'Returnable assets (totes, cages, pallets) going missing', 'Labour-intensive cycle counts'],
     solution: ['Cartons and pallets carry UHF labels; fixed readers in dock-door portals capture everything that passes without line of sight, while handhelds speed cycle counts and putaway. Rugged anti-metal tags identify returnable totes, racking and equipment.', 'The result is a live inventory record and an automatic, verified count at every receiving and shipping event.', 'The key to reliability is matching the tag to the load. Plain cartons take economical paper labels; metal racking, steel totes and drums need on-metal tags with a spacer or ferrite; and pallets of liquid need inlays tuned for high water content. We manufacture the full range — labels, inlays and hard tags — and pre-encode them to your SSCC or internal numbering, then help specify the dock-door and handheld readers so the whole system is sourced and tuned together.'],
-    benefits: ['Receiving and dispatch verified automatically at the door', 'Inventory accuracy typically 95%+', 'Shipping and picking errors sharply reduced', 'Returnable assets tracked and recovered', 'Cycle counts in a fraction of the time'],
+    benefits: ['Receiving and dispatch verified automatically at the door', 'Order accuracy up to 99.9% when EPC/RFID is used to reconcile shipments (Auburn RFID Lab & GS1 US, Project Zipper Phase 1)', 'Shipping and picking errors sharply reduced', 'Returnable assets tracked and recovered', 'Cycle counts in a fraction of the time'],
     products: [['uhf-rfid-label.html', 'UHF RFID Label', 'Carton and pallet labels for supply-chain visibility.'], ['rfid-anti-metal-tag.html', 'Anti-Metal Tag', 'Rugged tags for totes, racking and equipment.'], ['rfid-reader-writer.html', 'RFID Readers / Gateways', 'Fixed dock-door portals and handheld readers.'], ['rfid-smart-cabinet.html', 'RFID Smart Cabinet', 'Automated control for tools and high-value assets.']],
     metricsHead: ['Process', 'Manual / barcode', 'With UHF RFID'],
-    metricsRows: [['Pallet receiving', 'Scan each carton', 'Read whole pallet at the door'], ['Inventory accuracy', '~80%', '95%+'], ['Cycle count', 'Hours', 'Minutes'], ['Shipping errors', 'Baseline', 'Greatly reduced']],
+    metricsRows: [['Pallet receiving', 'Scan each carton', 'Read whole pallet at the door'], ['Order accuracy (DC to retailer)', '31% of orders error-free', '99.9% when shipments are reconciled'], ['Cycle count', 'Hours', 'Minutes'], ['Shipping errors', 'Baseline', 'Greatly reduced']],
+    sourceNote: '<p style="font-size:13px;color:var(--muted)">Order-accuracy figures are from “Project Zipper” Phase 1, conducted by the <a href="https://rfid.auburn.edu/" rel="nofollow noopener" target="_blank">Auburn University RFID Lab</a> and <a href="https://www.gs1us.org/" rel="nofollow noopener" target="_blank">GS1 US</a> between June 2017 and July 2018 across 8 brand owners and 5 retailers. Remaining rows describe qualitative process changes rather than measured benchmarks. Your own results will depend on tag selection, read infrastructure, packaging material and process discipline — we recommend a pilot before full rollout.</p>',
     caseLink: ['case-warehouse.html', 'Case study: warehouse management'],
     guides: [['rfid-frequencies-lf-hf-uhf.html', 'LF vs HF vs UHF for logistics'], ['rfid-vs-barcode.html', 'RFID vs barcode'], ['rfid-readers-hardware-guide.html', 'Choosing RFID readers & hardware']],
     faqs: [['How far can warehouse RFID read?', 'Passive UHF reads cartons and pallets at roughly 1–10 metres, enough for dock-door portals and forklift-mounted readers.'], ['Does RFID work on metal shelving and liquids?', 'Standard labels are detuned by metal and liquids; on-metal (anti-metal) tags restore reliable reads on those surfaces.'], ['Can RFID integrate with our WMS?', 'Yes — readers output standard data (EPC, MQTT/HTTP) that integrates with common WMS/ERP platforms.']],
@@ -172,7 +175,7 @@ ${FOOTER}
 }
 
 const INDUSTRY_IMG = {
-  retail: ['images/rfid-white-label-sticker.webp', 'UHF RFID apparel label for item-level retail inventory', 'Item-level UHF labels drive 95%+ retail inventory accuracy.'],
+  retail: ['images/rfid-white-label-sticker.webp', 'UHF RFID apparel label for item-level retail inventory', 'Item-level UHF labels lift retail inventory accuracy from an average of 63% to 95% (Auburn RFID Lab).'],
   warehouse: ['images/rfid-warehouse-management.webp', 'RFID warehouse management with dock-door portal reads', 'Dock-door portals read whole pallets without line of sight.'],
   healthcare: ['images/rfid-anti-metal-tag.webp', 'Anti-metal RFID tag for tracking medical equipment', 'Anti-metal and high-temperature tags track equipment and sterilised instruments.'],
   hospitality: ['images/hotel-rfid-key-card.webp', 'Branded RFID hotel keycard for contactless room access', 'RFID keycards work across major lock brands with full-colour branding.'],
@@ -182,10 +185,11 @@ const INDUSTRY_IMG = {
 
 function industryPage(ind) {
   const slug = 'industry-' + ind.slug + '.html';
+  const _d = DATES.track(slug, JSON.stringify(ind), UPDATED_ISO);
   const iimg = INDUSTRY_IMG[ind.slug];
   const iFigure = iimg ? `<figure style="margin:6px auto 22px;max-width:560px"><img src="${iimg[0]}" alt="${esc(iimg[1])}" loading="lazy" width="300" height="300" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--line,#e5e9f0)" /><figcaption style="font-size:13px;color:var(--muted,#6b7a90);margin-top:8px;text-align:center">${esc(iimg[2])}</figcaption></figure>` : '';
   const ld = [
-    { '@context': 'https://schema.org', '@type': 'Article', headline: ind.h1, description: ind.desc, image: iimg ? SITE + '/' + iimg[0] : SITE + '/og-image.jpg', datePublished: UPDATED_ISO, dateModified: UPDATED_ISO, author: { '@type': 'Organization', name: 'RFID MFG', url: SITE + '/about.html' }, publisher: { '@type': 'Organization', name: 'RFID MFG', logo: { '@type': 'ImageObject', url: SITE + '/icon-512.png' } }, mainEntityOfPage: SITE + '/' + slug },
+    { '@context': 'https://schema.org', '@type': 'Article', headline: ind.h1, description: ind.desc, image: iimg ? SITE + '/' + iimg[0] : SITE + '/og-image.jpg', datePublished: _d.published, dateModified: _d.modified, author: { '@type': 'Organization', name: 'RFID MFG', url: SITE + '/about.html' }, publisher: { '@type': 'Organization', name: 'RFID MFG', logo: { '@type': 'ImageObject', url: SITE + '/icon-512.png' } }, mainEntityOfPage: SITE + '/' + slug },
     { '@context': 'https://schema.org', '@type': 'Service', serviceType: 'RFID solutions for ' + ind.crumb, provider: { '@type': 'Organization', name: 'RFID MFG Co., Ltd.', url: SITE + '/' }, areaServed: 'Worldwide', description: ind.desc, url: SITE + '/' + slug },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE + '/' }, { '@type': 'ListItem', position: 2, name: 'Industries', item: SITE + '/industries.html' }, { '@type': 'ListItem', position: 3, name: ind.crumb, item: SITE + '/' + slug }] },
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: ind.faqs.map((f) => ({ '@type': 'Question', name: f[0], acceptedAnswer: { '@type': 'Answer', text: f[1] } })) },
@@ -217,7 +221,7 @@ ${ldHtml}`;
 <section class="section">
   <div class="container article">
     <div class="article-body">
-      <p style="font-size:13px;color:var(--muted,#6b7a90);margin:0 0 18px">By ${esc(AUTHOR)} · Updated ${esc(UPDATED)}</p>
+      <p style="font-size:13px;color:var(--muted,#6b7a90);margin:0 0 18px">By ${esc(AUTHOR)} · Updated ${esc(_d.modifiedHuman)}</p>
       <div class="lead-line" style="border-left:4px solid var(--brand,#0aa2e8);background:#f4f8fc;padding:14px 18px;border-radius:8px;margin-bottom:22px"><strong>In short:</strong> ${esc(ind.lead)}</div>
       ${iFigure}
       <h2>The challenges</h2>
@@ -228,7 +232,7 @@ ${ldHtml}`;
       ${POINTS(ind.benefits)}
       <h2>Typical impact</h2>
       ${TABLE(ind.metricsHead, ind.metricsRows)}
-      <p style="font-size:13px;color:var(--muted)">Figures are typical ranges commonly reported across industry deployments; actual results vary by environment, process and integration.</p>
+      ${ind.sourceNote || '<p style="font-size:13px;color:var(--muted)">Figures are typical ranges commonly reported across industry deployments; actual results vary by environment, process and integration.</p>'}
       <h2>Recommended products</h2>
       <div class="catalog-grid" style="margin-top:8px">
         ${prods}
@@ -305,4 +309,5 @@ ${ldHtml}`;
 let n = 0;
 for (const ind of INDUSTRIES) { fs.writeFileSync(path.join(OUT, 'industry-' + ind.slug + '.html'), industryPage(ind)); n++; }
 fs.writeFileSync(path.join(OUT, 'industries.html'), hubPage()); n++;
+DATES.save('industries');
 console.log(`Generated ${n} pages (${INDUSTRIES.length} industries + hub).`);

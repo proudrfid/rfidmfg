@@ -1,0 +1,202 @@
+{
+  "case-bank-card.html": {
+    "published": "2024-09-20",
+    "modified": "2026-08-12",
+    "hash": "99ec323d21760297"
+  },
+  "case-events.html": {
+    "published": "2025-05-15",
+    "modified": "2026-08-12",
+    "hash": "7806f057ac8c23c5"
+  },
+  "case-gateways.html": {
+    "published": "2024-12-03",
+    "modified": "2026-08-12",
+    "hash": "4b6041be7a7f71ec"
+  },
+  "case-id-cards.html": {
+    "published": "2024-11-05",
+    "modified": "2026-08-12",
+    "hash": "d15711fb2f4efd7b"
+  },
+  "case-library.html": {
+    "published": "2025-01-18",
+    "modified": "2026-08-12",
+    "hash": "f9b305980ed0e065"
+  },
+  "case-logistics.html": {
+    "published": "2025-04-02",
+    "modified": "2026-08-12",
+    "hash": "5a4c194c876c92a0"
+  },
+  "case-member-card.html": {
+    "published": "2024-06-28",
+    "modified": "2026-08-12",
+    "hash": "12b615c0518f41fd"
+  },
+  "case-nfc-honda.html": {
+    "published": "2024-07-11",
+    "modified": "2026-08-12",
+    "hash": "db88dfd1a63026b2"
+  },
+  "case-scratch-card.html": {
+    "published": "2024-08-22",
+    "modified": "2026-08-12",
+    "hash": "ac8a1ac8a0ecc759"
+  },
+  "case-transit.html": {
+    "published": "2025-02-09",
+    "modified": "2026-08-12",
+    "hash": "bea1962ab854cded"
+  },
+  "case-warehouse.html": {
+    "published": "2025-03-12",
+    "modified": "2026-08-12",
+    "hash": "0b108e2e4a831fd4"
+  },
+  "case-warranty.html": {
+    "published": "2024-10-15",
+    "modified": "2026-08-12",
+    "hash": "5a3b03b374a7eecb"
+  },
+  "industry-events.html": {
+    "published": "2026-06-18",
+    "modified": "2026-08-12",
+    "hash": "bc4f4da8ef2113d3"
+  },
+  "industry-healthcare.html": {
+    "published": "2026-06-18",
+    "modified": "2026-08-12",
+    "hash": "aaf9262fc2f0c01f"
+  },
+  "industry-hospitality.html": {
+    "published": "2026-06-18",
+    "modified": "2026-08-12",
+    "hash": "6907cc786c1abf57"
+  },
+  "industry-livestock.html": {
+    "published": "2026-06-18",
+    "modified": "2026-08-12",
+    "hash": "758247368601b049"
+  },
+  "industry-retail.html": {
+    "published": "2026-06-18",
+    "modified": "2026-08-12",
+    "hash": "6e87c3c1ac0dfe20"
+  },
+  "industry-warehouse.html": {
+    "published": "2026-06-18",
+    "modified": "2026-08-12",
+    "hash": "6c5a4470f5693a33"
+  },
+  "news-blocking-card.html": {
+    "published": "2026-05-25",
+    "modified": "2026-08-12",
+    "hash": "ddea7a829cc64354"
+  },
+  "news-food.html": {
+    "published": "2025-10-13",
+    "modified": "2026-08-12",
+    "hash": "f763ca0e82b8f14f"
+  },
+  "news-nfc-stickers.html": {
+    "published": "2026-02-28",
+    "modified": "2026-08-12",
+    "hash": "83f92dc5460eaf05"
+  },
+  "news-rail.html": {
+    "published": "2026-05-12",
+    "modified": "2026-08-12",
+    "hash": "babd16c399425c42"
+  },
+  "news-walmart.html": {
+    "published": "2025-10-10",
+    "modified": "2026-08-12",
+    "hash": "d7d768b1f4e4987d"
+  },
+  "news-wristband.html": {
+    "published": "2025-10-18",
+    "modified": "2026-08-12",
+    "hash": "6286f552bd6cc306"
+  },
+  "nfc-guide.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "ab0b5201cde07d19"
+  },
+  "nfc-vs-rfid-wristband.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "fc61a6e51409232e"
+  },
+  "ntag213-vs-215-vs-216.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "e07b01e9b63454ff"
+  },
+  "rfid-blocking-guide.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "3d18f97870a5f21f"
+  },
+  "rfid-card-materials.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "7e7c8e59692929e5"
+  },
+  "rfid-cards-guide.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "bc69d19c8c466e76"
+  },
+  "rfid-chips-mifare-ntag-desfire.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "6592a2c78c6ccc62"
+  },
+  "rfid-dry-vs-wet-inlay.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "5b5c346bf7260b8d"
+  },
+  "rfid-frequencies-lf-hf-uhf.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "699e562fa0172327"
+  },
+  "rfid-key-fob-guide.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "397a1838f6548164"
+  },
+  "rfid-labels-inlays-guide.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "50e35f3b21104c0b"
+  },
+  "rfid-readers-hardware-guide.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "82ef3f9a96ce348e"
+  },
+  "rfid-vs-barcode.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "27c347fe8a90cf6a"
+  },
+  "rfid-vs-nfc.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "a2d30f65b5dbe392"
+  },
+  "rfid-wristband-materials.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "0bb57a1178e1dc2d"
+  },
+  "uhf-vs-hf-rfid-label.html": {
+    "published": "2026-06-15",
+    "modified": "2026-08-12",
+    "hash": "d92f893edde4500f"
+  }
+}

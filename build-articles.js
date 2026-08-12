@@ -11,7 +11,8 @@ const path = require('path');
 const OUT = __dirname;
 const SITE = 'https://www.rfidmfg.com';
 const IMGBASE = 'images/';
-const BUILD_DATE = '2026-06-14';
+const BUILD_DATE = '2026-06-14';        // 历史日期，仅作首次登记的种子
+const DATES = require('./content-dates.js');
 const BUILD_DATE_DISPLAY = 'June 14, 2026';
 const AUTHOR = 'RFID MFG Editorial Team';
 const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -84,8 +85,9 @@ ${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEnt
 }
 
 function buildBody(it) {
+  const _d = trackArticle(it);
   const lead = it.lead ? `<div class="lead-line" style="border-left:4px solid var(--brand,#0aa2e8);background:#f4f8fc;padding:14px 18px;border-radius:8px;margin-bottom:22px"><strong>In short:</strong> ${esc(it.lead)}</div>` : '';
-  const byline = `<p style="font-size:13px;color:var(--muted,#6b7a90);margin:-4px 0 18px">By ${esc(AUTHOR)} · Updated ${esc(BUILD_DATE_DISPLAY)}</p>`;
+  const byline = `<p style="font-size:13px;color:var(--muted,#6b7a90);margin:-4px 0 18px">By ${esc(AUTHOR)} · Updated ${esc(_d.modifiedHuman)}</p>`;
   const intro = P_ART(it.body, it.art);
   const table = TABLE(it.table);
   const takeaways = it.points && it.points.length ? `<h2>Key takeaways</h2>\n      ${POINTS(it.points)}` : '';
@@ -95,14 +97,20 @@ function buildBody(it) {
   return [byline, lead, intro, table, takeaways, help, related, faq].filter(Boolean).join('\n      ');
 }
 
+// 指纹只覆盖正文内容，不含日期，避免自我循环。track 幂等，重复调用不会重复计数。
+function trackArticle(it) {
+  return DATES.track(it.slug, JSON.stringify({ h1: it.h1, lead: it.lead, body: it.body, faqs: it.faqs, tables: it.tables }), it.date || BUILD_DATE);
+}
+
 function shell(it) {
   const type = it.crumbCat === 'News' ? 'NewsArticle' : 'Article';
+  const _d = trackArticle(it);
   const articleLd = {
     '@context': 'https://schema.org', '@type': type,
     headline: it.h1,
     description: it.lead || it.body[0],
     image: it.img ? SITE + '/' + IMGBASE + it.img : SITE + '/og-image.jpg',
-    datePublished: it.date, dateModified: BUILD_DATE,
+    datePublished: it.date, dateModified: _d.modified,
     author: { '@type': 'Organization', name: 'RFID MFG', url: SITE + '/about.html' },
     publisher: { '@type': 'Organization', name: 'RFID MFG', logo: { '@type': 'ImageObject', url: SITE + '/favicon.svg' } },
     mainEntityOfPage: SITE + '/' + it.slug,
@@ -132,7 +140,7 @@ ${JSON.stringify(articleLd)}
 <meta property="og:url" content="${SITE}/${it.slug}" />
 <meta property="og:image" content="${it.img ? SITE + '/' + IMGBASE + it.img : SITE + '/og-image.jpg'}" />
 <meta property="article:published_time" content="${it.date}" />
-<meta property="article:modified_time" content="${BUILD_DATE}" />
+<meta property="article:modified_time" content="${_d.modified}" />
 <meta name="twitter:card" content="summary_large_image" />
 ${ld}
 ${FONTS}
@@ -683,4 +691,5 @@ function rewire(file, items) {
 rewire('cases.html', CASES);
 rewire('news.html', NEWS);
 
+DATES.save('articles');
 console.log(`Generated ${n} article pages (12 cases + 6 news) with TL;DR, tables, FAQ schema, dates & author; rewired Read-more links.`);
