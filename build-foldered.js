@@ -113,7 +113,7 @@ function categoryPage(cat) {
   let h = fs.readFileSync(path.join(ROOT, 'products.html'), 'utf8');
   const url = `${SITE}/products/${cat}/`;
   const title = `${CAT_FULL[cat]} — Manufacturer | RFID MFG`;
-  const desc = `${CAT_FULL[cat]} from RFID MFG — ${CAT_SUB[cat]} OEM/ODM, low MOQ, ISO 9001 certified site, since 1996.`;
+  const desc = `${CAT_FULL[cat]} from RFID MFG — ${CAT_SUB[cat]} OEM/ODM, low MOQ, ISO 9001 certified site.`;
   // head swaps
   h = h.replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`);
   h = h.replace(/(<meta name="description" content=")[^"]*(")/, `$1${desc}$2`);

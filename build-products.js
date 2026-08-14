@@ -240,7 +240,6 @@ const FREQ_SVG = `<figure class="figure">
 
 // ── 工厂实数表(全部来自站内已发布数字)与下单时间线 ──
 const FACTORY_ROWS = [
-  ['Established', '1996, Shenzhen'],
   ['Production', 'Card lamination, inlay bonding, die-cutting and personalisation in house'],
   ['Chip sourcing', 'Direct from NXP, Impinj and EM Microelectronic product lines'],
   ['Engineering', 'In-house R&D, tooling and QC lab'],
@@ -990,13 +989,13 @@ const NAV = `      <a href="index.html">Home</a>
       <a href="news.html">Blog</a>
       <a href="contact.html">Contact</a>`;
 
-const TOPBAR = `<div class="topbar"><div class="container topbar__inner"><span class="topbar__item">Established 1996 · Shenzhen, China</span><div class="topbar__contact"><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8615815501857">+86 158 1550 1857</a></div></div></div>`;
+const TOPBAR = `<div class="topbar"><div class="container topbar__inner"><span class="topbar__item">Shenzhen, China · ISO 9001 · 14001 · 45001 site</span><div class="topbar__contact"><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8615815501857">+86 158 1550 1857</a></div></div></div>`;
 
 const HEADER = `<header class="header" id="header"><div class="container header__inner"><a href="index.html" class="brand" aria-label="RFID MFG home"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><nav class="nav" id="nav">
 ${NAV}
     </nav><a href="contact.html" class="btn btn--primary header__cta">Get a Quote</a><button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div></header>`;
 
-const FOOTER = `<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing since 1996.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="industries.html">Industries</a><a href="cases.html">Cases</a><a href="sustainability.html">Sustainability</a><a href="news.html">Blog</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a><a href="datasheets.html">Datasheets</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8615815501857">+86 158 1550 1857</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>`;
+const FOOTER = `<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing, direct from our Shenzhen plant.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="industries.html">Industries</a><a href="cases.html">Cases</a><a href="sustainability.html">Sustainability</a><a href="news.html">Blog</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a><a href="datasheets.html">Datasheets</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8615815501857">+86 158 1550 1857</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>`;
 
 const FONTS = `<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin-700-normal.woff2" crossorigin /><link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin-400-normal.woff2" crossorigin />`;
 
@@ -1281,7 +1280,7 @@ ${mfgNote}
 </section>`;
   const body = `<div class="side-layout"><div class="side-layout__grid">${sideNav(p.slug, p.cat, false)}<div class="side-main">${inner}</div></div></div>`;
   const title = `${p.name} Manufacturer & Wholesale Supplier | RFID MFG`;
-  const metaDesc = d.metaDesc || `${p.name} — custom OEM/ODM manufacturer & wholesale supplier since 1996. MOQ from ${moqFmt(w.moq)} ${wUnitPl}, free samples, 24-hour quote. Worldwide shipping.`;
+  const metaDesc = d.metaDesc || `${p.name} — custom OEM/ODM manufacturer & wholesale supplier. MOQ from ${moqFmt(w.moq)} ${wUnitPl}, free samples, 24-hour quote. Worldwide shipping.`;
   return page(title, metaDesc, `${p.slug}.html`, ld + '\n' + faqLd, body);
 }
 

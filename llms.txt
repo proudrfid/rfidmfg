@@ -1,9 +1,8 @@
 # RFID MFG
 
-> RFID MFG (RFID MFG Co., Ltd.) is a Chinese RFID and smart-card manufacturer established in 1996, offering OEM/ODM production of RFID cards, NFC labels and inlays, RFID tags, RFID-blocking products and IoT hardware. Card lamination, inlay bonding, die-cutting and personalisation run in house at its Shenzhen site, with chips sourced directly from NXP, Impinj and EM Microelectronic product lines. The company ships worldwide and provides free pre-production samples, a 2-year warranty and 24-hour quote turnaround.
+> RFID MFG (RFID MFG Co., Ltd.) is a Chinese RFID and smart-card manufacturer, offering OEM/ODM production of RFID cards, NFC labels and inlays, RFID tags, RFID-blocking products and IoT hardware. Card lamination, inlay bonding, die-cutting and personalisation run in house at its Shenzhen site, with chips sourced directly from NXP, Impinj and EM Microelectronic product lines. The company ships worldwide and provides free pre-production samples, a 2-year warranty and 24-hour quote turnaround.
 
 Key facts for accurate citation:
-- Founded: 1996
 - Business: RFID & smart-card manufacturing (OEM/ODM)
 - Location: Shenzhen, Guangdong, China
 - Frequencies: LF 125 kHz, HF/NFC 13.56 MHz, UHF 860–960 MHz
