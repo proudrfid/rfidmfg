@@ -184,7 +184,8 @@ for (const c of CAT_ORDER) { writeOut('products/' + c, categoryPage(c)); n++; }
 
 // ---- copy assets ----
 const rootAssets = ['styles.css', 'script.js', 'favicon.svg', 'favicon.ico', 'favicon-32.png', 'apple-touch-icon.png',
-  'icon-192.png', 'icon-512.png', 'og-image.jpg', 'site.webmanifest', 'robots.txt', 'llms.txt', 'llms-full.txt', '_headers', '_redirects'];
+  'icon-192.png', 'icon-512.png', 'og-image.jpg', 'site.webmanifest', 'robots.txt', 'llms.txt', 'llms-full.txt', '_headers', '_redirects',
+  'ddb6f87001124c9ca06a2ea8021c931a.txt']; // IndexNow key file
 for (const a of rootAssets) { if (fs.existsSync(path.join(ROOT, a))) fs.copyFileSync(path.join(ROOT, a), path.join(OUT, a)); }
 fs.mkdirSync(path.join(OUT, 'fonts'), { recursive: true });
 for (const a of fs.readdirSync(path.join(ROOT, 'fonts')).filter((x) => x.endsWith('.woff2'))) fs.copyFileSync(path.join(ROOT, 'fonts', a), path.join(OUT, 'fonts', a));
