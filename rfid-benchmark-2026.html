@@ -133,6 +133,21 @@
     </div>
     <p style="font-size:14px;color:var(--muted)">Browse the matching products: <a href="rfid-nfc-card.html">RFID / NFC cards</a>, <a href="uhf-rfid-label.html">UHF labels</a>, <a href="rfid-anti-metal-tag.html">anti-metal tags</a>, <a href="uhf-windshield-tag.html">windshield tags</a>.</p>
 
+    <h3>UHF read range by mounting surface</h3>
+    <p>The same tag reads very differently depending on what it sits on. Typical estimates with a fixed reader at regulatory full power (2 W ERP EU / 4 W EIRP US), tag facing the antenna:</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Product family</th><th>On plastics / wood / cardboard</th><th>On metal</th><th>Near liquids / on body</th></tr></thead>
+        <tbody>
+          <tr><td>UHF label / wet inlay</td><td>3–8 m</td><td>Near zero — unreliable without an anti-metal design</td><td>Sharply reduced, often under 1 m</td></tr>
+          <tr><td>UHF anti-metal tag</td><td>Reduced — ferrite designs are tuned for metal backing</td><td>1–6 m (designed surface)</td><td>Reduced</td></tr>
+          <tr><td>UHF card</td><td>1–3 m (holder / lanyard)</td><td>Near zero — not designed for metal</td><td>Sharply reduced against the body</td></tr>
+          <tr><td>UHF windshield tag</td><td>—</td><td>—</td><td>6–10 m on plain glass; metallised or heated glass blocks reads — use the antenna window</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:14px;color:var(--muted)">Handheld readers commonly reach only around half of a fixed gate reader's range at the same site. These are estimates from chip-vendor datasheet figures and UHF propagation behaviour, not measured values — the definitive number for your combination comes from testing free samples on your own readers and surfaces.</p>
+
     <h2>3. Chip comparison</h2>
     <p>The chip decides memory, security and cost. The most common chips we supply, by frequency:</p>
     <div class="table-wrap">
@@ -192,7 +207,7 @@
     <h3>Source map by section</h3>
     <ul class="check-list">
       <li><strong>1. Frequency benchmark</strong> — frequencies, protocols and standards from ISO/IEC 14443 / 15693 / 18000-63 and GS1 EPC Gen2; typical read ranges from RFID MFG production experience.</li>
-      <li><strong>2. Read range by form factor</strong> — RFID MFG production and deployment experience; representative typical values, not certified lab measurements.</li>
+      <li><strong>2. Read range by form factor &amp; mounting surface</strong> — RFID MFG production and deployment experience plus chip-vendor datasheet figures and UHF propagation behaviour; representative typical values and estimates, not certified lab measurements.</li>
       <li><strong>3. Chip comparison</strong> — memory and feature data from NXP, Impinj and EM Microelectronic public datasheets; typical range figures from production experience.</li>
       <li><strong>4. Material &amp; environment</strong> — material-supplier data plus production experience. Limits describe the base material only: a finished tag's real rating depends on the full construction (chip packaging, adhesive, encapsulation, antenna), so check the per-SKU datasheet.</li>
       <li><strong>5. Sourcing reference</strong> — RFID MFG quoting and production data as of June 2026, confirmed per quotation.</li>
