@@ -1293,6 +1293,9 @@ function catalogPage() {
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ItemList","name":"RFID MFG Product Categories","itemListElement":[${CAT_ORDER.map((c, i) => `{"@type":"ListItem","position":${i + 1},"name":${JSON.stringify(CATS[c].name)},"url":"${SITE}/products.html#${c}"}`).join(',')}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I buy RFID tags or cards in bulk?","acceptedAnswer":{"@type":"Answer","text":"Pick a product (or describe your application), send your chip or reader model, quantity and artwork, and you get a written factory quote within 24 hours. Free samples ship in 3–7 days; bulk production runs 7–30 days after you approve sample and proof."}},{"@type":"Question","name":"Do you sell wholesale to resellers and integrators?","acceptedAnswer":{"@type":"Answer","text":"Yes — we manufacture for resellers, system integrators and brands worldwide on FOB Shenzhen terms, with OEM/ODM branding, volume price tiers and blanket orders with scheduled releases for recurring demand."}},{"@type":"Question","name":"Can cards and labels be custom printed?","acceptedAnswer":{"@type":"Answer","text":"Yes. Cards print offset CMYK with foil, emboss or laser options; labels print full colour on the face material. Blank printable RFID cards and white labels are also available for standard card and label printers."}},{"@type":"Question","name":"What do RFID tags and cards cost?","acceptedAnswer":{"@type":"Answer","text":"Indicative wholesale ranges for every product are published in the RFID price guide — the exact price depends on chip, size, material, printing and volume, and is fixed in a written 24-hour quotation."}}]}
 </script>`;
   const catNav = CAT_ORDER.map((c) => `<a href="#${c}">${esc(CATS[c].name)}</a>`).join('');
   const sections = CAT_ORDER.map((c) => {
@@ -1307,13 +1310,23 @@ function catalogPage() {
   <div class="container page-hero__inner">
     <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span>Products</nav>
     <h1>The complete RFID &amp; smart product line</h1>
-    <p>Five core categories, hundreds of configurations — every item customizable to your chip, frequency, size, encoding and artwork.</p>
+    <p>Five core categories, hundreds of configurations — every item customizable to your chip, frequency, size, encoding and artwork. All 39 products ship factory-direct from our Shenzhen plant: cards, tags and wristbands from 500 pcs, labels from 1,000 pcs, hardware from 10 units, with free pre-production samples and a written quote in 24 hours.</p>
   </div>
 </section>
 <div class="side-layout"><div class="side-layout__grid">${sideNav('', '', true)}<div class="side-main"><section class="section">
   <div class="container">
     <nav class="cat-nav">${catNav}</nav>
     ${sections}
+    <div class="catalog-cat" id="ordering">
+      <h2>Buying wholesale &amp; bulk, direct from the factory</h2>
+      <p>Every product above is manufactured and sold factory-direct — no trading-company margin. Bulk and wholesale orders run on published volume tiers (see the <a href="rfid-pricing-guide.html">price guide</a> and <a href="rfid-moq-sample-policy.html">MOQ &amp; sample policy</a>): cards, tags and wristbands from 500 pieces, labels and inlays from 1,000–2,000 pieces, readers and other hardware from 10 units. Custom printing (offset CMYK, silkscreen, variable data) and chip encoding are done in house, and every order starts with free pre-production samples in 3–7 days.</p>
+      <div class="faq" style="margin-top:14px">
+        <details class="faq-item"><summary>How do I buy RFID tags or cards in bulk?</summary><p>Pick a product above (or just describe your application), send your chip or reader model, quantity and artwork, and you get a written factory quote within 24 hours. Free samples ship in 3–7 days; bulk production runs 7–30 days after you approve sample and proof.</p></details>
+        <details class="faq-item"><summary>Do you sell wholesale to resellers and integrators?</summary><p>Yes — we manufacture for resellers, system integrators and brands worldwide on FOB Shenzhen terms, with OEM/ODM branding, volume price tiers and blanket orders with scheduled releases for recurring demand.</p></details>
+        <details class="faq-item"><summary>Can cards and labels be custom printed?</summary><p>Yes. Cards print offset CMYK with foil, emboss or laser options; labels print full colour on the face material. If you prefer to print in house, blank printable RFID cards and white labels are available for standard card and label printers — see the <a href="rfid-card-printing-guide.html">card printing guide</a>.</p></details>
+        <details class="faq-item"><summary>What do RFID tags and cards cost?</summary><p>Indicative wholesale ranges for every product are published in the <a href="rfid-pricing-guide.html">RFID price guide</a> — the exact price depends on chip, size, material, printing and volume, and is fixed in a written 24-hour quotation.</p></details>
+      </div>
+    </div>
   </div>
 </section></div></div></div>
 <section class="cta-band">

@@ -129,6 +129,8 @@ function categoryPage(cat) {
 {"@context":"https://schema.org","@type":"CollectionPage","name":"${CAT_FULL[cat]}","url":"${url}"}
 </script>`;
   h = h.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/, ld);
+  // strip the products-hub FAQPage LD — its FAQ content is not on category pages
+  h = h.replace(/<script type="application\/ld\+json">\s*\{"@context":"https:\/\/schema\.org","@type":"FAQPage"[\s\S]*?<\/script>\s*/, '');
   // build product grid for this category
   const items = CAT_ORDER.includes(cat) ? Object.keys(CAT).filter((s) => CAT[s] === cat) : [];
   const cards = items.map((s) => {
