@@ -1362,7 +1362,7 @@ function datasheetPage(p) {
 ${JSON.stringify(prodLd)}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","name":${JSON.stringify(p.name + ' — Datasheet')},"url":"${SITE}/datasheet-${p.slug}.html","datePublished":"${dates.published}","dateModified":"${dates.modified}","isPartOf":{"@type":"WebSite","name":"RFID MFG","url":"${SITE}/"}}
+{"@context":"https://schema.org","@type":"WebPage","name":${JSON.stringify(p.name + ' — Datasheet')},"identifier":"RFMFG-DS-${p.slug.toUpperCase()}","url":"${SITE}/datasheet-${p.slug}.html","datePublished":"${dates.published}","dateModified":"${dates.modified}","isPartOf":{"@type":"WebSite","name":"RFID MFG","url":"${SITE}/"}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"${SITE}/"},{"@type":"ListItem","position":2,"name":"Datasheets","item":"${SITE}/datasheets.html"},{"@type":"ListItem","position":3,"name":${JSON.stringify(p.name)},"item":"${SITE}/datasheet-${p.slug}.html"}]}
@@ -1389,7 +1389,7 @@ ${JSON.stringify(prodLd)}
         <h1 class="section__title">${esc(p.name)} — Datasheet</h1>
         <p class="lead-line">${esc(p.tagline)}</p>
         <p>${esc(p.overview)}</p>
-        <p class="fastfacts">Published ${esc(dates.publishedHuman)} · Specifications last updated ${esc(dates.modifiedHuman)}</p>
+        <p class="fastfacts">Document RFMFG-DS-${p.slug.toUpperCase()} · Rev. ${dates.modified} · Published ${esc(dates.publishedHuman)} · Specifications last updated ${esc(dates.modifiedHuman)}</p>
         <div class="prod__cta">
           <a href="/datasheets/${p.slug}.pdf" download class="btn btn--primary btn--lg">↓ Download PDF</a>
           <a href="${p.slug}.html" class="btn btn--lg" style="border-color:var(--brand-deep);color:var(--brand-deep)">Product page &amp; pricing</a>

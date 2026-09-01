@@ -289,6 +289,16 @@
     "modified": "2026-08-12",
     "hash": "6c5a4470f5693a33"
   },
+  "mifare-classic-vs-desfire.html": {
+    "published": "2026-09-01",
+    "modified": "2026-09-01",
+    "hash": "c0a309f8e7c03ace"
+  },
+  "mifare-vs-ntag.html": {
+    "published": "2026-09-01",
+    "modified": "2026-09-01",
+    "hash": "339a2ab3cc554f7e"
+  },
   "news-blocking-card.html": {
     "published": "2026-05-25",
     "modified": "2026-08-12",
@@ -408,6 +418,11 @@
     "published": "2026-06-15",
     "modified": "2026-08-12",
     "hash": "0bb57a1178e1dc2d"
+  },
+  "t5577-vs-em4200.html": {
+    "published": "2026-09-01",
+    "modified": "2026-09-01",
+    "hash": "a92315d3d699cdfe"
   },
   "uhf-vs-hf-rfid-label.html": {
     "published": "2026-06-15",

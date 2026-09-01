@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MIFARE vs NTAG: Which 13.56 MHz Chip Do You Need? | RFID MFG</title>
+<meta name="description" content="MIFARE vs NTAG compared: phone compatibility, 144–888 bytes vs 1–8 KB memory, security and cost. NTAG for phone tap and marketing, MIFARE for access and transit." />
+<link rel="canonical" href="https://www.rfidmfg.com/mifare-vs-ntag.html" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="theme-color" content="#0a1b34" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="RFID MFG" />
+<meta property="og:title" content="MIFARE vs NTAG: Which 13.56 MHz Chip Do You Need? | RFID MFG" />
+<meta property="og:description" content="MIFARE vs NTAG compared: phone compatibility, 144–888 bytes vs 1–8 KB memory, security and cost. NTAG for phone tap and marketing, MIFARE for access and transit." />
+<meta property="og:url" content="https://www.rfidmfg.com/mifare-vs-ntag.html" />
+<meta property="og:image" content="https://www.rfidmfg.com/og-image.jpg" />
+<meta property="article:modified_time" content="2026-09-01" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"MIFARE vs NTAG: which 13.56 MHz chip?","description":"MIFARE vs NTAG compared: phone compatibility, 144–888 bytes vs 1–8 KB memory, security and cost. NTAG for phone tap and marketing, MIFARE for access and transit.","image":"https://www.rfidmfg.com/og-image.jpg","datePublished":"2026-09-01","dateModified":"2026-09-01","author":{"@type":"Organization","name":"RFID MFG","url":"https://www.rfidmfg.com/about.html"},"publisher":{"@type":"Organization","name":"RFID MFG","logo":{"@type":"ImageObject","url":"https://www.rfidmfg.com/icon-512.png"}},"mainEntityOfPage":"https://www.rfidmfg.com/mifare-vs-ntag.html"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.rfidmfg.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://www.rfidmfg.com/guides.html"},{"@type":"ListItem","position":3,"name":"MIFARE vs NTAG","item":"https://www.rfidmfg.com/mifare-vs-ntag.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can a smartphone read a MIFARE card?","acceptedAnswer":{"@type":"Answer","text":"Not as a normal tap. Phones expect NDEF data (the NTAG format); a MIFARE Classic or DESFire credential does not present that by default, and reading it requires special apps and permissions. For phone interaction, specify NTAG."}},{"@type":"Question","name":"Can NTAG be used for door access?","acceptedAnswer":{"@type":"Answer","text":"Some simple systems accept the NTAG UID as an identifier, but the MIFARE family is designed for access control and supported by every major platform — so NTAG for phone-facing uses, MIFARE for credentials."}},{"@type":"Question","name":"Are MIFARE and NTAG both NXP products?","acceptedAnswer":{"@type":"Answer","text":"Yes — both are NXP chip families on 13.56 MHz ISO/IEC 14443 A. The names refer to different product lines, not different standards bodies."}},{"@type":"Question","name":"Which is cheaper, MIFARE or NTAG?","acceptedAnswer":{"@type":"Answer","text":"NTAG213 and MIFARE Classic 1K sit in a similar low bracket; DESFire costs several times more. Volume moves every number — the written quotation states the exact price for your chip and construction."}}]}
+</script>
+<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin-700-normal.woff2" crossorigin /><link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin-400-normal.woff2" crossorigin />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+<link rel="stylesheet" href="styles.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZFYMHHLN3Q"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZFYMHHLN3Q');</script>
+</head>
+<body>
+<div class="topbar"><div class="container topbar__inner"><span class="topbar__item">Shenzhen, China · ISO 9001 · 14001 · 45001 site</span><div class="topbar__contact"><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8615815501857">+86 158 1550 1857</a></div></div></div>
+<header class="header" id="header"><div class="container header__inner"><a href="index.html" class="brand" aria-label="RFID MFG home"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="products.html">Products</a>
+      <a href="guides.html">Guides</a>
+      <a href="cases.html">Cases</a>
+      <a href="sustainability.html">Sustainability</a>
+      <a href="news.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav><a href="contact.html" class="btn btn--primary header__cta">Get a Quote</a><button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div></header>
+<main>
+<section class="page-hero">
+  <div class="page-hero__bg" aria-hidden="true"></div>
+  <div class="container page-hero__inner" style="padding:54px 24px 48px">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span><a href="guides.html">Guides</a><span>/</span>MIFARE vs NTAG</nav>
+    <h1 style="max-width:20em;margin-left:auto;margin-right:auto">MIFARE vs NTAG: which 13.56 MHz chip?</h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container article">
+    <div class="article-body">
+      <p style="font-size:13px;color:var(--muted,#6b7a90);margin:0 0 18px">By RFID MFG Editorial Team · Updated September 1, 2026 · 2 min read</p>
+      <div class="lead-line" style="border-left:4px solid var(--brand,#0aa2e8);background:#f4f8fc;padding:14px 18px;border-radius:8px;margin-bottom:22px"><strong>In short:</strong> Both are NXP chips at 13.56 MHz — the split is the reader. NTAG (NFC Forum Type 2) is built to be tapped by smartphones: URLs, vCards, product authentication. MIFARE (Classic, DESFire) is built for infrastructure readers: door access, transit, payment.</div>
+      
+      <h2>One frequency, two jobs</h2>
+      <p>The confusion is natural: MIFARE and NTAG cards look identical, share ISO/IEC 14443 A at 13.56 MHz, and both come from NXP. The practical question is who reads the card. If the answer is &quot;a phone&quot;, you want NTAG — every modern smartphone opens an NTAG NDEF record natively. If the answer is &quot;a wall reader, gate or terminal&quot;, you want the MIFARE family, which access and transit platforms are built around.</p>
+      <h2>MIFARE vs NTAG</h2>
+      <div style="overflow-x:auto;margin:14px 0 6px"><table style="width:100%;border-collapse:collapse;font-size:15px">
+        <thead><tr><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">Aspect</th><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">NTAG213/215/216</th><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">MIFARE (Classic / DESFire)</th></tr></thead><tbody><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">Designed for</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Smartphone tap (NFC Forum Type 2)</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Infrastructure readers</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">Phone-readable by default</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Yes — native NDEF, no app</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">No — not a plain NDEF tap</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">User memory</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">144 / 504 / 888 bytes</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">1–4 KB (Classic), 2–8 KB (DESFire)</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">Security</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Password protection, lock bits</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">CRYPTO1 (legacy) or AES-128 (DESFire)</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">Relative cost</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Lowest</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Low (Classic) to highest (DESFire)</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">Best for</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Marketing, business cards, authentication</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Access, transit, payment, ID</td></tr></tbody></table></div>
+      <h2>Choose NTAG when</h2>
+      <p>End users tap with their own phones: NFC business cards, smart packaging, product authentication, review cards, smart posters. Encode a URL or vCard, lock it if needed, and it works on iPhone and Android with no app.</p>
+      <h2>Choose MIFARE when</h2>
+      <p>The card is a credential for a system you control: door access, elevators, transit gates, cashless payment, campus ID. Pick Classic only for legacy compatibility and closed loops; pick DESFire EV2/EV3 for anything new that touches money, identity or restricted areas.</p>
+      <h2>Related reading</h2>
+      <ul class="check-list"><li><a href="rfid-chips-mifare-ntag-desfire.html">MIFARE vs NTAG vs DESFire overview</a></li><li><a href="ntag213-vs-215-vs-216.html">NTAG213 vs 215 vs 216</a></li><li><a href="mifare-classic-vs-desfire.html">MIFARE Classic vs DESFire</a></li><li><a href="nfc-business-card.html">NFC business cards</a></li></ul>
+      <h2>Frequently asked questions</h2>
+      <div class="faq" style="margin-top:8px"><details class="faq-item"><summary>Can a smartphone read a MIFARE card?</summary><p>Not as a normal tap. Phones expect NDEF data (the NTAG format); a MIFARE Classic or DESFire credential does not present that by default, and reading it requires special apps and permissions. For phone interaction, specify NTAG.</p></details><details class="faq-item"><summary>Can NTAG be used for door access?</summary><p>Some simple systems accept the NTAG UID as an identifier, but the MIFARE family is designed for access control and supported by every major platform — so NTAG for phone-facing uses, MIFARE for credentials.</p></details><details class="faq-item"><summary>Are MIFARE and NTAG both NXP products?</summary><p>Yes — both are NXP chip families on 13.56 MHz ISO/IEC 14443 A. The names refer to different product lines, not different standards bodies.</p></details><details class="faq-item"><summary>Which is cheaper, MIFARE or NTAG?</summary><p>NTAG213 and MIFARE Classic 1K sit in a similar low bracket; DESFire costs several times more. Volume moves every number — the written quotation states the exact price for your chip and construction.</p></details></div>
+    </div>
+    <div class="article-back"><a href="guides.html" class="link-arrow"><span>←</span> All guides</a></div>
+  </div>
+</section>
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div><h2>Need help choosing the right RFID product?</h2><p>Tell us your application — we'll recommend the chip, frequency and format and quote within 24 hours.</p></div>
+    <a href="contact.html" class="btn btn--ghost btn--lg">Get Expert Advice</a>
+  </div>
+</section>
+</main>
+<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing, direct from our Shenzhen plant.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="industries.html">Industries</a><a href="cases.html">Cases</a><a href="guides.html">Guides</a><a href="sustainability.html">Sustainability</a><a href="news.html">Blog</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8615815501857">+86 158 1550 1857</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>
+<a href="#" class="to-top" id="toTop" aria-label="Back to top">↑</a>
+<script src="script.js"></script>
+</body>
+</html>

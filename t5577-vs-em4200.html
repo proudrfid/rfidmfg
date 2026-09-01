@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>T5577 vs EM4200: Choosing a 125 kHz LF Chip | RFID MFG</title>
+<meta name="description" content="T5577 vs EM4200 compared: rewritable vs read-only, EM/HID format emulation, hotel lock compatibility and cost — how to pick the right 125 kHz chip." />
+<link rel="canonical" href="https://www.rfidmfg.com/t5577-vs-em4200.html" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="theme-color" content="#0a1b34" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="RFID MFG" />
+<meta property="og:title" content="T5577 vs EM4200: Choosing a 125 kHz LF Chip | RFID MFG" />
+<meta property="og:description" content="T5577 vs EM4200 compared: rewritable vs read-only, EM/HID format emulation, hotel lock compatibility and cost — how to pick the right 125 kHz chip." />
+<meta property="og:url" content="https://www.rfidmfg.com/t5577-vs-em4200.html" />
+<meta property="og:image" content="https://www.rfidmfg.com/og-image.jpg" />
+<meta property="article:modified_time" content="2026-09-01" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"T5577 vs EM4200: which 125 kHz chip?","description":"T5577 vs EM4200 compared: rewritable vs read-only, EM/HID format emulation, hotel lock compatibility and cost — how to pick the right 125 kHz chip.","image":"https://www.rfidmfg.com/og-image.jpg","datePublished":"2026-09-01","dateModified":"2026-09-01","author":{"@type":"Organization","name":"RFID MFG","url":"https://www.rfidmfg.com/about.html"},"publisher":{"@type":"Organization","name":"RFID MFG","logo":{"@type":"ImageObject","url":"https://www.rfidmfg.com/icon-512.png"}},"mainEntityOfPage":"https://www.rfidmfg.com/t5577-vs-em4200.html"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.rfidmfg.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://www.rfidmfg.com/guides.html"},{"@type":"ListItem","position":3,"name":"T5577 vs EM4200","item":"https://www.rfidmfg.com/t5577-vs-em4200.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can a T5577 be programmed to act like an EM4200?","acceptedAnswer":{"@type":"Answer","text":"Yes — T5577 is commonly programmed to an EM4102-compatible layout, which is why it serves as the universal replacement card for legacy LF systems."}},{"@type":"Question","name":"Which chip do hotel door locks use?","acceptedAnswer":{"@type":"Answer","text":"Platforms that write keys at check-in typically specify T5577 (or 13.56 MHz MIFARE). It depends entirely on the lock system — name yours in the inquiry and we encode free samples you can test in a real door."}},{"@type":"Question","name":"Can my phone read these cards?","acceptedAnswer":{"@type":"Answer","text":"No. Smartphones read NFC at 13.56 MHz only; no phone reads 125 kHz LF cards. If phone interaction matters, you need NTAG-based cards instead."}},{"@type":"Question","name":"Is EM4200 secure against cloning?","acceptedAnswer":{"@type":"Answer","text":"No — it presents a fixed, unencrypted ID that inexpensive duplicators can copy. Treat LF as convenience-grade identification and use DESFire for anything that needs real security."}}]}
+</script>
+<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin-700-normal.woff2" crossorigin /><link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin-400-normal.woff2" crossorigin />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+<link rel="stylesheet" href="styles.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZFYMHHLN3Q"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZFYMHHLN3Q');</script>
+</head>
+<body>
+<div class="topbar"><div class="container topbar__inner"><span class="topbar__item">Shenzhen, China · ISO 9001 · 14001 · 45001 site</span><div class="topbar__contact"><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8615815501857">+86 158 1550 1857</a></div></div></div>
+<header class="header" id="header"><div class="container header__inner"><a href="index.html" class="brand" aria-label="RFID MFG home"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="products.html">Products</a>
+      <a href="guides.html">Guides</a>
+      <a href="cases.html">Cases</a>
+      <a href="sustainability.html">Sustainability</a>
+      <a href="news.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav><a href="contact.html" class="btn btn--primary header__cta">Get a Quote</a><button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div></header>
+<main>
+<section class="page-hero">
+  <div class="page-hero__bg" aria-hidden="true"></div>
+  <div class="container page-hero__inner" style="padding:54px 24px 48px">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span><a href="guides.html">Guides</a><span>/</span>T5577 vs EM4200</nav>
+    <h1 style="max-width:20em;margin-left:auto;margin-right:auto">T5577 vs EM4200: which 125 kHz chip?</h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container article">
+    <div class="article-body">
+      <p style="font-size:13px;color:var(--muted,#6b7a90);margin:0 0 18px">By RFID MFG Editorial Team · Updated September 1, 2026 · 2 min read</p>
+      <div class="lead-line" style="border-left:4px solid var(--brand,#0aa2e8);background:#f4f8fc;padding:14px 18px;border-radius:8px;margin-bottom:22px"><strong>In short:</strong> EM4200 is a read-only 125 kHz chip with a factory-fixed ID — the cheapest, simplest LF credential. T5577 is rewritable and can be programmed to EM- and HID-compatible formats, which is why card-issuing systems and hotel platforms specify it.</div>
+      
+      <h2>Fixed ID or programmable — that is the whole question</h2>
+      <p>Both chips live in the same LF 125 kHz world of access fobs, hotel keycards and legacy readers, where range is a few centimetres and no phone can read the card. EM4200 ships with a unique serial number burned in at the factory: the reader learns the number, and that is the system. T5577 ships blank and programmable: the issuing system writes the format and ID it wants — commonly EM4102-compatible or HID-compatible layouts — and can rewrite the card later.</p>
+      <h2>T5577 vs EM4200</h2>
+      <div style="overflow-x:auto;margin:14px 0 6px"><table style="width:100%;border-collapse:collapse;font-size:15px">
+        <thead><tr><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">Aspect</th><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">EM4200</th><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">T5577</th></tr></thead><tbody><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">Writability</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Read-only, factory-fixed ID</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Rewritable, field-programmable</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">Formats</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">EM standard ID</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Programmable — EM- and HID-compatible layouts</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">Typical use</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Simple access, membership fobs</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Hotel locks, card-issuing systems, duplication/replacement</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">Phone-readable</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">No — 125 kHz is not NFC</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">No — 125 kHz is not NFC</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">Relative cost</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Lowest</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Slightly higher</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">Security level</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Low — fixed ID is easily duplicated</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Low — convenience chip, not a secure credential</td></tr></tbody></table></div>
+      <h2>Choose EM4200 when</h2>
+      <p>The system only needs a stable unique number: gym and membership fobs, simple door access, time-and-attendance. It is the lowest-cost option and there is nothing to configure — enroll the ID and go.</p>
+      <h2>Choose T5577 when</h2>
+      <p>The platform writes to the card. Many hotel-lock systems issue keys by programming the card at the front desk, and replacement cards for mixed EM/HID estates are easier when one blank chip can be programmed to either format. That flexibility is exactly why our hotel keycard line lists T5577 alongside MIFARE options.</p>
+      <h2>A security note on 125 kHz</h2>
+      <p>Neither chip encrypts anything — LF credentials present an ID and cheap cloning devices can copy them. That is acceptable for low-stakes doors and memberships, but anything protecting money, data or sensitive areas belongs on 13.56 MHz DESFire. We will say so plainly if your use case has outgrown LF.</p>
+      <h2>Related reading</h2>
+      <ul class="check-list"><li><a href="rfid-frequencies-lf-hf-uhf.html">LF vs HF vs UHF frequencies</a></li><li><a href="mifare-classic-vs-desfire.html">MIFARE Classic vs DESFire</a></li><li><a href="rfid-keyfob.html">RFID keyfobs</a></li><li><a href="hotel-key-card.html">Hotel keycards</a></li></ul>
+      <h2>Frequently asked questions</h2>
+      <div class="faq" style="margin-top:8px"><details class="faq-item"><summary>Can a T5577 be programmed to act like an EM4200?</summary><p>Yes — T5577 is commonly programmed to an EM4102-compatible layout, which is why it serves as the universal replacement card for legacy LF systems.</p></details><details class="faq-item"><summary>Which chip do hotel door locks use?</summary><p>Platforms that write keys at check-in typically specify T5577 (or 13.56 MHz MIFARE). It depends entirely on the lock system — name yours in the inquiry and we encode free samples you can test in a real door.</p></details><details class="faq-item"><summary>Can my phone read these cards?</summary><p>No. Smartphones read NFC at 13.56 MHz only; no phone reads 125 kHz LF cards. If phone interaction matters, you need NTAG-based cards instead.</p></details><details class="faq-item"><summary>Is EM4200 secure against cloning?</summary><p>No — it presents a fixed, unencrypted ID that inexpensive duplicators can copy. Treat LF as convenience-grade identification and use DESFire for anything that needs real security.</p></details></div>
+    </div>
+    <div class="article-back"><a href="guides.html" class="link-arrow"><span>←</span> All guides</a></div>
+  </div>
+</section>
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div><h2>Need help choosing the right RFID product?</h2><p>Tell us your application — we'll recommend the chip, frequency and format and quote within 24 hours.</p></div>
+    <a href="contact.html" class="btn btn--ghost btn--lg">Get Expert Advice</a>
+  </div>
+</section>
+</main>
+<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing, direct from our Shenzhen plant.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="industries.html">Industries</a><a href="cases.html">Cases</a><a href="guides.html">Guides</a><a href="sustainability.html">Sustainability</a><a href="news.html">Blog</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8615815501857">+86 158 1550 1857</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>
+<a href="#" class="to-top" id="toTop" aria-label="Back to top">↑</a>
+<script src="script.js"></script>
+</body>
+</html>

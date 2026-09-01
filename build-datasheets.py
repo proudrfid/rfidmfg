@@ -7,6 +7,10 @@ build-datasheets.py — 为每个产品生成一页式规格书 PDF(datasheets/<
 注意: 生成的 PDF 是静态资源,已纳入 git;改产品数据后重跑 build-datasheets.sh 即可。
 """
 import json, os
+try:
+    CDATES = json.load(open('content-dates.json'))
+except Exception:
+    CDATES = {}
 from reportlab.lib.pagesizes import LETTER
 from reportlab.lib.units import mm
 from reportlab.lib import colors
@@ -31,14 +35,14 @@ def deco(c,d):
     c.setFillColor(ACC); c.rect(0, LETTER[1]-20*mm-2, LETTER[0], 2, fill=1, stroke=0)
     c.setFillColor(colors.white); c.setFont('Helvetica-Bold',15); c.drawString(18*mm, LETTER[1]-13*mm, 'RFID MFG')
     sx = 18*mm + stringWidth('RFID MFG','Helvetica-Bold',15) + 7*mm
-    c.setFillColor(colors.HexColor('#a9c6e6')); c.setFont('Helvetica',8); c.drawString(sx, LETTER[1]-13*mm, 'RFID & Smart-Card Manufacturer · Since 1996')
+    c.setFillColor(colors.HexColor('#a9c6e6')); c.setFont('Helvetica',8); c.drawString(sx, LETTER[1]-13*mm, 'RFID & Smart-Card Manufacturer · Shenzhen, China')
     c.setFont('Helvetica',8); c.setFillColor(colors.white); c.drawRightString(LETTER[0]-18*mm, LETTER[1]-13*mm, 'www.rfidmfg.com')
     # footer (stacked, non-overlapping)
     c.setStrokeColor(LINE); c.setLineWidth(0.6); c.line(18*mm,16*mm,LETTER[0]-18*mm,16*mm)
     c.setFillColor(MUT); c.setFont('Helvetica',7.5)
     c.drawString(18*mm,11.5*mm,'RFID MFG Co., Ltd.   ·   peter@rfidmfg.com   ·   +86 158 1550 1857   ·   Shenzhen, China')
     c.setFont('Helvetica',7)
-    c.drawString(18*mm,8*mm,'OEM/ODM · ISO 9001/14001/45001 · CE/FCC/FSC/RoHS/REACH · samples available · 2-year warranty')
+    c.drawString(18*mm,8*mm,'OEM/ODM · ISO 9001/14001/45001 site · CE/FCC per product model · RoHS/REACH per batch · 2-year warranty')
     c.drawString(18*mm,5*mm,'Specifications are customizable and subject to change without notice; confirmed on written quotation.')
     c.restoreState()
 
@@ -47,8 +51,13 @@ def build(p):
     doc=BaseDocTemplate(fn,pagesize=LETTER,topMargin=26*mm,bottomMargin=22*mm,leftMargin=18*mm,rightMargin=18*mm,
                         title=p['name']+' — Datasheet | RFID MFG',author='RFID MFG')
     doc.addPageTemplates([PageTemplate(id='m',frames=[Frame(18*mm,22*mm,LETTER[0]-36*mm,LETTER[1]-48*mm,id='f')],onPage=deco)])
+    rec=CDATES.get('datasheet-'+p['slug']+'.html',{})
+    docline='Document RFMFG-DS-%s'%p['slug'].upper()
+    if rec.get('modified'): docline+=' · Rev. %s'%rec['modified']
+    DOCNO=ParagraphStyle('DOCNO',fontSize=8,leading=10,textColor=MUT,spaceAfter=6)
     fl=[Paragraph(CATN.get(p['cat'],p['cat']).upper(),EY),
         Paragraph(p['name']+' — Datasheet',H1),
+        Paragraph(docline,DOCNO),
         Paragraph(p.get('tagline',''),TAG),
         Paragraph(p.get('overview',''),BODY),
         Paragraph('Specifications',H2)]
@@ -60,9 +69,9 @@ def build(p):
     fl.append(Paragraph('Applications',H2))
     fl.append(Paragraph(' · '.join(p.get('apps',[])),BODY))
     fl.append(Paragraph('Why RFID MFG',H2))
-    items=['Since 1996 — nearly three decades in RFID & smart-card manufacturing',
+    items=['100% read testing before packing — a UID/TID check on every unit, data verification on encoded orders',
            'ISO 9001/14001/45001-certified Shenzhen site — lamination, bonding, die-cutting and personalisation in house',
-           'First-hand chip sourcing for stable supply and sharp pricing',
+           'Chips from NXP, Impinj and EM Microelectronic product lines, with batch-level traceability',
            'Full OEM / ODM, custom encoding under NDA',
            'Worldwide shipping · samples available · 2-year warranty']
     fl.append(ListFlowable([ListItem(Paragraph(x,BODY),leftIndent=10) for x in items],

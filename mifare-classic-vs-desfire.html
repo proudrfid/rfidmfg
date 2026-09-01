@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MIFARE Classic vs DESFire: Security, Memory &amp; When to Upgrade | RFID MFG</title>
+<meta name="description" content="MIFARE Classic vs MIFARE DESFire compared: CRYPTO1 vs AES-128 security, 1–4 KB vs 2–8 KB memory, typical uses, cost and how to migrate an existing card system." />
+<link rel="canonical" href="https://www.rfidmfg.com/mifare-classic-vs-desfire.html" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="theme-color" content="#0a1b34" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="RFID MFG" />
+<meta property="og:title" content="MIFARE Classic vs DESFire: Security, Memory &amp; When to Upgrade | RFID MFG" />
+<meta property="og:description" content="MIFARE Classic vs MIFARE DESFire compared: CRYPTO1 vs AES-128 security, 1–4 KB vs 2–8 KB memory, typical uses, cost and how to migrate an existing card system." />
+<meta property="og:url" content="https://www.rfidmfg.com/mifare-classic-vs-desfire.html" />
+<meta property="og:image" content="https://www.rfidmfg.com/og-image.jpg" />
+<meta property="article:modified_time" content="2026-09-01" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"MIFARE Classic vs DESFire: which credential chip?","description":"MIFARE Classic vs MIFARE DESFire compared: CRYPTO1 vs AES-128 security, 1–4 KB vs 2–8 KB memory, typical uses, cost and how to migrate an existing card system.","image":"https://www.rfidmfg.com/og-image.jpg","datePublished":"2026-09-01","dateModified":"2026-09-01","author":{"@type":"Organization","name":"RFID MFG","url":"https://www.rfidmfg.com/about.html"},"publisher":{"@type":"Organization","name":"RFID MFG","logo":{"@type":"ImageObject","url":"https://www.rfidmfg.com/icon-512.png"}},"mainEntityOfPage":"https://www.rfidmfg.com/mifare-classic-vs-desfire.html"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.rfidmfg.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://www.rfidmfg.com/guides.html"},{"@type":"ListItem","position":3,"name":"MIFARE Classic vs DESFire","item":"https://www.rfidmfg.com/mifare-classic-vs-desfire.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is MIFARE Classic still secure enough to use?","acceptedAnswer":{"@type":"Answer","text":"For new high-security systems, no — CRYPTO1 attacks are public and cloning tools are cheap. For replacement cards in an existing closed-loop or low-stakes system, it remains a pragmatic, low-cost choice while a migration is planned."}},{"@type":"Question","name":"Do I have to replace readers to move to DESFire?","acceptedAnswer":{"@type":"Answer","text":"Often not — many access readers accept both with a firmware setting or multi-protocol mode. Confirm with your platform vendor, then validate with encoded samples before a bulk order."}},{"@type":"Question","name":"How much more does DESFire cost than Classic?","acceptedAnswer":{"@type":"Answer","text":"DESFire sits well above Classic per chip, and EV3 above EV2 — but at volume the gap narrows, and for payment or identity the security is the point. Exact pricing is stated on a written quotation."}},{"@type":"Question","name":"Can one card run both Classic and DESFire?","acceptedAnswer":{"@type":"Answer","text":"Not on a single chip. A dual-chip card is possible for special migrations, but the cleaner route is DESFire with per-application keys, which carries multiple applications on one secure chip."}}]}
+</script>
+<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk-latin-700-normal.woff2" crossorigin /><link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin-400-normal.woff2" crossorigin />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+<link rel="stylesheet" href="styles.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZFYMHHLN3Q"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZFYMHHLN3Q');</script>
+</head>
+<body>
+<div class="topbar"><div class="container topbar__inner"><span class="topbar__item">Shenzhen, China · ISO 9001 · 14001 · 45001 site</span><div class="topbar__contact"><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8615815501857">+86 158 1550 1857</a></div></div></div>
+<header class="header" id="header"><div class="container header__inner"><a href="index.html" class="brand" aria-label="RFID MFG home"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="products.html">Products</a>
+      <a href="guides.html">Guides</a>
+      <a href="cases.html">Cases</a>
+      <a href="sustainability.html">Sustainability</a>
+      <a href="news.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav><a href="contact.html" class="btn btn--primary header__cta">Get a Quote</a><button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div></header>
+<main>
+<section class="page-hero">
+  <div class="page-hero__bg" aria-hidden="true"></div>
+  <div class="container page-hero__inner" style="padding:54px 24px 48px">
+    <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span><a href="guides.html">Guides</a><span>/</span>MIFARE Classic vs DESFire</nav>
+    <h1 style="max-width:20em;margin-left:auto;margin-right:auto">MIFARE Classic vs DESFire: which credential chip?</h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container article">
+    <div class="article-body">
+      <p style="font-size:13px;color:var(--muted,#6b7a90);margin:0 0 18px">By RFID MFG Editorial Team · Updated September 1, 2026 · 2 min read</p>
+      <div class="lead-line" style="border-left:4px solid var(--brand,#0aa2e8);background:#f4f8fc;padding:14px 18px;border-radius:8px;margin-bottom:22px"><strong>In short:</strong> MIFARE Classic (1K/4K, CRYPTO1) is the low-cost workhorse for legacy access and closed-loop transit; MIFARE DESFire EV2/EV3 (2–8 KB, AES-128) is the secure choice for payment, identity and any new high-security deployment.</div>
+      
+      <h2>Same family, different security era</h2>
+      <p>Both are NXP chips on 13.56 MHz ISO/IEC 14443 A, and both fit the same CR80 card body — the difference is the security design. MIFARE Classic dates from the 1990s and protects data with the proprietary CRYPTO1 cipher, which has had publicly documented attacks since 2008; it survives in huge numbers because readers, locks and closed-loop systems already speak it. DESFire EV2/EV3 uses open AES-128 with mutual authentication and holds Common Criteria EAL5+ certification — the level banks and transit authorities specify.</p>
+      <h2>MIFARE Classic vs DESFire</h2>
+      <div style="overflow-x:auto;margin:14px 0 6px"><table style="width:100%;border-collapse:collapse;font-size:15px">
+        <thead><tr><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">Chip</th><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">Memory</th><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">Security</th><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">Typical use</th><th style="text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-deep,#0a1b34);font-weight:700">Relative cost</th></tr></thead><tbody><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">MIFARE Classic 1K</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">1 KB (16 sectors)</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">CRYPTO1 — legacy, known attacks</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Door access, membership, closed loops</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Lowest</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">MIFARE Classic 4K</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">4 KB (40 sectors)</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">CRYPTO1 — legacy, known attacks</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Multi-application legacy systems</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Low</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">DESFire EV2</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">2 / 4 / 8 KB</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">AES-128, mutual authentication</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Payment, transit, campus ID</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Higher</td></tr><tr><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0;font-weight:600">DESFire EV3</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">2 / 4 / 8 KB</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">AES-128, EAL5+ certified</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">New high-security deployments</td><td style="padding:10px 12px;border-bottom:1px solid #e5e9f0">Highest</td></tr></tbody></table></div>
+      <h2>When Classic is still a reasonable choice</h2>
+      <p>Replacement and expansion cards for an existing Classic-based system, low-stakes membership and loyalty, and closed loops where a cloned card cannot extract real money. The chip is cheap, every access platform reads it, and re-issuing an entire estate has its own cost. What it is not for: new systems protecting money, identity or restricted areas.</p>
+      <h2>When to specify DESFire</h2>
+      <p>Anything touching payment or stored value, campus and corporate ID, government use, and any new access system you expect to run for a decade. AES-128 with mutual authentication resists the cloning attacks that broke CRYPTO1, and per-application keys let one card carry access, payment and identity without the applications seeing each other.</p>
+      <h2>Migrating an existing system</h2>
+      <p>The usual path is phased: issue DESFire cards encoded with both your new AES keys and, where the platform allows, legacy sector data, upgrade readers to multi-protocol firmware, then retire Classic acceptance once the fleet is replaced. We encode both chips per system spec under NDA and supply free pre-production samples so you can verify against your readers before committing either way.</p>
+      <h2>Related reading</h2>
+      <ul class="check-list"><li><a href="rfid-chips-mifare-ntag-desfire.html">MIFARE vs NTAG vs DESFire overview</a></li><li><a href="mifare-vs-ntag.html">MIFARE vs NTAG</a></li><li><a href="rfid-nfc-card.html">RFID / NFC cards</a></li><li><a href="hotel-key-card.html">Hotel keycards</a></li></ul>
+      <h2>Frequently asked questions</h2>
+      <div class="faq" style="margin-top:8px"><details class="faq-item"><summary>Is MIFARE Classic still secure enough to use?</summary><p>For new high-security systems, no — CRYPTO1 attacks are public and cloning tools are cheap. For replacement cards in an existing closed-loop or low-stakes system, it remains a pragmatic, low-cost choice while a migration is planned.</p></details><details class="faq-item"><summary>Do I have to replace readers to move to DESFire?</summary><p>Often not — many access readers accept both with a firmware setting or multi-protocol mode. Confirm with your platform vendor, then validate with encoded samples before a bulk order.</p></details><details class="faq-item"><summary>How much more does DESFire cost than Classic?</summary><p>DESFire sits well above Classic per chip, and EV3 above EV2 — but at volume the gap narrows, and for payment or identity the security is the point. Exact pricing is stated on a written quotation.</p></details><details class="faq-item"><summary>Can one card run both Classic and DESFire?</summary><p>Not on a single chip. A dual-chip card is possible for special migrations, but the cleaner route is DESFire with per-application keys, which carries multiple applications on one secure chip.</p></details></div>
+    </div>
+    <div class="article-back"><a href="guides.html" class="link-arrow"><span>←</span> All guides</a></div>
+  </div>
+</section>
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div><h2>Need help choosing the right RFID product?</h2><p>Tell us your application — we'll recommend the chip, frequency and format and quote within 24 hours.</p></div>
+    <a href="contact.html" class="btn btn--ghost btn--lg">Get Expert Advice</a>
+  </div>
+</section>
+</main>
+<footer class="footer"><div class="container footer__grid"><div class="footer__brand"><a href="index.html" class="brand brand--light"><span class="brand__mark">R</span><span class="brand__text">RFID<span class="brand__sub">&nbsp;MFG</span></span></a><p>RFID MFG Co., Ltd. — RFID &amp; smart-card manufacturing, direct from our Shenzhen plant.</p></div><div class="footer__col"><h4>Company</h4><a href="about.html">About</a><a href="industries.html">Industries</a><a href="cases.html">Cases</a><a href="guides.html">Guides</a><a href="sustainability.html">Sustainability</a><a href="news.html">Blog</a></div><div class="footer__col"><h4>Products</h4><a href="products.html#cards">Cards</a><a href="products.html#labels">Labels &amp; Stickers</a><a href="products.html#tags">RFID Tags</a><a href="products.html#blocking">RFID Blocking</a><a href="products.html#hardware">Hardware</a></div><div class="footer__col"><h4>Contact</h4><a href="mailto:peter@rfidmfg.com">peter@rfidmfg.com</a><a href="tel:+8615815501857">+86 158 1550 1857</a><span>Shenzhen, China</span></div></div><div class="footer__bar"><div class="container footer__bar-inner"><span>© <span id="year"></span> RFID MFG Co., Ltd. All rights reserved.</span><span><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms</a></span></div></div></footer>
+<a href="#" class="to-top" id="toTop" aria-label="Back to top">↑</a>
+<script src="script.js"></script>
+</body>
+</html>

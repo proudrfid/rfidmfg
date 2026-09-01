@@ -287,6 +287,68 @@ const COMPARISONS = [
     related: [['nfc-guide.html', 'NFC cards, tags & labels guide'], ['rfid-chips-mifare-ntag-desfire.html', 'MIFARE vs NTAG vs DESFire'], ['nfc-business-card.html', 'NFC business cards'], ['nfc-printed-label.html', 'NFC printed labels']],
   },
   {
+    slug: 'mifare-classic-vs-desfire.html', crumb: 'MIFARE Classic vs DESFire', seed: '2026-09-01',
+    title: 'MIFARE Classic vs DESFire: Security, Memory & When to Upgrade | RFID MFG',
+    desc: 'MIFARE Classic vs MIFARE DESFire compared: CRYPTO1 vs AES-128 security, 1–4 KB vs 2–8 KB memory, typical uses, cost and how to migrate an existing card system.',
+    h1: 'MIFARE Classic vs DESFire: which credential chip?',
+    lead: 'MIFARE Classic (1K/4K, CRYPTO1) is the low-cost workhorse for legacy access and closed-loop transit; MIFARE DESFire EV2/EV3 (2–8 KB, AES-128) is the secure choice for payment, identity and any new high-security deployment.',
+    body: [{ h: 'Same family, different security era', p: ['Both are NXP chips on 13.56 MHz ISO/IEC 14443 A, and both fit the same CR80 card body — the difference is the security design. MIFARE Classic dates from the 1990s and protects data with the proprietary CRYPTO1 cipher, which has had publicly documented attacks since 2008; it survives in huge numbers because readers, locks and closed-loop systems already speak it. DESFire EV2/EV3 uses open AES-128 with mutual authentication and holds Common Criteria EAL5+ certification — the level banks and transit authorities specify.'] }],
+    tables: [{ cap: 'MIFARE Classic vs DESFire', head: ['Chip', 'Memory', 'Security', 'Typical use', 'Relative cost'], rows: [['MIFARE Classic 1K', '1 KB (16 sectors)', 'CRYPTO1 — legacy, known attacks', 'Door access, membership, closed loops', 'Lowest'], ['MIFARE Classic 4K', '4 KB (40 sectors)', 'CRYPTO1 — legacy, known attacks', 'Multi-application legacy systems', 'Low'], ['DESFire EV2', '2 / 4 / 8 KB', 'AES-128, mutual authentication', 'Payment, transit, campus ID', 'Higher'], ['DESFire EV3', '2 / 4 / 8 KB', 'AES-128, EAL5+ certified', 'New high-security deployments', 'Highest']] }],
+    body2: [
+      { h: 'When Classic is still a reasonable choice', p: ['Replacement and expansion cards for an existing Classic-based system, low-stakes membership and loyalty, and closed loops where a cloned card cannot extract real money. The chip is cheap, every access platform reads it, and re-issuing an entire estate has its own cost. What it is not for: new systems protecting money, identity or restricted areas.'] },
+      { h: 'When to specify DESFire', p: ['Anything touching payment or stored value, campus and corporate ID, government use, and any new access system you expect to run for a decade. AES-128 with mutual authentication resists the cloning attacks that broke CRYPTO1, and per-application keys let one card carry access, payment and identity without the applications seeing each other.'] },
+      { h: 'Migrating an existing system', p: ['The usual path is phased: issue DESFire cards encoded with both your new AES keys and, where the platform allows, legacy sector data, upgrade readers to multi-protocol firmware, then retire Classic acceptance once the fleet is replaced. We encode both chips per system spec under NDA and supply free pre-production samples so you can verify against your readers before committing either way.'] },
+    ],
+    faqs: [
+      ['Is MIFARE Classic still secure enough to use?', 'For new high-security systems, no — CRYPTO1 attacks are public and cloning tools are cheap. For replacement cards in an existing closed-loop or low-stakes system, it remains a pragmatic, low-cost choice while a migration is planned.'],
+      ['Do I have to replace readers to move to DESFire?', 'Often not — many access readers accept both with a firmware setting or multi-protocol mode. Confirm with your platform vendor, then validate with encoded samples before a bulk order.'],
+      ['How much more does DESFire cost than Classic?', 'DESFire sits well above Classic per chip, and EV3 above EV2 — but at volume the gap narrows, and for payment or identity the security is the point. Exact pricing is stated on a written quotation.'],
+      ['Can one card run both Classic and DESFire?', 'Not on a single chip. A dual-chip card is possible for special migrations, but the cleaner route is DESFire with per-application keys, which carries multiple applications on one secure chip.'],
+    ],
+    related: [['rfid-chips-mifare-ntag-desfire.html', 'MIFARE vs NTAG vs DESFire overview'], ['mifare-vs-ntag.html', 'MIFARE vs NTAG'], ['rfid-nfc-card.html', 'RFID / NFC cards'], ['hotel-key-card.html', 'Hotel keycards']],
+  },
+  {
+    slug: 'mifare-vs-ntag.html', crumb: 'MIFARE vs NTAG', seed: '2026-09-01',
+    title: 'MIFARE vs NTAG: Which 13.56 MHz Chip Do You Need? | RFID MFG',
+    desc: 'MIFARE vs NTAG compared: phone compatibility, 144–888 bytes vs 1–8 KB memory, security and cost. NTAG for phone tap and marketing, MIFARE for access and transit.',
+    h1: 'MIFARE vs NTAG: which 13.56 MHz chip?',
+    lead: 'Both are NXP chips at 13.56 MHz — the split is the reader. NTAG (NFC Forum Type 2) is built to be tapped by smartphones: URLs, vCards, product authentication. MIFARE (Classic, DESFire) is built for infrastructure readers: door access, transit, payment.',
+    body: [{ h: 'One frequency, two jobs', p: ['The confusion is natural: MIFARE and NTAG cards look identical, share ISO/IEC 14443 A at 13.56 MHz, and both come from NXP. The practical question is who reads the card. If the answer is "a phone", you want NTAG — every modern smartphone opens an NTAG NDEF record natively. If the answer is "a wall reader, gate or terminal", you want the MIFARE family, which access and transit platforms are built around.'] }],
+    tables: [{ cap: 'MIFARE vs NTAG', head: ['Aspect', 'NTAG213/215/216', 'MIFARE (Classic / DESFire)'], rows: [['Designed for', 'Smartphone tap (NFC Forum Type 2)', 'Infrastructure readers'], ['Phone-readable by default', 'Yes — native NDEF, no app', 'No — not a plain NDEF tap'], ['User memory', '144 / 504 / 888 bytes', '1–4 KB (Classic), 2–8 KB (DESFire)'], ['Security', 'Password protection, lock bits', 'CRYPTO1 (legacy) or AES-128 (DESFire)'], ['Relative cost', 'Lowest', 'Low (Classic) to highest (DESFire)'], ['Best for', 'Marketing, business cards, authentication', 'Access, transit, payment, ID']] }],
+    body2: [
+      { h: 'Choose NTAG when', p: ['End users tap with their own phones: NFC business cards, smart packaging, product authentication, review cards, smart posters. Encode a URL or vCard, lock it if needed, and it works on iPhone and Android with no app.'] },
+      { h: 'Choose MIFARE when', p: ['The card is a credential for a system you control: door access, elevators, transit gates, cashless payment, campus ID. Pick Classic only for legacy compatibility and closed loops; pick DESFire EV2/EV3 for anything new that touches money, identity or restricted areas.'] },
+    ],
+    faqs: [
+      ['Can a smartphone read a MIFARE card?', 'Not as a normal tap. Phones expect NDEF data (the NTAG format); a MIFARE Classic or DESFire credential does not present that by default, and reading it requires special apps and permissions. For phone interaction, specify NTAG.'],
+      ['Can NTAG be used for door access?', 'Some simple systems accept the NTAG UID as an identifier, but the MIFARE family is designed for access control and supported by every major platform — so NTAG for phone-facing uses, MIFARE for credentials.'],
+      ['Are MIFARE and NTAG both NXP products?', 'Yes — both are NXP chip families on 13.56 MHz ISO/IEC 14443 A. The names refer to different product lines, not different standards bodies.'],
+      ['Which is cheaper, MIFARE or NTAG?', 'NTAG213 and MIFARE Classic 1K sit in a similar low bracket; DESFire costs several times more. Volume moves every number — the written quotation states the exact price for your chip and construction.'],
+    ],
+    related: [['rfid-chips-mifare-ntag-desfire.html', 'MIFARE vs NTAG vs DESFire overview'], ['ntag213-vs-215-vs-216.html', 'NTAG213 vs 215 vs 216'], ['mifare-classic-vs-desfire.html', 'MIFARE Classic vs DESFire'], ['nfc-business-card.html', 'NFC business cards']],
+  },
+  {
+    slug: 't5577-vs-em4200.html', crumb: 'T5577 vs EM4200', seed: '2026-09-01',
+    title: 'T5577 vs EM4200: Choosing a 125 kHz LF Chip | RFID MFG',
+    desc: 'T5577 vs EM4200 compared: rewritable vs read-only, EM/HID format emulation, hotel lock compatibility and cost — how to pick the right 125 kHz chip.',
+    h1: 'T5577 vs EM4200: which 125 kHz chip?',
+    lead: 'EM4200 is a read-only 125 kHz chip with a factory-fixed ID — the cheapest, simplest LF credential. T5577 is rewritable and can be programmed to EM- and HID-compatible formats, which is why card-issuing systems and hotel platforms specify it.',
+    body: [{ h: 'Fixed ID or programmable — that is the whole question', p: ['Both chips live in the same LF 125 kHz world of access fobs, hotel keycards and legacy readers, where range is a few centimetres and no phone can read the card. EM4200 ships with a unique serial number burned in at the factory: the reader learns the number, and that is the system. T5577 ships blank and programmable: the issuing system writes the format and ID it wants — commonly EM4102-compatible or HID-compatible layouts — and can rewrite the card later.'] }],
+    tables: [{ cap: 'T5577 vs EM4200', head: ['Aspect', 'EM4200', 'T5577'], rows: [['Writability', 'Read-only, factory-fixed ID', 'Rewritable, field-programmable'], ['Formats', 'EM standard ID', 'Programmable — EM- and HID-compatible layouts'], ['Typical use', 'Simple access, membership fobs', 'Hotel locks, card-issuing systems, duplication/replacement'], ['Phone-readable', 'No — 125 kHz is not NFC', 'No — 125 kHz is not NFC'], ['Relative cost', 'Lowest', 'Slightly higher'], ['Security level', 'Low — fixed ID is easily duplicated', 'Low — convenience chip, not a secure credential']] }],
+    body2: [
+      { h: 'Choose EM4200 when', p: ['The system only needs a stable unique number: gym and membership fobs, simple door access, time-and-attendance. It is the lowest-cost option and there is nothing to configure — enroll the ID and go.'] },
+      { h: 'Choose T5577 when', p: ['The platform writes to the card. Many hotel-lock systems issue keys by programming the card at the front desk, and replacement cards for mixed EM/HID estates are easier when one blank chip can be programmed to either format. That flexibility is exactly why our hotel keycard line lists T5577 alongside MIFARE options.'] },
+      { h: 'A security note on 125 kHz', p: ['Neither chip encrypts anything — LF credentials present an ID and cheap cloning devices can copy them. That is acceptable for low-stakes doors and memberships, but anything protecting money, data or sensitive areas belongs on 13.56 MHz DESFire. We will say so plainly if your use case has outgrown LF.'] },
+    ],
+    faqs: [
+      ['Can a T5577 be programmed to act like an EM4200?', 'Yes — T5577 is commonly programmed to an EM4102-compatible layout, which is why it serves as the universal replacement card for legacy LF systems.'],
+      ['Which chip do hotel door locks use?', 'Platforms that write keys at check-in typically specify T5577 (or 13.56 MHz MIFARE). It depends entirely on the lock system — name yours in the inquiry and we encode free samples you can test in a real door.'],
+      ['Can my phone read these cards?', 'No. Smartphones read NFC at 13.56 MHz only; no phone reads 125 kHz LF cards. If phone interaction matters, you need NTAG-based cards instead.'],
+      ['Is EM4200 secure against cloning?', 'No — it presents a fixed, unencrypted ID that inexpensive duplicators can copy. Treat LF as convenience-grade identification and use DESFire for anything that needs real security.'],
+    ],
+    related: [['rfid-frequencies-lf-hf-uhf.html', 'LF vs HF vs UHF frequencies'], ['mifare-classic-vs-desfire.html', 'MIFARE Classic vs DESFire'], ['rfid-keyfob.html', 'RFID keyfobs'], ['hotel-key-card.html', 'Hotel keycards']],
+  },
+  {
     slug: 'uhf-vs-hf-rfid-label.html', crumb: 'UHF vs HF Labels',
     title: 'UHF vs HF RFID Labels: Which Frequency to Choose | RFID MFG',
     desc: 'UHF vs HF RFID labels compared: read range, bulk reading, phone compatibility and best uses. Choose the right smart label frequency for your application.',
@@ -318,7 +380,7 @@ function comparisonPage(c) {
     c.howto ? `<h2>${esc(c.howto.name)}</h2>\n      <ol class="num-list">${c.howto.steps.map((s) => `<li><strong>${esc(s[0])}.</strong> ${esc(s[1])}</li>`).join('')}</ol>` : '',
     RELATED(c.related),
   ].filter(Boolean).join('\n      ');
-  return shell({ slug: c.slug, title: c.title, desc: c.desc, h1: c.h1, lead: c.lead, crumb: c.crumb, bodyHtml: body, faqs: c.faqs, howto: c.howto });
+  return shell({ slug: c.slug, title: c.title, desc: c.desc, h1: c.h1, lead: c.lead, crumb: c.crumb, bodyHtml: body, faqs: c.faqs, howto: c.howto, seed: c.seed });
 }
 
 // ================= PILLAR GUIDES =================
