@@ -37,7 +37,7 @@ const CAT_SUB = {
 const GUIDES = ['rfid-cards-guide', 'nfc-guide', 'rfid-labels-inlays-guide', 'rfid-blocking-guide', 'rfid-readers-hardware-guide',
   'rfid-frequencies-lf-hf-uhf', 'rfid-vs-nfc', 'rfid-vs-barcode', 'rfid-chips-mifare-ntag-desfire', 'rfid-dry-vs-wet-inlay', 'rfid-card-materials', 'rfid-glossary',
   'nfc-vs-rfid-wristband', 'ntag213-vs-215-vs-216', 'uhf-vs-hf-rfid-label', 'rfid-wristband-materials', 'rfid-key-fob-guide',
-  'rfid-pricing-guide', 'how-to-order-rfid', 'rfid-moq-sample-policy'];
+  'rfid-pricing-guide', 'how-to-order-rfid', 'rfid-moq-sample-policy', 'rfid-card-printing-guide'];
 const STATIC = ['about', 'products', 'guides', 'cases', 'sustainability', 'contact', 'privacy', 'terms'];
 const TOOLS = ['rfid-selector'];
 

@@ -814,6 +814,9 @@ const DETAILS = {
     extraFaqs: [
       ['How many heat cycles will a tag actually survive?', 'PPS builds run thousands of 200 °C-class cycles; ceramic extends both temperature and cycle life. Give us peak temp, dwell and cycle count and we quote expected service life for the recommended model.'],
       ['How should tags be attached in hot processes?', 'Above adhesive limits (~150–200 °C with specialty tapes), specify screw/rivet mounts or embedding. We supply mounting hardware and placement guidance per process.'],
+      ['What is the highest temperature an RFID tag can survive?', 'Ceramic-packaged tags are the top of the range — 230–260 °C class ratings with short peaks higher, model-dependent. Beyond that, the answer is process engineering: thermal barriers, standoff mounting or reading before/after the hottest zone. Tell us your peak and dwell and we will say plainly whether a tag can live there.'],
+      ['Are high-temperature RFID tags passive?', 'Yes — the practical high-temp designs are passive HF or UHF: no battery to fail in the heat, powered entirely by the reader field. That is why they survive repeated oven and autoclave cycles that would destroy battery-assisted tags.'],
+      ['Is there a high-temperature RFID label, or only rigid tags?', 'Flexible label formats handle moderate heat only (roughly the 120–150 °C short-exposure class, construction-dependent). For repeated 200 °C+ processes you need a rigid PPS, ceramic or FR4 housing — that is the trade: label thinness versus survivable temperature.'],
     ],
   },
   'rfid-seal-tag': {

@@ -256,8 +256,8 @@
   },
   "how-to-order-rfid.html": {
     "published": "2026-08-12",
-    "modified": "2026-08-13",
-    "hash": "c5db225bf572f618"
+    "modified": "2026-09-01",
+    "hash": "0767a0b8e3c0b1ed"
   },
   "industry-events.html": {
     "published": "2026-06-18",
@@ -321,8 +321,8 @@
   },
   "nfc-guide.html": {
     "published": "2026-06-15",
-    "modified": "2026-08-12",
-    "hash": "ab0b5201cde07d19"
+    "modified": "2026-09-01",
+    "hash": "3e0fff27a839786d"
   },
   "nfc-vs-rfid-wristband.html": {
     "published": "2026-06-15",
@@ -331,28 +331,33 @@
   },
   "ntag213-vs-215-vs-216.html": {
     "published": "2026-06-15",
-    "modified": "2026-08-12",
-    "hash": "e07b01e9b63454ff"
+    "modified": "2026-09-01",
+    "hash": "bf78c42eb6ea7991"
   },
   "rfid-blocking-guide.html": {
     "published": "2026-06-15",
-    "modified": "2026-08-12",
-    "hash": "3d18f97870a5f21f"
+    "modified": "2026-09-01",
+    "hash": "ce2a5ce3f8b1e970"
   },
   "rfid-card-materials.html": {
     "published": "2026-06-15",
     "modified": "2026-08-12",
     "hash": "7e7c8e59692929e5"
   },
+  "rfid-card-printing-guide.html": {
+    "published": "2026-09-01",
+    "modified": "2026-09-01",
+    "hash": "27391d2c84452f94"
+  },
   "rfid-cards-guide.html": {
     "published": "2026-06-15",
-    "modified": "2026-08-12",
-    "hash": "bc69d19c8c466e76"
+    "modified": "2026-09-01",
+    "hash": "e86b22eb793b7114"
   },
   "rfid-chips-mifare-ntag-desfire.html": {
     "published": "2026-06-15",
-    "modified": "2026-08-12",
-    "hash": "6592a2c78c6ccc62"
+    "modified": "2026-09-01",
+    "hash": "16cc0f18e0aeee7d"
   },
   "rfid-dry-vs-wet-inlay.html": {
     "published": "2026-06-15",
@@ -376,13 +381,13 @@
   },
   "rfid-moq-sample-policy.html": {
     "published": "2026-08-12",
-    "modified": "2026-08-12",
-    "hash": "f7ac710d75f33849"
+    "modified": "2026-09-01",
+    "hash": "8a634f3a1168da67"
   },
   "rfid-pricing-guide.html": {
     "published": "2026-08-12",
-    "modified": "2026-08-12",
-    "hash": "8117534eb308b459"
+    "modified": "2026-09-01",
+    "hash": "ff5dbf47454164b4"
   },
   "rfid-readers-hardware-guide.html": {
     "published": "2026-06-15",
@@ -406,7 +411,7 @@
   },
   "uhf-vs-hf-rfid-label.html": {
     "published": "2026-06-15",
-    "modified": "2026-08-12",
-    "hash": "d92f893edde4500f"
+    "modified": "2026-09-01",
+    "hash": "28e69831844d98d1"
   }
 }

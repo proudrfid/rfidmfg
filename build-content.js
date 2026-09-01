@@ -208,7 +208,7 @@ const COMPARISONS = [
     title: 'MIFARE vs NTAG vs DESFire: RFID Chip Comparison | RFID MFG',
     desc: 'Compare the most common 13.56 MHz RFID chips — MIFARE Classic, NTAG, MIFARE DESFire — by memory, security and use case to pick the right one.',
     h1: 'MIFARE vs NTAG vs DESFire: choosing an HF chip',
-    lead: 'NTAG is the go-to for NFC phone tap and marketing; MIFARE Classic suits access and closed-loop transit; DESFire is the secure, encrypted choice for payment, transit and high-security ID.',
+    lead: 'NTAG is the go-to for NFC phone tap and marketing; MIFARE Classic suits legacy access and closed-loop transit (not new high-security builds); DESFire is the secure, encrypted choice for payment, transit and high-security ID.',
     body: [{ h: 'Why the chip matters', p: ['At 13.56 MHz the antenna and card body can be identical — the chip decides memory, speed, security and price. Picking the right chip prevents costly re-issues later, especially for access control and payment where security is non-negotiable.'] }],
     tables: [{ cap: 'Common HF/NFC chips compared', head: ['Chip', 'Memory', 'Security', 'Best for'], rows: [['NTAG213/215/216', '144–888 bytes', 'Basic, password', 'NFC tap, marketing, auth'], ['MIFARE Classic 1K/4K', '1–4 KB', 'CRYPTO1 (legacy)', 'Access, loyalty, closed transit'], ['MIFARE Ultralight', '48–192 bytes', 'Basic', 'Disposable tickets'], ['MIFARE DESFire EV2/EV3', '2–8 KB', 'AES, strong', 'Payment, transit, secure ID'], ['ICODE SLIX', '~1 KB', 'Basic', 'Library, long-range HF']] }],
     body2: [{ h: 'NTAG (NFC)', p: ['NTAG chips are tuned for NFC phone interaction. They store a URL or vCard, can be locked, and are inexpensive — ideal for tap-to-engage marketing, product authentication and digital business cards.'] }, { h: 'MIFARE Classic', p: ['A long-standing workhorse for access control and closed-loop loyalty/transit. Its CRYPTO1 cipher is now considered legacy, so for new high-security projects DESFire is preferred.'] }, { h: 'MIFARE DESFire', p: ['DESFire EV2/EV3 adds AES encryption and a flexible file system, making it the modern choice for payment, public transit and government ID where security and multi-application support matter.'] }, { h: 'Ultralight and ICODE — tickets and libraries', p: ['Two more families round out the HF world. MIFARE Ultralight (and Ultralight EV1/C) is a low-cost, small-memory chip built for high-volume disposable use — single-ride transit tickets and event entry. NXP ICODE (SLIX/SLIX2, ISO 15693) offers longer HF read range and anti-collision, which is why it dominates library book tagging and some retail and healthcare applications where you scan a shelf of items at once.'] }, { h: 'Match the chip to your memory and security needs', p: ['Start from two questions: how much data must the tag hold, and how sensitive is it. For a URL or simple ID, NTAG213 (144 bytes) is plenty; for richer payloads or gaming, NTAG215 (504 bytes) and NTAG216 (888 bytes) give headroom. For access with legacy infrastructure, MIFARE Classic 1K/4K still fits; for anything touching money, identity or multiple applications on one card, choose DESFire EV2/EV3 with AES. Getting this right up front avoids a costly re-issue later.'] }],
@@ -281,6 +281,7 @@ const COMPARISONS = [
     faqs: [
       ['What is the difference between NTAG213, 215 and 216?', 'Mainly user memory: NTAG213 has 144 bytes, NTAG215 has 504 bytes and NTAG216 has 888 bytes. They otherwise share the same 13.56 MHz operation, features and phone compatibility.'],
       ['Which NTAG chip is used for amiibo and gaming?', 'NTAG215, because its 504-byte user memory fits the data these tokens use. It is a common choice for NFC gaming and collectibles.'],
+      ['Are NTAG215 and NTAG216 the same?', 'No. They share the same 13.56 MHz operation, features and phone compatibility, but NTAG215 offers 504 bytes of user memory while NTAG216 offers 888 bytes — and NTAG216 costs more. If 504 bytes fits your payload, NTAG215 is the better value; choose NTAG216 only when you need the extra room.'],
       ['Can I lock an NTAG chip so it cannot be changed?', 'Yes. All three support password protection and permanent locking, which is important for authentication and anti-tamper use. We can pre-encode and lock chips before delivery.'],
     ],
     related: [['nfc-guide.html', 'NFC cards, tags & labels guide'], ['rfid-chips-mifare-ntag-desfire.html', 'MIFARE vs NTAG vs DESFire'], ['nfc-business-card.html', 'NFC business cards'], ['nfc-printed-label.html', 'NFC printed labels']],
@@ -290,11 +291,11 @@ const COMPARISONS = [
     title: 'UHF vs HF RFID Labels: Which Frequency to Choose | RFID MFG',
     desc: 'UHF vs HF RFID labels compared: read range, bulk reading, phone compatibility and best uses. Choose the right smart label frequency for your application.',
     h1: 'UHF vs HF RFID labels: which frequency?',
-    lead: 'UHF labels (860–960 MHz) read from metres away and scan hundreds at once — ideal for retail and logistics. HF labels (13.56 MHz) read at a few centimetres, are phone-readable, and suit libraries, pharma and NFC marketing.',
+    lead: 'UHF labels (860–960 MHz) read from metres away and scan hundreds at once — ideal for retail and logistics. HF labels (13.56 MHz) read at a few centimetres, are phone-readable when built on NFC-compatible chips such as NTAG, and suit libraries, pharma and NFC marketing.',
     body: [
       { h: 'Frequency decides the job', p: ['A smart label\'s frequency is the single biggest factor in how it performs. UHF is built for range and speed; HF is built for short-range, reliable, item-by-item reads and phone interaction. Picking the wrong one is the most common labelling mistake.', 'UHF (EPC Gen2 / ISO 18000-6C) reads passive labels at roughly 1–8 metres and can capture hundreds per second, which is why retail item-level tagging, warehouse gates and logistics run on it. HF (ISO 14443 / 15693, which includes NFC) reads within about 10 cm — a feature for libraries, pharmacy and any tap-with-a-phone use.'] },
     ],
-    tables: [{ cap: 'UHF vs HF RFID labels', head: ['Aspect', 'UHF label', 'HF label'], rows: [['Frequency', '860–960 MHz', '13.56 MHz'], ['Read range', '≈ 1–8 m', '≈ up to 10 cm'], ['Bulk reading', 'Excellent (100s/sec)', 'Limited'], ['Phone-readable (NFC)', 'No', 'Yes'], ['Best for', 'Retail, warehouse, logistics', 'Library, pharma, marketing'], ['Chip examples', 'UCODE, Impinj', 'NTAG, ICODE'], ['Cost at volume', 'Lowest per label', 'Low–medium']] }],
+    tables: [{ cap: 'UHF vs HF RFID labels', head: ['Aspect', 'UHF label', 'HF label'], rows: [['Frequency', '860–960 MHz', '13.56 MHz'], ['Read range', '≈ 1–8 m', '≈ up to 10 cm'], ['Bulk reading', 'Excellent (100s/sec)', 'Limited'], ['Phone-readable (NFC)', 'No', 'Yes, with NFC-compatible chips (e.g. NTAG)'], ['Best for', 'Retail, warehouse, logistics', 'Library, pharma, marketing'], ['Chip examples', 'UCODE, Impinj', 'NTAG, ICODE'], ['Cost at volume', 'Lowest per label', 'Low–medium']] }],
     body2: [
       { h: 'Choose UHF labels when', p: ['You need range, speed and volume: apparel and retail item tagging, carton and pallet tracking, warehouse dock-door portals and asset management. UHF inlays are also usually the cheapest per label at scale.'] },
       { h: 'Choose HF labels when', p: ['You need close, reliable single-item reads or phone interaction: library book tagging (ICODE/ISO 15693), pharmacy and healthcare item control, access, and NFC marketing where consumers tap with a phone (NTAG).'] },
@@ -331,7 +332,7 @@ const GUIDES = [
     sections: [
       { h: 'What is an RFID card?', p: ['An RFID card carries a microchip and a thin antenna laminated inside the card. When it enters a reader’s field, the reader powers the chip and exchanges data — no battery, no contact. The same principle drives access badges, transit cards, hotel keys, membership and payment cards.'] },
       { h: 'Frequencies: LF, HF/NFC and UHF', p: ['Cards come in LF (125 kHz) for simple access, HF/NFC (13.56 MHz) for tap cards, transit and phone interaction, and UHF (860–960 MHz) for longer-range reads. HF/NFC is by far the most common card frequency. See our frequency guide for a full comparison.'] },
-      { h: 'Chips: matching security to use', p: ['The chip sets memory and security. NTAG suits NFC marketing; MIFARE Classic suits access and closed-loop loyalty; MIFARE DESFire (AES) suits payment, transit and secure ID. Choosing the right chip up front avoids costly re-issues.'] },
+      { h: 'Chips: matching security to use', p: ['The chip sets memory and security. NTAG suits NFC marketing; MIFARE Classic suits legacy access and closed-loop loyalty (not new high-security builds); MIFARE DESFire (AES) suits payment, transit and secure ID. Choosing the right chip up front avoids costly re-issues.'] },
       { h: 'Materials and finishes', p: ['PVC is the economical standard; PET/PETG and PC add durability and security; eco/BIO and wood reduce plastic; metal signals premium. Finishes include matte/gloss, frosted, transparent, signature panels, magnetic stripes, embossing and foil.'] },
       { h: 'Printing and personalization', p: ['Cards can be offset or silkscreen printed in full colour, then personalized with sequential numbers, barcodes/QR, photos, and chip encoding. RFID MFG prints and encodes in-house so cards arrive ready to issue.'] },
       { h: 'Common applications', p: ['Access control, public transit, hotel keycards, membership and loyalty, payment, campus and event credentials, and NFC marketing. The card body and print stay flexible while the chip and frequency are matched to the system.'] },
@@ -347,7 +348,7 @@ const GUIDES = [
     title: 'NFC Cards, Tags & Labels: A Practical Guide | RFID MFG',
     desc: 'A practical NFC guide: how NFC works, NTAG chips, cards vs tags vs labels, encoding, and real applications from marketing to authentication.',
     h1: 'NFC cards, tags & labels: a practical guide',
-    lead: 'NFC is short-range 13.56 MHz technology built into every modern phone. A tap can open a link, verify a product or share data — no app needed — which makes NFC ideal for marketing, authentication and access.',
+    lead: 'NFC is short-range 13.56 MHz technology built into virtually every modern smartphone. A tap can open a link, verify a product or share data — typically with no app needed — which makes NFC ideal for marketing, authentication and access.',
     sections: [
       { h: 'How NFC works', p: ['NFC (Near Field Communication) is a subset of HF RFID standardised for two-way phone interaction at a few centimetres. The phone powers the passive NFC tag and reads its stored data (NDEF), typically a URL or contact — opening it directly in the browser with no app or pairing.'] },
       { h: 'NTAG chips', p: ['Most NFC products use NTAG213/215/216, differing mainly in memory (144–888 bytes). NTAG215 (504 bytes) is popular for vCards and richer data. Chips can be locked so the content cannot be overwritten — important for authentication.'] },
@@ -384,7 +385,7 @@ const GUIDES = [
     title: 'RFID Blocking: How It Works & What You Need | RFID MFG',
     desc: 'How RFID blocking protects contactless cards from skimming: passive vs active blocking, cards, sleeves and wallets, and what actually works.',
     h1: 'RFID blocking: how it works and what you need',
-    lead: 'RFID-blocking products stop unauthorized 13.56 MHz reads of contactless cards. Passive shields detune the field; active cards emit a jamming signal. A single card, sleeve or wallet lining protects what is around it.',
+    lead: 'RFID-blocking products stop unauthorized 13.56 MHz reads of contactless cards. Passive shields detune the field; active cards emit a low-power interference signal in the 13.56 MHz band. A single card, sleeve or wallet lining protects what is around it.',
     sections: [
       { h: 'The risk it addresses', p: ['As contactless payment, smart ID and access cards become universal, so does the theoretical risk of "skimming" — an unauthorized reader trying to read a card through a bag or pocket. RFID blocking neutralises that by interfering with reads at 13.56 MHz.'] },
       { h: 'Passive vs active blocking', p: ['Passive shielding uses conductive material to absorb and detune the reader field, needing no power. Active cards contain a tiny circuit that emits a disrupting signal when it senses a read attempt. Both stop nearby contactless cards from being read silently.'] },
@@ -494,6 +495,8 @@ if (!WD.length) {
     faqs: [
       ['How much does a custom RFID card cost?', `Across our card range, indicative wholesale pricing runs ${lo('cards')}–${hi('cards')} per card (FOB Shenzhen). Basic PVC proximity cards sit at the bottom of that range; metal, wood and dual-interface constructions at the top. Chip choice and volume move the number most.`],
       ['How much do UHF RFID labels cost at volume?', `Labels and inlays run ${lo('labels')}–${hi('labels')} per piece indicatively, and are the most volume-sensitive products we make — at 10,000+ pieces on reels the per-unit price falls steeply because converting runs continuously.`],
+      ['How much do RFID chips cost?', 'The chip is quoted inside the finished product, and it is the biggest single cost driver. As a rule of thumb: basic LF chips and NTAG sit lowest, MIFARE Classic low-to-mid, and DESFire EV-series or long-range UHF parts (Impinj, UCODE) highest. The same chip drops sharply in cost at volume, which is why target quantity matters more than any list price.'],
+      ['What are the cheapest RFID tags to buy in bulk?', 'Reel-converted UHF wet inlays and paper labels are the lowest-cost tags at volume — converting runs continuously, so 10,000+ piece orders price far below small runs. For durable housings (ABS, silicone, anti-metal), expect more per unit; the table above shows the real range per product.'],
       ['Why is my quote different from the table?', 'The table shows indicative ranges from published tiers. Your written quote reflects the exact chip, size, artwork, encoding and destination — it can land below the range at high volume or above it for premium constructions, and the written quote is what we commit to.'],
       ['Do you charge for samples before an order?', 'No — pre-production samples are free, arrive in 3–7 days, and bulk production only starts after you approve the sample and artwork proof.'],
     ],
@@ -504,18 +507,18 @@ if (!WD.length) {
     title: 'How to Order Custom RFID Cards & Tags from a China Factory (Step by Step) | RFID MFG',
     desc: 'The exact 6-step process for ordering custom RFID products from a China factory: spec, 24-hour quote, free samples, artwork proof, bulk production with 100% read testing, and tracked delivery.',
     h1: 'How to order custom RFID products from a China factory',
-    lead: 'Six steps: send your spec, get a written quote within 24 hours, test free samples in 3–7 days, approve the artwork proof, bulk production runs 7–20 days (by product family) with 100% read testing, and tracked door-to-door delivery follows. Payment is by T/T and everything carries a 2-year warranty.',
+    lead: 'Six steps: send your spec, get a written quote within 24 hours, test free samples in 3–7 days, approve the artwork proof, bulk production runs 7–30 days (by product family) with 100% read testing, and tracked door-to-door delivery follows. Payment is by T/T and everything carries a 2-year warranty.',
     sections: [
       { h: 'Step 1 — Define your spec (or just describe the goal)', p: ['The five things that define an RFID order: chip or frequency (match your existing readers — this is the most common mistake), size and form factor, material, artwork, and quantity. If you can only answer some of these, describe the application instead — "we need 5,000 wristbands for a 3-day festival with tap payment" is enough for our engineers to spec the rest.'] },
       { h: 'Step 2 — Written quote within 24 hours', p: ['You get an exact, binding price for the stated spec — not an indicative range. If you are still comparing options, the price guide on this site shows the real range for every product before you ever send an email.'] },
       { h: 'Step 3 — Free samples in 3–7 days', p: ['Pre-production samples cost nothing and exist so you can test the actual chip, material and print on your own readers and in your own environment before committing. If a sample fails your tests, we adjust chip, antenna or material and resample — bulk never starts on a failed sample.'] },
       { h: 'Step 4 — Artwork proof and approval', p: ['Alongside samples you receive an artwork proof for print layout, colours and variable data. Encoding files, sector maps and keys are handled under NDA. Production starts only after you approve both sample and proof — this approval gate is your protection.'] },
-      { h: 'Step 5 — Bulk production with QC (7–20 days by product family)', p: ['Lamination, inlay bonding, die-cutting and personalisation run in house, with full-process traceability and a 100% read test before packing. Typical bulk lead time is 7–20 days depending on product family, construction and volume; the exact date is on your quotation.'] },
+      { h: 'Step 5 — Bulk production with QC (7–30 days by product family)', p: ['Lamination, inlay bonding, die-cutting and personalisation run in house, with full-process traceability and a 100% read test before packing — every unit passes a UID/TID read check, and encoded orders are additionally verified against the approved data file. This confirms each tag responds and carries the right data; field read range is validated separately with samples in your deployment. Typical bulk lead time is 7–30 days depending on product family, construction and volume; the exact date is on your quotation.'] },
       { h: 'Step 6 — Delivery and after-sales', p: ['Orders ship express, door to door, with tracking and full export documentation. Every product carries a 2-year warranty with ongoing technical support — if something reads wrong in the field, you talk to the engineers who built it.'] },
       { h: 'Common mistakes to avoid', p: ['Ordering a frequency your readers cannot see (always confirm reader model first); skipping the sample stage to save a week and losing a production run; sending encoding data after production has started; and leaving artwork sign-off to the last minute — the proof cycle is fast, but only if someone on your side owns it.'] },
     ],
-    table: { cap: 'Timeline at a glance', head: ['Stage', 'Typical time'], rows: [['Written quote', 'Within 24 hours'], ['Free pre-production samples', '3–7 days'], ['Artwork proof', 'Alongside samples'], ['Bulk production', '7–20 days after approval, by product family'], ['Shipping', 'Express, tracked, door-to-door'], ['Warranty', '2 years']] },
-    howto: { name: 'How to order custom RFID products', steps: [['Send your spec or goal', 'Chip/frequency, size, material, artwork and quantity — or describe the application and we spec it.'], ['Receive a written quote in 24 hours', 'Exact, binding pricing for your stated spec.'], ['Test free samples (3–7 days)', 'Verify chip, print and material on your own readers before committing.'], ['Approve the artwork proof', 'Print layout and encoding data confirmed under NDA.'], ['Bulk production (7–20 days)', 'In-house production with 100% read testing before packing.'], ['Tracked delivery', 'Door-to-door express with export documentation and a 2-year warranty.']] },
+    table: { cap: 'Timeline at a glance', head: ['Stage', 'Typical time'], rows: [['Written quote', 'Within 24 hours'], ['Free pre-production samples', '3–7 days'], ['Artwork proof', 'Alongside samples'], ['Bulk production', '7–30 days after approval, by product family'], ['Shipping', 'Express, tracked, door-to-door'], ['Warranty', '2 years']] },
+    howto: { name: 'How to order custom RFID products', steps: [['Send your spec or goal', 'Chip/frequency, size, material, artwork and quantity — or describe the application and we spec it.'], ['Receive a written quote in 24 hours', 'Exact, binding pricing for your stated spec.'], ['Test free samples (3–7 days)', 'Verify chip, print and material on your own readers before committing.'], ['Approve the artwork proof', 'Print layout and encoding data confirmed under NDA.'], ['Bulk production (7–30 days)', 'In-house production with 100% read testing before packing.'], ['Tracked delivery', 'Door-to-door express with export documentation and a 2-year warranty.']] },
     faqs: [
       ['What payment terms do you accept?', 'T/T (bank transfer). Exact terms and any deposit schedule are stated on the written quotation before you commit.'],
       ['Can you encode our existing system keys and sectors?', 'Yes — custom keys, sector maps and serialisation are handled under NDA, so replacement or expansion orders drop straight into your current system.'],
@@ -527,9 +530,9 @@ if (!WD.length) {
   {
     slug: 'rfid-moq-sample-policy.html', crumb: 'MOQ & Samples', seed: SEED_NEW,
     title: 'RFID MOQ & Free Sample Policy: Minimum Order Quantities by Product | RFID MFG',
-    desc: `Minimum order quantities for all 39 RFID products we manufacture — from ${minMoq} pcs — plus the free pre-production sample policy: 3–7 day samples, artwork proof, and no bulk run until you approve.`,
+    desc: `Minimum order quantities for all 39 RFID products we manufacture — cards, tags and wristbands from 500 pcs, labels from 1,000 pcs, hardware from 10 units — plus the free pre-production sample policy: 3–7 day samples, artwork proof, and no bulk run until you approve.`,
     h1: 'RFID minimum order quantities & free sample policy',
-    lead: `MOQs start at ${minMoq} pieces for cards, fobs, tags and wristbands, and are higher for reel-converted labels and inlays. Every order starts with free pre-production samples in 3–7 days — bulk production begins only after you approve the sample and artwork proof. The table below lists the real MOQ for every product.`,
+    lead: `MOQs start at 500 pieces for cards, fobs, tags and wristbands, 1,000–2,000 pieces for reel-converted labels and inlays, and 10 units for readers and other hardware. Every order starts with free pre-production samples in 3–7 days — bulk production begins only after you approve the sample and artwork proof. The table below lists the real MOQ for every product.`,
     sections: [
       { h: 'How MOQ works here', p: ['MOQ is set per production run, not per year — it reflects the point where setup, tooling and material changeover stop dominating the unit cost. Different constructions have different economics, which is why a PVC card and a reel-converted inlay have very different minimums. The table below is the same data our quotes are built from.'] },
       { h: 'Why labels and inlays have higher MOQs', p: ['Labels and inlays are converted reel-to-reel: antenna bonding, adhesive lamination and die-cutting run as a continuous process, and starting the line for a short run wastes most of a reel. That is why label MOQs are counted in thousands while cards and tags start in the hundreds.'] },
@@ -538,7 +541,7 @@ if (!WD.length) {
     ],
     table: { cap: 'MOQ, sample and bulk lead time by product', head: ['Product', 'MOQ', 'Sample lead', 'Bulk lead'], rows: moqRows },
     faqs: [
-      ['What is the minimum order for custom RFID cards?', `Card MOQs start at ${minMoq} pieces per run for standard constructions. Specialty builds (metal, dual-interface) can differ — the table on this page shows the real minimum for each product.`],
+      ['What is the minimum order for custom RFID cards?', `Card MOQs start at 500 pieces per run for standard constructions. Specialty builds (metal, dual-interface) can differ — the table on this page shows the real minimum for each product.`],
       ['Are samples really free?', 'Yes. Pre-production samples are free, ship in 3–7 days, and carry no obligation — bulk production only starts after you approve them.'],
       ['Can I order less than the MOQ?', 'Sometimes, on standard specs without custom tooling. Share your use case and target quantity — pilot runs ahead of a larger rollout are usually workable.'],
       ['Do sample chips match production chips?', 'Yes — samples are built with the same chip and construction quoted for production, so what you validate is what you receive in bulk.'],
@@ -546,6 +549,33 @@ if (!WD.length) {
     related: [['rfid-pricing-guide.html', 'RFID price guide'], ['how-to-order-rfid.html', 'How to order, step by step'], ['products.html', 'Full product catalog'], ['contact.html', 'Ask about a pilot run']],
   });
 }
+
+GUIDES.push({
+  slug: 'rfid-card-printing-guide.html', crumb: 'Card Printing', seed: '2026-09-01',
+  title: 'Custom Printed RFID Cards: Printing Methods, Artwork & Printable Blanks | RFID MFG',
+  desc: 'How custom printed RFID cards are made — offset CMYK, silkscreen, foil and variable data — plus blank printable RFID cards for your own card printer, MOQs and free samples.',
+  h1: 'Custom printed RFID cards: methods, artwork and printable blanks',
+  lead: 'Two ways to get printed RFID cards: we print them for you at the factory (offset CMYK, silkscreen, foil, variable data) from 500 pieces with free pre-production samples — or you buy blank printable RFID cards and white labels and print in house on a standard card printer. This guide covers both routes and how to choose.',
+  sections: [
+    { h: 'Factory printing: what the card lines do', p: ['Standard PVC RFID cards print offset CMYK edge to edge on both sides, with silkscreen spot colours, foil, embossing and signature or scratch panels as options; premium constructions such as metal and wood have their own marking options listed on their product pages. Printing and lamination run on the same Shenzhen lines as inlay bonding and encoding, so colour, chip and data are controlled in one place.'] },
+    { h: 'Variable data: numbering, barcodes and QR', p: ['Each card can carry unique printed data — sequential numbers, barcodes, QR codes or names — matched to the data encoded in the chip. The mapping file is agreed at the artwork stage and verified against the encoded IDs during production, so the printed number on the card always corresponds to the chip inside it.'] },
+    { h: 'Printable blank RFID cards for your own printer', p: ['If you personalise cards in house, we supply blank white CR80 RFID cards and printable white RFID labels that run through common desktop card and label printers. Chip and antenna sit inside the laminated body, so the printable surface is flat and standard. Printer models and ribbon systems vary — the sensible route is to test our free samples in your own printer before committing to a bulk order.'] },
+    { h: 'Artwork and proofing', p: ['Vector files (AI, PDF or EPS) print best; send what you have and you approve a digital proof before anything is printed. Free pre-production samples let you check colour and material in hand — bulk printing starts only after you approve both sample and proof.'] },
+  ],
+  table: { cap: 'Printing routes at a glance', head: ['Route', 'Best for', 'Notes'], rows: [
+    ['Factory offset CMYK', 'Branded runs from 500 pcs', 'Edge-to-edge colour both sides, laminated finish'],
+    ['Factory silkscreen / foil / emboss', 'Premium and spot-colour designs', 'Combined with CMYK as needed'],
+    ['Factory variable data', 'Numbered, barcoded or personalised cards', 'Printed data matched to chip encoding'],
+    ['Blank printable cards (your printer)', 'In-house personalisation, small batches', 'Standard CR80 blanks; validate with free samples'],
+  ] },
+  faqs: [
+    ['Can RFID cards be printed like normal PVC cards?', 'Yes — the chip and antenna are laminated inside the card body, so the surface prints like any PVC card: offset CMYK, silkscreen, foil and panels are all available on RFID constructions.'],
+    ['Do you sell blank printable RFID cards?', 'Yes. Blank white CR80 RFID cards and printable white RFID labels are stock constructions, made to run through common card and label printers. Test free samples in your own printer first.'],
+    ['Can each printed card carry a unique number or QR code?', 'Yes — variable printed data (numbers, barcodes, QR, names) is matched to the chip encoding from an agreed data file, and verified during production.'],
+    ['What is the minimum order for custom printed RFID cards?', 'Factory-printed card runs start at 500 pieces, with free pre-production samples in 3–7 days and bulk production in 7–15 days after proof approval.'],
+  ],
+  related: [['pvc-cards.html', 'PVC cards'], ['custom-card-program.html', 'Custom card program'], ['rfid-pricing-guide.html', 'RFID price guide'], ['how-to-order-rfid.html', 'How to order, step by step']],
+});
 
 function guidePage(g) {
   const body = [
@@ -792,7 +822,7 @@ ${HEADER}
   <div class="container page-hero__inner">
     <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span>Guides</nav>
     <h1>RFID &amp; NFC guides and resources</h1>
-    <p>Independent, practical guidance to help you choose the right RFID and NFC products — from frequencies and chips to materials and hardware.</p>
+    <p>Practical, hands-on guidance from our engineering and sales team to help you choose the right RFID and NFC products — from frequencies and chips to materials and hardware.</p>
   </div>
 </section>
 <section class="section">
